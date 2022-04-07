@@ -1,0 +1,97 @@
+url: https://andreweatherman.github.io/toRvik/
+development:
+  mode: auto
+template:
+  bootstrap: 5
+  bslib:
+    headings-color: "#246B94"
+    link-color: "#595959"
+    link-hover-color: "#184763"
+    base_font:
+      google: "Quicksand"
+    code_font:
+      google: "Ubuntu Mono"
+authors:
+  Andrew Weatherman:
+    href: https://twitter.com/andreweatherman
+home:
+  sidebar:
+    structure: [links, license, citation, authors, dev]
+  links:
+    - text: Browse source code
+      href: https://github.com/andreweatherman/toRvik
+    - text: Report a bug
+      href: https://github.com/andreweatherman/toRvik/issues
+navbar:
+  type: light
+  structure:
+    left: [home, reference, articles]
+    right: [news, twitter, github]
+  components:
+    home:
+      icon: fa-home
+      href: index.html
+    reference:
+      text: "Functions"
+      href: reference/index.html
+      icon: fas fa-code-simple
+    articles:
+      text: "Guides"
+      menu:
+        - text: "Getting Started"
+          href: articles/introduction.html
+        - text: --------
+        - text: Vignettes
+          href: articles/index.html
+    news:
+      icon: fas fa-cloud-check
+      text: Changelog
+      href: news/index.html
+    twitter:
+      icon: fab fa-twitter fa-lg
+      href: https://twitter.com/andreweatherman
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/andreweatherman/toRvik
+reference:
+  - subtitle: Ratings
+    desc: Functions to scrape T-Rank
+    contents:
+      - '`bart_ratings`'
+      - '`bart_conf_factors`'
+      - '`bart_factors`'
+      - '`bart_archive`'
+  - subtitle: Games
+    desc: Functions to scrape games and results
+    contents:
+      - '`bart_season_schedule`'
+      - '`bart_team_schedule`'
+      - '`bart_pregame`'
+  - subtitle: Player and Game Stats
+    desc: Functions to scrape player and game stats
+    contents:
+      - '`bart_player_game`'
+      - '`bart_player_season`'
+      - '`bart_transfers`'
+      - '`bart_game_box`'
+      - '`bart_game_factors`'
+  - subtitle: Team and Conference Stats
+    desc: Functions to scrape team and conference stats
+    contents:
+      - '`bart_team_shooting`'
+      - '`bart_team_history`'
+      - '`bart_conf_stats`'
+  - subtitle: Tournament Stats
+    desc: Functions to scrape tournament stats
+    contents:
+      - '`bart_tourney_results`'
+      - '`bart_tourney_sheets`'
+      - '`bart_tourney_odds`'
+  - subtitle: Miscellaneous Stats
+    desc: Functions to scrape miscellaneous stats
+    contents:
+      - '`bart_coach`'
+      - '`bart_coach_change`'
+      - '`bart_injuryimpact`'
+      - '`bart_poy`'
+      - '`current_season`'

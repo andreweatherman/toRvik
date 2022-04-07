@@ -25,6 +25,4 @@ Data is split on three statistical types, explained below: \describe{
 statistics; sorts by recruiting rank.}}
 }
 \examples{
-\dontrun{bart_player_season(year=2019, stat='adv', conf_only=TRUE)}
-
-}
+bart_player_season(year=2019, stat='adv', conf_only=TRUE)}

@@ -1,0 +1,506 @@
+#' Get T-Rank Ratings
+#'
+#' Returns current T-Rank ratings and two forms of strength of schedule.
+#'
+#' \itemize{\item Barthag is the estimation of a team's win probability against
+#' the average Division 1 team on a neutral court. \item WAB (wins above bubble)
+#' is the number of wins attained above or below the expected total from a
+#' bubble team against an analogous schedule. \item `x_elite_sos` is the
+#' percentage of games that an 'elite' team would project to lose against this
+#' team's non-conference or overall schedule. \item `x_cur_sos` is the current
+#' average Barthag rating of opponents. \item `x_fut_sos` is the projected
+#' average Barthag rating of opponents.}
+#'
+#' @param year Defaults to current season (YYYY).
+#' @import dplyr
+#' @import readr
+#' @import httr
+#' @import janitor
+#' @importFrom cli cli_abort
+#' @importFrom rvest read_html html_table
+#' @importFrom purrr pluck
+#' @importFrom tidyr separate
+#'
+#' @importFrom magrittr %>%
+#' @examples
+#' bart_ratings(year=2022)
+#'
+#' @export
+bart_ratings <- function(year = current_season()) {
+  suppressWarnings({
+    if (!(is.numeric(year) && nchar(year) == 4 && year >=
+      2008)) {
+      cli::cli_abort("Enter a valid year as a number (YYYY). Data only goes back to 2008!")
+    } else {
+      x_names <- c("team", "barthag", "adj_o", "adj_d", "adj_t", "wab")
+      y_names <- c(
+        "team", "seed", "conf", "nc_elite_sos", "nc_fut_sos", "nc_cur_sos",
+        "ov_elite_sos", "ov_fut_sos", "ov_cur_sos"
+      )
+      x <- readr::read_csv(paste0("https://barttorvik.com/trank.php?year=", year, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
+        dplyr::select(1, 4, 2, 3, 27, 35)
+      colnames(x) <- x_names
+      y <- httr::GET(paste0("https://barttorvik.com/sos.php?year=", year)) %>%
+        httr::content(as = "text") %>%
+        rvest::read_html() %>%
+        rvest::html_table(header = FALSE) %>%
+        purrr::pluck(1) %>%
+        janitor::row_to_names(row = 2) %>%
+        janitor::clean_names() %>%
+        select(-1) %>%
+        dplyr::mutate_at(3:8, funs(readr::parse_number(.))) %>%
+        tidyr::separate(team,
+          into = c("team", "seed"), sep = "(?<=[A-Za-z.]) (?=[0-9])",
+          convert = TRUE
+        )
+      colnames(y) <- y_names
+      x <- dplyr::left_join(x, y, by = "team") %>%
+        dplyr::relocate(conf, .before = barthag) %>%
+        dplyr::relocate(seed, .after = last_col()) %>%
+        dplyr::mutate(year = year) %>%
+        dplyr::arrange(desc(barthag)) %>%
+        dplyr::mutate(barthag_rk = row_number(), .after = barthag) %>%
+        dplyr::arrange(desc(adj_o)) %>%
+        dplyr::mutate(adj_o_rk = row_number(), .after = adj_o) %>%
+        dplyr::arrange(adj_d) %>%
+        dplyr::mutate(adj_d_rk = row_number(), .after = adj_d) %>%
+        dplyr::arrange(desc(adj_t)) %>%
+        dplyr::mutate(adj_t_rk = row_number(), .after = adj_t) %>%
+        arrange(desc(barthag))
+      return(x)
+    }
+  })
+}
+
+#' Get Four Factor Statistics
+#'
+#' Returns four factor data and team records on a variety of splits, including
+#' date range, quadrant level, opponent ranking, game location, and game type.
+#'
+#' For a brief explanation of each factor and its computation, please visit
+#' \href{https://kenpom.com/blog/four-factors/}{KenPom's blog}. Data can be
+#' split on five variables: \describe{ \item{venue}{Splits on game location;
+#' 'all', 'home', 'away', 'neutral', and 'road' (away + neutral).}
+#' \item{type}{Splits on game type; 'all', 'nc' (non-conference), 'conf'
+#' (conference), 'reg' (regular season), 'post' (post-season tournaments),
+#' 'ncaa' (NCAA tournament).} \item{quad}{Splits by quadrant level; 1-4 with 0
+#' indicating 1-A games.} \item{top}{Splits by opponent T-Rank position,
+#' adjusted for game location.} \item{start/end}{Splits by date range
+#' (YYYYMMDD).}}
+#'
+#' @param year Defaults to current season (YYYY).
+#' @param venue Filters by venue; defaults to `all`.
+#' @param type Filters by game type; defaults to `all`.
+#' @param quad Filters by quadrant level; defaults to `4`.
+#' @param top Filters by opponent T-Rank position; defaults to NULL (all).
+#' @param start Filters by start date; defaults to NULL (full season).
+#' @param end Filters by end date; defaults to NULL (full season).
+#' @import dplyr
+#' @import httr
+#' @import readr
+#' @import janitor
+#' @importFrom cli cli_abort
+#' @importFrom rvest read_html html_table
+#' @importFrom purrr pluck
+#' @importFrom tidyr separate
+#' @importFrom magrittr %>%
+#' @examples
+#' bart_factors(quad='3', venue='away', start='20220101')
+#'
+#' @export
+bart_factors <- function(year = current_season(), venue = "all", type = "all", quad = "4", top=0, start = NULL, end = NULL) {
+  suppressWarnings({
+    if (!(is.numeric(year) && nchar(year) == 4 && year >=
+      2008)) {
+      cli::cli_abort("Enter a valid year as a number (YYYY). Data only goes back to 2008!")
+    }
+    if (!(is.character(quad))) {
+      cli::cli_abort("Please enter quadrant cutoff as a character value (e.g. '4')")
+    }
+    if(!(venue %in% c('all', 'home', 'away', 'neutral', 'road'))) {
+      cli::cli_abort("Please input correct venue value (see details)")
+    }
+    if(!(type %in% c('all', 'nc', 'conf', 'reg', 'post', 'ncaa'))) {
+      cli::cli_abort("Please input correct type value (see details)")
+    }
+    if(!(quad %in% c('0', '1', '2', '3', '4'))) {
+      cli::cli_abort("Please input correct quad value (see details)")
+    }
+    x_names <- c(
+      "team", "barthag", "rec", "wins", "games", "adj_t", "adj_o", "off_efg", "off_to", "off_or", "off_ftr", "adj_d", "def_efg",
+      "def_to", "def_or", "def_ftr"
+    )
+    y_names <- c("team", "conf")
+    venue_lookup <- list(
+      "all" = "All",
+      "home" = "H",
+      "away" = "A",
+      "neutral" = "N",
+      "road" = "A-N"
+    )
+    v <- venue_lookup[venue]
+    type_lookup <- list(
+      "all" = "All",
+      "nc" = "N",
+      "conf" = "C",
+      "reg" = "R",
+      "post" = "P",
+      "ncaa" = "T"
+    )
+    t <- type_lookup[type]
+    quad_lookup <- list(
+      "0" = "1",
+      "1" = "2",
+      "2" = "3",
+      "3" = "4",
+      "4" = "5"
+    )
+    q <- quad_lookup[quad]
+    y <- httr::GET(paste0("https://barttorvik.com/sos.php?year=", year, "&csv=1")) %>%
+      httr::content(as = "text") %>%
+      rvest::read_html() %>%
+      rvest::html_table(header = FALSE) %>%
+      purrr::pluck(1) %>%
+      janitor::row_to_names(row = 2) %>%
+      janitor::clean_names() %>%
+      dplyr::select(2:3) %>%
+      tidyr::separate(team, into = c("team", NA), sep = "(?<=[A-Za-z.]) (?=[0-9])")
+    colnames(y) <- y_names
+    if (is.null(start) && is.null(end)) {
+      x <- readr::read_csv(paste0("https://barttorvik.com/trank.php?year=", year, "&revquad=0&quad=", q, "&venue=", v, "&type=", t, "&top=", top, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
+        dplyr::select(1, 4, 5, 6, 7, 27, 2, 8, 12, 14, 10, 3, 9, 13, 15, 11)
+      colnames(x) <- x_names
+      x <- x %>% dplyr::mutate(across(c(2, 4:13), as.numeric),
+        year = year,
+        venue = venue,
+        type = type,
+        quad = paste0(quad, "+")
+      )
+      x <- dplyr::left_join(x, y, by = "team") %>%
+        dplyr::relocate(conf, .after = team) %>%
+        dplyr::arrange(desc(barthag))
+    }
+    if (!is.null(start) && !is.null(end)) {
+      x <- readr::read_csv(paste0("https://barttorvik.com/trank.php?year=", year, "&sort=&hteam=&t2value=&begin=", start, "&end=", end, "&revquad=0&quad=", q, "&venue=", v, "&type=", t, "&top=", top, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
+        dplyr::select(1, 4, 5, 6, 7, 27, 2, 8, 12, 14, 10, 3, 9, 13, 15, 11)
+      colnames(x) <- x_names
+      x <- x %>% dplyr::mutate(across(c(2, 4:13), as.numeric),
+        year = year,
+        venue = venue,
+        type = type,
+        quad = paste0(quad, "+"),
+        start = start,
+        end = end
+      )
+      x <- dplyr::left_join(x, y, by = "team") %>%
+        dplyr::relocate(conf, .after = team) %>%
+        dplyr::arrange(desc(barthag))
+    }
+    if(!is.null(start) && is.null(end)) {
+      x <- readr::read_csv(paste0("https://barttorvik.com/trank.php?year=", year, "&sort=&hteam=&t2value=&begin=", start, "&revquad=0&quad=", q, "&venue=", v, "&type=", t, "&top=", top, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
+        dplyr::select(1, 4, 5, 6, 7, 27, 2, 8, 12, 14, 10, 3, 9, 13, 15, 11)
+      colnames(x) <- x_names
+      x <- x %>% dplyr::mutate(across(c(2, 4:13), as.numeric),
+                               year = year,
+                               venue = venue,
+                               type = type,
+                               quad = paste0(quad, "+"),
+                               start = start,
+      )
+      x <- dplyr::left_join(x, y, by = "team") %>%
+        dplyr::relocate(conf, .after = team) %>%
+        dplyr::arrange(desc(barthag))
+    }
+    if(is.null(start) && !is.null(end)) {
+      x <- readr::read_csv(paste0("https://barttorvik.com/trank.php?year=", year, "&sort=&hteam=&t2value=&end=", end, "&revquad=0&quad=", q, "&venue=", v, "&type=", t, "&top=", top, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
+        dplyr::select(1, 4, 5, 6, 7, 27, 2, 8, 12, 14, 10, 3, 9, 13, 15, 11)
+      colnames(x) <- x_names
+      x <- x %>% dplyr::mutate(across(c(2, 4:13), as.numeric),
+                               year = year,
+                               venue = venue,
+                               type = type,
+                               quad = paste0(quad, "+"),
+                               end = end,
+      )
+      x <- dplyr::left_join(x, y, by = "team") %>%
+        dplyr::relocate(conf, .after = team) %>%
+        dplyr::arrange(desc(barthag))
+
+    }
+    return(x)
+  })
+}
+
+#' Get Conference Four Factor Statistics
+#'
+#' Returns conference-wide four factor data on a variety of splits, including
+#' date range, quadrant level, opponent ranking, game location, and game type.
+#'
+#' For a brief explanation of each factor and its computation, please visit
+#' \href{https://kenpom.com/blog/four-factors/}{KenPom's blog}. Data can be
+#' split on five variables: \describe{ \item{venue}{Splits on game location;
+#' 'all', 'home', 'away', 'neutral', and 'road' (away + neutral).}
+#' \item{type}{Splits on game type; 'all', 'nc' (non-conference), 'conf'
+#' (conference), 'reg' (regular season), 'post' (post-season tournaments),
+#' 'ncaa' (NCAA tournament).} \item{quad}{Splits by quadrant level; 1-4 with 0
+#' indicating 1-A games.} \item{top}{Splits by opponent T-Rank position,
+#' adjusted for game location.} \item{start/end}{Splits by date range
+#' (YYYYMMDD).}}
+#'
+#' @param year Defaults to current season (YYYY).
+#' @param venue Filters by venue; defaults to `all`.
+#' @param type Filters by game type; defaults to `all`.
+#' @param quad Filters by quadrant level; defaults to `4`.
+#' @param top Filters by opponent T-Rank position; defaults to NULL (all).
+#' @param start Filters by start date; defaults to NULL (full season).
+#' @param end Filters by end date; defaults to NULL (full season).
+#' @import dplyr
+#' @import readr
+#' @importFrom cli cli_abort
+#' @importFrom magrittr %>%
+#' @examples
+#' bart_conf_factors(type='nc')
+#'
+#' @export
+bart_conf_factors <- function(year = current_season(), venue = "all", type = "all", quad = "4", top=0, start = NULL, end = NULL) {
+  suppressWarnings({
+    if (!(is.numeric(year) && nchar(year) == 4 && year >=
+      2008)) {
+      cli::cli_abort("Enter a valid year as a number (YYYY). Data only goes back to 2008!")
+    }
+    if (!(is.character(quad))) {
+      cli::cli_abort("Please enter quadrant cutoff as a character value (e.g. '4')")
+    }
+    if(!(venue %in% c('all', 'home', 'away', 'neutral', 'road'))) {
+      cli::cli_abort("Please input correct venue value (see details)")
+    }
+    if(!(type %in% c('all', 'nc', 'conf', 'reg', 'post', 'ncaa'))) {
+      cli::cli_abort("Please input correct type value (see details)")
+    }
+    if(!(quad %in% c('0', '1', '2', '3', '4'))) {
+      cli::cli_abort("Please input correct quad value (see details)")
+    }
+    x_names <- c(
+      "conf", "barthag", "rec", "wins", "games", "adj_t", "adj_o", "off_efg", "off_to", "off_or", "off_ftr", "adj_d", "def_efg",
+      "def_to", "def_or", "def_ftr", "wab"
+    )
+    venue_lookup <- list(
+      "all" = "All",
+      "home" = "H",
+      "away" = "A",
+      "neutral" = "N",
+      "road" = "A-N"
+    )
+    v <- venue_lookup[venue]
+    type_lookup <- list(
+      "all" = "All",
+      "nc" = "N",
+      "conf" = "C",
+      "reg" = "R",
+      "post" = "P",
+      "ncaa" = "T"
+    )
+    t <- type_lookup[type]
+    quad_lookup <- list(
+      "0" = "1",
+      "1" = "2",
+      "2" = "3",
+      "3" = "4",
+      "4" = "5"
+    )
+    q <- quad_lookup[quad]
+    if (is.null(start) && is.null(end)) {
+      x <- readr::read_csv(paste0("https://barttorvik.com/trank.php?year=", year, "&conyes=1&revquad=0&quad=", q, "&venue=", v, "&type=", t, "&top=", top, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
+        dplyr::select(1, 4, 5, 6, 7, 27, 2, 8, 12, 14, 10, 3, 9, 13, 15, 11, 35)
+      colnames(x) <- x_names
+      x <- x %>%
+        dplyr::mutate(
+          year = year,
+          venue = venue,
+          type = type,
+          top=top,
+          quad = paste0(quad, "+")
+        ) %>%
+        dplyr::arrange(desc(barthag))
+    }
+    if (!is.null(start) && !is.null(end)) {
+      x <- readr::read_csv(paste0("https://barttorvik.com/trank.php?year=", year, "&conyes=1&sort=&hteam=&t2value=&begin=", start, "&end=", end, "&revquad=0&quad=", q, "&top=", top, "&venue=", v, "&type=", t, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
+        dplyr::select(1, 4, 5, 6, 7, 27, 2, 8, 12, 14, 10, 3, 9, 13, 15, 11, 35)
+      colnames(x) <- x_names
+      x <- x %>%
+        dplyr::mutate(
+          year = year,
+          venue = venue,
+          type = type,
+          top=top,
+          quad = paste0(quad, "+"),
+          start = start,
+          end = end
+        ) %>%
+        dplyr::arrange(desc(barthag))
+    }
+    if(!is.null(start) && is.null(end)) {
+      x <- readr::read_csv(paste0("https://barttorvik.com/trank.php?year=", year, "&conyes=1&sort=&hteam=&t2value=&begin=", start, "&revquad=0&quad=", q, "&top=", top, "&venue=", v, "&type=", t, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
+        dplyr::select(1, 4, 5, 6, 7, 27, 2, 8, 12, 14, 10, 3, 9, 13, 15, 11, 35)
+      colnames(x) <- x_names
+      x <- x %>%
+        dplyr::mutate(
+          year = year,
+          venue = venue,
+          type = type,
+          top=top,
+          quad = paste0(quad, "+"),
+          start = start,
+          end = end
+        ) %>%
+        dplyr::arrange(desc(barthag))
+    }
+    if(is.null(start) && !is.null(end)) {
+      x <- readr::read_csv(paste0("https://barttorvik.com/trank.php?year=", year, "&conyes=1&sort=&hteam=&t2value=&end=", end, "&revquad=0&quad=", q, "&top=", top, "&venue=", v, "&type=", t, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
+        dplyr::select(1, 4, 5, 6, 7, 27, 2, 8, 12, 14, 10, 3, 9, 13, 15, 11, 35)
+      colnames(x) <- x_names
+      x <- x %>%
+        dplyr::mutate(
+          year = year,
+          venue = venue,
+          type = type,
+          top=top,
+          quad = paste0(quad, "+"),
+          start = start,
+          end = end
+        ) %>%
+        dplyr::arrange(desc(barthag))
+    }
+    return(x)
+  })
+}
+
+#' Get Conference Team Statistics
+#'
+#' Returns conference-only metrics, strengths of schedule, and bid probabilities
+#' (auto and at-large) for all teams in a conference.
+#'
+#' Accepted conference abbreviations for the `conf` argument are: \itemize{\item ‘A10’, ‘ACC’,
+#' ‘AE’, ‘ASun’, ‘Amer’, ‘B10’, ‘B12’, ‘BE’, ‘BSky’, ‘BSth’, ‘BW’, ‘CAA’,
+#' ‘CUSA’, ‘Horz’, ‘Ivy’, ‘MAAC’, ‘MAC’, ‘MEAC’, ‘MVC’, ‘MWC’, ‘NEC’, ‘OVC’,
+#' ‘P12’, ‘Pat’, ‘SB’, ‘SC’, ‘SEC’, ‘SWAC’, ‘Slnd’, ‘Sum’, ‘WAC’, ‘WCC’}
+#'
+#' Other: \itemize{\item Barthag is the estimation of a team's win probability against
+#' the average Division 1 team on a neutral court. \item `conf_cur_sos` is the
+#' current average Barthag rating of conference opponents. \item `conf_fut_sos`
+#' is the projected average Barthag rating of conference opponents.}
+#'
+#' @param year Defaults to current season (YYYY).
+#' @param conf Indicates conference (see details).
+#' @import dplyr
+#' @import httr
+#' @import janitor
+#' @import readr
+#' @importFrom cli cli_abort
+#' @importFrom rvest read_html html_table
+#' @importFrom purrr pluck
+#' @importFrom tidyr separate
+#' @importFrom magrittr %>%
+#' @examples
+#' bart_conf_stats(year=2022, conf='ACC')
+#'
+#' @export
+bart_conf_stats <- function(year = current_season(), conf = NULL) {
+  suppressWarnings({
+    if (is.null(conf) || !(conf %in% c('A10', 'ACC', 'AE', 'ASun', 'Amer', 'B10', 'B12', 'BE', 'BSky', 'BSth', 'BW',
+                                      'CAA', 'CUSA', 'Horz', 'Ivy', 'MAAC', 'MAC', 'MEAC', 'MVC', 'MWC', 'NEC', 'OVC',
+                                      'P12', 'Pat', 'SB', 'SC', 'SEC', 'SWAC', 'Slnd', 'Sum', 'WAC', 'WCC'))) {
+      cli::cli_abort("Please enter valid conference code (see details)")
+    }
+    if (!(is.numeric(year) && nchar(year) == 4 && year >=
+      2008)) {
+      cli::cli_abort("Enter a valid year as a number. Data only goes back to 2008!")
+    }
+    else {
+      x <- httr::GET(paste0("https://barttorvik.com/conf.php?conf=", conf, "&year=", year)) %>%
+        httr::content(as = "text") %>%
+        rvest::read_html() %>%
+        rvest::html_table() %>%
+        purrr::pluck(1) %>%
+        janitor::row_to_names(row_number = 1) %>%
+        janitor::clean_names() %>%
+        tidyr::separate(team, into = c("team", "more"), sep = "(?<=[a-zA-QS-Z.])\\s*(?=[0-9])") %>%
+        tidyr::separate(more, into = c("seed", "finish"), sep = ",") %>%
+        dplyr::mutate_at(4, funs(trimws(.))) %>%
+        dplyr::select(-9) %>%
+        dplyr::rename(
+          "conf_rec" = 5,
+          "eff_marg"=9,
+          "con_oe_rk" = 11,
+          "con_de_rk" = 13,
+          "conf_barthag" = 14,
+          "conf_cur_sos" = 16,
+          "conf_cur_sos_rk" = 17,
+          "conf_fut_sos" = 18,
+          "conf_fut_sos_rk" = 19,
+          "conf_sos" = 20,
+          "conf_sos_rk" = 21,
+          "auto_prob"=22,
+          "bid_prob"=23
+        ) %>%
+        dplyr::mutate(
+          seed = readr::parse_number(seed),
+          auto_prob=readr::parse_number(auto_prob),
+          bid_prob=readr::parse_number(bid_prob),
+          across(c(1, 6:14, 16:23), as.numeric)
+        )
+      return(x)
+    }
+  })
+}
+
+#' Get T-Rank Archive Ratings
+#'
+#' Returns T-Rank ratings and efficiency metrics from the morning of the
+#' specified day. Data goes back to 2014-15.
+#'
+#' Barthag is the estimation of a team's win probability against the average
+#' Division 1 team on a neutral court. WAB (wins above bubble) is the number of
+#' wins attained above or below the expected total from a bubble team against an
+#' analogous schedule.
+#'
+#' @param date Date to pull ratings (YYYYMMDD).
+#' @import dplyr
+#' @import lubridate
+#' @import httr
+#' @importFrom cli cli_abort
+#' @importFrom rvest read_html html_table
+#' @importFrom purrr pluck
+#' @importFrom magrittr %>%
+#' @examples
+#' bart_archive('20220113')
+#' @export
+bart_archive <- function(date) {
+  suppressWarnings({
+    t_date <- lubridate::ymd(date)
+    if (t_date < as.Date("2014-11-01")) {
+      cli::cli_abort("Data only goes back to 2014-11-01!")
+    }
+    if (isTRUE(grepl("-", date))) {
+      cli::cli_abort("Please enter a date in YYYYMMDD format with no hyphens")
+    }
+    names <- c(
+      "rk", "team", "conf", "rec", "adj_o", "adj_o_rk", "adj_d", "adj_d_rk", "barthag", "proj_rec", "proj_conf_rec",
+      "wab", "wab_rk", "cur_rk", "change"
+    )
+    x <- httr::GET(paste0("https://barttorvik.com/trank-time-machine.php?date=", date)) %>%
+      httr::content(as = "text") %>%
+      rvest::read_html() %>%
+      rvest::html_table() %>%
+      purrr::pluck(1)
+    x <- x %>%
+      subset(select = -c(16:ncol(x)))
+    colnames(x) <- names
+    x <- x %>%
+      dplyr::mutate(across(c(1, 5:9, 12:15), as.numeric),
+        date = lubridate::ymd(date), .after = last_col()
+      ) %>%
+      dplyr::filter(!is.na(adj_o))
+    return(x)
+  })
+}

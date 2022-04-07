@@ -1,0 +1,141 @@
+---
+title: "Intro to toRvik"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, include=FALSE}
+library(toRvik)
+library(dplyr)
+library(readr)
+library(tictoc)
+library(utils)
+```
+
+Hey, everyone, I'm Andrew Weatherman, creator of [`toRvik`](https://github.com/andreweatherman/toRvik) and lover of college basketball analytics. The goal of `toRvik` is to expand access to reliable, high-quality CBB statistics. While analogous packages exist to pull data, like Saiem Gilani's brilliant [`hoopR`](http://hoopr.sportsdataverse.org/), `toRvik` requires no paid subscription or set-up and can be immediately utilized by anyone with just a few lines of code. 
+
+## **Install** [**`toRvik`**](https://github.com/andreweatherman/toRvik)
+```{r install, message=FALSE,eval=FALSE}
+# You can install using {pacman} with the following code:
+if (!requireNamespace('pacman', quietly = TRUE)){
+  install.packages('pacman')
+}
+pacman::p_load_current_gh("andreweatherman/toRvik", dependencies = TRUE, update = TRUE)
+```
+
+## **Overview of Barttorvik and** [**`toRvik`**](https://github.com/andreweatherman/toRvik)
+
+`toRvik` is a package of scrapers that pull data from [Barttorvik](https://barttorvik.com/#), a popular college basketball analytics website, and return it in tidy format. Barttorvik splits its data on a number of variables and hosts detailed player and game statistics, while serving as a reputable, industry-recognized metric rating system. Generally speaking, all data is avaliable back to the 2007-08 season. More information about Barttorvik, its data, and its metric rating system can be found [here](http://adamcwisports.blogspot.com/p/every-possession-counts.html).
+
+Package functions are syntactically structured to point to their data source (e.g. by 'player,' 'game,' etc.) and should be considered `get` functions by nature. As of `toRvik` version 1.0.0, the package exports more than 20 functions covering the website and its data. Some highlights include:
+
+- Retrieving detailed game-by-game player statistics
+- Splitting advanced metrics by game location, type, date range, or opponent strength
+- Pulling play-by-play shooting bins for players and teams
+- Grabbing composite recruit rankings for top players by coach
+- Generating injury-adjusted efficiency measures by team
+
+## **Quick start with ratings**
+
+`toRvik` requires no set-up and can be instantly executed in any session. To understand the package, the T-Rank functions, pulling and splitting Barttorvik's metric rating system, are an excellent place to start. Let's take a glance at the top teams in T-Rank using `toRvik`:
+
+```{r trank, warning=FALSE}
+tictoc::tic()
+toRvik::bart_ratings(year=2022) %>% 
+  utils::head(10)
+tictoc::toc()
+```
+
+Here, the `bart_ratings` function returned the top ten teams in T-Rank in the current season. We are also presented with each team's adjusted efficiencies, their adjusted tempo, and two forms of strength of schedule (documented in `bart_ratings`). But what if we want these same measures in home games only? We would use `bart_factors` and input 'home' as venue:
+
+```{r factors, warning=FALSE}
+tictoc::tic()
+toRvik::bart_factors(venue='home') %>%
+  utils::head(10)
+tictoc::toc()
+```
+
+And now, we have four factor data and metric ratings for *home games only*. The `bart_factors` function, and the analogous `bart_conf_factors`, takes venue, game type, date range, and opponent strength as additional splits. Great, but what if we want to explore rating trends over time? `toRvik` gives us that ability with `bart_archive`, a function that pulls adjusted ratings and projected records from the morning of a desired date:
+
+```{r archive, wanring=FALSE}
+tictoc::tic()
+toRvik::bart_archive('20220113') %>%
+  utils::head(10)
+tictoc::toc()
+```
+
+At this time, `bart_archive` only takes a single date, but if you want to track longer periods, I suggest looking into mapping packages such as [`purrr`](https://purrr.tidyverse.org/reference/index.html).
+
+## **Exploring player and game data**
+
+Perhaps the most valuable functions in `toRvik` concern granular analysis. The package gives us the ability to explore advanced statistics at a game-by-game level for every Division 1 player since the 2007-08 season using `bart_player_game`. 
+
+Please note: This function returns a large tibble with >100,000 rows for each completed season. If you will be performing analyses on this data, it is recommended to store a fresh tibble as a saftey variable.
+
+```{r player_game, warning=FALSE}
+tictoc::tic()
+toRvik::bart_player_game(year=2022, stat='adv') %>%
+  dplyr::filter(team=='Duke') %>%
+  dplyr::arrange(desc(net)) %>%
+  utils::head(10)
+tictoc::toc()
+```
+
+Here, `bart_player_game` returned the 20 highest individual net BPMs by a Duke player this season. The function takes 'box,' 'shooting,' and 'adv' as stat inputs, and I welcome you to explore each one in your own session. But what if we want to investigate similar performance at a seaosn level? Well, `bart_player_season` gives us that option -- also taking 'box,' 'shooting,' and 'adv' as stat inputs.
+
+```{r player season, warning=FALSE}
+tictoc::tic()
+toRvik::bart_player_season(year=2022, stat='shooting') %>%
+  dplyr::filter(team=='Duke') %>%
+  dplyr::arrange(desc(mid_a)) %>%
+  utils::head(5)
+tictoc::toc()
+```
+
+And now, we have a tibble of season-long shooting data for Duke players, sorted by number of mid-range attempts. Advanced metric data can be pulled by team on a per-game basis using `bart_team_schedule`, and total team shooting splis can be accessed using `bart_team_shooting`. Game box data can be pulled with `bart_game_total`.
+
+## **Investigating the NCAA tournament**
+
+Lastly for this introductory vignette, we will explore `toRvik` functions for scraping tournament data. Frequent any time on social media in college basketball circles in March, and you will undoubtedly hear about 'team sheets,' detailed repositories of strength and quality metrics used by the seeding and selection committee. With `bart_tourney_sheets`, you can pull 'quick-hit' team sheets in tidy format with just a single line of code:
+
+```{r sheets, warning=FALSE}
+tictoc::tic()
+toRvik::bart_tourney_sheets(year=2022) %>%
+  utils::head(10)
+tictoc::toc()
+```
+
+Returned are sheets of top teams sorted by their NCAA NET ranking. Because this function relies on NET data, it is only available back to the 2018-19 season. In-season performance is valuable, but what if you want to investigate *just* tournament data? Well, `toRvik` gives you two options to do so: `bart_tourney_odds` and `bart_tourney_results`. The former returns metric-adjusted round probabilities by split. Let's explore round odds for the 2022 NCAA Tournament:
+
+```{r t_odds, warning=FALSE}
+tictoc::tic()
+toRvik::bart_tourney_odds(year=2022, odds='pre') %>%
+  dplyr::arrange(desc(s16)) %>%
+  utils::head(10)
+tictoc::toc()
+```
+
+With the 'odds' argument set to 'pre,' we returned pre-tournament odds and sorted by likelihood to reach the second weekend (Sweet 16). `bart_tourney_odds` also takes current odds ('current'), odds based on recent performance ('recent'), and odds based on games against strong opponents ('t100'). This data is similarly available starting with the 2019 tournament. Now, what if we want to explore tournament results?
+
+```{r t_res, warning=FALSE}
+tictoc::tic()
+toRvik::bart_tourney_results(min_year=2011, max_year=2021, type='conf') %>%
+  utils::head(5)
+tictoc::toc()
+```
+
+With `bart_tourney_results`, we can return raw and adjusted outcomes by split. Here, we returned aggregate conference results from 2011 to 2021, sorted by PAKE -- the number of wins attained above or below KenPom expectation. The function splits by team ('team'), conference ('conf'), coach ('coach'), and seed ('seed') and includes data starting in 2000.
+
+## **And you're off!**
+
+`toRvik` includes several additional functions and capabilities that I did not describe here; take time to explore them and those detailed in this introduction. If you have any questions, feel free to message me on [Twitter](https://twitter.com/andreweatherman). If you run into any bugs, please open an issue on the [GitHub](https://github.com/andreweatherman/toRvik/issues). Happy exploring!

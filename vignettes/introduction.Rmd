@@ -35,7 +35,7 @@ pacman::p_load_current_gh("andreweatherman/toRvik", dependencies = TRUE, update 
 
 ## **Overview of Barttorvik and** [**`toRvik`**](https://github.com/andreweatherman/toRvik)
 
-`toRvik` is a package of scrapers that pull data from [Barttorvik](https://barttorvik.com/#), a popular college basketball analytics website, and return it in tidy format. Barttorvik splits its data on a number of variables and hosts detailed player and game statistics, while serving as a reputable, industry-recognized metric rating system. Generally speaking, all data is avaliable back to the 2007-08 season. More information about Barttorvik, its data, and its metric rating system can be found [here](http://adamcwisports.blogspot.com/p/every-possession-counts.html).
+`toRvik` is a package of scrapers that pull data from [Barttorvik](https://barttorvik.com/), a popular college basketball analytics website, and return it in tidy format. Barttorvik splits its data on a number of variables and hosts detailed player and game statistics, while serving as a reputable, industry-recognized metric rating system. Generally speaking, all data is avaliable back to the 2007-08 season. More information about Barttorvik, its data, and its metric rating system can be found [here](http://adamcwisports.blogspot.com/p/every-possession-counts.html).
 
 Package functions are syntactically structured to point to their data source (e.g. by 'player,' 'game,' etc.) and should be considered `get` functions by nature. As of `toRvik` version 1.0.0, the package exports more than 20 functions covering the website and its data. Some highlights include:
 

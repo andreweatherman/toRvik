@@ -34,5 +34,5 @@ Suggests:
     tictoc
 VignetteBuilder: knitr
 Config/testthat/edition: 3
-URL: https://andreweatherman.github.io/toRvik/
+URL: http://www.torvik.dev/
 Language: en-US

@@ -26,6 +26,7 @@ Imports:
     stringr,
     tidyr
 Suggests: 
+    covr,
     knitr,
     rmarkdown,
     spelling,

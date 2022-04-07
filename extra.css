@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;600&display=swap');
+
+h1, h2, h3, h4, h5, h6{
+font-family: "Quicksand";
+font-weight: 700;
+}
+
+.navbar-light .navbar-brand{
+font-family: "Oswald";
+font-weight:600;
+font-size: 24px;
+}
+

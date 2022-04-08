@@ -116,20 +116,20 @@ statistics.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">bart_transfers</span><span class="op">(</span>stat<span class="op">=</span><span class="st">'box'</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 937 × 20</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 969 × 20</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    player     pos   exp   hgt   team  conf      g   mpg   ppg fg_pct  oreb  dreb</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> A.J. Hamr… C     Fr    6-9   Char… BSth      5  6.75  3.38  0.167 1.38  1.75 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> A.J. McGi… Wing… So    6-3   Cinc… Amer      7  4.88  2.25  0.35  0     0.5  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> A.J. Oliv… Wing… Sr    6-5   Old … CUSA     31 17.6   2.56  0.310 0.469 1.5  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> AJ Neal    Wing… Fr    6-1   Long… BW       14  5.75  1.88  0.4   0.125 0.438</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> AJ Stredic Wing… Jr    6-8   Arka… SWAC     23 14.8   1.36  0.5   0.76  1.52 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Aaron Cla… Scor… Sr    6-1   Sacr… NEC      25 33.1  16.0   0.421 0.36  1.32 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Abdou Ndi… PF/C  Jr    6-9   Illi… MVC      24  9.65  1.69  0.55  0.769 1.15 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Abdoul Ka… PF/C  So    6-9   St. … A10      33  9.58  3.73  0.513 0.758 0.939</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Adam Anho… PF/C  Jr    6-8   West… Sum      11  4.46  1.31  0.455 0.462 0.923</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Adam This… Stre… Sr    6-6   Colo… MWC      23 12.5   2.29  0.38  0.25  1.5  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 927 more rows, and 8 more variables: rpg &lt;dbl&gt;, apg &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Aaron Cla… Scor… Sr    6-1   Sacr… NEC      25 33.1  16.0   0.421 0.36  1.32 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Abdou Ndi… PF/C  Jr    6-9   Illi… MVC      24  9.65  1.69  0.55  0.769 1.15 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Abdoul Ka… PF/C  So    6-9   St. … A10      33  9.58  3.73  0.513 0.758 0.939</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Adam Anho… PF/C  Jr    6-8   West… Sum      11  4.46  1.31  0.455 0.462 0.923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Adam This… Stre… Sr    6-6   Colo… MWC      23 12.5   2.29  0.38  0.25  1.5  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Adong Mak… C     Sr    6-9   Nort… MAC      30 16.9   5.77  0.574 1.5   1.83 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 959 more rows, and 8 more variables: rpg &lt;dbl&gt;, apg &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ast_to &lt;dbl&gt;, spg &lt;dbl&gt;, bpg &lt;dbl&gt;, num &lt;chr&gt;, year &lt;dbl&gt;, id &lt;dbl&gt;</span></span>
 <span class="r-in"></span>
 </code></pre></div>

@@ -1,7 +1,7 @@
 Package: toRvik
 Type: Package
 Title: Functions to Scrape Men's College Basketball Data from Barttorvik
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: person("Andrew", "Weatherman", email = "taw38@duke.edu", 
   role = c("aut", "cre"))
 Description: A suite of functions to quickly scrape and tidy advanced metrics,

@@ -7,7 +7,7 @@
 
 [**`toRvik`**](https://github.com/andreweatherman/toRvik) is an R package for working with and scraping men's college basketball data from [Barttorvik](https://barttorvik.com/). 
  
-No subscription is required to access the data. The package includes functions for pulling player and team data, game results, advanced metric splits, play-by-play shooting, and more -- all returned in tibble format. As of version 1.0.0, `toRvik` ships with more than 20 functions.
+No subscription is required to access the data. The package includes functions for pulling player and team data, game results, advanced metric splits, play-by-play shooting, and more -- all returned in tibble format. As of version 1.0.1, `toRvik` ships with more than 20 functions.
    
 ## Package Installation
 To install toRvik, run the following code inside your R session:

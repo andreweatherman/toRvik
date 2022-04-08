@@ -4,26 +4,29 @@
 \alias{bart_transfers}
 \title{Get Transfer Portal Statistics}
 \usage{
-bart_transfers(stat = NULL, conf_only = F)
+bart_transfers(stat = NULL, conf_only = F, active = T)
 }
 \arguments{
 \item{stat}{Indicates statistical split (see details).}
 
 \item{conf_only}{Logical. Filters data by conference-only play; defaults to
 `FALSE`.}
+
+\item{active}{Logical. Filters players by portal status -- active vs.
+committed; defaults to TRUE (active).}
 }
 \description{
 Returns detailed, season-long player statistics on a variety of splits for
-all active portal players. Transfer information is sourced from
+all portal players for 2022-23. Transfer information is sourced from
 \href{https://verbalcommits.com/transfers/2022}{Verbal Commits} and is
-updated every 20 minutes.
+updated every 20 minutes. Commit information is updated roughly every 18
+hours.
 }
 \details{
 Data is split on three statistical types, explained below: \describe{
-\item{box}{Returns basic box score stats.}
-\item{shooting}{Returns play-by-play shooting splits.}
-\item{adv}{Returns advanced metrics and possession-adjusted box score
-statistics.}}
+\item{box}{Returns basic box score stats.} \item{shooting}{Returns
+play-by-play shooting splits.} \item{adv}{Returns advanced metrics and
+possession-adjusted box score statistics.}}
 }
 \examples{
 bart_transfers(stat='box')

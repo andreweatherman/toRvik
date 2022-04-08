@@ -29,6 +29,7 @@ current_season <- function() {
 #'   `FALSE`.
 #' @import dplyr
 #' @import readr
+#' @importFrom withr local_options
 #' @importFrom cli cli_abort
 #' @importFrom magrittr %>%
 #' @examples
@@ -37,6 +38,7 @@ current_season <- function() {
 #' @export
 bart_player_season <- function(year = current_season(), stat = NULL, conf_only = F) {
   suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
     if (!(is.numeric(year) && nchar(year) == 4 && year >=
       2008)) {
       cli::cli_abort("Enter a valid year as a number (YYYY). Data only goes back to 2008")
@@ -117,6 +119,7 @@ bart_player_season <- function(year = current_season(), stat = NULL, conf_only =
 #' @import dplyr
 #' @import jsonlite
 #' @import lubridate
+#' @importFrom withr local_options
 #' @importFrom cli cli_abort
 #' @importFrom magrittr %>%
 #' @examples
@@ -125,6 +128,7 @@ bart_player_season <- function(year = current_season(), stat = NULL, conf_only =
 #' @export
 bart_player_game <- function(year = current_season(), stat = NULL) {
   suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
     if (!(is.numeric(year) && nchar(year) == 4 && year >=
       2008)) {
       cli::cli_abort("Enter a valid year as a number. Data only goes back to 2008!")
@@ -209,45 +213,58 @@ bart_player_game <- function(year = current_season(), stat = NULL) {
 #' Get Transfer Portal Statistics
 #'
 #' Returns detailed, season-long player statistics on a variety of splits for
-#' all active portal players. Transfer information is sourced from
+#' all portal players for 2022-23. Transfer information is sourced from
 #' \href{https://verbalcommits.com/transfers/2022}{Verbal Commits} and is
-#' updated every 20 minutes.
+#' updated every 20 minutes. Commit information is updated roughly every 18
+#' hours.
 #'
 #' Data is split on three statistical types, explained below: \describe{
-#' \item{box}{Returns basic box score stats.}
-#' \item{shooting}{Returns play-by-play shooting splits.}
-#' \item{adv}{Returns advanced metrics and possession-adjusted box score
-#' statistics.}}
+#' \item{box}{Returns basic box score stats.} \item{shooting}{Returns
+#' play-by-play shooting splits.} \item{adv}{Returns advanced metrics and
+#' possession-adjusted box score statistics.}}
 #'
 #' @param stat Indicates statistical split (see details).
 #' @param conf_only Logical. Filters data by conference-only play; defaults to
 #'   `FALSE`.
+#' @param active Logical. Filters players by portal status -- active vs.
+#'   committed; defaults to TRUE (active).
 #' @import dplyr
 #' @import jsonlite
 #' @import readr
+#' @import httr
+#' @importFrom withr local_options
 #' @importFrom cli cli_abort
-#' @importFrom RCurl getURL
 #' @importFrom stringr str_match
 #' @importFrom magrittr %>%
 #' @examples
 #' bart_transfers(stat='box')
 #'
 #' @export
-bart_transfers <- function(stat = NULL, conf_only = F) {
+bart_transfers <- function(stat = NULL, conf_only = F, active=T) {
   suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
     if (is.null(stat) || !(stat %in% c("box", "shooting", "adv"))) {
       cli::cli_abort("Please input a valid stat command ('box', 'shooting', or 'adv')")
     }
     c_only <- as.integer(conf_only)
-    txt <- RCurl::getURL("https://barttorvik.com/playerstat.php?link=y&xvalue=trans&year=2022")
+    txt <- httr::GET("https://barttorvik.com/playerstat.php?link=y&xvalue=trans&year=2022")
+    txt <- httr::content(txt)
     t <- stringr::str_match(txt, "var transfers\\s*(.*?)\\s*var trandict")[1, 2]
     t <- gsub("=", "", t)
     t <- gsub(";", "", t)
-    t <- jsonlite::fromJSON(t) %>%
-      dplyr::as_tibble() %>%
-      dplyr::filter(V3 == "") %>%
-      dplyr::select(1) %>%
-      dplyr::rename("player" = 1)
+    all <- jsonlite::fromJSON(t) %>%
+      dplyr::as_tibble()
+    portal <- all %>%
+              dplyr::filter(V3 == "") %>%
+              dplyr::select(1, 2) %>%
+              dplyr::rename("player" = 1,
+                            "team"=2)
+    commit <- all %>%
+              dplyr::filter(V3 != "") %>%
+              dplyr::select(1, 2, 3) %>%
+              dplyr::rename("player" = 1,
+                            "team"=2,
+                            "new_school"=3)
     if (stat == "box") {
       names <- c(
         "player", "pos", "exp", "hgt", "team", "conf", "g", "mpg", "ppg", "oreb",
@@ -268,8 +285,14 @@ bart_transfers <- function(stat = NULL, conf_only = F) {
       x <- dplyr::left_join(x, (y %>% dplyr::select(1, 4)), by = "id") %>%
         dplyr::relocate(fg_pct, .before = oreb) %>%
         dplyr::arrange(desc(ppg))
-    }
-    if (stat == "shooting") {
+          if(active==T) {
+              x <- merge(x, portal, by = c("player", "team")) %>%
+                dplyr::as_tibble() }
+          if(active==F) {
+              x <- merge(x, commit, by = c("player", "team")) %>%
+                  dplyr::as_tibble() }
+      }
+      if (stat == "shooting") {
       names <- c(
         "player", "pos", "exp", "team", "conf", "g", "mpg", "ppg", "usg", "ortg", "efg", "ts",
         "ftm", "fta", "ft_pct", "two_m", "two_a", "two_pct", "three_m", "three_a",
@@ -285,7 +308,13 @@ bart_transfers <- function(stat = NULL, conf_only = F) {
       x <- x %>%
         dplyr::mutate(p_per = ((40 * ppg) / mpg), .after = ppg) %>%
         arrange(desc(ppg))
-    }
+            if(active==T) {
+                x <- merge(x, portal, by = c("player", "team")) %>%
+                     dplyr::as_tibble() }
+            if(active==F) {
+                x <- merge(x, commit, by = c("player", "team")) %>%
+                     dplyr::as_tibble() }
+      }
     if (stat == "adv") {
       names <- c(
         "player", "pos", "exp", "team", "conf", "g", "min", "porpag", "dporpag", "ortg", "adj_oe", "drtg", "adj_de",
@@ -296,10 +325,16 @@ bart_transfers <- function(stat = NULL, conf_only = F) {
         dplyr::select(1, 65, 26, 2:5, 29, 49, 6, 30, 47, 48, 50, 56, 57, 54, 10:13, 23:25, 31, 35, 33)
       colnames(x) <- names
       x <- x %>% arrange(desc(rec))
+          if(active==T) {
+              x <- merge(x, portal, by = c("player", "team")) %>%
+                   dplyr::as_tibble() }
+          if(active==F) {
+             x <- merge(x, commit, by = c("player", "team")) %>%
+                  dplyr::as_tibble() }
     }
-    x <- merge(x, t, by = "player") %>% dplyr::as_tibble()
     return(x)
-  })
+}
+  )
 }
 
 #' Get Player of the Year Ratings
@@ -320,6 +355,7 @@ bart_transfers <- function(stat = NULL, conf_only = F) {
 #' @import dplyr
 #' @import httr
 #' @import janitor
+#' @importFrom withr local_options
 #' @importFrom cli cli_abort
 #' @importFrom rvest read_html html_table
 #' @importFrom purrr pluck
@@ -329,6 +365,8 @@ bart_transfers <- function(stat = NULL, conf_only = F) {
 #'
 #' @export
 bart_poy <- function(year = current_season(), conf = "All", class = NULL, conf_only = F) {
+  suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
   if (!(is.numeric(year) && nchar(year) == 4 && year >=
     2008)) {
     cli::cli_abort("Enter a valid year as a number (YYYY). Data only goes back to 2008!")
@@ -366,7 +404,7 @@ bart_poy <- function(year = current_season(), conf = "All", class = NULL, conf_o
       janitor::clean_names()
     return(x)
   }
-}
+})}
 
 #' Get Estimated Injury Impact
 #'
@@ -382,6 +420,7 @@ bart_poy <- function(year = current_season(), conf = "All", class = NULL, conf_o
 #' @import dplyr
 #' @import httr
 #' @import janitor
+#' @importFrom withr local_options
 #' @importFrom rvest read_html html_table
 #' @importFrom cli cli_abort
 #' @importFrom purrr pluck
@@ -392,6 +431,7 @@ bart_poy <- function(year = current_season(), conf = "All", class = NULL, conf_o
 #' @export
 bart_injuryimpact <- function(year = current_season(), team = NULL, player = NULL) {
   suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
     if (is.null(team) | is.null(player)) {
       cli::cli_abort("Please enter a team or player value!")
     }

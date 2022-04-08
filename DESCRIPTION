@@ -24,7 +24,8 @@ Imports:
     readr,
     rvest,
     stringr,
-    tidyr
+    tidyr,
+    withr
 Suggests: 
     covr,
     knitr,
@@ -34,5 +35,5 @@ Suggests:
     tictoc
 VignetteBuilder: knitr
 Config/testthat/edition: 3
-URL: http://www.torvik.dev/
+URL: https://www.torvik.dev/
 Language: en-US

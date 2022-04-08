@@ -7,6 +7,7 @@
 #' @import dplyr
 #' @import httr
 #' @import janitor
+#' @importFrom withr local_options
 #' @importFrom cli cli_abort
 #' @importFrom purrr pluck
 #' @importFrom tidyr separate
@@ -17,6 +18,7 @@
 #' @export
 bart_tourney_sheets <- function(year = current_season()) {
   suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
     if (!(is.numeric(year) && nchar(year) == 4 && year >=
       2019)) {
       cli::cli_abort("Enter a valid year as a number (YYYY). Data only goes back to 2019!")
@@ -54,6 +56,7 @@ bart_tourney_sheets <- function(year = current_season()) {
 #' @import dplyr
 #' @import httr
 #' @import janitor
+#' @importFrom withr local_options
 #' @importFrom rvest read_html html_table
 #' @importFrom cli cli_abort
 #' @importFrom purrr pluck
@@ -65,6 +68,7 @@ bart_tourney_sheets <- function(year = current_season()) {
 #' @export
 bart_tourney_odds <- function(year = current_season(), odds = "current") {
   suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
     lookup <- list(
       "current" = "cur",
       "pre" = "pre",
@@ -121,6 +125,7 @@ bart_tourney_odds <- function(year = current_season(), odds = "current") {
 #' @import httr
 #' @import janitor
 #' @import readr
+#' @importFrom withr local_options
 #' @importFrom rvest read_html html_table
 #' @importFrom cli cli_abort
 #' @importFrom purrr pluck
@@ -131,6 +136,7 @@ bart_tourney_odds <- function(year = current_season(), odds = "current") {
 #' @export
 bart_tourney_results <- function(min_year = 2000, max_year = current_season(), type = "team") {
   suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
     if (!(is.numeric(min_year) && nchar(min_year) == 4 && min_year >=
           2000)) {
       cli::cli_abort("Enter a valid year as a number (YYYY). Data only goes back to 2000!")

@@ -22,5 +22,6 @@ Returns detailed game-by-game player statistics on a variety of splits.
 statistics; sorts by recruiting rank.}}
 }
 \examples{
-bart_player_game(year=2022, stat='box')}
+\dontrun{bart_player_game(year=2022, stat='box')}
 
+}

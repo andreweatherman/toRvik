@@ -13,6 +13,7 @@
 #' @import httr
 #' @import janitor
 #' @import readr
+#' @importFrom withr local_options
 #' @importFrom rvest read_html html_table
 #' @importFrom purrr pluck
 #' @importFrom tidyr separate
@@ -23,6 +24,7 @@
 #' @export
 bart_coach <- function(coach) {
   suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
     if(grepl('  ', coach)){
       cli::cli_abort("Check spacing in coach's name; use just one space to separate first and last.")
     }
@@ -66,6 +68,7 @@ bart_coach <- function(coach) {
 #' @import dplyr
 #' @import httr
 #' @import janitor
+#' @importFrom withr local_options
 #' @importFrom cli cli_abort
 #' @importFrom rvest read_html html_table
 #' @importFrom purrr pluck
@@ -76,6 +79,7 @@ bart_coach <- function(coach) {
 #' @export
 bart_coach_change <- function(year = current_season()) {
   suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
     if (!(is.numeric(year) && nchar(year) == 4 && year >=
       2008)) {
       cli::cli_abort("Enter a valid year as a number. Data only goes back to 2008!")

@@ -16,6 +16,7 @@
 #' @import readr
 #' @import httr
 #' @import janitor
+#' @importFrom withr local_options
 #' @importFrom cli cli_abort
 #' @importFrom rvest read_html html_table
 #' @importFrom purrr pluck
@@ -28,6 +29,7 @@
 #' @export
 bart_ratings <- function(year = current_season()) {
   suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
     if (!(is.numeric(year) && nchar(year) == 4 && year >=
       2008)) {
       cli::cli_abort("Enter a valid year as a number (YYYY). Data only goes back to 2008!")
@@ -99,6 +101,7 @@ bart_ratings <- function(year = current_season()) {
 #' @import httr
 #' @import readr
 #' @import janitor
+#' @importFrom withr local_options
 #' @importFrom cli cli_abort
 #' @importFrom rvest read_html html_table
 #' @importFrom purrr pluck
@@ -110,6 +113,7 @@ bart_ratings <- function(year = current_season()) {
 #' @export
 bart_factors <- function(year = current_season(), venue = "all", type = "all", quad = "4", top=0, start = NULL, end = NULL) {
   suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
     if (!(is.numeric(year) && nchar(year) == 4 && year >=
       2008)) {
       cli::cli_abort("Enter a valid year as a number (YYYY). Data only goes back to 2008!")
@@ -256,6 +260,7 @@ bart_factors <- function(year = current_season(), venue = "all", type = "all", q
 #' @param end Filters by end date; defaults to NULL (full season).
 #' @import dplyr
 #' @import readr
+#' @importFrom withr local_options
 #' @importFrom cli cli_abort
 #' @importFrom magrittr %>%
 #' @examples
@@ -264,6 +269,7 @@ bart_factors <- function(year = current_season(), venue = "all", type = "all", q
 #' @export
 bart_conf_factors <- function(year = current_season(), venue = "all", type = "all", quad = "4", top=0, start = NULL, end = NULL) {
   suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
     if (!(is.numeric(year) && nchar(year) == 4 && year >=
       2008)) {
       cli::cli_abort("Enter a valid year as a number (YYYY). Data only goes back to 2008!")
@@ -396,6 +402,7 @@ bart_conf_factors <- function(year = current_season(), venue = "all", type = "al
 #' @import httr
 #' @import janitor
 #' @import readr
+#' @importFrom withr local_options
 #' @importFrom cli cli_abort
 #' @importFrom rvest read_html html_table
 #' @importFrom purrr pluck
@@ -407,6 +414,7 @@ bart_conf_factors <- function(year = current_season(), venue = "all", type = "al
 #' @export
 bart_conf_stats <- function(year = current_season(), conf = NULL) {
   suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
     if (is.null(conf) || !(conf %in% c('A10', 'ACC', 'AE', 'ASun', 'Amer', 'B10', 'B12', 'BE', 'BSky', 'BSth', 'BW',
                                       'CAA', 'CUSA', 'Horz', 'Ivy', 'MAAC', 'MAC', 'MEAC', 'MVC', 'MWC', 'NEC', 'OVC',
                                       'P12', 'Pat', 'SB', 'SC', 'SEC', 'SWAC', 'Slnd', 'Sum', 'WAC', 'WCC'))) {
@@ -468,6 +476,7 @@ bart_conf_stats <- function(year = current_season(), conf = NULL) {
 #' @import dplyr
 #' @import lubridate
 #' @import httr
+#' @importFrom withr local_options
 #' @importFrom cli cli_abort
 #' @importFrom rvest read_html html_table
 #' @importFrom purrr pluck
@@ -477,6 +486,7 @@ bart_conf_stats <- function(year = current_season(), conf = NULL) {
 #' @export
 bart_archive <- function(date) {
   suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
     t_date <- lubridate::ymd(date)
     if (t_date < as.Date("2014-11-01")) {
       cli::cli_abort("Data only goes back to 2014-11-01!")

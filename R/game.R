@@ -12,6 +12,7 @@
 #' @import dplyr
 #' @import readr
 #' @import lubridate
+#' @importFrom withr local_options
 #' @importFrom magrittr %>%
 #' @importFrom cli cli_abort
 #' @examples
@@ -20,6 +21,7 @@
 #' @export
 bart_season_schedule <- function(year = current_season()) {
   suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
     if (!(is.numeric(year) && nchar(year) == 4 && year >=
       2008)) {
       cli::cli_abort("Enter a valid year as a number (YYYY). Data only goes back to 2008!")
@@ -61,6 +63,7 @@ bart_season_schedule <- function(year = current_season()) {
 #' @import dplyr
 #' @import jsonlite
 #' @import lubridate
+#' @importFrom withr local_options
 #' @importFrom cli cli_abort
 #' @importFrom tidyr separate
 #' @importFrom magrittr %>%
@@ -70,6 +73,7 @@ bart_season_schedule <- function(year = current_season()) {
 #' @export
 bart_team_schedule <- function(year=current_season(), team=NULL) {
   suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
     if(!(is.numeric(year) && nchar(year) == 4 && year >=
          2008)){
       cli::cli_abort('Enter a valid year as a number. Data only goes back to 2008!')
@@ -122,6 +126,7 @@ bart_team_schedule <- function(year=current_season(), team=NULL) {
 #' @import dplyr
 #' @import readr
 #' @import lubridate
+#' @importFrom withr local_options
 #' @importFrom cli cli_abort
 #' @importFrom magrittr %>%
 #' @examples
@@ -130,6 +135,7 @@ bart_team_schedule <- function(year=current_season(), team=NULL) {
 #' @export
 bart_pregame <- function(year=current_season()) {
   suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
     if(!(is.numeric(year) && nchar(year) == 4 && year >=
          2008)){
       cli::cli_abort('Enter a valid year as a number. Data only goes back to 2008!')
@@ -161,6 +167,7 @@ bart_pregame <- function(year=current_season()) {
 #' @import dplyr
 #' @import jsonlite
 #' @import lubridate
+#' @importFrom withr local_options
 #' @importFrom cli cli_abort
 #' @importFrom magrittr %>%
 #' @examples
@@ -169,6 +176,7 @@ bart_pregame <- function(year=current_season()) {
 #' @export
 bart_game_box <- function(year = current_season()) {
   suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
     abbrev <- c("fgm", "fga", "tpm", "tpa", "ftm", "fta", "oreb", "dreb", "reb", "ast", "stl", "blk", "to", "pf", "pts")
     names <- c("game_id", "date", "min", "team1", "team2", "pos", "win", "loss")
     if (!(is.numeric(year) && nchar(year) == 4 && year >=
@@ -221,6 +229,7 @@ bart_game_box <- function(year = current_season()) {
 #' @import dplyr
 #' @import readr
 #' @import lubridate
+#' @importFrom withr local_options
 #' @importFrom cli cli_abort
 #' @importFrom magrittr %>%
 #' @examples
@@ -228,6 +237,8 @@ bart_game_box <- function(year = current_season()) {
 #'
 #' @export
 bart_game_factors <- function(year = current_season()) {
+  suppressWarnings({
+  withr::local_options(HTTPUserAgent='toRvik Package')
   if (!(is.numeric(year) && nchar(year) == 4 && year >=
     2008)) {
     cli::cli_abort("Enter a valid year as a number (YYYY). Data only goes back to 2008!")
@@ -255,4 +266,4 @@ bart_game_factors <- function(year = current_season()) {
       dplyr::arrange(desc(date))
     return(x)
   }
-}
+})}

@@ -9,6 +9,7 @@
 #' @param year Defaults to current season (YYYY).
 #' @import dplyr
 #' @import httr
+#' @importFrom withr local_options
 #' @importFrom cli cli_abort
 #' @importFrom rvest read_html html_table
 #' @importFrom purrr pluck
@@ -19,6 +20,7 @@
 #' @export
 bart_team_shooting <- function(year = current_season()) {
   suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
     names <- c("team", "conf", "dunk_fg", "dunk_share", "dunk_fg_d", "dunk_share_d", "close_fg", "close_share", "close_fg_d", "close_share_d", "far_fg", "far_share", "far_fg_d", "far_share_d", "three_fg", "three_share", "three_fg_d", "three_share_d")
     if (!(is.numeric(year) && nchar(year) == 4 && year >=
       2010)) {
@@ -54,6 +56,7 @@ bart_team_shooting <- function(year = current_season()) {
 #' @import httr
 #' @import janitor
 #' @import  readr
+#' @importFrom withr local_options
 #' @importFrom rvest read_html html_table
 #' @importFrom purrr pluck
 #' @importFrom tidyr separate
@@ -61,6 +64,7 @@ bart_team_shooting <- function(year = current_season()) {
 #' @export
 bart_team_history <- function(team) {
   suppressWarnings({
+    withr::local_options(HTTPUserAgent='toRvik Package')
     if(grepl('  ', team)){
       cli::cli_abort("Check spacing in team name; use just one space to separate.")
     }

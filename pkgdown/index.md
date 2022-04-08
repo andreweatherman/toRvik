@@ -1,7 +1,7 @@
 # A Barttorvik Companion
 
  <!-- badges: start -->
- [![R-CMD-check](https://github.com/rossellhayes/ipa/workflows/R-CMD-check/badge.svg)](https://github.com/andreweatherman/toRvik/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/andreweatherman/toRvik/workflows/R-CMD-check/badge.svg)](https://github.com/andreweatherman/toRvik/actions)
  [![Codecov test coverage](https://codecov.io/gh/andreweatherman/toRvik/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andreweatherman/toRvik?branch=main)
   <!-- badges: end -->
 

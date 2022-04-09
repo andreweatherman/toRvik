@@ -1,8 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-\#toRvik
-<a href="https://www.torvik.dev/"><img src="man/figures/logo.png" align="right" width="20%" min-width="100px"/></a>
+# toRvik <a href="https://www.torvik.dev/"><img src="man/figures/logo.png" align="right" width="20%" min-width="100px"/></a>
 
 <!-- badges: start -->
 
@@ -31,8 +30,16 @@ if (!requireNamespace('devtools', quietly = TRUE)){
 devtools::install_github("andreweatherman/toRvik")
 ```
 
-    ## Skipping install of 'toRvik' from a github remote, the SHA1 (a9121f88) has not changed since last install.
-    ##   Use `force = TRUE` to force installation
+    ## Downloading GitHub repo andreweatherman/toRvik@HEAD
+
+    ## 
+    ## * checking for file ‘/private/var/folders/d3/b4km_d190_g_1y2jbyt7tdhc0000gn/T/RtmpMVTkIG/remotes8b10265e9484/andreweatherman-toRvik-e068d77/DESCRIPTION’ ... OK
+    ## * preparing ‘toRvik’:
+    ## * checking DESCRIPTION meta-information ... OK
+    ## * checking for LF line-endings in source and make files and shell scripts
+    ## * checking for empty or unneeded directories
+    ## Omitted ‘LazyData’ from DESCRIPTION
+    ## * building ‘toRvik_1.0.1.tar.gz’
 
 ``` r
 library(toRvik)

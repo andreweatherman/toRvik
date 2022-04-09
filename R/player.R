@@ -86,7 +86,7 @@ bart_player_season <- function(year = current_season(), stat = NULL, conf_only =
       colnames(x) <- names
       x <- x %>%
         dplyr::mutate(p_per = ((40 * ppg) / mpg), .after = ppg) %>%
-        arrange(desc(ppg))
+        dplyr::arrange(desc(ppg))
       return(x)
     }
     if (stat == "adv") {
@@ -98,11 +98,12 @@ bart_player_season <- function(year = current_season(), stat = NULL, conf_only =
       x <- readr::read_csv(paste0("https://barttorvik.com/getadvstats.php?year=", year, "&conyes=", c_only, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
         dplyr::select(1, 65, 26, 2:5, 29, 49, 6, 30, 47, 48, 50, 56, 57, 54, 10:13, 23:25, 31, 35, 46, 33)
       colnames(x) <- names
-      x <- x %>% arrange(desc(rec))
+      x <- x %>% dplyr::arrange(desc(rec))
       return(x)
     }
   })
 }
+
 
 #' Get Player Game Stats
 #'

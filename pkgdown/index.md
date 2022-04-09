@@ -12,6 +12,9 @@ No subscription is required to access the data. The package includes functions f
 ## Package Installation
 To install toRvik, run the following code inside your R session:
 ```r
+if (!requireNamespace('devtools', quietly = TRUE)){
+  install.packages('devtools')
+}
 devtools::install_github("andreweatherman/toRvik")
 library(toRvik)
 ```

@@ -79,6 +79,7 @@ reference:
     desc: Functions to scrape team and conference stats
     contents:
       - '`bart_team_shooting`'
+      - '`bart_team_box`'
       - '`bart_team_history`'
       - '`bart_conf_stats`'
   - subtitle: Tournament Stats

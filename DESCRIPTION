@@ -20,7 +20,6 @@ Imports:
     lubridate,
     magrittr,
     purrr,
-    RCurl,
     readr,
     rvest,
     stringr,

@@ -61,6 +61,8 @@ bart_team_shooting <- function(year = current_season()) {
 #' @importFrom purrr pluck
 #' @importFrom tidyr separate
 #' @importFrom magrittr %>%
+#' @examples
+#' bart_team_history(team='Charlotte')
 #' @export
 bart_team_history <- function(team) {
   suppressWarnings({
@@ -91,3 +93,111 @@ bart_team_history <- function(team) {
     return(x)
   })
 }
+
+
+#' Get Team Box Stats
+#'
+#' Returns team box totals and per-game averages by game type back to 2008.
+#'
+#' Columns ending in 'pg' indicate a per-game average. Unless specified by
+#' `type=d1`, results include games against non-Division 1 opponents.
+#'
+#' The `type` argument splits the results by game type, explained below:
+#' \describe{ \item{all}{All games played.} \item{nc}{Non-conference games.}
+#' \item{conf}{In-conference games.} \item{post}{Post-conference tournament
+#' games.} \item{d1}{Games against D-1 teams only.} \item{nond1}{Games involving
+#' one non-D1 team.} }
+#'
+#' @param year Defaults to current season (YYYY).
+#' @param type Filters by game type; defaults to `all`.
+#' @import dplyr
+#' @importFrom tidyr gather spread
+#' @importFrom magrittr %>%
+#' @importFrom cli cli_abort
+#' @examples
+#' bart_team_box(type='conf')
+#' @export
+bart_team_box <- function(year=current_season(), type='all') {
+  suppressMessages({
+    if (!(is.numeric(year) && nchar(year) == 4 && year >=
+          2008)) {
+      cli::cli_abort("Enter a valid year as a number (YYYY). Data only goes back to 2008!")
+    }
+    if (!(type %in% c('all', 'nc', 'conf', 'conf_t', 'post', 'd1', 'nond1'))) {
+      cli::cli_abort("Please input a valid type value (see details)")
+    }
+  teams <- toRvik::bart_season_schedule(year=year) %>%
+            dplyr::filter(type != 'nond1') %>%
+            dplyr::select(home) %>%
+            dplyr::distinct()
+  if (type=='all') {
+    x <- toRvik::bart_game_box(year=current_season()) %>%
+      dplyr::select(3:34, 38)
+    x <- tidyr::gather(x, key='key', value='value', -team1, -team2, -game_id) %>%
+      dplyr::mutate(team = dplyr::case_when(grepl("team1", key)~team1,
+                                            grepl("team2", key)~team2),
+                    key=gsub(".*_", "", key)) %>%
+      dplyr::select(3:6) %>%
+      tidyr::spread(key, value) %>%
+      dplyr::group_by(team) %>%
+      dplyr::summarize(dplyr::across(where(is.double), sum, na.rm=TRUE))
+    x <- dplyr::inner_join(x, teams, by=c('team'='home'))
+    y <- toRvik::bart_season_schedule(year=year) %>%
+      dplyr::select(home, away) %>%
+      tidyr::gather("loc", "team", home, away) %>%
+      dplyr::count(team, name='games')
+  }
+  else if (type=='d1') {
+    x <- dplyr::inner_join(toRvik::bart_game_box(year=year), (toRvik::bart_season_schedule(year=year) %>% dplyr::filter(type != 'nond1')), by='game_id') %>%
+      dplyr::select(3:34, 38)
+    x <- tidyr::gather(x, key='key', value='value', -team1, -team2, -game_id) %>%
+      dplyr::mutate(team = dplyr::case_when(grepl("team1", key)~team1,
+                                            grepl("team2", key)~team2),
+                    key=gsub(".*_", "", key)) %>%
+      dplyr::select(3:6) %>%
+      tidyr::spread(key, value) %>%
+      dplyr::group_by(team) %>%
+      dplyr::summarize(dplyr::across(where(is.double), sum, na.rm=TRUE))
+    x <- dplyr::inner_join(x, teams, by=c('team'='home'))
+    y <- toRvik::bart_season_schedule(year=year) %>%
+      dplyr::filter(type != 'nond1') %>%
+      dplyr::select(home, away) %>%
+      tidyr::gather("loc", "team", home, away) %>%
+      dplyr::count(team, name='games')
+  }
+  else {
+    x <- dplyr::inner_join(toRvik::bart_game_box(year=year), (toRvik::bart_season_schedule(year=year) %>% dplyr::filter(type== !!type)), by='game_id') %>%
+          dplyr::select(3:34, 38)
+    x <- tidyr::gather(x, key='key', value='value', -team1, -team2, -game_id) %>%
+      dplyr::mutate(team = dplyr::case_when(grepl("team1", key)~team1,
+                                            grepl("team2", key)~team2),
+                    key=gsub(".*_", "", key)) %>%
+      dplyr::select(3:6) %>%
+      tidyr::spread(key, value) %>%
+      dplyr::group_by(team) %>%
+      dplyr::summarize(dplyr::across(where(is.double), sum, na.rm=TRUE))
+    x <- dplyr::inner_join(x, teams, by=c('team'='home'))
+    y <- toRvik::bart_season_schedule(year=year) %>%
+      dplyr::filter(type== !!type) %>%
+      dplyr::select(home, away) %>%
+      tidyr::gather("loc", "team", home, away) %>%
+      dplyr::count(team, name='games')
+  }
+  x <- dplyr::inner_join(x, y, by='team')
+  x <- x %>% dplyr::mutate(fg_pct=fgm/fga,
+                           tp_pct=tpm/tpa,
+                           ft_pct=ftm/fta,
+                           rpg=(oreb+dreb)/games,
+                           apg=ast/games,
+                           spg=stl/games,
+                           bpg=blk/games,
+                           tpg=to/games,
+                           fpg=pf/games,
+                           ppg=pts/games, .before=games) %>%
+            dplyr::arrange(desc(ppg))
+
+  return(x)
+  })}
+
+
+

@@ -15,6 +15,8 @@ test_that("stat input must match", {
   expect_error(bart_player_season(stat='Box'), 'valid')
   expect_error(bart_player_game(), 'valid')
   expect_error(bart_player_game(stat='Box'), 'valid')
+  expect_error(bart_transfers(), 'valid')
+  expect_error(bart_transfers(stat='Box'), 'valid')
 })
 
 test_that("conf code must be exact", {

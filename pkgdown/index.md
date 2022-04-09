@@ -25,12 +25,6 @@ if (!requireNamespace('devtools', quietly = TRUE)){
   install.packages('devtools')
 }
 devtools::install_github("andreweatherman/toRvik")
-```
-
-    ## Skipping install of 'toRvik' from a github remote, the SHA1 (a9121f88) has not changed since last install.
-    ##   Use `force = TRUE` to force installation
-
-``` r
 library(toRvik)
 ```
 

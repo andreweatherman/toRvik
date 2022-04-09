@@ -21,18 +21,14 @@ format. As of version 1.0.1, `toRvik` ships with more than 20 functions.
 
 ## Package Installation
 
-To install toRvik, run the following code inside your R session:
-
-    ## Downloading GitHub repo andreweatherman/toRvik@HEAD
-
-    ## 
-    ## * checking for file ‘/private/var/folders/d3/b4km_d190_g_1y2jbyt7tdhc0000gn/T/RtmpySPn0s/remotes8bc2283c9948/andreweatherman-toRvik-f888b0c/DESCRIPTION’ ... OK
-    ## * preparing ‘toRvik’:
-    ## * checking DESCRIPTION meta-information ... OK
-    ## * checking for LF line-endings in source and make files and shell scripts
-    ## * checking for empty or unneeded directories
-    ## Omitted ‘LazyData’ from DESCRIPTION
-    ## * building ‘toRvik_1.0.1.tar.gz’
+To install toRvik, run the following code:
+``` r
+if (!requireNamespace('devtools', quietly = TRUE)){
+  install.packages('devtools')
+}
+devtools::install_github("andreweatherman/toRvik") 
+library(toRvik)
+```
 
 ## Package Highlights
 

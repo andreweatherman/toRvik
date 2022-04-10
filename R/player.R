@@ -120,6 +120,7 @@ bart_player_season <- function(year = current_season(), stat = NULL, conf_only =
 #' @import dplyr
 #' @import jsonlite
 #' @import lubridate
+#' @importFrom curl curl_download
 #' @importFrom withr local_options
 #' @importFrom cli cli_abort
 #' @importFrom magrittr %>%
@@ -137,12 +138,13 @@ bart_player_game <- function(year = current_season(), stat = NULL) {
     if (!(is.character(stat) && stat %in% c("box", "shooting", "adv"))) {
       cli::cli_abort("Please input a valid stat command ('box,' 'shooting', or 'adv')")
     }
+    curl::curl_download(paste0('https://barttorvik.com/', year, '_all_advgames.json.gz'), 'games.json')
     if (stat == "box") {
       names <- c(
         "date", "player", "exp", "team", "opp", "result", "min", "pts", "two_m", "two_a", "three_m",
         "three_a", "ftm", "fta", "oreb", "dreb", "ast", "tov", "stl", "blk", "pf", "id", "game_id"
       )
-      x <- jsonlite::fromJSON(paste0("https://barttorvik.com/", year, "_all_advgames.json")) %>%
+      x <- jsonlite::fromJSON('games.json') %>%
         dplyr::as_tibble() %>%
         select(1, 49, 51, 48, 6, 5, 9, 34, 24:29, 35, 36, 37, 38, 39, 40, 43, 52, 7)
       colnames(x) <- names
@@ -163,14 +165,13 @@ bart_player_game <- function(year = current_season(), stat = NULL) {
           .after = three_a
         ) %>%
         dplyr::relocate(year, .after = date)
-      return(x)
     }
     if (stat == "shooting") {
       names <- c(
         "date", "player", "exp", "team", "opp", "result", "min", "pts", "usg", "efg", "ts", "dunk_m", "dunk_a",
         "rim_m", "rim_a", "mid_m", "mid_a", "two_m", "two_a", "three_m", "three_a", "ftm", "fta", "id", "game_id"
       )
-      x <- jsonlite::fromJSON(paste0("https://barttorvik.com/", year, "_all_advgames.json")) %>%
+      x <- jsonlite::fromJSON('games.json') %>%
         dplyr::as_tibble() %>%
         select(1, 49, 51, 48, 6, 5, 9, 34, 11:13, 18:29, 52, 7)
       colnames(x) <- names
@@ -186,14 +187,13 @@ bart_player_game <- function(year = current_season(), stat = NULL) {
           year = year
         ) %>%
         dplyr::relocate(year, .after = date)
-      return(x)
     }
     if (stat == "adv") {
       names <- c(
         "date", "player", "exp", "team", "opp", "result", "min", "pts", "usg", "ortg", "or_pct", "dr_pct",
         "ast_pct", "to_pct", "stl_pct", "blk_pct", "bpm", "obpm", "dbpm", "net", "poss", "id", "game_id"
       )
-      x <- jsonlite::fromJSON(paste0("https://barttorvik.com/", year, "_all_advgames.json")) %>%
+      x <- jsonlite::fromJSON('games.json') %>%
         dplyr::as_tibble() %>%
         select(1, 49, 51, 48, 6, 5, 9, 34, 11, 10, 14:17, 41:42, 30:33, 44, 52, 7)
       colnames(x) <- names
@@ -206,8 +206,9 @@ bart_player_game <- function(year = current_season(), stat = NULL) {
         ),
         year = year, .after = date
       )
-      return(x)
     }
+    unlink('games.json')
+    return(x)
   })
 }
 

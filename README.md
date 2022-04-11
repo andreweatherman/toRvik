@@ -22,40 +22,35 @@ format. As of version 1.0.1, `toRvik` ships with more than 20 functions.
 ## Package Installation
 
 To install toRvik, run the following code:
+
+To install toRvik, run the following code inside your R session:
+
 ``` r
 if (!requireNamespace('devtools', quietly = TRUE)){
   install.packages('devtools')
 }
-devtools::install_github("andreweatherman/toRvik") 
+devtools::install_github("andreweatherman/toRvik")
 library(toRvik)
 ```
 
 ## Package Highlights
 
--   Game-by-game statistics by player for every D-1 game since 2008
-    (box, shooting, advanced)
--   Season-long statistics for every D-1 player since 2008 (box,
-    shooting, advanced)
--   Shooting splits + shares by team for every season since 2008
--   Game box scores for every D-1 game since 2008
--   Team and conference four factors on a variety of splits (date range,
-    location, game type, opponent strength, and quad)
--   Game-by-game four factors by team
--   NCAA committee-style team sheets, including resume and quality
-    metrics + quad records
--   Every D-1 head coaching change since 2008
+-   Detailed game-by-game + season-long statistics by player
+-   Shooting splits + shares by team
+-   Game box scores for D-1 games
+-   Team + conference four factors by split
+-   Game-by-game four factors
+-   NCAA committee-style team sheets
+-   D-1 head coaching changes
 
 ## Basic Uses
 
 All `toRvik` functions fall into one of five categories:
 
--   **Rating**, which pulls and slices T-Rank + four factor data on a
-    variety of splits
--   **Game**, which pulls team and season schedules + results
--   **Stat**, which pulls and slices player, team, and conference stats
-    on a variety of levels and splits
--   **Tournament**, which pulls raw and adjusted tournament
-    performance + odds
+-   **Rating**, pulling and slicing T-Rank + four factor data
+-   **Game**, pulling team and season schedules + results
+-   **Stat**, pulling and slicing player, team, and conference stats
+-   **Tournament**, pulling raw and adjusted tournament performance
 -   **Miscellaneous**
 
 ### Pull T-Rank ratings:

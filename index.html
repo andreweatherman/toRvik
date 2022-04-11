@@ -126,14 +126,13 @@
 <h2 id="package-highlights">Package Highlights<a class="anchor" aria-label="anchor" href="#package-highlights"></a>
 </h2>
 <ul>
-<li>Game-by-game statistics by player for every D-1 game since 2008 (box, shooting, advanced)</li>
-<li>Season-long statistics for every D-1 player since 2008 (box, shooting, advanced)</li>
-<li>Shooting splits + shares by team for every season since 2008</li>
-<li>Game box scores for every D-1 game since 2008</li>
-<li>Team and conference four factors on a variety of splits (date range, location, game type, opponent strength, and quad)</li>
-<li>Game-by-game four factors by team</li>
-<li>NCAA committee-style team sheets, including resume and quality metrics + quad records</li>
-<li>Every D-1 head coaching change since 2008</li>
+<li>Detailed game-by-game + season-long statistics by player</li>
+<li>Shooting splits + shares by team</li>
+<li>Game box scores for D-1 games</li>
+<li>Team + conference four factors by split</li>
+<li>Game-by-game four factors</li>
+<li>NCAA committee-style team sheets</li>
+<li>D-1 head coaching changes</li>
 </ul>
 </div>
 <div class="section level2">
@@ -142,13 +141,13 @@
 <p>All <code>toRvik</code> functions fall into one of five categories:</p>
 <ul>
 <li>
-<strong>Rating</strong>, which pulls and slices T-Rank + four factor data on a variety of splits</li>
+<strong>Rating</strong>, pulling and slicing T-Rank + four factor data</li>
 <li>
-<strong>Game</strong>, which pulls team and season schedules + results</li>
+<strong>Game</strong>, pulling team and season schedules + results</li>
 <li>
-<strong>Stat</strong>, which pulls and slices player, team, and conference stats on a variety of levels and splits</li>
+<strong>Stat</strong>, pulling and slicing player, team, and conference stats</li>
 <li>
-<strong>Tournament</strong>, which pulls raw and adjusted tournament performance + odds</li>
+<strong>Tournament</strong>, pulling raw and adjusted tournament performance</li>
 <li><strong>Miscellaneous</strong></li>
 </ul>
 <div class="section level3">
@@ -221,7 +220,7 @@
 <span id="cb9-9"><a href="#cb9-9"></a><span class="co">## 6 Bryce Hami… Wing… Sr    6-4   UNLV  MWC      31  32.3  21.9  0.439 0.688  4.31</span></span>
 <span id="cb9-10"><a href="#cb9-10"></a><span class="co">## # … with 8 more variables: rpg &lt;dbl&gt;, apg &lt;dbl&gt;, ast_to &lt;dbl&gt;, spg &lt;dbl&gt;,</span></span>
 <span id="cb9-11"><a href="#cb9-11"></a><span class="co">## #   bpg &lt;dbl&gt;, num &lt;chr&gt;, year &lt;dbl&gt;, id &lt;dbl&gt;</span></span></code></pre></div>
-<p>Calling <code>bart_player_game</code> will return detailed game-by-game player stats. To pull advance splits by game, set stat to ‘adv.’</p>
+<p>Calling <code>bart_player_game</code> will return detailed game-by-game player stats. To pull advanced splits by game, set stat to ‘adv.’</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/bart_player_game.html">bart_player_game</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">'adv'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">## # A tibble: 6 × 24</span></span>

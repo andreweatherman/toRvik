@@ -163,7 +163,7 @@
 <span class="co">#&gt; <span style="color: #949494;">#   nc_cur_sos &lt;dbl&gt;, ov_elite_sos &lt;dbl&gt;, ov_fut_sos &lt;dbl&gt;, ov_cur_sos &lt;dbl&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   seed &lt;int&gt;, year &lt;dbl&gt;</span></span>
 <span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; 3.047 sec elapsed</span></code></pre></div>
+<span class="co">#&gt; 3.12 sec elapsed</span></code></pre></div>
 <p>Here, the <code>bart_ratings</code> function returned the top ten teams in T-Rank in the current season. We are also presented with each team’s adjusted efficiencies, their adjusted tempo, and two forms of strength of schedule (documented in <code>bart_ratings</code>). But what if we want these same measures in home games only? We would use <code>bart_factors</code> and input ‘home’ as venue:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span>
@@ -186,7 +186,7 @@
 <span class="co">#&gt; <span style="color: #949494;">#   def_to &lt;dbl&gt;, def_or &lt;dbl&gt;, def_ftr &lt;dbl&gt;, year &lt;dbl&gt;, venue &lt;chr&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   type &lt;chr&gt;, quad &lt;chr&gt;</span></span>
 <span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; 2.753 sec elapsed</span></code></pre></div>
+<span class="co">#&gt; 1.915 sec elapsed</span></code></pre></div>
 <p>And now, we have four factor data and metric ratings for <em>home games only</em>. The <code>bart_factors</code> function, and the analogous <code>bart_conf_factors</code>, takes venue, game type, date range, and opponent strength as additional splits. Great, but what if we want to explore rating trends over time? <code>toRvik</code> gives us that ability with <code>bart_archive</code>, a function that pulls adjusted ratings and projected records from the morning of a desired date:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span>
@@ -208,7 +208,7 @@
 <span class="co">#&gt; <span style="color: #949494;"># … with 6 more variables: proj_conf_rec &lt;chr&gt;, wab &lt;dbl&gt;, wab_rk &lt;dbl&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   cur_rk &lt;dbl&gt;, change &lt;dbl&gt;, date &lt;date&gt;</span></span>
 <span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; 0.71 sec elapsed</span></code></pre></div>
+<span class="co">#&gt; 0.665 sec elapsed</span></code></pre></div>
 <p>At this time, <code>bart_archive</code> only takes a single date, but if you want to track longer periods, I suggest looking into mapping packages such as <a href="https://purrr.tidyverse.org/reference/index.html" class="external-link"><code>purrr</code></a>.</p>
 </div>
 <div class="section level2">
@@ -240,7 +240,7 @@
 <span class="co">#&gt; <span style="color: #949494;">#   to_pct &lt;dbl&gt;, stl_pct &lt;dbl&gt;, blk_pct &lt;dbl&gt;, bpm &lt;dbl&gt;, obpm &lt;dbl&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   dbpm &lt;dbl&gt;, net &lt;dbl&gt;, poss &lt;dbl&gt;, id &lt;dbl&gt;, game_id &lt;chr&gt;</span></span>
 <span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; 14.241 sec elapsed</span></code></pre></div>
+<span class="co">#&gt; 14.581 sec elapsed</span></code></pre></div>
 <p>Here, <code>bart_player_game</code> returned the 20 highest individual net BPMs by a Duke player this season. The function takes ‘box,’ ‘shooting,’ and ‘adv’ as stat inputs, and I welcome you to explore each one in your own session. But what if we want to investigate similar performance at a seaosn level? Well, <code>bart_player_season</code> gives us that option – also taking ‘box,’ ‘shooting,’ and ‘adv’ as stat inputs.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span>
@@ -261,7 +261,7 @@
 <span class="co">#&gt; <span style="color: #949494;">#   dunk_m &lt;dbl&gt;, dunk_a &lt;dbl&gt;, dunk_pct &lt;dbl&gt;, rim_m &lt;dbl&gt;, rim_a &lt;dbl&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   rim_pct &lt;dbl&gt;, mid_m &lt;dbl&gt;, mid_a &lt;dbl&gt;, mid_pct &lt;dbl&gt;, id &lt;dbl&gt;</span></span>
 <span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; 1.843 sec elapsed</span></code></pre></div>
+<span class="co">#&gt; 2.278 sec elapsed</span></code></pre></div>
 <p>And now, we have a tibble of season-long shooting data for Duke players, sorted by number of mid-range attempts. Advanced metric data can be pulled by team on a per-game basis using <code>bart_team_schedule</code>, and total team shooting splis can be accessed using <code>bart_team_shooting</code>. Game box data can be pulled with <code>bart_game_total</code>.</p>
 </div>
 <div class="section level2">
@@ -288,7 +288,7 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;">10</span> UCLA       4    10    11    15    13       9     8    10      9   2-4   5-4  </span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 4 more variables: q2 &lt;chr&gt;, q1_2 &lt;chr&gt;, q3 &lt;chr&gt;, q4 &lt;chr&gt;</span></span>
 <span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; 0.705 sec elapsed</span></code></pre></div>
+<span class="co">#&gt; 0.593 sec elapsed</span></code></pre></div>
 <p>Returned are sheets of top teams sorted by their NCAA NET ranking. Because this function relies on NET data, it is only available back to the 2018-19 season. In-season performance is valuable, but what if you want to investigate <em>just</em> tournament data? Well, <code>toRvik</code> gives you two options to do so: <code>bart_tourney_odds</code> and <code>bart_tourney_results</code>. The former returns metric-adjusted round probabilities by split. Let’s explore round odds for the 2022 NCAA Tournament:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span>
@@ -309,7 +309,7 @@
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     5 Midwest Iowa       B10     100  84.3  64.5  32.2  19.3   9.2   3.7</span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     2 South   Villanova  BE      100  90.8  63.6  34.6  16.1   8.4   3.5</span>
 <span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; 0.225 sec elapsed</span></code></pre></div>
+<span class="co">#&gt; 0.206 sec elapsed</span></code></pre></div>
 <p>With the ‘odds’ argument set to ‘pre,’ we returned pre-tournament odds and sorted by likelihood to reach the second weekend (Sweet 16). <code>bart_tourney_odds</code> also takes current odds (‘current’), odds based on recent performance (‘recent’), and odds based on games against strong opponents (‘t100’). This data is similarly available starting with the 2019 tournament. Now, what if we want to explore tournament results?</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span>
@@ -326,7 +326,7 @@
 <span class="co">#&gt; <span style="color: #949494;"># … with 6 more variables: champ &lt;dbl&gt;, top2 &lt;dbl&gt;, f4_percent &lt;dbl&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   champ_percent &lt;dbl&gt;, from &lt;dbl&gt;, to &lt;dbl&gt;</span></span>
 <span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; 0.404 sec elapsed</span></code></pre></div>
+<span class="co">#&gt; 0.35 sec elapsed</span></code></pre></div>
 <p>With <code>bart_tourney_results</code>, we can return raw and adjusted outcomes by split. Here, we returned aggregate conference results from 2011 to 2021, sorted by PAKE – the number of wins attained above or below KenPom expectation. The function splits by team (‘team’), conference (‘conf’), coach (‘coach’), and seed (‘seed’) and includes data starting in 2000.</p>
 </div>
 <div class="section level2">

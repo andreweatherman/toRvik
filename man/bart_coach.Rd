@@ -20,6 +20,6 @@ scale of recruiting ranking, where 100 is a consensus #1 recruit and 0 is
 unrecruited.
 }
 \examples{
-bart_coach('Mike Krzyzewski')
+\dontrun{bart_coach('Mike Krzyzewski')}
 
 }

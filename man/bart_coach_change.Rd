@@ -13,6 +13,6 @@ bart_coach_change(year = current_season())
 Returns head coaching changes at the Division 1 level by season.
 }
 \examples{
-bart_coach_change(year=2015)
+\dontrun{bart_coach_change(year=2015)}
 
 }

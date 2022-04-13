@@ -23,6 +23,6 @@ Returns a tibble with raw and adjusted NCAA tournament results by team,
 coach, conference, or seed back to 2000.
 }
 \examples{
-bart_tourney_results(min_year=2010, max_year=2015, type='conf')
+\dontrun{bart_tourney_results(min_year=2010, max_year=2015, type='conf')}
 
 }

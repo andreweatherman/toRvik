@@ -20,6 +20,6 @@ For a brief explanation of each factor and its computation, please visit
 the average lead or deficit during a game for the team.
 }
 \examples{
-bart_team_schedule(year=2022, team='Duke')
+\dontrun{bart_team_schedule(year=2022, team='Duke')}
 
 }

@@ -27,6 +27,6 @@ Accepted conference abbreviations for the `conf` argument are: \itemize{\item �
 ‘P12’, ‘Pat’, ‘SB’, ‘SC’, ‘SEC’, ‘SWAC’, ‘Slnd’, ‘Sum’, ‘WAC’, ‘WCC’ }
 }
 \examples{
-bart_poy(year=2019, class='fr')
+\dontrun{bart_poy(year=2019, class='fr')}
 
 }

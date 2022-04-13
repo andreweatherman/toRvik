@@ -20,5 +20,5 @@ wins attained above or below the expected total from a bubble team against an
 analogous schedule.
 }
 \examples{
-bart_archive('20220113')
+\dontrun{bart_archive('20220113')}
 }

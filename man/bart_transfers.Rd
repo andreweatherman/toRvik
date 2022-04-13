@@ -29,6 +29,6 @@ play-by-play shooting splits.} \item{adv}{Returns advanced metrics and
 possession-adjusted box score statistics.}}
 }
 \examples{
-bart_transfers(stat='box')
+\dontrun{bart_transfers(stat='box')}
 
 }

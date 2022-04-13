@@ -18,5 +18,5 @@ to 2010.
 category.
 }
 \examples{
-bart_team_shooting(year=2019)
+\dontrun{bart_team_shooting(year=2019)}
 }

@@ -25,5 +25,5 @@ games.} \item{d1}{Games against D-1 teams only.} \item{nond1}{Games involving
 one non-D1 team.} }
 }
 \examples{
-bart_team_box(type='conf')
+\dontrun{bart_team_box(type='conf')}
 }

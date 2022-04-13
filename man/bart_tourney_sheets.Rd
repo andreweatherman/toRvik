@@ -14,6 +14,6 @@ Returns a tibble with similar quality and resume metrics used by the NCAA
 seeding committee. Data runs back to the 2019 tournament.
 }
 \examples{
-bart_tourney_sheets(year=2019)
+\dontrun{bart_tourney_sheets(year=2019)}
 
 }

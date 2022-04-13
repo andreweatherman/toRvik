@@ -46,6 +46,6 @@ adjusted for game location.} \item{start/end}{Splits by date range
 (YYYYMMDD).}}
 }
 \examples{
-bart_conf_factors(type='nc')
+\dontrun{bart_conf_factors(type='nc')}
 
 }

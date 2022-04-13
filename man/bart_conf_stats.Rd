@@ -27,6 +27,6 @@ current average Barthag rating of conference opponents. \item `conf_fut_sos`
 is the projected average Barthag rating of conference opponents.}
 }
 \examples{
-bart_conf_stats(year=2022, conf='ACC')
+\dontrun{bart_conf_stats(year=2022, conf='ACC')}
 
 }

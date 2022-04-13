@@ -46,6 +46,6 @@ adjusted for game location.} \item{start/end}{Splits by date range
 (YYYYMMDD).}}
 }
 \examples{
-bart_factors(quad='3', venue='away', start='20220101')
+\dontrun{bart_factors(quad='3', venue='away', start='20220101')}
 
 }

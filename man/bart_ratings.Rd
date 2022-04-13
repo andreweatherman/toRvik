@@ -23,6 +23,6 @@ average Barthag rating of opponents. \item `x_fut_sos` is the projected
 average Barthag rating of opponents.}
 }
 \examples{
-bart_ratings(year=2022)
+\dontrun{bart_ratings(year=2022)}
 
 }

@@ -100,47 +100,7 @@ unrecruited.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">bart_coach</span><span class="op">(</span><span class="st">'Mike Krzyzewski'</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 15 × 23</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     year  t_rk team   seed finish  conf  ov_rec conf_rec adj_o adj_d efg_o efg_d</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>022     6 Duke      2 Final … ACC   32-7   16-4      123.  96.1  55.6  47.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>021    32 Duke     <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>      ACC   13-11  9-9       115.  97.2  53.6  51.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>020     6 Duke      3 <span style="color: #BB0000;">NA</span>      ACC   25-6   15-5      115.  91.9  52.6  45.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>019     5 Duke      1 Elite … ACC   32-6   14-4      120.  90.5  53.7  45.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>018     3 Duke      2 Elite … ACC   29-8   13-5      122.  93.1  55.9  46.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>017    10 Duke      2 R32     ACC   28-9   11-7      122.  95.5  54.8  47.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>016    20 Duke      4 Sweet … ACC   25-11  11-7      121.  98.9  53.7  49.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>015     2 Duke      1 CHAMPS  ACC   35-4   15-3      125.  90.5  56.6  46.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>014     6 Duke      3 R64     ACC   26-9   13-5      126.  98.7  53.8  49.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>013     8 Duke      2 Elite … ACC   30-6   14-4      118.  91.5  53.9  45.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>  <span style="text-decoration: underline;">2</span>012    18 Duke      2 R64     ACC   27-7   13-3      116.  95.4  52.8  47.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>  <span style="text-decoration: underline;">2</span>011     3 Duke      1 Sweet … ACC   32-5   13-3      120.  90.0  53.7  44.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span>  <span style="text-decoration: underline;">2</span>010     1 Duke      1 CHAMPS  ACC   35-5   13-3      121.  87.9  50.6  43.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span>  <span style="text-decoration: underline;">2</span>009    12 Duke      2 Sweet … ACC   30-7   11-5      117.  92.2  50.5  47.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span>  <span style="text-decoration: underline;">2</span>008     7 Duke      2 R32     ACC   28-6   13-3      116.  89.9  53.6  47.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 11 more variables: to_percent &lt;dbl&gt;, tod_percent &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   or_percent &lt;dbl&gt;, dr_percent &lt;dbl&gt;, ftr &lt;dbl&gt;, ftrd &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ft_percent &lt;dbl&gt;, two_pct &lt;dbl&gt;, two_pct_d &lt;dbl&gt;, three_pct &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   three_pct_d &lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 63 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     year player            team  rec_rank</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>018 Marvin Bagley III Duke     100  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>019 R.J. Barrett      Duke     100  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>015 Jahlil Okafor     Duke     100  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>022 Paolo Banchero    Duke      99.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>017 Harry Giles       Duke      99.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>019 Cam Reddish       Duke      99.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>012 Austin Rivers     Duke      99.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>011 Kyrie Irving      Duke      99.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>016 Brandon Ingram    Duke      99.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>014 Jabari Parker     Duke      99.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 53 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu">bart_coach</span><span class="op">(</span><span class="st">'Mike Krzyzewski'</span><span class="op">)</span></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>

@@ -8,3 +8,5 @@
 ^pkgdown$
 ^README\.Rmd$
 ^cran_comments\.md$
+^CRAN-SUBMISSION$
+^cran-comments\.md$

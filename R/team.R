@@ -115,7 +115,7 @@ bart_team_history <- function(team) {
 #' @importFrom magrittr %>%
 #' @importFrom cli cli_abort
 #' @examples
-#' bart_team_box(type='conf')
+#' \dontrun{bart_team_box(type='conf')}
 #' @export
 bart_team_box <- function(year=current_season(), type='all') {
   suppressMessages({

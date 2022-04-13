@@ -16,7 +16,7 @@
 #' @importFrom magrittr %>%
 #' @importFrom cli cli_abort
 #' @examples
-#' bart_season_schedule(year=2022)
+#' \dontrun{bart_season_schedule(year=2022)}
 #'
 #' @export
 bart_season_schedule <- function(year = current_season()) {
@@ -68,7 +68,7 @@ bart_season_schedule <- function(year = current_season()) {
 #' @importFrom tidyr separate
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_team_schedule(year=2022, team='Duke')
+#' \dontrun{bart_team_schedule(year=2022, team='Duke')}
 #'
 #' @export
 bart_team_schedule <- function(year=current_season(), team=NULL) {
@@ -130,7 +130,7 @@ bart_team_schedule <- function(year=current_season(), team=NULL) {
 #' @importFrom cli cli_abort
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_pregame(year=2022)
+#' \dontrun{bart_pregame(year=2022)}
 #'
 #' @export
 bart_pregame <- function(year=current_season()) {
@@ -171,7 +171,7 @@ bart_pregame <- function(year=current_season()) {
 #' @importFrom cli cli_abort
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_game_box(year=2022)
+#' \dontrun{bart_game_box(year=2022)}
 #'
 #' @export
 bart_game_box <- function(year = current_season()) {

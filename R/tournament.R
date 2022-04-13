@@ -13,7 +13,7 @@
 #' @importFrom tidyr separate
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_tourney_sheets(year=2019)
+#' \dontrun{bart_tourney_sheets(year=2019)}
 #'
 #' @export
 bart_tourney_sheets <- function(year = current_season()) {
@@ -63,7 +63,7 @@ bart_tourney_sheets <- function(year = current_season()) {
 #' @importFrom stringr str_replace
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_tourney_odds(year=2022, odds='pre')
+#' \dontrun{bart_tourney_odds(year=2022, odds='pre')}
 #'
 #' @export
 bart_tourney_odds <- function(year = current_season(), odds = "current") {
@@ -131,7 +131,7 @@ bart_tourney_odds <- function(year = current_season(), odds = "current") {
 #' @importFrom purrr pluck
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_tourney_results(min_year=2010, max_year=2015, type='conf')
+#' \dontrun{bart_tourney_results(min_year=2010, max_year=2015, type='conf')}
 #'
 #' @export
 bart_tourney_results <- function(min_year = 2000, max_year = current_season(), type = "team") {

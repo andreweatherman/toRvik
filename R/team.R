@@ -16,7 +16,7 @@
 #' @importFrom tidyr separate
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_team_shooting(year=2019)
+#' \dontrun{bart_team_shooting(year=2019)}
 #' @export
 bart_team_shooting <- function(year = current_season()) {
   suppressWarnings({
@@ -62,7 +62,7 @@ bart_team_shooting <- function(year = current_season()) {
 #' @importFrom tidyr separate
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_team_history(team='Charlotte')
+#' \dontrun{bart_team_history(team='Charlotte')}
 #' @export
 bart_team_history <- function(team) {
   suppressWarnings({

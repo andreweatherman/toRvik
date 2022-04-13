@@ -19,7 +19,7 @@
 #' @importFrom tidyr separate
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_coach('Mike Krzyzewski')
+#' \dontrun{bart_coach('Mike Krzyzewski')}
 #'
 #' @export
 bart_coach <- function(coach) {
@@ -74,7 +74,7 @@ bart_coach <- function(coach) {
 #' @importFrom purrr pluck
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_coach_change(year=2015)
+#' \dontrun{bart_coach_change(year=2015)}
 #'
 #' @export
 bart_coach_change <- function(year = current_season()) {

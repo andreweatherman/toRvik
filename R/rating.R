@@ -24,7 +24,7 @@
 #'
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_ratings(year=2022)
+#' \dontrun{bart_ratings(year=2022)}
 #'
 #' @export
 bart_ratings <- function(year = current_season()) {
@@ -108,7 +108,7 @@ bart_ratings <- function(year = current_season()) {
 #' @importFrom tidyr separate
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_factors(quad='3', venue='away', start='20220101')
+#' \dontrun{bart_factors(quad='3', venue='away', start='20220101')}
 #'
 #' @export
 bart_factors <- function(year = current_season(), venue = "all", type = "all", quad = "4", top=0, start = NULL, end = NULL) {
@@ -264,7 +264,7 @@ bart_factors <- function(year = current_season(), venue = "all", type = "all", q
 #' @importFrom cli cli_abort
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_conf_factors(type='nc')
+#' \dontrun{bart_conf_factors(type='nc')}
 #'
 #' @export
 bart_conf_factors <- function(year = current_season(), venue = "all", type = "all", quad = "4", top=0, start = NULL, end = NULL) {
@@ -409,7 +409,7 @@ bart_conf_factors <- function(year = current_season(), venue = "all", type = "al
 #' @importFrom tidyr separate
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_conf_stats(year=2022, conf='ACC')
+#' \dontrun{bart_conf_stats(year=2022, conf='ACC')}
 #'
 #' @export
 bart_conf_stats <- function(year = current_season(), conf = NULL) {
@@ -482,7 +482,7 @@ bart_conf_stats <- function(year = current_season(), conf = NULL) {
 #' @importFrom purrr pluck
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_archive('20220113')
+#' \dontrun{bart_archive('20220113')}
 #' @export
 bart_archive <- function(date) {
   suppressWarnings({

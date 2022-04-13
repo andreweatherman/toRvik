@@ -239,7 +239,7 @@ bart_player_game <- function(year = current_season(), stat = NULL) {
 #' @importFrom stringr str_match
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_transfers(stat='box')
+#' \dontrun{bart_transfers(stat='box')}
 #'
 #' @export
 bart_transfers <- function(stat = NULL, conf_only = F, active=T) {
@@ -363,7 +363,7 @@ bart_transfers <- function(stat = NULL, conf_only = F, active=T) {
 #' @importFrom purrr pluck
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_poy(year=2019, class='fr')
+#' \dontrun{bart_poy(year=2019, class='fr')}
 #'
 #' @export
 bart_poy <- function(year = current_season(), conf = "All", class = NULL, conf_only = F) {
@@ -428,7 +428,7 @@ bart_poy <- function(year = current_season(), conf = "All", class = NULL, conf_o
 #' @importFrom purrr pluck
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_injuryimpact(year=2019, team='Duke', player='Zion Williamson')
+#' \dontrun{bart_injuryimpact(year=2019, team='Duke', player='Zion Williamson')}
 #'
 #' @export
 bart_injuryimpact <- function(year = current_season(), team = NULL, player = NULL) {

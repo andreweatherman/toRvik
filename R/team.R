@@ -6,6 +6,29 @@
 #' `x_share` represents the percentage of made FGs that fall under that
 #' category.
 #'
+#' @returns Returns a tibble with 20 columns:
+#' \describe{
+#'   \item{\code{team}}{character.}
+#'   \item{\code{seed}}{double.}
+#'   \item{\code{conf}}{character.}
+#'   \item{\code{dunk_fg}}{character.}
+#'   \item{\code{dunk_share}}{double.}
+#'   \item{\code{dunk_fg_d}}{character.}
+#'   \item{\code{dunk_share_d}}{double.}
+#'   \item{\code{close_fg}}{character.}
+#'   \item{\code{close_share}}{double.}
+#'   \item{\code{close_fg_d}}{character.}
+#'   \item{\code{close_share_d}}{double.}
+#'   \item{\code{far_fg}}{character.}
+#'   \item{\code{far_share}}{double.}
+#'   \item{\code{far_fg_d}}{character.}
+#'   \item{\code{far_share_d}}{double.}
+#'   \item{\code{three_fg}}{character.}
+#'   \item{\code{three_share}}{double.}
+#'   \item{\code{three_fg_d}}{character.}
+#'   \item{\code{three_share_d}}{double.}
+#'   \item{\code{year}}{double.}
+#'}
 #' @param year Defaults to current season (YYYY).
 #' @import dplyr
 #' @import httr
@@ -16,7 +39,7 @@
 #' @importFrom tidyr separate
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_team_shooting(year=2019)}
+#' bart_team_shooting(year=2019)
 #' @export
 bart_team_shooting <- function(year = current_season()) {
   suppressWarnings({
@@ -51,6 +74,32 @@ bart_team_shooting <- function(year = current_season()) {
 #' names are used where applicable (e.g. 'North Carolina'). For complete list,
 #' see `team` column of \code{\link{bart_ratings}}.
 #'
+#' @returns Returns a tibble with 23 columns:
+#' \describe{
+#'   \item{\code{year}}{double.}
+#'   \item{\code{t_rk}}{double.}
+#'   \item{\code{coach}}{character.}
+#'   \item{\code{seed}}{double.}
+#'   \item{\code{finish}}{character.}
+#'   \item{\code{conf}}{character.}
+#'   \item{\code{ov_rec}}{character.}
+#'   \item{\code{conf_rec}}{character.}
+#'   \item{\code{adj_o}}{double.}
+#'   \item{\code{adj_d}}{double.}
+#'   \item{\code{efg_o}}{double.}
+#'   \item{\code{efg_d}}{double.}
+#'   \item{\code{to_percent}}{double.}
+#'   \item{\code{tod_percent}}{double.}
+#'   \item{\code{or_percent}}{double.}
+#'   \item{\code{dr_percent}}{double.}
+#'   \item{\code{ftr}}{double.}
+#'   \item{\code{ftrd}}{double.}
+#'   \item{\code{ft_percent}}{double.}
+#'   \item{\code{two_pct}}{double.}
+#'   \item{\code{two_pct_d}}{double.}
+#'   \item{\code{three_pct}}{double.}
+#'   \item{\code{adj_t}}{double.}
+#' }
 #' @param team Indicates team to return.
 #' @import dplyr
 #' @import httr
@@ -62,7 +111,7 @@ bart_team_shooting <- function(year = current_season()) {
 #' @importFrom tidyr separate
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_team_history(team='Charlotte')}
+#' bart_team_history(team='Charlotte')
 #' @export
 bart_team_history <- function(team) {
   suppressWarnings({
@@ -108,6 +157,7 @@ bart_team_history <- function(team) {
 #' games.} \item{d1}{Games against D-1 teams only.} \item{nond1}{Games involving
 #' one non-D1 team.} }
 #'
+#' @returns Returns a tibble of team box totals and per-game averages
 #' @param year Defaults to current season (YYYY).
 #' @param type Filters by game type; defaults to `all`.
 #' @import dplyr
@@ -115,7 +165,7 @@ bart_team_history <- function(team) {
 #' @importFrom magrittr %>%
 #' @importFrom cli cli_abort
 #' @examples
-#' \dontrun{bart_team_box(type='conf')}
+#' \donttest{bart_team_box(type='conf')}
 #' @export
 bart_team_box <- function(year=current_season(), type='all') {
   suppressMessages({
@@ -198,6 +248,4 @@ bart_team_box <- function(year=current_season(), type='all') {
 
   return(x)
   })}
-
-
 

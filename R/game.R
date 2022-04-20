@@ -8,6 +8,15 @@
 #' \item{conf}{In-conference games.} \item{post}{Post-conference tournament
 #' games.} \item{nond1}{Games involving one non-D1 team.} }
 #'
+#' @returns Returns a tibble with six columns:
+#' \describe{
+#'   \item{\code{date}}{double.}
+#'   \item{\code{type}}{character. See details.}
+#'   \item{\code{neutral}}{logical.}
+#'   \item{\code{home}}{character.}
+#'   \item{\code{away}}{character.}
+#'   \item{\code{game_id}}{character.}
+#' }
 #' @param year Defaults to current season (YYYY).
 #' @import dplyr
 #' @import readr
@@ -16,7 +25,7 @@
 #' @importFrom magrittr %>%
 #' @importFrom cli cli_abort
 #' @examples
-#' \dontrun{bart_season_schedule(year=2022)}
+#' bart_season_schedule(year=2022)
 #'
 #' @export
 bart_season_schedule <- function(year = current_season()) {
@@ -40,8 +49,8 @@ bart_season_schedule <- function(year = current_season()) {
           TRUE ~ "nond1"
         ),
         neutral = dplyr::case_when(
-          neutral == 1 ~ "yes",
-          TRUE ~ "no"
+          neutral == 1 ~ TRUE,
+          TRUE ~ FALSE
         )
       )
       return(x)
@@ -58,6 +67,7 @@ bart_season_schedule <- function(year = current_season()) {
 #' \href{https://kenpom.com/blog/four-factors/}{KenPom's blog}. `lead_diff` is
 #' the average lead or deficit during a game for the team.
 #'
+#' @returns Returns a tibble of game-by-game four factors by team
 #' @param year Defaults to current season (YYYY).
 #' @param team Team to return.
 #' @import dplyr
@@ -68,7 +78,7 @@ bart_season_schedule <- function(year = current_season()) {
 #' @importFrom tidyr separate
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_team_schedule(year=2022, team='Duke')}
+#' bart_team_schedule(year=2022, team='Duke')
 #'
 #' @export
 bart_team_schedule <- function(year=current_season(), team=NULL) {
@@ -122,6 +132,24 @@ bart_team_schedule <- function(year=current_season(), team=NULL) {
 #' games.} \item{post}{Post-conference tournament games.} \item{nond1}{Games
 #' involving one non-D1 team.} }
 #'
+#' @returns Returns a tibble with 13 columns:
+#' \describe{
+#'   \item{\code{date}}{double.}
+#'   \item{\code{conf}}{character.}
+#'   \item{\code{line}}{character.}
+#'   \item{\code{ttq}}{double. Torvik Thrill Quotient -- measures how good the
+#'   teams are, how close the game is projected to be, and how fast the tempo is
+#'   projected to be.}
+#'   \item{\code{type}}{character. See details.}
+#'   \item{\code{team1}}{character.}
+#'   \item{\code{team1_wp}}{double. Estimated win percentage.}
+#'   \item{\code{team1_pts}}{double. Estimated total points.}
+#'   \item{\code{team2}}{character.}
+#'   \item{\code{team2_wp}}{double. Estimated win percentage.}
+#'   \item{\code{team2_pts}}{double. Estimated total points.}
+#'   \item{\code{game_id}}{character.}
+#'   \item{\code{year}}{double.}
+#' }
 #' @param year Defaults to current season (YYYY).
 #' @import dplyr
 #' @import readr
@@ -130,7 +158,7 @@ bart_team_schedule <- function(year=current_season(), team=NULL) {
 #' @importFrom cli cli_abort
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_pregame(year=2022)}
+#' bart_pregame(year=2022)
 #'
 #' @export
 bart_pregame <- function(year=current_season()) {
@@ -163,6 +191,7 @@ bart_pregame <- function(year=current_season()) {
 #' The home team is coded as `team2`. Neutral site games may contain errors as
 #' to whom is the home team.
 #'
+#' @returns Returns a tibble of box score statistics
 #' @param year Defaults to current season (YYYY).
 #' @import dplyr
 #' @import jsonlite
@@ -171,7 +200,7 @@ bart_pregame <- function(year=current_season()) {
 #' @importFrom cli cli_abort
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_game_box(year=2022)}
+#' bart_game_box(year=2022)
 #'
 #' @export
 bart_game_box <- function(year = current_season()) {
@@ -225,6 +254,7 @@ bart_game_box <- function(year = current_season()) {
 #' \href{https://kenpom.com/blog/four-factors/}{KenPom's blog}. `avg_marg` and
 #' `opp_avg_marg` is the the average lead or deficit during a game.
 #'
+#' @returns Returns a tibble of four factor statistics
 #' @param year Defaults to current season (YYYY).
 #' @import dplyr
 #' @import readr
@@ -233,7 +263,7 @@ bart_game_box <- function(year = current_season()) {
 #' @importFrom cli cli_abort
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_game_factors(year=2022)}
+#' bart_game_factors(year=2022)
 #'
 #' @export
 bart_game_factors <- function(year = current_season()) {

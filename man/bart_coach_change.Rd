@@ -9,10 +9,19 @@ bart_coach_change(year = current_season())
 \arguments{
 \item{year}{Defaults to current season (YYYY).}
 }
+\value{
+Returns a tibble with four columns:
+\describe{
+  \item{\code{team}}{character.}
+  \item{\code{conf}}{character.}
+  \item{\code{old_coach}}{character.}
+  \item{\code{new_coach}}{character.}
+}
+}
 \description{
 Returns head coaching changes at the Division 1 level by season.
 }
 \examples{
-\dontrun{bart_coach_change(year=2015)}
+bart_coach_change(year=2015)
 
 }

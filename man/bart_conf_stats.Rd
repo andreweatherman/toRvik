@@ -11,6 +11,39 @@ bart_conf_stats(year = current_season(), conf = NULL)
 
 \item{conf}{Indicates conference (see details).}
 }
+\value{
+Returns a tibble with 23 columns:
+\describe{
+  \item{\code{rk}}{double.}
+  \item{\code{team}}{character.}
+  \item{\code{seed}}{double.}
+  \item{\code{finish}}{character.}
+  \item{\code{conf_rec}}{character.}
+  \item{\code{adj_oe}}{double.}
+  \item{\code{adj_de}}{double.}
+  \item{\code{barthag}}{double. The estimation of a team's win probability
+  against the average Division 1 team on a neutral court.}
+  \item{\code{eff_marg}}{double.}
+  \item{\code{con_oe}}{double.}
+  \item{\code{con_oe_rk}}{double.}
+  \item{\code{con_de}}{double.}
+  \item{\code{con_de_rk}}{double.}
+  \item{\code{conf_barthag}}{double.}
+  \item{\code{proj_rec}}{character.}
+  \item{\code{conf_cur_sos}}{double. The current average Barthag rating of
+  conference opponents.}
+  \item{\code{conf_cur_sos_rk}}{double.}
+  \item{\code{conf_fut_sos}}{double. The projected average Barthag rating of
+  conference opponents}
+  \item{\code{conf_fut_sos_rk}}{double.}
+  \item{\code{conf_sos}}{double.}
+  \item{\code{conf_sos_rk}}{double.}
+  \item{\code{auto_prob}}{double. Probability of winning the conference
+  tournament (automatic bid).}
+  \item{\code{bid_prob}}{double. Probability of securing a tournament bid
+  (auto or at-large)}
+}
+}
 \description{
 Returns conference-only metrics, strengths of schedule, and bid probabilities
 (auto and at-large) for all teams in a conference.
@@ -20,13 +53,8 @@ Accepted conference abbreviations for the `conf` argument are: \itemize{\item �
 ‘AE’, ‘ASun’, ‘Amer’, ‘B10’, ‘B12’, ‘BE’, ‘BSky’, ‘BSth’, ‘BW’, ‘CAA’,
 ‘CUSA’, ‘Horz’, ‘Ivy’, ‘MAAC’, ‘MAC’, ‘MEAC’, ‘MVC’, ‘MWC’, ‘NEC’, ‘OVC’,
 ‘P12’, ‘Pat’, ‘SB’, ‘SC’, ‘SEC’, ‘SWAC’, ‘Slnd’, ‘Sum’, ‘WAC’, ‘WCC’}
-
-Other: \itemize{\item Barthag is the estimation of a team's win probability against
-the average Division 1 team on a neutral court. \item `conf_cur_sos` is the
-current average Barthag rating of conference opponents. \item `conf_fut_sos`
-is the projected average Barthag rating of conference opponents.}
 }
 \examples{
-\dontrun{bart_conf_stats(year=2022, conf='ACC')}
+bart_conf_stats(year=2022, conf='ACC')
 
 }

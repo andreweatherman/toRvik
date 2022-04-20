@@ -4,7 +4,7 @@
 \alias{bart_player_season}
 \title{Get Player Season Stats}
 \usage{
-bart_player_season(year = current_season(), stat = NULL, conf_only = F)
+bart_player_season(year = current_season(), stat = "all", conf_only = FALSE)
 }
 \arguments{
 \item{year}{Defaults to current season (YYYY).}
@@ -13,6 +13,10 @@ bart_player_season(year = current_season(), stat = NULL, conf_only = F)
 
 \item{conf_only}{Logical. Filters data by conference-only play; defaults to
 `FALSE`.}
+}
+\value{
+Returns a tibble with the number of columns dependent on the value
+  supplied to the `stat` argument.
 }
 \description{
 Returns detailed, season-long player statistics on a variety of splits.
@@ -25,6 +29,6 @@ Data is split on three statistical types, explained below: \describe{
 statistics; sorts by recruiting rank.}}
 }
 \examples{
-\dontrun{bart_player_season(year=2019, stat='adv', conf_only=TRUE)}
+\donttest{bart_player_season(year=2019, stat='adv', conf_only=TRUE)}
 
 }

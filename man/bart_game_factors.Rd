@@ -9,6 +9,9 @@ bart_game_factors(year = current_season())
 \arguments{
 \item{year}{Defaults to current season (YYYY).}
 }
+\value{
+Returns a tibble of four factor statistics
+}
 \description{
 Returns game-by-game four factor statistics.
 }
@@ -18,6 +21,6 @@ For a brief explanation of each factor and its computation, please visit
 `opp_avg_marg` is the the average lead or deficit during a game.
 }
 \examples{
-\dontrun{bart_game_factors(year=2022)}
+bart_game_factors(year=2022)
 
 }

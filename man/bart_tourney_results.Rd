@@ -18,11 +18,19 @@ bart_tourney_results(
 \item{type}{Data split value, defaults to team ('team', 'coach', 'conf',
 'seed').}
 }
+\value{
+Returns a tibble of adjusted and raw tournament results.
+}
 \description{
 Returns a tibble with raw and adjusted NCAA tournament results by team,
 coach, conference, or seed back to 2000.
 }
+\details{
+\itemize{\item PASE is the number of wins above or below the expected value
+given a seed. \item PAKE is the number of wins above or below the expected
+value given a KenPom rating.}
+}
 \examples{
-\dontrun{bart_tourney_results(min_year=2010, max_year=2015, type='conf')}
+bart_tourney_results(min_year=2010, max_year=2015, type='conf')
 
 }

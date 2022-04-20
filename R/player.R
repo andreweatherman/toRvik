@@ -23,6 +23,8 @@ current_season <- function() {
 #' \item{adv}{Returns advanced metrics and possession-adjusted box score
 #' statistics; sorts by recruiting rank.}}
 #'
+#' @returns Returns a tibble with the number of columns dependent on the value
+#'   supplied to the `stat` argument.
 #' @param year Defaults to current season (YYYY).
 #' @param stat Indicates statistical split (see details).
 #' @param conf_only Logical. Filters data by conference-only play; defaults to
@@ -33,17 +35,17 @@ current_season <- function() {
 #' @importFrom cli cli_abort
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_player_season(year=2019, stat='adv', conf_only=TRUE)}
+#' \donttest{bart_player_season(year=2019, stat='adv', conf_only=TRUE)}
 #'
 #' @export
-bart_player_season <- function(year = current_season(), stat = NULL, conf_only = F) {
+bart_player_season <- function(year = current_season(), stat = 'all', conf_only = FALSE) {
   suppressWarnings({
     withr::local_options(HTTPUserAgent='toRvik Package')
     if (!(is.numeric(year) && nchar(year) == 4 && year >=
       2008)) {
       cli::cli_abort("Enter a valid year as a number (YYYY). Data only goes back to 2008")
     }
-    if (is.null(stat) || !(stat %in% c("box", "shooting", "adv"))) {
+    if (!(stat %in% c("box", "shooting", "adv", "all"))) {
       cli::cli_abort("Please input a valid stat command ('box', 'shooting', or 'adv')")
     }
     c_only <- as.integer(conf_only)
@@ -62,7 +64,6 @@ bart_player_season <- function(year = current_season(), stat = NULL, conf_only =
           fg_pct = fgm / fga
         ) %>%
         dplyr::rename("id" = 1)
-
       x <- x %>% dplyr::select(1, 65, 26, 27, 2:4, 55, 64, 58:61, 36, 62, 63, 28, 32, 33)
       colnames(x) <- names
       x <- dplyr::left_join(x, (y %>% dplyr::select(1, 4)), by = "id") %>%
@@ -70,7 +71,6 @@ bart_player_season <- function(year = current_season(), stat = NULL, conf_only =
         dplyr::arrange(desc(ppg))
       return(x)
     }
-
     if (stat == "shooting") {
       names <- c(
         "player", "pos", "exp", "team", "conf", "g", "mpg", "ppg", "usg", "ortg", "efg", "ts",
@@ -101,6 +101,28 @@ bart_player_season <- function(year = current_season(), stat = NULL, conf_only =
       x <- x %>% dplyr::arrange(desc(rec))
       return(x)
     }
+    else {
+      names <- c("player", "pos", "exp", "num", "hgt", "team", "conf", "g", "mpg", "ppg", "oreb",
+                 "dreb", "rpg", "apg", "ast_to", "spg", "bpg", "usg", "ortg", "efg", "ts",
+                 "ftm", "fta", "ft_pct", "two_m", "two_a", "two_pct", "three_m", "three_a",
+                 "three_pct", "dunk_m", "dunk_a", "dunk_pct", "rim_m", "rim_a", "rim_pct",
+                 "mid_m", "mid_a", "mid_pct", "porpag", "dporpag", "adj_oe", "drtg", "adj_de",
+                 "stops", "obpm", "dbpm", "bpm", "oreb_rate", "dreb_rate", "ast", "to", "blk", "stl", "ftr", "pfr",
+                 "rec", "pick", "year", "id")
+      x <- readr::read_csv(paste0("https://barttorvik.com/getadvstats.php?year=", year, "&conyes=", c_only, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
+        dplyr::select(1, 65, 26, 28, 27, 2:4, 55, 64, 58:61, 36, 62, 63, 7, 6, 8, 9, 14:22, 43:45, 37, 38, 41, 39, 40,
+                      42, 29, 49, 6, 30, 47, 48, 50, 56, 57, 54, 10:13, 23:25, 31, 35, 46, 32, 33)
+      colnames(x) <- names
+      y <- x %>%
+        dplyr::group_by(id) %>%
+        dplyr::summarize(fgm=sum(two_m, three_m, na.rm=TRUE),
+                  fga=sum(two_a, three_a, na.rm=TRUE),
+                  fg_pct=fgm/fga)
+      x <- dplyr::left_join(x, y, by='id')
+      x <- x %>%
+        dplyr::relocate(c(61:63), .after=ts)
+      return(x)
+    }
   })
 }
 
@@ -115,6 +137,8 @@ bart_player_season <- function(year = current_season(), stat = NULL, conf_only =
 #' \item{adv}{Returns advanced metrics and possession-adjusted box score
 #' statistics; sorts by recruiting rank.}}
 #'
+#' @returns Returns a tibble with the number of columns dependent on the value
+#'   supplied to the `stat` argument.
 #' @param year Defaults to current season (YYYY).
 #' @param stat Indicates statistical split (see details).
 #' @import dplyr
@@ -125,17 +149,17 @@ bart_player_season <- function(year = current_season(), stat = NULL, conf_only =
 #' @importFrom cli cli_abort
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_player_game(year=2022, stat='box')}
+#' \donttest{bart_player_game(year=2022, stat='box')}
 #'
 #' @export
-bart_player_game <- function(year = current_season(), stat = NULL) {
+bart_player_game <- function(year = current_season(), stat = "all") {
   suppressWarnings({
     withr::local_options(HTTPUserAgent='toRvik Package')
     if (!(is.numeric(year) && nchar(year) == 4 && year >=
       2008)) {
       cli::cli_abort("Enter a valid year as a number. Data only goes back to 2008!")
     }
-    if (!(is.character(stat) && stat %in% c("box", "shooting", "adv"))) {
+    if (!(is.character(stat) && stat %in% c("box", "shooting", "adv", "all"))) {
       cli::cli_abort("Please input a valid stat command ('box,' 'shooting', or 'adv')")
     }
     curl::curl_download(paste0('https://barttorvik.com/', year, '_all_advgames.json.gz'), 'games.json')
@@ -146,7 +170,7 @@ bart_player_game <- function(year = current_season(), stat = NULL) {
       )
       x <- jsonlite::fromJSON('games.json') %>%
         dplyr::as_tibble() %>%
-        select(1, 49, 51, 48, 6, 5, 9, 34, 24:29, 35, 36, 37, 38, 39, 40, 43, 52, 7)
+        dplyr::select(1, 49, 51, 48, 6, 5, 9, 34, 24:29, 35, 36, 37, 38, 39, 40, 43, 52, 7)
       colnames(x) <- names
       x <- x %>%
         dplyr::mutate(
@@ -173,7 +197,7 @@ bart_player_game <- function(year = current_season(), stat = NULL) {
       )
       x <- jsonlite::fromJSON('games.json') %>%
         dplyr::as_tibble() %>%
-        select(1, 49, 51, 48, 6, 5, 9, 34, 11:13, 18:29, 52, 7)
+        dplyr::select(1, 49, 51, 48, 6, 5, 9, 34, 11:13, 18:29, 52, 7)
       colnames(x) <- names
       x <- x %>%
         dplyr::mutate(
@@ -195,7 +219,7 @@ bart_player_game <- function(year = current_season(), stat = NULL) {
       )
       x <- jsonlite::fromJSON('games.json') %>%
         dplyr::as_tibble() %>%
-        select(1, 49, 51, 48, 6, 5, 9, 34, 11, 10, 14:17, 41:42, 30:33, 44, 52, 7)
+        dplyr::select(1, 49, 51, 48, 6, 5, 9, 34, 11, 10, 14:17, 41:42, 30:33, 44, 52, 7)
       colnames(x) <- names
       x <- x %>% dplyr::mutate(
         date = lubridate::ymd(date),
@@ -206,6 +230,22 @@ bart_player_game <- function(year = current_season(), stat = NULL) {
         ),
         year = year, .after = date
       )
+    }
+    if(stat=='all') {
+      names <- c("date", "player", "exp", "team", "opp", "result", "min", "pts", "two_m", "two_a", "three_m",
+                 "three_a", "ftm", "fta", "oreb", "dreb", "ast", "tov", "stl", "blk", "pf", "ortg", "usg", "efg", "ts", "dunk_m", "dunk_a",
+                 "rim_m", "rim_a", "mid_m", "mid_a", "or_pct", "dr_pct", "ast_pct", "to_pct", "stl_pct", "blk_pct", "bpm", "obpm", "dbpm",
+                 "net", "poss", "id", "game_id")
+      x <- jsonlite::fromJSON('games.json') %>%
+        dplyr::as_tibble() %>%
+        dplyr::select(1, 49, 51, 48, 6, 5, 9, 34, 24:29, 35, 36, 37, 38, 39, 40, 43, 10:13, 18:23, 14:17, 41:42, 30:33, 44, 52, 7 )
+      colnames(x) <- names
+      x <- x %>%
+        dplyr::mutate(across(c(7:43), as.numeric),
+                      date=lubridate::ymd(date),
+                      result=case_when(result=="1"~"W",
+                                       TRUE~"L"),
+                      fg_pct = (two_m + three_m) / (two_a + three_a) * 100, .before = efg)
     }
     unlink('games.json')
     return(x)
@@ -225,6 +265,8 @@ bart_player_game <- function(year = current_season(), stat = NULL) {
 #' play-by-play shooting splits.} \item{adv}{Returns advanced metrics and
 #' possession-adjusted box score statistics.}}
 #'
+#' @returns Returns a tibble with the number of columns dependent on the value
+#'   supplied to the `stat` argument.
 #' @param stat Indicates statistical split (see details).
 #' @param conf_only Logical. Filters data by conference-only play; defaults to
 #'   `FALSE`.
@@ -239,13 +281,13 @@ bart_player_game <- function(year = current_season(), stat = NULL) {
 #' @importFrom stringr str_match
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_transfers(stat='box')}
+#' bart_transfers(stat='box')
 #'
 #' @export
-bart_transfers <- function(stat = NULL, conf_only = F, active=T) {
+bart_transfers <- function(stat = 'all', conf_only = FALSE, active=TRUE) {
   suppressWarnings({
     withr::local_options(HTTPUserAgent='toRvik Package')
-    if (is.null(stat) || !(stat %in% c("box", "shooting", "adv"))) {
+    if (is.null(stat) || !(stat %in% c("box", "shooting", "adv", "all"))) {
       cli::cli_abort("Please input a valid stat command ('box', 'shooting', or 'adv')")
     }
     c_only <- as.integer(conf_only)
@@ -287,10 +329,10 @@ bart_transfers <- function(stat = NULL, conf_only = F, active=T) {
       x <- dplyr::left_join(x, (y %>% dplyr::select(1, 4)), by = "id") %>%
         dplyr::relocate(fg_pct, .before = oreb) %>%
         dplyr::arrange(desc(ppg))
-          if(active==T) {
+          if(active==TRUE) {
               x <- merge(x, portal, by = c("player", "team")) %>%
                 dplyr::as_tibble() }
-          if(active==F) {
+          if(active==FALSE) {
               x <- merge(x, commit, by = c("player", "team")) %>%
                   dplyr::as_tibble() }
       }
@@ -309,30 +351,59 @@ bart_transfers <- function(stat = NULL, conf_only = F, active=T) {
       colnames(x) <- names
       x <- x %>%
         dplyr::mutate(p_per = ((40 * ppg) / mpg), .after = ppg) %>%
-        arrange(desc(ppg))
-            if(active==T) {
+        dplyr::arrange(desc(ppg))
+            if(active==TRUE) {
                 x <- merge(x, portal, by = c("player", "team")) %>%
                      dplyr::as_tibble() }
-            if(active==F) {
+            if(active==FALSE) {
                 x <- merge(x, commit, by = c("player", "team")) %>%
                      dplyr::as_tibble() }
       }
     if (stat == "adv") {
       names <- c(
-        "player", "pos", "exp", "team", "conf", "g", "min", "porpag", "dporpag", "ortg", "adj_oe", "drtg", "adj_de",
+        "player", "pos", "exp", "team", "conf", "g", "min_rate", "porpag", "dporpag", "ortg", "adj_oe", "drtg", "adj_de",
         "stops", "obpm", "dbpm", "bpm", "oreb", "dreb", "ast", "to", "blk", "stl", "ftr", "pfr",
         "rec", "id"
       )
       x <- readr::read_csv(paste0("https://barttorvik.com/getadvstats.php?year=2022", "&conyes=", c_only, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
         dplyr::select(1, 65, 26, 2:5, 29, 49, 6, 30, 47, 48, 50, 56, 57, 54, 10:13, 23:25, 31, 35, 33)
       colnames(x) <- names
-      x <- x %>% arrange(desc(rec))
-          if(active==T) {
+      x <- x %>%
+        dplyr::arrange(desc(rec))
+          if(active==TRUE) {
               x <- merge(x, portal, by = c("player", "team")) %>%
                    dplyr::as_tibble() }
-          if(active==F) {
+          if(active==FALSE) {
              x <- merge(x, commit, by = c("player", "team")) %>%
                   dplyr::as_tibble() }
+    }
+    if(stat=='all') {
+      names <- c("player", "pos", "exp", "num", "hgt", "team", "conf", "g", "mpg", "ppg", "oreb",
+                 "dreb", "rpg", "apg", "ast_to", "spg", "bpg", "usg", "ortg", "efg", "ts",
+                 "ftm", "fta", "ft_pct", "two_m", "two_a", "two_pct", "three_m", "three_a",
+                 "three_pct", "dunk_m", "dunk_a", "dunk_pct", "rim_m", "rim_a", "rim_pct",
+                 "mid_m", "mid_a", "mid_pct", "min_rate", "porpag", "dporpag", "adj_oe", "drtg", "adj_de",
+                 "stops", "obpm", "dbpm", "bpm", "oreb_rate", "dreb_rate", "ast", "to", "blk", "stl", "ftr", "pfr",
+                 "rec", "year", "id")
+      x <- readr::read_csv(paste0("https://barttorvik.com/getadvstats.php?year=2022&conyes=", c_only, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
+        dplyr::select(1, 65, 26, 28, 27, 2:4, 55, 64, 58:61, 36, 62, 63, 7, 6, 8, 9, 14:22, 43:45, 37, 38, 41, 39, 40,
+                        42, 5, 29, 49, 30, 47, 48, 50, 56, 57, 54, 10:13, 23:25, 31, 35, 32, 33)
+      colnames(x) <- names
+      y <- x %>%
+        dplyr::group_by(id) %>%
+        dplyr::summarize(fgm=sum(two_m, three_m, na.rm=TRUE),
+                         fga=sum(two_a, three_a, na.rm=TRUE),
+                         fg_pct=fgm/fga)
+      x <- dplyr::left_join(x, y, by='id')
+      x <- x %>%
+        dplyr::relocate(c(61:63), .after=ts) %>%
+        dplyr::arrange(desc(ppg))
+      if(active==TRUE) {
+        x <- merge(x, portal, by = c("player", "team")) %>%
+          dplyr::as_tibble() }
+      if(active==FALSE) {
+        x <- merge(x, commit, by = c("player", "team")) %>%
+          dplyr::as_tibble() }
     }
     return(x)
 }
@@ -343,11 +414,18 @@ bart_transfers <- function(stat = NULL, conf_only = F, active=T) {
 #'
 #' Returns Barttorvik Player of the Year ratings on a variety of splits.
 #'
-#' Accepted conference abbreviations for the `conf` argument are: \itemize{\item ‘A10’, ‘ACC’,
-#' ‘AE’, ‘ASun’, ‘Amer’, ‘B10’, ‘B12’, ‘BE’, ‘BSky’, ‘BSth’, ‘BW’, ‘CAA’,
-#' ‘CUSA’, ‘Horz’, ‘Ivy’, ‘MAAC’, ‘MAC’, ‘MEAC’, ‘MVC’, ‘MWC’, ‘NEC’, ‘OVC’,
-#' ‘P12’, ‘Pat’, ‘SB’, ‘SC’, ‘SEC’, ‘SWAC’, ‘Slnd’, ‘Sum’, ‘WAC’, ‘WCC’ }
+#' Accepted conference abbreviations for the `conf` argument are: \itemize{\item
+#' ‘A10’, ‘ACC’, ‘AE’, ‘ASun’, ‘Amer’, ‘B10’, ‘B12’, ‘BE’, ‘BSky’, ‘BSth’, ‘BW’,
+#' ‘CAA’, ‘CUSA’, ‘Horz’, ‘Ivy’, ‘MAAC’, ‘MAC’, ‘MEAC’, ‘MVC’, ‘MWC’, ‘NEC’,
+#' ‘OVC’, ‘P12’, ‘Pat’, ‘SB’, ‘SC’, ‘SEC’, ‘SWAC’, ‘Slnd’, ‘Sum’, ‘WAC’, ‘WCC’ }
 #'
+#' @returns Returns a tibble with four columns:
+#' \describe{
+#'   \item{\code{rk}}{integer.}
+#'   \item{\code{player}}{character.}
+#'   \item{\code{team}}{character.}
+#'   \item{\code{score}}{double.}
+#'   }
 #' @param year Defaults to current season (YYYY).
 #' @param conf Filters results by conference; defaults to all (see details).
 #' @param class Filters results by class ('fr', 'so', 'jr', 'sr'); defaults to
@@ -363,10 +441,10 @@ bart_transfers <- function(stat = NULL, conf_only = F, active=T) {
 #' @importFrom purrr pluck
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_poy(year=2019, class='fr')}
+#' bart_poy(year=2019, class='fr')
 #'
 #' @export
-bart_poy <- function(year = current_season(), conf = "All", class = NULL, conf_only = F) {
+bart_poy <- function(year = current_season(), conf = "All", class = NULL, conf_only = FALSE) {
   suppressWarnings({
     withr::local_options(HTTPUserAgent='toRvik Package')
   if (!(is.numeric(year) && nchar(year) == 4 && year >=
@@ -381,6 +459,7 @@ bart_poy <- function(year = current_season(), conf = "All", class = NULL, conf_o
                                      'P12', 'Pat', 'SB', 'SC', 'SEC', 'SWAC', 'Slnd', 'Sum', 'WAC', 'WCC'))) {
     cli::cli_abort("Please enter valid conference code (see details)")
   }
+
   class_lookup <- list(
     "fr" = "Fr",
     "so" = "So",
@@ -388,7 +467,7 @@ bart_poy <- function(year = current_season(), conf = "All", class = NULL, conf_o
     "sr" = "Sr"
   )
   class <- class_lookup[class]
-  if (conf_only == F) {
+  if (conf_only == FALSE) {
     x <- httr::GET(paste0("https://barttorvik.com/poy.php?conlimit=", conf, "&year=", year, "&yr=", class)) %>%
       httr::content(as = "text") %>%
       rvest::read_html() %>%
@@ -397,7 +476,7 @@ bart_poy <- function(year = current_season(), conf = "All", class = NULL, conf_o
       janitor::clean_names()
     return(x)
   }
-  if (conf_only == T) {
+  if (conf_only == TRUE) {
     x <- httr::GET(paste0("https://barttorvik.com/conpoy.php?conlimit=", conf, "&year=", year, "&yr=", class)) %>%
       httr::content(as = "text") %>%
       rvest::read_html() %>%
@@ -416,6 +495,14 @@ bart_poy <- function(year = current_season(), conf = "All", class = NULL, conf_o
 #' \href{https://twitter.com/totally_t_bomb/status/973731719479201792}{'highly
 #' dubious analysis.'}
 #'
+#' @returns Returns a tibble with five columns:
+#' \describe{
+#'   \item{\code{situation}}{character.}
+#'   \item{\code{adj_oe}}{double.}
+#'   \item{\code{adj_de}}{double.}
+#'   \item{\code{barthag}}{double.}
+#'   \item{\code{rk}}{double.}
+#'   }
 #' @param year Defaults to current season (YYYY).
 #' @param team Indicates team.
 #' @param player Indicates player to remove.
@@ -428,7 +515,7 @@ bart_poy <- function(year = current_season(), conf = "All", class = NULL, conf_o
 #' @importFrom purrr pluck
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_injuryimpact(year=2019, team='Duke', player='Zion Williamson')}
+#' bart_injuryimpact(year=2019, team='Duke', player='Zion Williamson')
 #'
 #' @export
 bart_injuryimpact <- function(year = current_season(), team = NULL, player = NULL) {

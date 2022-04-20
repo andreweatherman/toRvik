@@ -9,6 +9,17 @@ bart_season_schedule(year = current_season())
 \arguments{
 \item{year}{Defaults to current season (YYYY).}
 }
+\value{
+Returns a tibble with six columns:
+\describe{
+  \item{\code{date}}{double.}
+  \item{\code{type}}{character. See details.}
+  \item{\code{neutral}}{logical.}
+  \item{\code{home}}{character.}
+  \item{\code{away}}{character.}
+  \item{\code{game_id}}{character.}
+}
+}
 \description{
 Returns full season schedule for all D-1 teams by year
 }
@@ -20,6 +31,6 @@ column, games are classified by one of four indicators, explained below:
 games.} \item{nond1}{Games involving one non-D1 team.} }
 }
 \examples{
-\dontrun{bart_season_schedule(year=2022)}
+bart_season_schedule(year=2022)
 
 }

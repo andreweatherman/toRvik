@@ -3,6 +3,27 @@
 #' Returns a tibble with similar quality and resume metrics used by the NCAA
 #' seeding committee. Data runs back to the 2019 tournament.
 #'
+#' @returns Returns a tibble with 16 columns:
+#' \describe{
+#'   \item{\code{team}}{character.}
+#'   \item{\code{seed}}{double.}
+#'   \item{\code{net}}{double.}
+#'   \item{\code{kpi}}{double.}
+#'   \item{\code{sor}}{double.}
+#'   \item{\code{res_avg}}{double. Average of resume rankings (NET, KPI, and
+#'   SOR).}
+#'   \item{\code{bpi}}{double.}
+#'   \item{\code{kp}}{double.}
+#'   \item{\code{sag}}{double.}
+#'   \item{\code{qual_avg}}{double. Average of quality rankings (BPI, KP, and
+#'   Sag).}
+#'   \item{\code{q1a}}{character.}
+#'   \item{\code{q1}}{character.}
+#'   \item{\code{q2}}{character.}
+#'   \item{\code{q1_2}}{character.}
+#'   \item{\code{q3}}{character.}
+#'   \item{\code{q4}}{character.}
+#' }
 #' @param year Defaults to current season (YYYY).
 #' @import dplyr
 #' @import httr
@@ -13,7 +34,7 @@
 #' @importFrom tidyr separate
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_tourney_sheets(year=2019)}
+#' bart_tourney_sheets(year=2019)
 #'
 #' @export
 bart_tourney_sheets <- function(year = current_season()) {
@@ -51,6 +72,20 @@ bart_tourney_sheets <- function(year = current_season()) {
 #' adjusted odds over the last ten games} \item{t100}{Returns odds against top
 #' 100 opponents.}}
 #'
+#' @returns Returns a tibble with 10 to 11 columns (depending on year input):
+#' #' \describe{
+#'   \item{\code{seed}}{double.}
+#'   \item{\code{region}}{character. Only avaliable for year >= 2022}
+#'   \item{\code{team}}{character.}
+#'   \item{\code{conf}}{character.}
+#'   \item{\code{r64}}{double.}
+#'   \item{\code{r32}}{double.}
+#'   \item{\code{s16}}{double.}
+#'   \item{\code{e8}}{double.}
+#'   \item{\code{f4}}{double.}
+#'   \item{\code{f2}}{double.}
+#'   \item{\code{champ}}{double.}
+#' }
 #' @param year Defaults to current season (YYYY).
 #' @param odds Filters results by odds, defaults to current (see details).
 #' @import dplyr
@@ -63,7 +98,7 @@ bart_tourney_sheets <- function(year = current_season()) {
 #' @importFrom stringr str_replace
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_tourney_odds(year=2022, odds='pre')}
+#' bart_tourney_odds(year=2022, odds='pre')
 #'
 #' @export
 bart_tourney_odds <- function(year = current_season(), odds = "current") {
@@ -117,6 +152,11 @@ bart_tourney_odds <- function(year = current_season(), odds = "current") {
 #' Returns a tibble with raw and adjusted NCAA tournament results by team,
 #' coach, conference, or seed back to 2000.
 #'
+#' \itemize{\item PASE is the number of wins above or below the expected value
+#' given a seed. \item PAKE is the number of wins above or below the expected
+#' value given a KenPom rating.}
+#'
+#' @returns Returns a tibble of adjusted and raw tournament results.
 #' @param min_year Minimum year to pull -- defaults to 2000 (YYYY).
 #' @param max_year Maximum year to pull -- defaults to current season (YYYY).
 #' @param type Data split value, defaults to team ('team', 'coach', 'conf',
@@ -131,7 +171,7 @@ bart_tourney_odds <- function(year = current_season(), odds = "current") {
 #' @importFrom purrr pluck
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_tourney_results(min_year=2010, max_year=2015, type='conf')}
+#' bart_tourney_results(min_year=2010, max_year=2015, type='conf')
 #'
 #' @export
 bart_tourney_results <- function(min_year = 2000, max_year = current_season(), type = "team") {

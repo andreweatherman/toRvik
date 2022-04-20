@@ -9,6 +9,26 @@ bart_pregame(year = current_season())
 \arguments{
 \item{year}{Defaults to current season (YYYY).}
 }
+\value{
+Returns a tibble with 13 columns:
+\describe{
+  \item{\code{date}}{double.}
+  \item{\code{conf}}{character.}
+  \item{\code{line}}{character.}
+  \item{\code{ttq}}{double. Torvik Thrill Quotient -- measures how good the
+  teams are, how close the game is projected to be, and how fast the tempo is
+  projected to be.}
+  \item{\code{type}}{character. See details.}
+  \item{\code{team1}}{character.}
+  \item{\code{team1_wp}}{double. Estimated win percentage.}
+  \item{\code{team1_pts}}{double. Estimated total points.}
+  \item{\code{team2}}{character.}
+  \item{\code{team2_wp}}{double. Estimated win percentage.}
+  \item{\code{team2_pts}}{double. Estimated total points.}
+  \item{\code{game_id}}{character.}
+  \item{\code{year}}{double.}
+}
+}
 \description{
 Returns pregame win probabilities, expected scores, and thrill quotients for
 all games.
@@ -21,6 +41,6 @@ games.} \item{post}{Post-conference tournament games.} \item{nond1}{Games
 involving one non-D1 team.} }
 }
 \examples{
-\dontrun{bart_pregame(year=2022)}
+bart_pregame(year=2022)
 
 }

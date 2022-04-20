@@ -1,3 +1,12 @@
+## Updated submission
+
+Updated package with recommendations from first CRAN submission. These include:
+
+- Omitted 'Functions' from package title
+- Provided links to utilized web services in DESCRIPTION
+- Changed logical variables package-wide from 'T' and 'F' to 'TRUE' and 'FALSE'
+- Added `\values{}` field to function documentation
+
 ## Test environments
 
 * local: Apple Silicon macOS 12.3.0; Darwin 21.4.0; R 4.1.0

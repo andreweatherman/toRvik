@@ -8,6 +8,7 @@
 #' scale of recruiting ranking, where 100 is a consensus #1 recruit and 0 is
 #' unrecruited.
 #'
+#' @returns Returns a list of tibbles: 'Coach History' and 'Recruiting History'
 #' @param coach Coach to return.
 #' @import dplyr
 #' @import httr
@@ -19,7 +20,7 @@
 #' @importFrom tidyr separate
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_coach('Mike Krzyzewski')}
+#' bart_coach('Mike Krzyzewski')
 #'
 #' @export
 bart_coach <- function(coach) {
@@ -64,6 +65,13 @@ bart_coach <- function(coach) {
 #'
 #' Returns head coaching changes at the Division 1 level by season.
 #'
+#' @returns Returns a tibble with four columns:
+#' \describe{
+#'   \item{\code{team}}{character.}
+#'   \item{\code{conf}}{character.}
+#'   \item{\code{old_coach}}{character.}
+#'   \item{\code{new_coach}}{character.}
+#' }
 #' @param year Defaults to current season (YYYY).
 #' @import dplyr
 #' @import httr
@@ -74,7 +82,7 @@ bart_coach <- function(coach) {
 #' @importFrom purrr pluck
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_coach_change(year=2015)}
+#' bart_coach_change(year=2015)
 #'
 #' @export
 bart_coach_change <- function(year = current_season()) {

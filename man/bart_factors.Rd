@@ -29,6 +29,36 @@ bart_factors(
 
 \item{end}{Filters by end date; defaults to NULL (full season).}
 }
+\value{
+Returns a tibble with 22 columns:
+\describe{
+  \item{\code{team}}{character.}
+  \item{\code{conf}}{character.}
+  \item{\code{barthag}}{double. The estimation of a team's win probability
+  against the average Division 1 team on a neutral court.}
+  \item{\code{rec}}{character.}
+  \item{\code{wins}}{double.}
+  \item{\code{games}}{double.}
+  \item{\code{adj_t}}{double.}
+  \item{\code{adj_o}}{double.}
+  \item{\code{off_efg}}{double.}
+  \item{\code{off_to}}{double.}
+  \item{\code{off_or}}{double.}
+  \item{\code{off_ftr}}{double.}
+  \item{\code{adj_d}}{double.}
+  \item{\code{def_efg}}{double.}
+  \item{\code{def_to}}{double.}
+  \item{\code{def_or}}{double.}
+  \item{\code{def_ftr}}{double.}
+  \item{\code{wab}}{double. The number of wins above or below the expected
+  total from a bubble team against the same schedule.}
+  \item{\code{year}}{double.}
+  \item{\code{venue}}{character. Split supplied to the venue argument.}
+  \item{\code{type}}{character. Split supplied to the type argument.}
+  \item{\code{top}}{double. Split supplied to the top argument.}
+  \item{\code{quad}}{character. Split supplied to the quad argument.}
+}
+}
 \description{
 Returns four factor data and team records on a variety of splits, including
 date range, quadrant level, opponent ranking, game location, and game type.
@@ -46,6 +76,6 @@ adjusted for game location.} \item{start/end}{Splits by date range
 (YYYYMMDD).}}
 }
 \examples{
-\dontrun{bart_factors(quad='3', venue='away', start='20220101')}
+\donttest{bart_factors(quad='3', venue='away', start='20220101')}
 
 }

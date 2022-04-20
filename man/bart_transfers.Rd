@@ -4,7 +4,7 @@
 \alias{bart_transfers}
 \title{Get Transfer Portal Statistics}
 \usage{
-bart_transfers(stat = NULL, conf_only = F, active = T)
+bart_transfers(stat = "all", conf_only = FALSE, active = TRUE)
 }
 \arguments{
 \item{stat}{Indicates statistical split (see details).}
@@ -14,6 +14,10 @@ bart_transfers(stat = NULL, conf_only = F, active = T)
 
 \item{active}{Logical. Filters players by portal status -- active vs.
 committed; defaults to TRUE (active).}
+}
+\value{
+Returns a tibble with the number of columns dependent on the value
+  supplied to the `stat` argument.
 }
 \description{
 Returns detailed, season-long player statistics on a variety of splits for
@@ -29,6 +33,6 @@ play-by-play shooting splits.} \item{adv}{Returns advanced metrics and
 possession-adjusted box score statistics.}}
 }
 \examples{
-\dontrun{bart_transfers(stat='box')}
+bart_transfers(stat='box')
 
 }

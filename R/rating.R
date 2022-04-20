@@ -2,15 +2,35 @@
 #'
 #' Returns current T-Rank ratings and two forms of strength of schedule.
 #'
-#' \itemize{\item Barthag is the estimation of a team's win probability against
-#' the average Division 1 team on a neutral court. \item WAB (wins above bubble)
-#' is the number of wins attained above or below the expected total from a
-#' bubble team against an analogous schedule. \item `x_elite_sos` is the
-#' percentage of games that an 'elite' team would project to lose against this
-#' team's non-conference or overall schedule. \item `x_cur_sos` is the current
-#' average Barthag rating of opponents. \item `x_fut_sos` is the projected
-#' average Barthag rating of opponents.}
+#' \itemize{\item `x_elite_sos` is the percentage of games that an 'elite' team
+#' would project to lose against this team's non-conference or overall schedule.
+#' \item `x_cur_sos` is the current average Barthag rating of opponents. \item
+#' `x_fut_sos` is the projected average Barthag rating of opponents.}
 #'
+#' @returns Returns a tibble with 19 columns:
+#' \describe{
+#'   \item{\code{team}}{character.}
+#'   \item{\code{conf}}{character.}
+#'   \item{\code{barthag}}{double. The estimation of a team's win probability
+#'   against the average Division 1 team on a neutral court.}
+#'   \item{\code{barthag_rk}}{integer.}
+#'   \item{\code{adj_o}}{double.}
+#'   \item{\code{adj_o_rk}}{integer.}
+#'   \item{\code{adj_d}}{double.}
+#'   \item{\code{adj_d_rk}}{integer.}
+#'   \item{\code{adj_t}}{double.}
+#'   \item{\code{adj_t_rk}}{integer.}
+#'   \item{\code{wab}}{double. The number of wins above or below the expected
+#'   total from a bubble team against the same schedule.}
+#'   \item{\code{nc_elite_sos}}{double.}
+#'   \item{\code{nc_fut_sos}}{double.}
+#'   \item{\code{nc_cur_sos}}{double.}
+#'   \item{\code{ov_elite_sos}}{double.}
+#'   \item{\code{ov_fut_sos}}{double.}
+#'   \item{\code{ov_cur_sos}}{double.}
+#'   \item{\code{seed}}{integer.}
+#'   \item{\code{year}}{double.}
+#' }
 #' @param year Defaults to current season (YYYY).
 #' @import dplyr
 #' @import readr
@@ -24,7 +44,7 @@
 #'
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_ratings(year=2022)}
+#' bart_ratings(year=2022)
 #'
 #' @export
 bart_ratings <- function(year = current_season()) {
@@ -90,6 +110,34 @@ bart_ratings <- function(year = current_season()) {
 #' adjusted for game location.} \item{start/end}{Splits by date range
 #' (YYYYMMDD).}}
 #'
+#' @returns Returns a tibble with 22 columns:
+#' \describe{
+#'   \item{\code{team}}{character.}
+#'   \item{\code{conf}}{character.}
+#'   \item{\code{barthag}}{double. The estimation of a team's win probability
+#'   against the average Division 1 team on a neutral court.}
+#'   \item{\code{rec}}{character.}
+#'   \item{\code{wins}}{double.}
+#'   \item{\code{games}}{double.}
+#'   \item{\code{adj_t}}{double.}
+#'   \item{\code{adj_o}}{double.}
+#'   \item{\code{off_efg}}{double.}
+#'   \item{\code{off_to}}{double.}
+#'   \item{\code{off_or}}{double.}
+#'   \item{\code{off_ftr}}{double.}
+#'   \item{\code{adj_d}}{double.}
+#'   \item{\code{def_efg}}{double.}
+#'   \item{\code{def_to}}{double.}
+#'   \item{\code{def_or}}{double.}
+#'   \item{\code{def_ftr}}{double.}
+#'   \item{\code{wab}}{double. The number of wins above or below the expected
+#'   total from a bubble team against the same schedule.}
+#'   \item{\code{year}}{double.}
+#'   \item{\code{venue}}{character. Split supplied to the venue argument.}
+#'   \item{\code{type}}{character. Split supplied to the type argument.}
+#'   \item{\code{top}}{double. Split supplied to the top argument.}
+#'   \item{\code{quad}}{character. Split supplied to the quad argument.}
+#'}
 #' @param year Defaults to current season (YYYY).
 #' @param venue Filters by venue; defaults to `all`.
 #' @param type Filters by game type; defaults to `all`.
@@ -108,7 +156,7 @@ bart_ratings <- function(year = current_season()) {
 #' @importFrom tidyr separate
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_factors(quad='3', venue='away', start='20220101')}
+#' \donttest{bart_factors(quad='3', venue='away', start='20220101')}
 #'
 #' @export
 bart_factors <- function(year = current_season(), venue = "all", type = "all", quad = "4", top=0, start = NULL, end = NULL) {
@@ -132,34 +180,31 @@ bart_factors <- function(year = current_season(), venue = "all", type = "all", q
     }
     x_names <- c(
       "team", "barthag", "rec", "wins", "games", "adj_t", "adj_o", "off_efg", "off_to", "off_or", "off_ftr", "adj_d", "def_efg",
-      "def_to", "def_or", "def_ftr"
+      "def_to", "def_or", "def_ftr", "wab"
     )
     y_names <- c("team", "conf")
-    venue_lookup <- list(
-      "all" = "All",
-      "home" = "H",
-      "away" = "A",
-      "neutral" = "N",
-      "road" = "A-N"
+    v <- switch(venue,
+                "all" = "All",
+                "home" = "H",
+                "away" = "A",
+                "neutral" = "N",
+                "road" = "A-N"
     )
-    v <- venue_lookup[venue]
-    type_lookup <- list(
-      "all" = "All",
-      "nc" = "N",
-      "conf" = "C",
-      "reg" = "R",
-      "post" = "P",
-      "ncaa" = "T"
+    t <- switch(type,
+                "all" = "All",
+                "nc" = "N",
+                "conf" = "C",
+                "reg" = "R",
+                "post" = "P",
+                "ncaa" = "T"
     )
-    t <- type_lookup[type]
-    quad_lookup <- list(
-      "0" = "1",
-      "1" = "2",
-      "2" = "3",
-      "3" = "4",
-      "4" = "5"
+    q <- switch(quad,
+                "0" = "1",
+                "1" = "2",
+                "2" = "3",
+                "3" = "4",
+                "4" = "5"
     )
-    q <- quad_lookup[quad]
     y <- httr::GET(paste0("https://barttorvik.com/sos.php?year=", year, "&csv=1")) %>%
       httr::content(as = "text") %>%
       rvest::read_html() %>%
@@ -172,12 +217,13 @@ bart_factors <- function(year = current_season(), venue = "all", type = "all", q
     colnames(y) <- y_names
     if (is.null(start) && is.null(end)) {
       x <- readr::read_csv(paste0("https://barttorvik.com/trank.php?year=", year, "&revquad=0&quad=", q, "&venue=", v, "&type=", t, "&top=", top, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
-        dplyr::select(1, 4, 5, 6, 7, 27, 2, 8, 12, 14, 10, 3, 9, 13, 15, 11)
+        dplyr::select(1, 4, 5, 6, 7, 27, 2, 8, 12, 14, 10, 3, 9, 13, 15, 11, 35)
       colnames(x) <- x_names
       x <- x %>% dplyr::mutate(across(c(2, 4:13), as.numeric),
         year = year,
         venue = venue,
         type = type,
+        top=top,
         quad = paste0(quad, "+")
       )
       x <- dplyr::left_join(x, y, by = "team") %>%
@@ -186,12 +232,13 @@ bart_factors <- function(year = current_season(), venue = "all", type = "all", q
     }
     if (!is.null(start) && !is.null(end)) {
       x <- readr::read_csv(paste0("https://barttorvik.com/trank.php?year=", year, "&sort=&hteam=&t2value=&begin=", start, "&end=", end, "&revquad=0&quad=", q, "&venue=", v, "&type=", t, "&top=", top, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
-        dplyr::select(1, 4, 5, 6, 7, 27, 2, 8, 12, 14, 10, 3, 9, 13, 15, 11)
+        dplyr::select(1, 4, 5, 6, 7, 27, 2, 8, 12, 14, 10, 3, 9, 13, 15, 11, 35)
       colnames(x) <- x_names
       x <- x %>% dplyr::mutate(across(c(2, 4:13), as.numeric),
         year = year,
         venue = venue,
         type = type,
+        top=top,
         quad = paste0(quad, "+"),
         start = start,
         end = end
@@ -202,12 +249,13 @@ bart_factors <- function(year = current_season(), venue = "all", type = "all", q
     }
     if(!is.null(start) && is.null(end)) {
       x <- readr::read_csv(paste0("https://barttorvik.com/trank.php?year=", year, "&sort=&hteam=&t2value=&begin=", start, "&revquad=0&quad=", q, "&venue=", v, "&type=", t, "&top=", top, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
-        dplyr::select(1, 4, 5, 6, 7, 27, 2, 8, 12, 14, 10, 3, 9, 13, 15, 11)
+        dplyr::select(1, 4, 5, 6, 7, 27, 2, 8, 12, 14, 10, 3, 9, 13, 15, 11, 35)
       colnames(x) <- x_names
       x <- x %>% dplyr::mutate(across(c(2, 4:13), as.numeric),
                                year = year,
                                venue = venue,
                                type = type,
+                               top=top,
                                quad = paste0(quad, "+"),
                                start = start,
       )
@@ -217,12 +265,13 @@ bart_factors <- function(year = current_season(), venue = "all", type = "all", q
     }
     if(is.null(start) && !is.null(end)) {
       x <- readr::read_csv(paste0("https://barttorvik.com/trank.php?year=", year, "&sort=&hteam=&t2value=&end=", end, "&revquad=0&quad=", q, "&venue=", v, "&type=", t, "&top=", top, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
-        dplyr::select(1, 4, 5, 6, 7, 27, 2, 8, 12, 14, 10, 3, 9, 13, 15, 11)
+        dplyr::select(1, 4, 5, 6, 7, 27, 2, 8, 12, 14, 10, 3, 9, 13, 15, 11, 35)
       colnames(x) <- x_names
       x <- x %>% dplyr::mutate(across(c(2, 4:13), as.numeric),
                                year = year,
                                venue = venue,
                                type = type,
+                               top=top,
                                quad = paste0(quad, "+"),
                                end = end,
       )
@@ -251,6 +300,33 @@ bart_factors <- function(year = current_season(), venue = "all", type = "all", q
 #' adjusted for game location.} \item{start/end}{Splits by date range
 #' (YYYYMMDD).}}
 #'
+#' @returns Returns a tibble with 22 columns:
+#' \describe{
+#'   \item{\code{conf}}{character.}
+#'   \item{\code{barthag}}{double. The estimation of a team's win probability
+#'   against the average Division 1 team on a neutral court.}
+#'   \item{\code{rec}}{character.}
+#'   \item{\code{wins}}{double.}
+#'   \item{\code{games}}{double.}
+#'   \item{\code{adj_t}}{double.}
+#'   \item{\code{adj_o}}{double.}
+#'   \item{\code{off_efg}}{double.}
+#'   \item{\code{off_to}}{double.}
+#'   \item{\code{off_or}}{double.}
+#'   \item{\code{off_ftr}}{double.}
+#'   \item{\code{adj_d}}{double.}
+#'   \item{\code{def_efg}}{double.}
+#'   \item{\code{def_to}}{double.}
+#'   \item{\code{def_or}}{double.}
+#'   \item{\code{def_ftr}}{double.}
+#'   \item{\code{wab}}{double. The number of wins above or below the expected
+#'   total from a bubble team against the same schedule.}
+#'   \item{\code{year}}{double.}
+#'   \item{\code{venue}}{character. Split supplied to the venue argument.}
+#'   \item{\code{type}}{character. Split supplied to the type argument.}
+#'   \item{\code{top}}{double. Split supplied to the top argument.}
+#'   \item{\code{quad}}{character. Split supplied to the quad argument.}
+#' }
 #' @param year Defaults to current season (YYYY).
 #' @param venue Filters by venue; defaults to `all`.
 #' @param type Filters by game type; defaults to `all`.
@@ -264,7 +340,7 @@ bart_factors <- function(year = current_season(), venue = "all", type = "all", q
 #' @importFrom cli cli_abort
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_conf_factors(type='nc')}
+#' \donttest{bart_conf_factors(type='nc')}
 #'
 #' @export
 bart_conf_factors <- function(year = current_season(), venue = "all", type = "all", quad = "4", top=0, start = NULL, end = NULL) {
@@ -290,15 +366,14 @@ bart_conf_factors <- function(year = current_season(), venue = "all", type = "al
       "conf", "barthag", "rec", "wins", "games", "adj_t", "adj_o", "off_efg", "off_to", "off_or", "off_ftr", "adj_d", "def_efg",
       "def_to", "def_or", "def_ftr", "wab"
     )
-    venue_lookup <- list(
+    v <- switch(venue,
       "all" = "All",
       "home" = "H",
       "away" = "A",
       "neutral" = "N",
       "road" = "A-N"
     )
-    v <- venue_lookup[venue]
-    type_lookup <- list(
+    t <- switch(type,
       "all" = "All",
       "nc" = "N",
       "conf" = "C",
@@ -306,15 +381,12 @@ bart_conf_factors <- function(year = current_season(), venue = "all", type = "al
       "post" = "P",
       "ncaa" = "T"
     )
-    t <- type_lookup[type]
-    quad_lookup <- list(
+    q <- switch(quad,
       "0" = "1",
       "1" = "2",
       "2" = "3",
       "3" = "4",
-      "4" = "5"
-    )
-    q <- quad_lookup[quad]
+      "4" = "5" )
     if (is.null(start) && is.null(end)) {
       x <- readr::read_csv(paste0("https://barttorvik.com/trank.php?year=", year, "&conyes=1&revquad=0&quad=", q, "&venue=", v, "&type=", t, "&top=", top, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
         dplyr::select(1, 4, 5, 6, 7, 27, 2, 8, 12, 14, 10, 3, 9, 13, 15, 11, 35)
@@ -391,11 +463,37 @@ bart_conf_factors <- function(year = current_season(), venue = "all", type = "al
 #' ‘CUSA’, ‘Horz’, ‘Ivy’, ‘MAAC’, ‘MAC’, ‘MEAC’, ‘MVC’, ‘MWC’, ‘NEC’, ‘OVC’,
 #' ‘P12’, ‘Pat’, ‘SB’, ‘SC’, ‘SEC’, ‘SWAC’, ‘Slnd’, ‘Sum’, ‘WAC’, ‘WCC’}
 #'
-#' Other: \itemize{\item Barthag is the estimation of a team's win probability against
-#' the average Division 1 team on a neutral court. \item `conf_cur_sos` is the
-#' current average Barthag rating of conference opponents. \item `conf_fut_sos`
-#' is the projected average Barthag rating of conference opponents.}
-#'
+#' @returns Returns a tibble with 23 columns:
+#' \describe{
+#'   \item{\code{rk}}{double.}
+#'   \item{\code{team}}{character.}
+#'   \item{\code{seed}}{double.}
+#'   \item{\code{finish}}{character.}
+#'   \item{\code{conf_rec}}{character.}
+#'   \item{\code{adj_oe}}{double.}
+#'   \item{\code{adj_de}}{double.}
+#'   \item{\code{barthag}}{double. The estimation of a team's win probability
+#'   against the average Division 1 team on a neutral court.}
+#'   \item{\code{eff_marg}}{double.}
+#'   \item{\code{con_oe}}{double.}
+#'   \item{\code{con_oe_rk}}{double.}
+#'   \item{\code{con_de}}{double.}
+#'   \item{\code{con_de_rk}}{double.}
+#'   \item{\code{conf_barthag}}{double.}
+#'   \item{\code{proj_rec}}{character.}
+#'   \item{\code{conf_cur_sos}}{double. The current average Barthag rating of
+#'   conference opponents.}
+#'   \item{\code{conf_cur_sos_rk}}{double.}
+#'   \item{\code{conf_fut_sos}}{double. The projected average Barthag rating of
+#'   conference opponents}
+#'   \item{\code{conf_fut_sos_rk}}{double.}
+#'   \item{\code{conf_sos}}{double.}
+#'   \item{\code{conf_sos_rk}}{double.}
+#'   \item{\code{auto_prob}}{double. Probability of winning the conference
+#'   tournament (automatic bid).}
+#'   \item{\code{bid_prob}}{double. Probability of securing a tournament bid
+#'   (auto or at-large)}
+#'}
 #' @param year Defaults to current season (YYYY).
 #' @param conf Indicates conference (see details).
 #' @import dplyr
@@ -409,7 +507,7 @@ bart_conf_factors <- function(year = current_season(), venue = "all", type = "al
 #' @importFrom tidyr separate
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_conf_stats(year=2022, conf='ACC')}
+#' bart_conf_stats(year=2022, conf='ACC')
 #'
 #' @export
 bart_conf_stats <- function(year = current_season(), conf = NULL) {
@@ -467,11 +565,27 @@ bart_conf_stats <- function(year = current_season(), conf = NULL) {
 #' Returns T-Rank ratings and efficiency metrics from the morning of the
 #' specified day. Data goes back to 2014-15.
 #'
-#' Barthag is the estimation of a team's win probability against the average
-#' Division 1 team on a neutral court. WAB (wins above bubble) is the number of
-#' wins attained above or below the expected total from a bubble team against an
-#' analogous schedule.
-#'
+#' @returns Returns a tibble with 16 columns:
+#' #' \describe{
+#'   \item{\code{rk}}{double.}
+#'   \item{\code{team}}{character.}
+#'   \item{\code{conf}}{character.}
+#'   \item{\code{rec}}{character.}
+#'   \item{\code{adj_o}}{double.}
+#'   \item{\code{adj_o_rk}}{double.}
+#'   \item{\code{adj_d}}{double.}
+#'   \item{\code{adj_d_rk}}{double.}
+#'   \item{\code{barthag}}{double. The estimation of a team's win probability
+#'   against the average Division 1 team on a neutral court.}
+#'   \item{\code{proj_rec}}{character.}
+#'   \item{\code{proj_conf_rec}}{character.}
+#'   \item{\code{wab}}{double. The number of wins above or below the expected
+#'   total from a bubble team against the same schedule.}
+#'   \item{\code{wab_rk}}{double.}
+#'   \item{\code{cur_rk}}{double.}
+#'   \item{\code{change}}{double.}
+#'   \item{\code{date}}{double.}
+#' }
 #' @param date Date to pull ratings (YYYYMMDD).
 #' @import dplyr
 #' @import lubridate
@@ -482,7 +596,7 @@ bart_conf_stats <- function(year = current_season(), conf = NULL) {
 #' @importFrom purrr pluck
 #' @importFrom magrittr %>%
 #' @examples
-#' \dontrun{bart_archive('20220113')}
+#' bart_archive('20220113')
 #' @export
 bart_archive <- function(date) {
   suppressWarnings({

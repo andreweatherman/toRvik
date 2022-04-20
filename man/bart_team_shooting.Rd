@@ -9,6 +9,31 @@ bart_team_shooting(year = current_season())
 \arguments{
 \item{year}{Defaults to current season (YYYY).}
 }
+\value{
+Returns a tibble with 20 columns:
+\describe{
+  \item{\code{team}}{character.}
+  \item{\code{seed}}{double.}
+  \item{\code{conf}}{character.}
+  \item{\code{dunk_fg}}{character.}
+  \item{\code{dunk_share}}{double.}
+  \item{\code{dunk_fg_d}}{character.}
+  \item{\code{dunk_share_d}}{double.}
+  \item{\code{close_fg}}{character.}
+  \item{\code{close_share}}{double.}
+  \item{\code{close_fg_d}}{character.}
+  \item{\code{close_share_d}}{double.}
+  \item{\code{far_fg}}{character.}
+  \item{\code{far_share}}{double.}
+  \item{\code{far_fg_d}}{character.}
+  \item{\code{far_share_d}}{double.}
+  \item{\code{three_fg}}{character.}
+  \item{\code{three_share}}{double.}
+  \item{\code{three_fg_d}}{character.}
+  \item{\code{three_share_d}}{double.}
+  \item{\code{year}}{double.}
+}
+}
 \description{
 Returns team shooting totals and shares by shot location. Data returns back
 to 2010.
@@ -18,5 +43,5 @@ to 2010.
 category.
 }
 \examples{
-\dontrun{bart_team_shooting(year=2019)}
+bart_team_shooting(year=2019)
 }

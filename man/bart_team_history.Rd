@@ -9,6 +9,34 @@ bart_team_history(team)
 \arguments{
 \item{team}{Indicates team to return.}
 }
+\value{
+Returns a tibble with 23 columns:
+\describe{
+  \item{\code{year}}{double.}
+  \item{\code{t_rk}}{double.}
+  \item{\code{coach}}{character.}
+  \item{\code{seed}}{double.}
+  \item{\code{finish}}{character.}
+  \item{\code{conf}}{character.}
+  \item{\code{ov_rec}}{character.}
+  \item{\code{conf_rec}}{character.}
+  \item{\code{adj_o}}{double.}
+  \item{\code{adj_d}}{double.}
+  \item{\code{efg_o}}{double.}
+  \item{\code{efg_d}}{double.}
+  \item{\code{to_percent}}{double.}
+  \item{\code{tod_percent}}{double.}
+  \item{\code{or_percent}}{double.}
+  \item{\code{dr_percent}}{double.}
+  \item{\code{ftr}}{double.}
+  \item{\code{ftrd}}{double.}
+  \item{\code{ft_percent}}{double.}
+  \item{\code{two_pct}}{double.}
+  \item{\code{two_pct_d}}{double.}
+  \item{\code{three_pct}}{double.}
+  \item{\code{adj_t}}{double.}
+}
+}
 \description{
 Returns efficiency and four factor finish, conference and overall records,
 and basic shooting percentages by year back to 2008.
@@ -19,5 +47,5 @@ names are used where applicable (e.g. 'North Carolina'). For complete list,
 see `team` column of \code{\link{bart_ratings}}.
 }
 \examples{
-\dontrun{bart_team_history(team='Charlotte')}
+bart_team_history(team='Charlotte')
 }

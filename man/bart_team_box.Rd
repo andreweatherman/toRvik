@@ -11,6 +11,9 @@ bart_team_box(year = current_season(), type = "all")
 
 \item{type}{Filters by game type; defaults to `all`.}
 }
+\value{
+Returns a tibble of team box totals and per-game averages
+}
 \description{
 Returns team box totals and per-game averages by game type back to 2008.
 }
@@ -25,5 +28,5 @@ games.} \item{d1}{Games against D-1 teams only.} \item{nond1}{Games involving
 one non-D1 team.} }
 }
 \examples{
-\dontrun{bart_team_box(type='conf')}
+\donttest{bart_team_box(type='conf')}
 }

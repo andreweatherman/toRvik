@@ -9,6 +9,9 @@ bart_game_box(year = current_season())
 \arguments{
 \item{year}{Defaults to current season (YYYY).}
 }
+\value{
+Returns a tibble of box score statistics
+}
 \description{
 Returns box score data by team for all games.
 }
@@ -17,6 +20,6 @@ The home team is coded as `team2`. Neutral site games may contain errors as
 to whom is the home team.
 }
 \examples{
-\dontrun{bart_game_box(year=2022)}
+bart_game_box(year=2022)
 
 }

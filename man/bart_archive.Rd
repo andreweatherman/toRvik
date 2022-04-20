@@ -9,16 +9,33 @@ bart_archive(date)
 \arguments{
 \item{date}{Date to pull ratings (YYYYMMDD).}
 }
+\value{
+Returns a tibble with 16 columns:
+#' \describe{
+  \item{\code{rk}}{double.}
+  \item{\code{team}}{character.}
+  \item{\code{conf}}{character.}
+  \item{\code{rec}}{character.}
+  \item{\code{adj_o}}{double.}
+  \item{\code{adj_o_rk}}{double.}
+  \item{\code{adj_d}}{double.}
+  \item{\code{adj_d_rk}}{double.}
+  \item{\code{barthag}}{double. The estimation of a team's win probability
+  against the average Division 1 team on a neutral court.}
+  \item{\code{proj_rec}}{character.}
+  \item{\code{proj_conf_rec}}{character.}
+  \item{\code{wab}}{double. The number of wins above or below the expected
+  total from a bubble team against the same schedule.}
+  \item{\code{wab_rk}}{double.}
+  \item{\code{cur_rk}}{double.}
+  \item{\code{change}}{double.}
+  \item{\code{date}}{double.}
+}
+}
 \description{
 Returns T-Rank ratings and efficiency metrics from the morning of the
 specified day. Data goes back to 2014-15.
 }
-\details{
-Barthag is the estimation of a team's win probability against the average
-Division 1 team on a neutral court. WAB (wins above bubble) is the number of
-wins attained above or below the expected total from a bubble team against an
-analogous schedule.
-}
 \examples{
-\dontrun{bart_archive('20220113')}
+bart_archive('20220113')
 }

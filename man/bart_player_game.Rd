@@ -4,12 +4,16 @@
 \alias{bart_player_game}
 \title{Get Player Game Stats}
 \usage{
-bart_player_game(year = current_season(), stat = NULL)
+bart_player_game(year = current_season(), stat = "all")
 }
 \arguments{
 \item{year}{Defaults to current season (YYYY).}
 
 \item{stat}{Indicates statistical split (see details).}
+}
+\value{
+Returns a tibble with the number of columns dependent on the value
+  supplied to the `stat` argument.
 }
 \description{
 Returns detailed game-by-game player statistics on a variety of splits.
@@ -22,6 +26,6 @@ Returns detailed game-by-game player statistics on a variety of splits.
 statistics; sorts by recruiting rank.}}
 }
 \examples{
-\dontrun{bart_player_game(year=2022, stat='box')}
+\donttest{bart_player_game(year=2022, stat='box')}
 
 }

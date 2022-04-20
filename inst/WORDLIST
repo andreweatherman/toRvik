@@ -3,6 +3,7 @@ AE’
 ASun’
 Amer’
 BE’
+BPI
 BPMs
 BSky’
 BSth’
@@ -21,6 +22,7 @@ Horz’
 Ivy’
 KenPom
 KenPom's
+KPI
 MAAC’
 MAC’
 MEAC’
@@ -29,6 +31,7 @@ MWC’
 NEC’
 OVC’
 PAKE
+PASE
 Pat’
 SB’
 SC’
@@ -36,6 +39,7 @@ SEC’
 SWAC’
 Saiem
 Slnd’
+SOR
 Sum’
 WAB
 WAC’
@@ -48,6 +52,7 @@ conf
 marg
 nc
 ncaa
+pkgdown
 ppg
 pre
 saftey
@@ -56,5 +61,6 @@ sos
 splis
 sr
 tibble
+Torvik
 unrecruited
 ’

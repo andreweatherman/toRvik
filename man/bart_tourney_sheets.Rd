@@ -9,11 +9,34 @@ bart_tourney_sheets(year = current_season())
 \arguments{
 \item{year}{Defaults to current season (YYYY).}
 }
+\value{
+Returns a tibble with 16 columns:
+\describe{
+  \item{\code{team}}{character.}
+  \item{\code{seed}}{double.}
+  \item{\code{net}}{double.}
+  \item{\code{kpi}}{double.}
+  \item{\code{sor}}{double.}
+  \item{\code{res_avg}}{double. Average of resume rankings (NET, KPI, and
+  SOR).}
+  \item{\code{bpi}}{double.}
+  \item{\code{kp}}{double.}
+  \item{\code{sag}}{double.}
+  \item{\code{qual_avg}}{double. Average of quality rankings (BPI, KP, and
+  Sag).}
+  \item{\code{q1a}}{character.}
+  \item{\code{q1}}{character.}
+  \item{\code{q2}}{character.}
+  \item{\code{q1_2}}{character.}
+  \item{\code{q3}}{character.}
+  \item{\code{q4}}{character.}
+}
+}
 \description{
 Returns a tibble with similar quality and resume metrics used by the NCAA
 seeding committee. Data runs back to the 2019 tournament.
 }
 \examples{
-\dontrun{bart_tourney_sheets(year=2019)}
+bart_tourney_sheets(year=2019)
 
 }

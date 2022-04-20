@@ -13,6 +13,16 @@ bart_injuryimpact(year = current_season(), team = NULL, player = NULL)
 
 \item{player}{Indicates player to remove.}
 }
+\value{
+Returns a tibble with five columns:
+\describe{
+  \item{\code{situation}}{character.}
+  \item{\code{adj_oe}}{double.}
+  \item{\code{adj_de}}{double.}
+  \item{\code{barthag}}{double.}
+  \item{\code{rk}}{double.}
+  }
+}
 \description{
 Returns estimated adjusted ratings in a one-player injury scenario by team.
 }
@@ -22,6 +32,6 @@ Estimations are experimental and based on
 dubious analysis.'}
 }
 \examples{
-\dontrun{bart_injuryimpact(year=2019, team='Duke', player='Zion Williamson')}
+bart_injuryimpact(year=2019, team='Duke', player='Zion Williamson')
 
 }

@@ -11,6 +11,9 @@ bart_team_schedule(year = current_season(), team = NULL)
 
 \item{team}{Team to return.}
 }
+\value{
+Returns a tibble of game-by-game four factors by team
+}
 \description{
 Returns full team schedule and game-by-game four factor statistics by year
 }
@@ -20,6 +23,6 @@ For a brief explanation of each factor and its computation, please visit
 the average lead or deficit during a game for the team.
 }
 \examples{
-\dontrun{bart_team_schedule(year=2022, team='Duke')}
+bart_team_schedule(year=2022, team='Duke')
 
 }

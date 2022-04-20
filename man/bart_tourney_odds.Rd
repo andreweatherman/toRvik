@@ -11,6 +11,22 @@ bart_tourney_odds(year = current_season(), odds = "current")
 
 \item{odds}{Filters results by odds, defaults to current (see details).}
 }
+\value{
+Returns a tibble with 10 to 11 columns (depending on year input):
+#' \describe{
+  \item{\code{seed}}{double.}
+  \item{\code{region}}{character. Only avaliable for year >= 2022}
+  \item{\code{team}}{character.}
+  \item{\code{conf}}{character.}
+  \item{\code{r64}}{double.}
+  \item{\code{r32}}{double.}
+  \item{\code{s16}}{double.}
+  \item{\code{e8}}{double.}
+  \item{\code{f4}}{double.}
+  \item{\code{f2}}{double.}
+  \item{\code{champ}}{double.}
+}
+}
 \description{
 Returns a tibble with round-to-round tournament probabilities. Data runs back
 to the 2018 tournament; region is only avaliable for the 2022 tournament.
@@ -22,6 +38,6 @@ adjusted odds over the last ten games} \item{t100}{Returns odds against top
 100 opponents.}}
 }
 \examples{
-\dontrun{bart_tourney_odds(year=2022, odds='pre')}
+bart_tourney_odds(year=2022, odds='pre')
 
 }

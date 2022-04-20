@@ -9,6 +9,9 @@ bart_coach(coach)
 \arguments{
 \item{coach}{Coach to return.}
 }
+\value{
+Returns a list of tibbles: 'Coach History' and 'Recruiting History'
+}
 \description{
 Returns coaching history with four factor and tournament finish (tibble one)
 along with notable recruits (tibble two).
@@ -20,6 +23,6 @@ scale of recruiting ranking, where 100 is a consensus #1 recruit and 0 is
 unrecruited.
 }
 \examples{
-\dontrun{bart_coach('Mike Krzyzewski')}
+bart_coach('Mike Krzyzewski')
 
 }

@@ -4,7 +4,12 @@
 \alias{bart_poy}
 \title{Get Player of the Year Ratings}
 \usage{
-bart_poy(year = current_season(), conf = "All", class = NULL, conf_only = F)
+bart_poy(
+  year = current_season(),
+  conf = "All",
+  class = NULL,
+  conf_only = FALSE
+)
 }
 \arguments{
 \item{year}{Defaults to current season (YYYY).}
@@ -17,16 +22,25 @@ no filter.}
 \item{conf_only}{Logical. Filters data by conference-only play; defaults to
 `FALSE`.}
 }
+\value{
+Returns a tibble with four columns:
+\describe{
+  \item{\code{rk}}{integer.}
+  \item{\code{player}}{character.}
+  \item{\code{team}}{character.}
+  \item{\code{score}}{double.}
+  }
+}
 \description{
 Returns Barttorvik Player of the Year ratings on a variety of splits.
 }
 \details{
-Accepted conference abbreviations for the `conf` argument are: \itemize{\item ‘A10’, ‘ACC’,
-‘AE’, ‘ASun’, ‘Amer’, ‘B10’, ‘B12’, ‘BE’, ‘BSky’, ‘BSth’, ‘BW’, ‘CAA’,
-‘CUSA’, ‘Horz’, ‘Ivy’, ‘MAAC’, ‘MAC’, ‘MEAC’, ‘MVC’, ‘MWC’, ‘NEC’, ‘OVC’,
-‘P12’, ‘Pat’, ‘SB’, ‘SC’, ‘SEC’, ‘SWAC’, ‘Slnd’, ‘Sum’, ‘WAC’, ‘WCC’ }
+Accepted conference abbreviations for the `conf` argument are: \itemize{\item
+‘A10’, ‘ACC’, ‘AE’, ‘ASun’, ‘Amer’, ‘B10’, ‘B12’, ‘BE’, ‘BSky’, ‘BSth’, ‘BW’,
+‘CAA’, ‘CUSA’, ‘Horz’, ‘Ivy’, ‘MAAC’, ‘MAC’, ‘MEAC’, ‘MVC’, ‘MWC’, ‘NEC’,
+‘OVC’, ‘P12’, ‘Pat’, ‘SB’, ‘SC’, ‘SEC’, ‘SWAC’, ‘Slnd’, ‘Sum’, ‘WAC’, ‘WCC’ }
 }
 \examples{
-\dontrun{bart_poy(year=2019, class='fr')}
+bart_poy(year=2019, class='fr')
 
 }

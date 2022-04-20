@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">toRvik</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get T-Rank Ratings</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/rating.R" class="external-link"><code>R/rating.R</code></a></small>
       <div class="d-none name"><code>bart_ratings.Rd</code></div>
     </div>
 
@@ -88,23 +88,94 @@
 <dd><p>Defaults to current season (YYYY).</p></dd>
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>Returns a tibble with 19 columns:</p><dl><dt><code>team</code></dt>
+<dd><p>character.</p></dd>
+
+  <dt><code>conf</code></dt>
+<dd><p>character.</p></dd>
+
+  <dt><code>barthag</code></dt>
+<dd><p>double. The estimation of a team's win probability
+  against the average Division 1 team on a neutral court.</p></dd>
+
+  <dt><code>barthag_rk</code></dt>
+<dd><p>integer.</p></dd>
+
+  <dt><code>adj_o</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>adj_o_rk</code></dt>
+<dd><p>integer.</p></dd>
+
+  <dt><code>adj_d</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>adj_d_rk</code></dt>
+<dd><p>integer.</p></dd>
+
+  <dt><code>adj_t</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>adj_t_rk</code></dt>
+<dd><p>integer.</p></dd>
+
+  <dt><code>wab</code></dt>
+<dd><p>double. The number of wins above or below the expected
+  total from a bubble team against the same schedule.</p></dd>
+
+  <dt><code>nc_elite_sos</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>nc_fut_sos</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>nc_cur_sos</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>ov_elite_sos</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>ov_fut_sos</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>ov_cur_sos</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>seed</code></dt>
+<dd><p>integer.</p></dd>
+
+  <dt><code>year</code></dt>
+<dd><p>double.</p></dd>
+
+
+</dl></div>
+    <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     
-<ul><li><p>WAB (wins above bubble)
-is the number of wins attained above or below the expected total from a
-bubble team against an analogous schedule.</p></li>
-<li><p>`x_elite_sos` is the
-percentage of games that an 'elite' team would project to lose against this
-team's non-conference or overall schedule.</p></li>
-<li><p>`x_cur_sos` is the current
-average Barthag rating of opponents.</p></li>
-<li><p>`x_fut_sos` is the projected
-average Barthag rating of opponents.</p></li>
+<ul><li><p>`x_cur_sos` is the current average Barthag rating of opponents.</p></li>
+<li><p>`x_fut_sos` is the projected average Barthag rating of opponents.</p></li>
 </ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu">bart_ratings</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">bart_ratings</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 358 × 19</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    team    conf  barthag barthag_rk adj_o adj_o_rk adj_d adj_d_rk adj_t adj_t_rk</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Gonzaga WCC     0.966          1  120.        4  89.9        9  72.6        5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Houston Amer    0.959          2  117.       10  88.5        6  63.7      336</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Kansas  B12     0.958          3  120.        5  91.3       13  69.1       71</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Texas … B12     0.951          4  111.       41  85.4        1  66.3      223</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Baylor  B12     0.949          5  118.        8  91.3       14  67.6      149</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Duke    ACC     0.944          6  123.        1  96.0       53  67.4      161</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Tennes… SEC     0.944          7  111.       34  87.1        3  67.4      164</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Villan… BE      0.935          8  117.        9  93.0       26  62.2      350</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Arizona P12     0.934          9  118.        7  93.7       35  72.3        9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> UCLA    P12     0.932         10  116.       12  92.2       20  65.4      274</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 348 more rows, and 9 more variables: wab &lt;dbl&gt;, nc_elite_sos &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   nc_fut_sos &lt;dbl&gt;, nc_cur_sos &lt;dbl&gt;, ov_elite_sos &lt;dbl&gt;, ov_fut_sos &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ov_cur_sos &lt;dbl&gt;, seed &lt;int&gt;, year &lt;dbl&gt;</span></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>

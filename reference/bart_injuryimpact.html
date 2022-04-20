@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">toRvik</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get Estimated Injury Impact</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/player.R" class="external-link"><code>R/player.R</code></a></small>
       <div class="d-none name"><code>bart_injuryimpact.Rd</code></div>
     </div>
 
@@ -92,6 +92,25 @@
 <dd><p>Indicates player to remove.</p></dd>
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>Returns a tibble with five columns:</p><dl><dt><code>situation</code></dt>
+<dd><p>character.</p></dd>
+
+  <dt><code>adj_oe</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>adj_de</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>barthag</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>rk</code></dt>
+<dd><p>double.</p></dd>
+
+  
+</dl></div>
+    <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Estimations are experimental and based on
 <a href="https://twitter.com/totally_t_bomb/status/973731719479201792" class="external-link">'highly
@@ -100,7 +119,12 @@ dubious analysis.'</a></p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu">bart_injuryimpact</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2019</span>, team<span class="op">=</span><span class="st">'Duke'</span>, player<span class="op">=</span><span class="st">'Zion Williamson'</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">bart_injuryimpact</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2019</span>, team<span class="op">=</span><span class="st">'Duke'</span>, player<span class="op">=</span><span class="st">'Zion Williamson'</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   situation            adj_oe adj_de barthag    rk</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> With Zion Williamson   120.   90.4   0.962     5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Without                115.   94.7   0.905    17</span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>

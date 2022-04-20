@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">toRvik</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,22 +69,42 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      
+      <small>Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.1" id="torvik-101">toRvik 1.0.1<a class="anchor" aria-label="anchor" href="#torvik-101"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.0.2" id="torvik-102">toRvik 1.0.2<a class="anchor" aria-label="anchor" href="#torvik-102"></a></h2>
 <div class="section level5">
-<h5 id="cran-submission-pending-1-0-1">CRAN Submission (pending)<a class="anchor" aria-label="anchor" href="#cran-submission-pending-1-0-1"></a></h5>
-<p>Updates:</p>
-<ul><li>Fixed <a href="https://github.com/andreweatherman/toRvik/issues/1" class="external-link">package-breaking user agent issue</a> that threw HTTP 403 error on Windows machines by using <code>withr</code>
+<h5 id="cran-submission-pending-1-0-2">CRAN Submission (pending)<a class="anchor" aria-label="anchor" href="#cran-submission-pending-1-0-2"></a></h5>
+<p><strong>Addressed CRAN submission comments:</strong></p>
+<ul><li>Omitted ‘Functions’ from package title</li>
+<li>Provided links to utilized web services in DESCRIPTION</li>
+<li>Changed logical variables package-wide from ‘T’ and ‘F’ to ‘TRUE’ and ‘FALSE’</li>
+<li>Added <code>\values{}</code> field to function documentation</li>
+</ul><p><strong>Code Updates:</strong></p>
+<ul><li>Added ‘all’ argument (new default) to stat input in <code>bart_player_season</code>, <code>bart_player_game</code>, and <code>bart_transfers</code>
 </li>
-<li>Fixed <a href="https://github.com/andreweatherman/toRvik/issues/3" class="external-link">function-breaking file issue</a> that caused <code>bart_player_game</code> to fail</li>
-<li>Added <a href="https://www.torvik.dev/reference/bart_team_box.html" class="external-link"><code>bart_team_box</code></a> to return team box statistics and per-game averages<br></li>
-<li>Added argument to filter <code>bart_transfers</code> by <a href="https://github.com/andreweatherman/toRvik/issues/2" class="external-link">active portal players and committed ones</a>
+<li>Transitioned to using <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/switch" class="external-link"><code>switch()</code></a> for lookup values in several functions</li>
+<li>Moved examples with &gt;5s run time to <code>\donttest{}</code> to keep output present on site while passing CRAN checks</li>
+<li>Added WAB (wins above bubble) column to <code>bart_factors</code> to keep consistent with output from analogous <code>bart_conf_factors</code>
 </li>
+<li>Switched neutral variable in <code>bart_season_schedule</code> to logical type</li>
 </ul></div>
 </div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.1" id="torvik-101">toRvik 1.0.1<a class="anchor" aria-label="anchor" href="#torvik-101"></a></h2>
+<p><strong>Initial CRAN submission rejected; fixed with 1.0.2</strong></p>
+<p><strong>Patches:</strong></p>
+<ul><li>Fixed <a href="https://github.com/andreweatherman/toRvik/issues/1" class="external-link">package-breaking user agent issue</a> that threw HTTP 403 error on Windows machines by using <a href="https://withr.r-lib.org" class="external-link"><code>withr</code></a>
+</li>
+<li>Fixed <a href="https://github.com/andreweatherman/toRvik/issues/3" class="external-link">function-breaking file issue</a> that caused <code>bart_player_game</code> to fail</li>
+</ul><p><strong>Code Updates:</strong></p>
+<ul><li>Added <a href="https://www.torvik.dev/reference/bart_team_box.html" class="external-link"><code>bart_team_box</code></a> to return team box statistics and per-game averages<br></li>
+<li>Added argument to filter <code>bart_transfers</code> by <a href="https://github.com/andreweatherman/toRvik/issues/2" class="external-link">active portal players and committed ones</a>
+</li>
+</ul><p><strong>Other:</strong></p>
+<ul><li>Changed pkgdown site colors</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.0" id="torvik-100"><strong>toRvik 1.0.0</strong><a class="anchor" aria-label="anchor" href="#torvik-100"></a></h2>
 <p>Initial release.</p>

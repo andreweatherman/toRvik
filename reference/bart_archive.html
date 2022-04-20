@@ -12,7 +12,7 @@ specified day. Data goes back to 2014-15."><meta property="og:image" content="ht
     
     <a class="navbar-brand me-2" href="../index.html">toRvik</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,7 +71,7 @@ specified day. Data goes back to 2014-15."><meta property="og:image" content="ht
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get T-Rank Archive Ratings</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/rating.R" class="external-link"><code>R/rating.R</code></a></small>
       <div class="d-none name"><code>bart_archive.Rd</code></div>
     </div>
 
@@ -91,16 +91,79 @@ specified day. Data goes back to 2014-15.</p>
 <dd><p>Date to pull ratings (YYYYMMDD).</p></dd>
 </dl></div>
     <div class="section level2">
-    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Barthag is the estimation of a team's win probability against the average
-Division 1 team on a neutral court. WAB (wins above bubble) is the number of
-wins attained above or below the expected total from a bubble team against an
-analogous schedule.</p>
-    </div>
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>Returns a tibble with 16 columns:
+#'</p><dl><dt><code>rk</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>team</code></dt>
+<dd><p>character.</p></dd>
+
+  <dt><code>conf</code></dt>
+<dd><p>character.</p></dd>
+
+  <dt><code>rec</code></dt>
+<dd><p>character.</p></dd>
+
+  <dt><code>adj_o</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>adj_o_rk</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>adj_d</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>adj_d_rk</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>barthag</code></dt>
+<dd><p>double. The estimation of a team's win probability
+  against the average Division 1 team on a neutral court.</p></dd>
+
+  <dt><code>proj_rec</code></dt>
+<dd><p>character.</p></dd>
+
+  <dt><code>proj_conf_rec</code></dt>
+<dd><p>character.</p></dd>
+
+  <dt><code>wab</code></dt>
+<dd><p>double. The number of wins above or below the expected
+  total from a bubble team against the same schedule.</p></dd>
+
+  <dt><code>wab_rk</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>cur_rk</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>change</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>date</code></dt>
+<dd><p>double.</p></dd>
+
+
+</dl></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu">bart_archive</span><span class="op">(</span><span class="st">'20220113'</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">bart_archive</span><span class="op">(</span><span class="st">'20220113'</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 358 × 16</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       rk team      conf  rec   adj_o adj_o_rk adj_d adj_d_rk barthag proj_rec</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     1 Gonzaga   WCC   13-2   124.        2  93.3       20   0.964 26-3    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     2 Baylor    B12   15-1   121.        5  91.3       13   0.962 26-5    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     3 Houston   Amer  14-2   120.        6  91         11   0.961 27-4    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     4 Auburn    SEC   15-1   115.       20  89.3        8   0.947 27-4    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     5 LSU       SEC   15-1   106.      117  82.4        1   0.946 27-4    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     6 Arizona   P12   13-1   117.       15  91         12   0.946 27-4    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     7 Villanova BE    12-4   117.       13  91.6       16   0.942 24-6    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     8 Kansas    B12   13-2   122.        4  96.5       50   0.938 24-7    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     9 Purdue    B10   13-2   125         1  98.9       94   0.937 24-7    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>    10 Duke      ACC   13-2   117.       11  93.8       23   0.926 26-5    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 348 more rows, and 6 more variables: proj_conf_rec &lt;chr&gt;, wab &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   wab_rk &lt;dbl&gt;, cur_rk &lt;dbl&gt;, change &lt;dbl&gt;, date &lt;date&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

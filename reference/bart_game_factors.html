@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">toRvik</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get Game Four Factors</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/game.R" class="external-link"><code>R/game.R</code></a></small>
       <div class="d-none name"><code>bart_game_factors.Rd</code></div>
     </div>
 
@@ -88,6 +88,10 @@
 <dd><p>Defaults to current season (YYYY).</p></dd>
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>Returns a tibble of four factor statistics</p>
+    </div>
+    <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>For a brief explanation of each factor and its computation, please visit
 <a href="https://kenpom.com/blog/four-factors/" class="external-link">KenPom's blog</a>. `avg_marg` and
@@ -96,7 +100,25 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu">bart_game_factors</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">bart_game_factors</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10,950 × 28</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    date       type  team             conf  opp    opp_conf loc   result avg_marg</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2022-04-04 post  Kansas           B12   North… ACC      N     W, 72…  -<span style="color: #BB0000;">2.09</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2022-04-04 post  North Carolina   ACC   Kansas B12      N     L, 72…   2.09  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2022-04-02 post  Duke             ACC   North… ACC      N     L, 81…   0.062<span style="text-decoration: underline;">1</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2022-04-02 post  North Carolina   ACC   Duke   ACC      N     W, 81…  -<span style="color: #BB0000;">0.062</span><span style="color: #BB0000; text-decoration: underline;">1</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2022-04-02 post  Kansas           B12   Villa… BE       N     W, 81…  10.9   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2022-04-02 post  Villanova        BE    Kansas B12      N     L, 81… -<span style="color: #BB0000;">10.9</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2022-04-01 post  Coastal Carolina SB    Fresn… MWC      H     L, 85… -<span style="color: #BB0000;">13.2</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2022-04-01 post  Fresno St.       MWC   Coast… SB       A     W, 85…  13.2   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2022-03-31 post  Texas A&amp;M        SEC   Xavier BE       N     L, 73…  -<span style="color: #BB0000;">0.024</span><span style="color: #BB0000; text-decoration: underline;">6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2022-03-31 post  Xavier           BE    Texas… SEC      N     W, 73…   0.024<span style="text-decoration: underline;">6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 10,940 more rows, and 19 more variables: opp_avg_marg &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   adj_o &lt;dbl&gt;, adj_d &lt;dbl&gt;, off_ppp &lt;dbl&gt;, off_efg &lt;dbl&gt;, off_to &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   off_or &lt;dbl&gt;, off_ftr &lt;dbl&gt;, def_ppp &lt;dbl&gt;, def_efg &lt;dbl&gt;, def_to &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   def_or &lt;dbl&gt;, def_ftr &lt;dbl&gt;, game_score &lt;dbl&gt;, season &lt;dbl&gt;, tempo &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   game_id &lt;chr&gt;, coach &lt;chr&gt;, opp_coach &lt;chr&gt;</span></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>

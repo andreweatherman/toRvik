@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">toRvik</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get Full Season Schedule</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/game.R" class="external-link"><code>R/game.R</code></a></small>
       <div class="d-none name"><code>bart_season_schedule.Rd</code></div>
     </div>
 
@@ -86,6 +86,28 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>year</dt>
 <dd><p>Defaults to current season (YYYY).</p></dd>
+</dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>Returns a tibble with six columns:</p><dl><dt><code>date</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>type</code></dt>
+<dd><p>character. See details.</p></dd>
+
+  <dt><code>neutral</code></dt>
+<dd><p>logical.</p></dd>
+
+  <dt><code>home</code></dt>
+<dd><p>character.</p></dd>
+
+  <dt><code>away</code></dt>
+<dd><p>character.</p></dd>
+
+  <dt><code>game_id</code></dt>
+<dd><p>character.</p></dd>
+
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -105,7 +127,21 @@ games.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu">bart_season_schedule</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">bart_season_schedule</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5,968 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    date       type  neutral home               away                game_id      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2021-11-09 nc    FALSE   Creighton          Arkansas Pine Bluff Arkansas Pin…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2021-11-09 nc    FALSE   Valparaiso         Toledo              ToledoValpar…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2021-11-09 nc    FALSE   Indiana            Eastern Michigan    Eastern Mich…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2021-11-09 nc    FALSE   North Carolina St. Bucknell            BucknellNort…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2021-11-09 nc    FALSE   Missouri           Central Michigan    Central Mich…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2021-11-09 nond1 FALSE   Brown              Salve Regina        Salve Regina…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2021-11-09 nond1 FALSE   Wright St.         Lake Erie           Lake ErieWri…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2021-11-09 nc    FALSE   New Mexico St.     UC Irvine           UC IrvineNew…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2021-11-09 nond1 FALSE   Furman             North Greenville    North Greenv…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2021-11-09 nc    FALSE   UAB                UNC Asheville       UNC Ashevill…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 5,958 more rows</span></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>

@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">toRvik</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get Head Coach Changes</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/coach.R" class="external-link"><code>R/coach.R</code></a></small>
       <div class="d-none name"><code>bart_coach_change.Rd</code></div>
     </div>
 
@@ -87,10 +87,40 @@
     <dl><dt>year</dt>
 <dd><p>Defaults to current season (YYYY).</p></dd>
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>Returns a tibble with four columns:</p><dl><dt><code>team</code></dt>
+<dd><p>character.</p></dd>
+
+  <dt><code>conf</code></dt>
+<dd><p>character.</p></dd>
+
+  <dt><code>old_coach</code></dt>
+<dd><p>character.</p></dd>
+
+  <dt><code>new_coach</code></dt>
+<dd><p>character.</p></dd>
+
+
+</dl></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu">bart_coach_change</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2015</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">bart_coach_change</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2015</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 49 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    team                  conf  old_coach       new_coach     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Appalachian St.       SB    Jason Capel     Jim Fox       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Auburn                SEC   Tony Barbee     Bruce Pearl   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Boston College        ACC   Steve Donahue   Jim Christian </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Bowling Green         MAC   Louis Orr       Chris Jans    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Butler                BE    Brandon Miller  Chris Holtmann</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> California            P12   Mike Montgomery Cuonzo Martin </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Central Arkansas      Slnd  Clarence Finley Russ Pennell  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Charlotte             CUSA  Alan Major      Ryan Odom     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> College of Charleston CAA   Doug Wojcik     Earl Grant    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Coppin St.            MEAC  Fang Mitchell   Michael Grant </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 39 more rows</span></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>

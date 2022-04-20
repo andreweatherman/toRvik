@@ -12,7 +12,7 @@ to the 2018 tournament; region is only avaliable for the 2022 tournament."><meta
     
     <a class="navbar-brand me-2" href="../index.html">toRvik</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,7 +71,7 @@ to the 2018 tournament; region is only avaliable for the 2022 tournament."><meta
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get NCAA Tournament Odds</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/tournament.R" class="external-link"><code>R/tournament.R</code></a></small>
       <div class="d-none name"><code>bart_tourney_odds.Rd</code></div>
     </div>
 
@@ -93,6 +93,44 @@ to the 2018 tournament; region is only avaliable for the 2022 tournament.</p>
 <dd><p>Filters results by odds, defaults to current (see details).</p></dd>
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>Returns a tibble with 10 to 11 columns (depending on year input):
+#'</p><dl><dt><code>seed</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>region</code></dt>
+<dd><p>character. Only avaliable for year &gt;= 2022</p></dd>
+
+  <dt><code>team</code></dt>
+<dd><p>character.</p></dd>
+
+  <dt><code>conf</code></dt>
+<dd><p>character.</p></dd>
+
+  <dt><code>r64</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>r32</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>s16</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>e8</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>f4</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>f2</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>champ</code></dt>
+<dd><p>double.</p></dd>
+
+
+</dl></div>
+    <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p><code>odds</code> splits the data by four variables:</p><dl><dt>current</dt>
 <dd><p>Returns
@@ -110,7 +148,21 @@ adjusted odds over the last ten games</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu">bart_tourney_odds</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span>, odds<span class="op">=</span><span class="st">'pre'</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">bart_tourney_odds</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span>, odds<span class="op">=</span><span class="st">'pre'</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 68 × 11</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     seed region  team       conf    r64   r32   s16    e8    f4    f2 champ</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     1 West    Gonzaga    WCC     100  96.6  81.9  69.6  52    38.5  27.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     5 South   Houston    Amer    100  84.5  62.6  40.6  26.5  16.9   8.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     1 Midwest Kansas     B12     100  96.3  73.7  48.7  32.5  17.7   8.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     1 East    Baylor     B12     100  94.9  72.5  42.9  25.2  11.1   5.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     1 South   Arizona    P12     100  94.8  72.7  37.3  21.2  12     5.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     3 South   Tennessee  SEC     100  92.3  67.5  41    20.8  11.6   5.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     3 West    Texas Tech B12     100  92.6  68.4  40.9  17.1   9.5   5  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     2 Midwest Auburn     SEC     100  91.5  70    48.4  24.8  11.7   4.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     2 East    Kentucky   SEC     100  90.2  62.7  36.4  19.8   8.2   4.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     2 West    Duke       ACC     100  94.1  69.8  38.9  15.5   8.2   4  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 58 more rows</span></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>

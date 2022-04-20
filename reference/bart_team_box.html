@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">toRvik</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get Team Box Stats</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/team.R" class="external-link"><code>R/team.R</code></a></small>
       <div class="d-none name"><code>bart_team_box.Rd</code></div>
     </div>
 
@@ -89,6 +89,10 @@
 <dt>type</dt>
 <dd><p>Filters by game type; defaults to `all`.</p></dd>
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>Returns a tibble of team box totals and per-game averages</p>
+    </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Columns ending in 'pg' indicate a per-game average. Unless specified by
@@ -113,7 +117,23 @@ one non-D1 team.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu">bart_team_box</span><span class="op">(</span>type<span class="op">=</span><span class="st">'conf'</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">bart_team_box</span><span class="op">(</span>type<span class="op">=</span><span class="st">'conf'</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 358 × 27</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    team    ast   blk  dreb   fga   fgm   fta   ftm  oreb    pf   pts   reb   stl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Gonz…   266    83   471   912   480   238   182   121   218  <span style="text-decoration: underline;">1</span>271   592   101</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Sout…   267    49   518  <span style="text-decoration: underline;">1</span>024   562   361   286   106   271  <span style="text-decoration: underline;">1</span>568   624   101</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Oral…   214    77   570  <span style="text-decoration: underline;">1</span>258   594   302   224   191   314  <span style="text-decoration: underline;">1</span>619   761    85</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Tole…   325    65   600  <span style="text-decoration: underline;">1</span>256   626   349   270   202   300  <span style="text-decoration: underline;">1</span>669   802   108</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Sout…   200    49   336   795   383   360   279   115   242  <span style="text-decoration: underline;">1</span>163   451   111</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Brya…   249    68   507  <span style="text-decoration: underline;">1</span>076   483   397   298   213   295  <span style="text-decoration: underline;">1</span>411   720   105</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Ariz…   386   101   588  <span style="text-decoration: underline;">1</span>196   592   424   309   219   319  <span style="text-decoration: underline;">1</span>641   807   121</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Nort…   250    54   543  <span style="text-decoration: underline;">1</span>163   581   367   267   138   362  <span style="text-decoration: underline;">1</span>629   681    88</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Hous…   182    27   334   831   379   368   274   149   289  <span style="text-decoration: underline;">1</span>132   483   127</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> New …   160    28   394   813   388   379   282   121   273  <span style="text-decoration: underline;">1</span>117   515   106</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 348 more rows, and 14 more variables: to &lt;dbl&gt;, tpa &lt;dbl&gt;, tpm &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   fg_pct &lt;dbl&gt;, tp_pct &lt;dbl&gt;, ft_pct &lt;dbl&gt;, rpg &lt;dbl&gt;, apg &lt;dbl&gt;, spg &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bpg &lt;dbl&gt;, tpg &lt;dbl&gt;, fpg &lt;dbl&gt;, ppg &lt;dbl&gt;, games &lt;int&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

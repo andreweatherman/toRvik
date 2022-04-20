@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">toRvik</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get Team Schedule</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/game.R" class="external-link"><code>R/game.R</code></a></small>
       <div class="d-none name"><code>bart_team_schedule.Rd</code></div>
     </div>
 
@@ -90,6 +90,10 @@
 <dd><p>Team to return.</p></dd>
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>Returns a tibble of game-by-game four factors by team</p>
+    </div>
+    <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>For a brief explanation of each factor and its computation, please visit
 <a href="https://kenpom.com/blog/four-factors/" class="external-link">KenPom's blog</a>. `lead_diff` is
@@ -98,7 +102,25 @@ the average lead or deficit during a game for the team.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu">bart_team_schedule</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span>, team<span class="op">=</span><span class="st">'Duke'</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">bart_team_schedule</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span>, team<span class="op">=</span><span class="st">'Duke'</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 39 × 29</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    date       type   team  conf  opp     opp_conf loc   result points opp_points</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2022-04-02 post   Duke  ACC   North … ACC      N     L          77         81</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2022-03-26 post   Duke  ACC   Arkans… SEC      N     W          78         69</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2022-03-24 post   Duke  ACC   Texas … B12      N     W          78         73</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2022-03-20 post   Duke  ACC   Michig… B10      N     W          85         76</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2022-03-18 post   Duke  ACC   Cal St… BW       N     W          78         61</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2022-03-12 conf_t Duke  ACC   Virgin… ACC      N     L          67         82</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2022-03-11 conf_t Duke  ACC   Miami … ACC      N     W          80         76</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2022-03-10 conf_t Duke  ACC   Syracu… ACC      N     W          88         79</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2022-03-05 conf   Duke  ACC   North … ACC      H     L          81         94</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2022-03-01 conf   Duke  ACC   Pittsb… ACC      A     W          86         56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 29 more rows, and 19 more variables: lead_diff &lt;dbl&gt;, adj_o &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   adj_d &lt;dbl&gt;, ppp &lt;dbl&gt;, efg &lt;dbl&gt;, to &lt;dbl&gt;, or &lt;dbl&gt;, ftr &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   def_ppp &lt;dbl&gt;, def_efg &lt;dbl&gt;, def_to &lt;dbl&gt;, def_or &lt;dbl&gt;, def_ftr &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   game_score &lt;dbl&gt;, year &lt;dbl&gt;, poss &lt;dbl&gt;, coach &lt;chr&gt;, opp_coach &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   game_id &lt;chr&gt;</span></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>

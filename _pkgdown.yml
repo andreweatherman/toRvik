@@ -18,8 +18,6 @@ home:
   sidebar:
     structure: [links, license, citation, authors, dev]
   links:
-    - text: Browse source code
-      href: https://github.com/andreweatherman/toRvik
     - text: Report a bug
       href: https://github.com/andreweatherman/toRvik/issues
 navbar:

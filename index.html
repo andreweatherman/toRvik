@@ -70,19 +70,20 @@
     <a class="dropdown-item" href="articles/index.html">Vignettes</a>
   </div>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-updates">Updates</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-updates">
+    <a class="dropdown-item" href="cran102.html">CRAN 1.0.2</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="news/index.html">Changelog</a>
+  </div>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
       <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="nav-link" href="news/index.html">
-    <span class="fas fa fas fa-cloud-check"></span>
-     
-    Changelog
-  </a>
-</li>
 <li class="nav-item">
   <a class="external-link nav-link" href="https://twitter.com/andreweatherman">
     <span class="fab fa fab fa-twitter fa-lg"></span>
@@ -114,13 +115,13 @@
 <div class="section level2">
 <h2 id="package-installation">Package Installation<a class="anchor" aria-label="anchor" href="#package-installation"></a>
 </h2>
-<p>To install toRvik, run the following code inside your R session:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'devtools'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+<p>Install the released version of <code>toRvik</code> from CRAN:</p>
+<pre class="{r}"><code><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"toRvik"</span><span class="op">)</span></code></pre>
+<p>Or install the development version from GitHub with:</p>
+<pre class="{r}"><code><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'devtools'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
   <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'devtools'</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"andreweatherman/toRvik"</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.torvik.dev/" class="external-link">toRvik</a></span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"andreweatherman/toRvik"</span><span class="op">)</span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="package-highlights">Package Highlights<a class="anchor" aria-label="anchor" href="#package-highlights"></a>
@@ -141,100 +142,121 @@
 <p>All <code>toRvik</code> functions fall into one of five categories:</p>
 <ul>
 <li>
-<strong>Rating</strong>, pulling and slicing T-Rank + four factor data</li>
+<strong>Rating</strong>:
+<ul>
+<li>Pulling and slicing T-Rank + four factor data</li>
+</ul>
+</li>
 <li>
-<strong>Game</strong>, pulling team and season schedules + results</li>
+<strong>Game</strong>:
+<ul>
+<li>Pulling team and season schedules + results</li>
+</ul>
+</li>
 <li>
-<strong>Stat</strong>, pulling and slicing player, team, and conference stats</li>
+<strong>Stat</strong>:
+<ul>
+<li>Pulling and slicing player, team, and conference stats</li>
+</ul>
+</li>
 <li>
-<strong>Tournament</strong>, pulling raw and adjusted tournament performance</li>
-<li><strong>Miscellaneous</strong></li>
+<strong>Tournament</strong>:
+<ul>
+<li>Pulling raw and adjusted tournament performance</li>
+</ul>
+</li>
+<li>
+<strong>Miscellaneous</strong>
+<ul>
+<li>Pulling coaching history, player of the year ratings, etc.</li>
+</ul>
+</li>
 </ul>
 <div class="section level3">
 <h3 id="pull-t-rank-ratings">Pull T-Rank ratings:<a class="anchor" aria-label="anchor" href="#pull-t-rank-ratings"></a>
 </h3>
 <p>Calling <code>bart_ratings</code> will return the current T-Rank ranks and ratings.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/bart_ratings.html">bart_ratings</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">## # A tibble: 6 × 19</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co">##   team     conf  barthag barthag_rk adj_o adj_o_rk adj_d adj_d_rk adj_t adj_t_rk</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co">##   &lt;chr&gt;    &lt;chr&gt;   &lt;dbl&gt;      &lt;int&gt; &lt;dbl&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt;</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co">## 1 Gonzaga  WCC     0.966          1  120.        4  89.9        9  72.6        5</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">## 2 Houston  Amer    0.959          2  117.       10  88.5        6  63.7      336</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">## 3 Kansas   B12     0.958          3  120.        5  91.3       13  69.1       71</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">## 4 Texas T… B12     0.951          4  111.       41  85.4        1  66.3      223</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">## 5 Baylor   B12     0.949          5  118.        8  91.3       14  67.6      149</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">## 6 Duke     ACC     0.944          6  123.        1  96.0       53  67.4      161</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">## # … with 9 more variables: wab &lt;dbl&gt;, nc_elite_sos &lt;dbl&gt;, nc_fut_sos &lt;dbl&gt;,</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">## #   nc_cur_sos &lt;dbl&gt;, ov_elite_sos &lt;dbl&gt;, ov_fut_sos &lt;dbl&gt;, ov_cur_sos &lt;dbl&gt;,</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co">## #   seed &lt;int&gt;, year &lt;dbl&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">## # A tibble: 6 × 19</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">##   team     conf  barthag barthag_rk adj_o adj_o_rk adj_d adj_d_rk adj_t adj_t_rk</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">##   &lt;chr&gt;    &lt;chr&gt;   &lt;dbl&gt;      &lt;int&gt; &lt;dbl&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">## 1 Gonzaga  WCC     0.966          1  120.        4  89.9        9  72.6        5</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">## 2 Houston  Amer    0.959          2  117.       10  88.5        6  63.7      336</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">## 3 Kansas   B12     0.958          3  120.        5  91.3       13  69.1       71</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">## 4 Texas T… B12     0.951          4  111.       41  85.4        1  66.3      223</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">## 5 Baylor   B12     0.949          5  118.        8  91.3       14  67.6      149</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">## 6 Duke     ACC     0.944          6  123.        1  96.0       53  67.4      161</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">## # … with 9 more variables: wab &lt;dbl&gt;, nc_elite_sos &lt;dbl&gt;, nc_fut_sos &lt;dbl&gt;,</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="co">## #   nc_cur_sos &lt;dbl&gt;, ov_elite_sos &lt;dbl&gt;, ov_fut_sos &lt;dbl&gt;, ov_cur_sos &lt;dbl&gt;,</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co">## #   seed &lt;int&gt;, year &lt;dbl&gt;</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="pull-team-statistics">Pull team statistics<a class="anchor" aria-label="anchor" href="#pull-team-statistics"></a>
 </h3>
 <p>Calling <code>bart_factors</code> will return four factor stats on a number of splits. To filter by home games, set venue to ‘home.’</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/bart_factors.html">bart_factors</a></span><span class="op">(</span>venue<span class="op">=</span><span class="st">'home'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">## # A tibble: 6 × 21</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co">##   team       conf  barthag rec    wins games adj_t adj_o off_efg off_to off_or</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">##   &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">## 1 Houston    Amer    0.978 16–1     16    17  65.8  116.    54.3   16.5   39.1</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">## 2 Baylor     B12     0.968 15–2     15    17  69.3  118.    55.1   17.6   38.1</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co">## 3 Gonzaga    WCC     0.966 16–0     16    16  73.1  121.    60     15.3   31.8</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co">## 4 Texas Tech B12     0.965 18–0     18    18  68.2  117.    57     19.4   38.3</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co">## 5 Auburn     SEC     0.961 16–0     16    16  72.5  116.    52.6   16.3   32.5</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co">## 6 Tennessee  SEC     0.959 16–0     16    16  68.9  113.    53     18.3   37.5</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="co">## # … with 10 more variables: off_ftr &lt;dbl&gt;, adj_d &lt;dbl&gt;, def_efg &lt;dbl&gt;,</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co">## #   def_to &lt;dbl&gt;, def_or &lt;dbl&gt;, def_ftr &lt;dbl&gt;, year &lt;dbl&gt;, venue &lt;chr&gt;,</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="co">## #   type &lt;chr&gt;, quad &lt;chr&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">## # A tibble: 6 × 21</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">##   team       conf  barthag rec    wins games adj_t adj_o off_efg off_to off_or</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">##   &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">## 1 Houston    Amer    0.978 16–1     16    17  65.8  116.    54.3   16.5   39.1</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">## 2 Baylor     B12     0.968 15–2     15    17  69.3  118.    55.1   17.6   38.1</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">## 3 Gonzaga    WCC     0.966 16–0     16    16  73.1  121.    60     15.3   31.8</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">## 4 Texas Tech B12     0.965 18–0     18    18  68.2  117.    57     19.4   38.3</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">## 5 Auburn     SEC     0.961 16–0     16    16  72.5  116.    52.6   16.3   32.5</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">## 6 Tennessee  SEC     0.959 16–0     16    16  68.9  113.    53     18.3   37.5</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">## # … with 10 more variables: off_ftr &lt;dbl&gt;, adj_d &lt;dbl&gt;, def_efg &lt;dbl&gt;,</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">## #   def_to &lt;dbl&gt;, def_or &lt;dbl&gt;, def_ftr &lt;dbl&gt;, year &lt;dbl&gt;, venue &lt;chr&gt;,</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">## #   type &lt;chr&gt;, quad &lt;chr&gt;</span></span></code></pre></div>
 <p>Calling <code>bart_team_box</code> will return team box totals and per-game averages by game type. To filter by in-conference games, set type to ‘conf.’</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/bart_team_box.html">bart_team_box</a></span><span class="op">(</span>type<span class="op">=</span><span class="st">'conf'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">## # A tibble: 6 × 27</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="co">##   team     ast   blk  dreb   fga   fgm   fta   ftm  oreb    pf   pts   reb   stl</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="co">##   &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="co">## 1 Gonza…   266    83   471   912   480   238   182   121   218  1271   592   101</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co">## 2 South…   267    49   518  1024   562   361   286   106   271  1568   624   101</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="co">## 3 Oral …   214    77   570  1258   594   302   224   191   314  1619   761    85</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="co">## 4 Toledo   325    65   600  1256   626   349   270   202   300  1669   802   108</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="co">## 5 South…   200    49   336   795   383   360   279   115   242  1163   451   111</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="co">## 6 Bryant   249    68   507  1076   483   397   298   213   295  1411   720   105</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="co">## # … with 14 more variables: to &lt;dbl&gt;, tpa &lt;dbl&gt;, tpm &lt;dbl&gt;, fg_pct &lt;dbl&gt;,</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="co">## #   tp_pct &lt;dbl&gt;, ft_pct &lt;dbl&gt;, rpg &lt;dbl&gt;, apg &lt;dbl&gt;, spg &lt;dbl&gt;, bpg &lt;dbl&gt;,</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="co">## #   tpg &lt;dbl&gt;, fpg &lt;dbl&gt;, ppg &lt;dbl&gt;, games &lt;int&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">## # A tibble: 6 × 27</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co">##   team     ast   blk  dreb   fga   fgm   fta   ftm  oreb    pf   pts   reb   stl</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co">##   &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">## 1 Gonza…   266    83   471   912   480   238   182   121   218  1271   592   101</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">## 2 South…   267    49   518  1024   562   361   286   106   271  1568   624   101</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">## 3 Oral …   214    77   570  1258   594   302   224   191   314  1619   761    85</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">## 4 Toledo   325    65   600  1256   626   349   270   202   300  1669   802   108</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">## 5 South…   200    49   336   795   383   360   279   115   242  1163   451   111</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">## 6 Bryant   249    68   507  1076   483   397   298   213   295  1411   720   105</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co">## # … with 14 more variables: to &lt;dbl&gt;, tpa &lt;dbl&gt;, tpm &lt;dbl&gt;, fg_pct &lt;dbl&gt;,</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co">## #   tp_pct &lt;dbl&gt;, ft_pct &lt;dbl&gt;, rpg &lt;dbl&gt;, apg &lt;dbl&gt;, spg &lt;dbl&gt;, bpg &lt;dbl&gt;,</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="co">## #   tpg &lt;dbl&gt;, fpg &lt;dbl&gt;, ppg &lt;dbl&gt;, games &lt;int&gt;</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="pull-player-statistics">Pull player statistics<a class="anchor" aria-label="anchor" href="#pull-player-statistics"></a>
 </h3>
 <p>Calling <code>bart_player_season</code> will return detailed season-long player stats. To pull per-game averages, set stat to ‘box.’</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/bart_player_season.html">bart_player_season</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">'box'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">## # A tibble: 6 × 20</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="co">##   player      pos   exp   hgt   team  conf      g   mpg   ppg fg_pct  oreb  dreb</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co">##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co">## 1 Peter Kiss  Comb… Sr    6-5   Brya… NEC      27  35.7  25.2  0.484 1.44   4.33</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="co">## 2 Darius McG… Comb… Sr    5-9   Libe… ASun     30  33.7  24.6  0.445 0.454  4.03</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="co">## 3 Antoine Da… Scor… Sr    6-1   Detr… Horz     29  37.0  23.9  0.429 0.483  3.07</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="co">## 4 Keegan Mur… Stre… So    6-8   Iowa  B10      35  31.9  23.5  0.596 2.86   5.8 </span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co">## 5 Max Abmas   Comb… Jr    6-0   Oral… Sum      28  36.8  22.8  0.412 0.3    3.13</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="co">## 6 Bryce Hami… Wing… Sr    6-4   UNLV  MWC      31  32.3  21.9  0.439 0.688  4.31</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="co">## # … with 8 more variables: rpg &lt;dbl&gt;, apg &lt;dbl&gt;, ast_to &lt;dbl&gt;, spg &lt;dbl&gt;,</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a><span class="co">## #   bpg &lt;dbl&gt;, num &lt;chr&gt;, year &lt;dbl&gt;, id &lt;dbl&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">## # A tibble: 6 × 20</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co">##   player      pos   exp   hgt   team  conf      g   mpg   ppg fg_pct  oreb  dreb</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">## 1 Peter Kiss  Comb… Sr    6-5   Brya… NEC      27  35.7  25.2  0.484 1.44   4.33</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">## 2 Darius McG… Comb… Sr    5-9   Libe… ASun     30  33.7  24.6  0.445 0.454  4.03</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">## 3 Antoine Da… Scor… Sr    6-1   Detr… Horz     29  37.0  23.9  0.429 0.483  3.07</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">## 4 Keegan Mur… Stre… So    6-8   Iowa  B10      35  31.9  23.5  0.596 2.86   5.8 </span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co">## 5 Max Abmas   Comb… Jr    6-0   Oral… Sum      28  36.8  22.8  0.412 0.3    3.13</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co">## 6 Bryce Hami… Wing… Sr    6-4   UNLV  MWC      31  32.3  21.9  0.439 0.688  4.31</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co">## # … with 8 more variables: rpg &lt;dbl&gt;, apg &lt;dbl&gt;, ast_to &lt;dbl&gt;, spg &lt;dbl&gt;,</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="co">## #   bpg &lt;dbl&gt;, num &lt;chr&gt;, year &lt;dbl&gt;, id &lt;dbl&gt;</span></span></code></pre></div>
 <p>Calling <code>bart_player_game</code> will return detailed game-by-game player stats. To pull advanced splits by game, set stat to ‘adv.’</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/bart_player_game.html">bart_player_game</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">'adv'</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">## # A tibble: 6 × 24</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="co">##   date        year player       exp   team  opp   result   min   pts   usg  ortg</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="co">##   &lt;date&gt;     &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="co">## 1 2021-11-09  2022 Jalen Colem… Sr    Kans… Mich… W         10     5  34.2  76.9</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="co">## 2 2021-11-12  2022 Jalen Colem… Sr    Kans… Tarl… W         12    10  11.7 144. </span></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="co">## 3 2021-11-18  2022 Jalen Colem… Sr    Kans… Ston… W         15     7  12.4 186. </span></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="co">## 4 2021-11-25  2022 Jalen Colem… Sr    Kans… Nort… W         10     0  10.3   0  </span></span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="co">## 5 2021-11-26  2022 Jalen Colem… Sr    Kans… Dayt… L          8     0  16.3  25.5</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="co">## 6 2021-11-28  2022 Jalen Colem… Sr    Kans… Iona  W          5     0   3   215. </span></span>
-<span id="cb11-10"><a href="#cb11-10"></a><span class="co">## # … with 13 more variables: or_pct &lt;dbl&gt;, dr_pct &lt;dbl&gt;, ast_pct &lt;dbl&gt;,</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a><span class="co">## #   to_pct &lt;dbl&gt;, stl_pct &lt;dbl&gt;, blk_pct &lt;dbl&gt;, bpm &lt;dbl&gt;, obpm &lt;dbl&gt;,</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a><span class="co">## #   dbpm &lt;dbl&gt;, net &lt;dbl&gt;, poss &lt;dbl&gt;, id &lt;dbl&gt;, game_id &lt;chr&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">## # A tibble: 6 × 24</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co">##   date        year player       exp   team  opp   result   min   pts   usg  ortg</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">##   &lt;date&gt;     &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co">## 1 2021-11-09  2022 Jalen Colem… Sr    Kans… Mich… W         10     5  34.2  76.9</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co">## 2 2021-11-12  2022 Jalen Colem… Sr    Kans… Tarl… W         12    10  11.7 144. </span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="co">## 3 2021-11-18  2022 Jalen Colem… Sr    Kans… Ston… W         15     7  12.4 186. </span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co">## 4 2021-11-25  2022 Jalen Colem… Sr    Kans… Nort… W         10     0  10.3   0  </span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="co">## 5 2021-11-26  2022 Jalen Colem… Sr    Kans… Dayt… L          8     0  16.3  25.5</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="co">## 6 2021-11-28  2022 Jalen Colem… Sr    Kans… Iona  W          5     0   3   215. </span></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="co">## # … with 13 more variables: or_pct &lt;dbl&gt;, dr_pct &lt;dbl&gt;, ast_pct &lt;dbl&gt;,</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="co">## #   to_pct &lt;dbl&gt;, stl_pct &lt;dbl&gt;, blk_pct &lt;dbl&gt;, bpm &lt;dbl&gt;, obpm &lt;dbl&gt;,</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="co">## #   dbpm &lt;dbl&gt;, net &lt;dbl&gt;, poss &lt;dbl&gt;, id &lt;dbl&gt;, game_id &lt;chr&gt;</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -252,6 +274,7 @@
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=toRvik" class="external-link">View on CRAN</a></li>
 <li><a href="https://github.com/andreweatherman/toRvik/" class="external-link">Browse source code</a></li>
 <li><a href="https://github.com/andreweatherman/toRvik/issues" class="external-link">Report a bug</a></li>
 </ul>
@@ -276,13 +299,15 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://twitter.com/andreweatherman" class="external-link">Andrew Weatherman</a> <br><small class="roles"> Author, maintainer </small>  </li>
+<a href="https://www.linkedin.com/in/andrewweatherman/" class="external-link">Andrew Weatherman</a> <br><small class="roles"> Author, maintainer </small>  </li>
 </ul>
 </div>
 
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
+<li><a href="https://CRAN.R-project.org/package=toRvik" class="external-link"><img src="https://www.r-pkg.org/badges/version/toRvik" alt="CRAN status"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
 <li><a href="https://github.com/andreweatherman/toRvik/actions" class="external-link"><img src="https://github.com/andreweatherman/toRvik/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://app.codecov.io/gh/andreweatherman/toRvik?branch=main" class="external-link"><img src="https://codecov.io/gh/andreweatherman/toRvik/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
@@ -294,7 +319,7 @@
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by <a href="https://twitter.com/andreweatherman" class="external-link">Andrew Weatherman</a>.</p>
+<p>Developed by <a href="https://www.linkedin.com/in/andrewweatherman/" class="external-link">Andrew Weatherman</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

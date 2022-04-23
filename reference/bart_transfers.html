@@ -47,17 +47,18 @@ hours."><meta property="og:image" content="https://andreweatherman.github.io/toR
     <a class="dropdown-item" href="../articles/index.html">Vignettes</a>
   </div>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-updates">Updates</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-updates">
+    <a class="dropdown-item" href="../cran102.html">CRAN 1.0.2</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../news/index.html">Changelog</a>
+  </div>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
       <ul class="navbar-nav"><li class="nav-item">
-  <a class="nav-link" href="../news/index.html">
-    <span class="fas fa fas fa-cloud-check"></span>
-     
-    Changelog
-  </a>
-</li>
-<li class="nav-item">
   <a class="external-link nav-link" href="https://twitter.com/andreweatherman">
     <span class="fab fa fab fa-twitter fa-lg"></span>
      
@@ -126,20 +127,20 @@ possession-adjusted box score statistics.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">bart_transfers</span><span class="op">(</span>stat<span class="op">=</span><span class="st">'box'</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 948 × 20</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    player     team  pos   exp   hgt   conf      g   mpg   ppg fg_pct  oreb  dreb</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> A.J. Hamr… Char… C     Fr    6-9   BSth      5  6.75 3.38   0.167 1.38  1.75 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> A.J. Oliv… Old … Wing… Sr    6-5   CUSA     31 17.6  2.56   0.310 0.469 1.5  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> AD Diedhi… UAB   C     So    6-10  CUSA      5  3.43 0.571  0.5   0.429 0.286</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> AJ Neal    Long… Wing… Fr    6-1   BW       14  5.75 1.88   0.4   0.125 0.438</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Aaron Cash Texa… PF/C  Jr    6-6   SEC      36 11.8  2.35   0.558 1.46  1.57 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Aaron Mur… UC D… PF/C  Fr    6-6   BW       22 11.0  2.08   0.514 1     1.67 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Abdou Ndi… Illi… PF/C  Jr    6-9   MVC      24  9.65 1.69   0.55  0.769 1.15 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Abdoul Ka… St. … PF/C  So    6-9   A10      33  9.58 3.73   0.513 0.758 0.939</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Adam Anho… West… PF/C  Jr    6-8   Sum      11  4.46 1.31   0.455 0.462 0.923</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Adong Mak… Nort… C     Sr    6-9   MAC      30 16.9  5.77   0.574 1.5   1.83 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 938 more rows, and 8 more variables: rpg &lt;dbl&gt;, apg &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 911 × 20</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    player    team  pos   exp   hgt   conf      g   mpg    ppg fg_pct  oreb  dreb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> A.J. Ham… Char… C     Fr    6-9   BSth      5  6.75  3.38   0.167 1.38  1.75 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> A.J. Oli… Old … Wing… Sr    6-5   CUSA     31 17.6   2.56   0.310 0.469 1.5  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> AD Diedh… UAB   C     So    6-10  CUSA      5  3.43  0.571  0.5   0.429 0.286</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> AJ Green  Nort… Comb… Jr    6-4   MVC      30 36.4  18.8    0.412 0.226 3.45 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> AJ Neal   Long… Wing… Fr    6-1   BW       14  5.75  1.88   0.4   0.125 0.438</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Aaron Ca… Texa… PF/C  Jr    6-6   SEC      36 11.8   2.35   0.558 1.46  1.57 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Aaron Mu… UC D… PF/C  Fr    6-6   BW       22 11.0   2.08   0.514 1     1.67 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Abdou Nd… Illi… PF/C  Jr    6-9   MVC      24  9.65  1.69   0.55  0.769 1.15 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Abdoul K… St. … PF/C  So    6-9   A10      33  9.58  3.73   0.513 0.758 0.939</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Adam Anh… West… PF/C  Jr    6-8   Sum      11  4.46  1.31   0.455 0.462 0.923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 901 more rows, and 8 more variables: rpg &lt;dbl&gt;, apg &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ast_to &lt;dbl&gt;, spg &lt;dbl&gt;, bpg &lt;dbl&gt;, num &lt;chr&gt;, year &lt;dbl&gt;, id &lt;dbl&gt;</span></span>
 <span class="r-in"></span>
 </code></pre></div>
@@ -149,7 +150,7 @@ possession-adjusted box score statistics.</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by <a href="https://twitter.com/andreweatherman" class="external-link">Andrew Weatherman</a>.</p>
+  <p></p><p>Developed by <a href="https://www.linkedin.com/in/andrewweatherman/" class="external-link">Andrew Weatherman</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

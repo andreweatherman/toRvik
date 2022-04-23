@@ -1,5 +1,4 @@
 # toRvik 1.0.2 
-#### CRAN Submission (pending)
 
 **Addressed CRAN submission comments:**
 
@@ -10,11 +9,15 @@
 
 **Code Updates:**
 
-- Added 'all' argument (new default) to stat input in `bart_player_season`, `bart_player_game`, and `bart_transfers`
+- Added support for pulling complete player statistics by setting stat argument to 'all' in `bart_player_season`, `bart_player_game`, and `bart_transfers` (new default)
 - Transitioned to using [`switch()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/switch) for lookup values in several functions
 - Moved examples with >5s run time to `\donttest{}` to keep output present on site while passing CRAN checks
 - Added WAB (wins above bubble) column to `bart_factors` to keep consistent with output from analogous `bart_conf_factors`
 - Switched neutral variable in `bart_season_schedule` to logical type
+
+**Other:**
+
+- Site refresh for CRAN release
 
 # toRvik 1.0.1
 **Initial CRAN submission rejected; fixed with 1.0.2**

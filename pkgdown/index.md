@@ -1,7 +1,8 @@
 # A Barttorvik Companion
 
 <!-- badges: start -->
-
+[![CRAN status](https://www.r-pkg.org/badges/version/toRvik)](https://CRAN.R-project.org/package=toRvik)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/andreweatherman/toRvik/workflows/R-CMD-check/badge.svg)](https://github.com/andreweatherman/toRvik/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/andreweatherman/toRvik/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andreweatherman/toRvik?branch=main)
@@ -18,16 +19,18 @@ format. As of version 1.0.2, `toRvik` ships with more than 20 functions.
 
 ## Package Installation
 
-To install toRvik, run the following code inside your R session:
+Install the released version of `toRvik` from CRAN:
+```{r}
+install.packages("toRvik")
+```
 
-``` r
+Or install the development version from GitHub with:
+```{r}
 if (!requireNamespace('devtools', quietly = TRUE)){
   install.packages('devtools')
 }
-devtools::install_github("andreweatherman/toRvik")
-library(toRvik)
+devtools::install_github("andreweatherman/toRvik") 
 ```
-
 ## Package Highlights
 
 -   Detailed game-by-game + season-long statistics by player
@@ -42,12 +45,16 @@ library(toRvik)
 
 All `toRvik` functions fall into one of five categories:
 
--   **Rating**, pulling and slicing T-Rank + four factor data 
--   **Game**, pulling team and season schedules + results
--   **Stat**, pulling and slicing player, team, and conference stats
--   **Tournament**, pulling raw and adjusted tournament
-    performance
+-   **Rating**:
+	- Pulling and slicing T-Rank + four factor data 
+-   **Game**: 
+	- Pulling team and season schedules + results
+-   **Stat**: 
+	- Pulling and slicing player, team, and conference stats
+-   **Tournament**: 
+	- Pulling raw and adjusted tournament performance
 -   **Miscellaneous**
+	- Pulling coaching history, player of the year ratings, etc.
 
 ### Pull T-Rank ratings:
 

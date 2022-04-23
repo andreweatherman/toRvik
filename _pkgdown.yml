@@ -4,16 +4,19 @@ development:
 template:
   bootstrap: 5
   bslib:
-    headings-color: "#246B94"
-    link-color: "#595959"
+    headings-color: "#0A3E5F"
+    link-color: "#205F83"
     link-hover-color: "#184763"
     base_font:
       google: "Quicksand"
     code_font:
       google: "Ubuntu Mono"
+    border-radius: 0
+    btn-border-radius: 3px
+    grid-gutter-width: 3rem
 authors:
   Andrew Weatherman:
-    href: https://twitter.com/andreweatherman
+    href: https://www.linkedin.com/in/andrewweatherman/
 home:
   sidebar:
     structure: [links, license, citation, authors, dev]
@@ -23,8 +26,8 @@ home:
 navbar:
   type: light
   structure:
-    left: [home, reference, articles]
-    right: [news, twitter, github]
+    left: [home, reference, articles, news]
+    right: [twitter, github]
   components:
     home:
       icon: fa-home
@@ -42,9 +45,13 @@ navbar:
         - text: Vignettes
           href: articles/index.html
     news:
-      icon: fas fa-cloud-check
-      text: Changelog
-      href: news/index.html
+      text: Updates
+      menu:
+        - text: "CRAN 1.0.2"
+          href: cran102.html
+        - text: --------
+        - text: "Changelog"
+          href: news/index.html
     twitter:
       icon: fab fa-twitter fa-lg
       href: https://twitter.com/andreweatherman

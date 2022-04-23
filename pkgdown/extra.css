@@ -1,6 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;600&display=swap');
 
+.page-header {
+  border-bottom: none;
+}
+
+img.logo{
+  width: 120px;
+}
+
+.template-home .page-header {
+  display: flex;
+  align-items: center;
+  border-bottom: none;
+}
+
+.template-home img.logo{
+    float: left;
+    margin-left: 0px;
+    margin-right: 20px;
+}
+
 h1, h2, h3, h4, h5, h6{
 font-family: "Quicksand";
 font-weight: 700;
@@ -18,3 +38,13 @@ color: rgba(24, 71, 99, 1);
   font-weight:600;
   color: rgba(24, 71, 99, 1);
 }
+
+.dropdown-item:hover{
+    background: rgba(255,255,255, 1);
+    text-decoration: underline;
+  }
+
+  .dropdown-item:focus{
+    background: rgba(255,255,255, 1);
+    text-decoration: underline;
+  }

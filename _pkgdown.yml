@@ -18,6 +18,8 @@ authors:
   Andrew Weatherman:
     href: https://www.linkedin.com/in/andrewweatherman/
 home:
+  title: toRvik
+  description: An R package for pulling Barttorvik (T-Rank) data
   sidebar:
     structure: [links, license, citation, authors, dev]
   links:

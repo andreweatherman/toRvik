@@ -19,3 +19,13 @@ test_that("stat input must match", {
 test_that("conf code must be exact", {
   expect_error(bart_poy(conf='Acc'), 'valid')
 })
+
+test_that("github issue #4; rbind works", {
+  skip_on_cran()
+  expect_output(print(map_dfr(.x=seq(2008, toRvik::current_season(), 1),
+                        .f=function(year) {
+                        x <- bart_player_season(year)
+                          return(x)
+                        })),
+                'tibble' )
+})

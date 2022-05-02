@@ -64,9 +64,11 @@ bart_player_season <- function(year = current_season(), stat = 'all', conf_only 
           fg_pct = fgm / fga
         ) %>%
         dplyr::rename("id" = 1)
-      x <- x %>% dplyr::select(1, 65, 26, 27, 2:4, 55, 64, 58:61, 36, 62, 63, 28, 32, 33)
+      x <- x %>%
+        dplyr::select(1, 65, 26, 27, 2:4, 55, 64, 58:61, 36, 62, 63, 28, 32, 33)
       colnames(x) <- names
       x <- dplyr::left_join(x, (y %>% dplyr::select(1, 4)), by = "id") %>%
+        dplyr::mutate(exp=as.character(exp)) %>%
         dplyr::relocate(fg_pct, .before = oreb) %>%
         dplyr::arrange(desc(ppg))
       return(x)
@@ -85,7 +87,8 @@ bart_player_season <- function(year = current_season(), stat = 'all', conf_only 
         )
       colnames(x) <- names
       x <- x %>%
-        dplyr::mutate(p_per = ((40 * ppg) / mpg), .after = ppg) %>%
+        dplyr::mutate(p_per = ((40 * ppg) / mpg), .after = ppg,
+                      exp=as.character(exp)) %>%
         dplyr::arrange(desc(ppg))
       return(x)
     }
@@ -98,7 +101,9 @@ bart_player_season <- function(year = current_season(), stat = 'all', conf_only 
       x <- readr::read_csv(paste0("https://barttorvik.com/getadvstats.php?year=", year, "&conyes=", c_only, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
         dplyr::select(1, 65, 26, 2:5, 29, 49, 6, 30, 47, 48, 50, 56, 57, 54, 10:13, 23:25, 31, 35, 46, 33)
       colnames(x) <- names
-      x <- x %>% dplyr::arrange(desc(rec))
+      x <- x %>%
+        dplyr::mutate(exp=as.character(exp)) %>%
+        dplyr::arrange(desc(rec))
       return(x)
     }
     else {
@@ -120,6 +125,8 @@ bart_player_season <- function(year = current_season(), stat = 'all', conf_only 
                   fg_pct=fgm/fga)
       x <- dplyr::left_join(x, y, by='id')
       x <- x %>%
+        dplyr::mutate(exp=as.character(exp),
+                      num=as.double(num)) %>%
         dplyr::relocate(c(61:63), .after=ts)
       return(x)
     }

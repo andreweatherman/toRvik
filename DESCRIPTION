@@ -38,3 +38,5 @@ Config/testthat/edition: 3
 URL: https://www.torvik.dev/,
      https://github.com/andreweatherman/toRvik
 Language: en-US
+Depends: 
+    R (>= 2.10)

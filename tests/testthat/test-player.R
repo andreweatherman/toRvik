@@ -14,6 +14,7 @@ test_that("stat input must match", {
   expect_error(bart_player_season(stat='Box'), 'valid')
   expect_error(bart_player_game(stat='Box'), 'valid')
   expect_error(bart_transfers(stat='Box'), 'valid')
+  expect_error(bart_pro(stat='Box'), 'valid')
 })
 
 test_that("conf code must be exact", {
@@ -28,4 +29,24 @@ test_that("github issue #4; rbind works", {
                           return(x)
                         })),
                 'tibble' )
+})
+
+test_that("all splits return tibbles", {
+  skip_on_cran()
+  expect_output(str(bart_pro()), 'tibble')
+  expect_output(str(bart_pro(stat='box')), 'tibble')
+  expect_output(str(bart_pro(stat='shooting')), 'tibble')
+  expect_output(str(bart_pro(stat='adv')), 'tibble')
+})
+
+test_that("early returns tibbles", {
+  skip_on_cran()
+  expect_output(str(bart_pro(early=TRUE)), 'tibble')
+  expect_output(str(bart_pro(early=FALSE)), 'tibble')
+})
+
+test_that("conf_only returns tibbles", {
+  skip_on_cran()
+  expect_output(str(bart_pro(conf_only=TRUE)), 'tibble')
+  expect_output(str(bart_pro(conf_only=FALSE)), 'tibble')
 })

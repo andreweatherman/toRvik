@@ -1,3 +1,16 @@
+# toRvik 1.0.3
+**Patches:**
+
+- Fixed [data issue](https://github.com/andreweatherman/toRvik/issues/4) that casued `bart_player_season` to fail on row binds across certain seasons
+
+**Code Updates:**
+
+- Added [`bart_pro`](https://www.torvik.dev/reference/bart_pro.php) to to pull statistics for draft-eligible players
+
+**Other:**
+
+- Moved package site to self-host on AWS
+
 # toRvik 1.0.2 
 
 **Addressed CRAN submission comments:**
@@ -29,7 +42,7 @@
 
 **Code Updates:**
 
-- Added [`bart_team_box`](https://www.torvik.dev/reference/bart_team_box.html) to return team box statistics and per-game averages  
+- Added [`bart_team_box`](https://www.torvik.dev/reference/bart_team_box.php) to return team box statistics and per-game averages  
 - Added argument to filter `bart_transfers` by [active portal players and committed ones](https://github.com/andreweatherman/toRvik/issues/2)
 
 **Other:**

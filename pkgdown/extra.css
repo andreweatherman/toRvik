@@ -5,8 +5,12 @@
   border-bottom: none;
 }
 
-img.logo{
+img.logo {
   width: 120px;
+}
+
+#sdv-logo {
+margin-top: -8px;
 }
 
 .template-home .page-header {
@@ -24,6 +28,10 @@ img.logo{
 h1, h2, h3, h4, h5, h6{
 font-family: "Quicksand";
 font-weight: 700;
+}
+
+small.nav-text.text-muted.me-auto {
+  font-weight: bold;
 }
 
 .navbar-light .navbar-brand{
@@ -48,3 +56,26 @@ color: rgba(24, 71, 99, 1);
     background: rgba(255,255,255, 1);
     text-decoration: underline;
   }
+
+.navbar-light .navbar-nav .active>.nav-link {
+  color: white;
+  background-color: rgba(24, 71, 99, 0.7);
+  border-radius: 15px;
+}
+
+.navbar-nav .nav-item>.nav-link {
+  border-radius: 15px;
+}
+
+.navbar-dark .navbar-nav .nav-item>.nav-link:hover, .navbar-light .navbar-nav .nav-item>.nav-link:hover {
+  border-radius: 15px;
+}
+
+
+pre code span.do {
+  font-style: normal;
+}
+
+.form-control.me-sm-2 {
+  margin-left: 15px;
+}

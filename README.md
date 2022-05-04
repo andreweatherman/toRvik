@@ -15,10 +15,9 @@ coverage](https://codecov.io/gh/andreweatherman/toRvik/branch/main/graph/badge.s
 package for working with and scraping men’s college basketball data from
 [Barttorvik](https://barttorvik.com/).
 
-No subscription is required to access the data. The package includes
-functions for pulling player and team data, game results, advanced
-metric splits, play-by-play shooting, and more – all returned in tibble
-format. As of version 1.0.2, `toRvik` ships with more than 20 functions.
+There are a lot of college basketball data out there, but most are difficult to pull and clean or they are behind a paywall. With `toRvik`, you have immediate access to some of the most detailed and extensive college basketball statistics publicly available -- all returned in tidy format with just a single line of code! Best of all, no subscription is required to access the data.
+
+As of version 1.0.2, the package includes over 20 functions for pulling player and team data, game results, advanced metric splits, play-by-play shooting, and more.
 
 ## Package Installation
 

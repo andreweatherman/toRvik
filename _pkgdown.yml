@@ -23,6 +23,8 @@ home:
   sidebar:
     structure: [links, license, citation, authors, dev]
   links:
+    - text: Check out the SportsDataverse
+      href:	https://github.com/sportsdataverse
     - text: Report a bug
       href: https://github.com/andreweatherman/toRvik/issues
 navbar:
@@ -80,6 +82,7 @@ reference:
       - '`bart_player_game`'
       - '`bart_player_season`'
       - '`bart_transfers`'
+      - '`bart_pro`'
       - '`bart_game_box`'
       - '`bart_game_factors`'
   - subtitle: Team and Conference Stats

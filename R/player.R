@@ -107,7 +107,7 @@ bart_player_season <- function(year = current_season(), stat = 'all', conf_only 
       return(x)
     }
     else {
-      names <- c("player", "pos", "exp", "num", "hgt", "team", "conf", "g", "mpg", "ppg", "oreb",
+      names <- c("player", "pos", "exp", "num", "hgt", "team", "conf", "g", "min", "mpg", "ppg", "oreb",
                  "dreb", "rpg", "apg", "ast_to", "spg", "bpg", "usg", "ortg", "efg", "ts",
                  "ftm", "fta", "ft_pct", "two_m", "two_a", "two_pct", "three_m", "three_a",
                  "three_pct", "dunk_m", "dunk_a", "dunk_pct", "rim_m", "rim_a", "rim_pct",
@@ -115,7 +115,7 @@ bart_player_season <- function(year = current_season(), stat = 'all', conf_only 
                  "stops", "obpm", "dbpm", "bpm", "oreb_rate", "dreb_rate", "ast", "to", "blk", "stl", "ftr", "pfr",
                  "rec", "pick", "year", "id")
       x <- readr::read_csv(paste0("https://barttorvik.com/getadvstats.php?year=", year, "&conyes=", c_only, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
-        dplyr::select(1, 65, 26, 28, 27, 2:4, 55, 64, 58:61, 36, 62, 63, 7, 6, 8, 9, 14:22, 43:45, 37, 38, 41, 39, 40,
+        dplyr::select(1, 65, 26, 28, 27, 2:5, 55, 64, 58:61, 36, 62, 63, 7, 6, 8, 9, 14:22, 43:45, 37, 38, 41, 39, 40,
                       42, 29, 49, 6, 30, 47, 48, 50, 56, 57, 54, 10:13, 23:25, 31, 35, 46, 32, 33)
       colnames(x) <- names
       y <- x %>%
@@ -385,7 +385,7 @@ bart_transfers <- function(stat = 'all', conf_only = FALSE, active=TRUE) {
                   dplyr::as_tibble() }
     }
     if(stat=='all') {
-      names <- c("player", "pos", "exp", "num", "hgt", "team", "conf", "g", "mpg", "ppg", "oreb",
+      names <- c("player", "pos", "exp", "num", "hgt", "team", "conf", "g", "min", "mpg", "ppg", "oreb",
                  "dreb", "rpg", "apg", "ast_to", "spg", "bpg", "usg", "ortg", "efg", "ts",
                  "ftm", "fta", "ft_pct", "two_m", "two_a", "two_pct", "three_m", "three_a",
                  "three_pct", "dunk_m", "dunk_a", "dunk_pct", "rim_m", "rim_a", "rim_pct",
@@ -393,8 +393,8 @@ bart_transfers <- function(stat = 'all', conf_only = FALSE, active=TRUE) {
                  "stops", "obpm", "dbpm", "bpm", "oreb_rate", "dreb_rate", "ast", "to", "blk", "stl", "ftr", "pfr",
                  "rec", "year", "id")
       x <- readr::read_csv(paste0("https://barttorvik.com/getadvstats.php?year=2022&conyes=", c_only, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
-        dplyr::select(1, 65, 26, 28, 27, 2:4, 55, 64, 58:61, 36, 62, 63, 7, 6, 8, 9, 14:22, 43:45, 37, 38, 41, 39, 40,
-                        42, 5, 29, 49, 30, 47, 48, 50, 56, 57, 54, 10:13, 23:25, 31, 35, 32, 33)
+        dplyr::select(1, 65, 26, 28, 27, 2:5, 55, 64, 58:61, 36, 62, 63, 7, 6, 8, 9, 14:22, 43:45, 37, 38, 41, 39, 40,
+                      42, 29, 49, 6, 30, 47, 48, 50, 56, 57, 54, 10:13, 23:25, 31, 35, 46, 32, 33)
       colnames(x) <- names
       y <- x %>%
         dplyr::group_by(id) %>%
@@ -550,7 +550,7 @@ bart_pro <- function(stat='all', conf_only=FALSE, early=FALSE) {
           dplyr::as_tibble() }
     }
     if(stat=='all') {
-      names <- c("player", "pos", "exp", "num", "hgt", "team", "conf", "g", "mpg", "ppg", "oreb",
+      names <- c("player", "pos", "exp", "num", "hgt", "team", "conf", "g", "min", "mpg", "ppg", "oreb",
                  "dreb", "rpg", "apg", "ast_to", "spg", "bpg", "usg", "ortg", "efg", "ts",
                  "ftm", "fta", "ft_pct", "two_m", "two_a", "two_pct", "three_m", "three_a",
                  "three_pct", "dunk_m", "dunk_a", "dunk_pct", "rim_m", "rim_a", "rim_pct",
@@ -558,8 +558,8 @@ bart_pro <- function(stat='all', conf_only=FALSE, early=FALSE) {
                  "stops", "obpm", "dbpm", "bpm", "oreb_rate", "dreb_rate", "ast", "to", "blk", "stl", "ftr", "pfr",
                  "rec", "year", "id")
       x <- readr::read_csv(paste0("https://barttorvik.com/getadvstats.php?year=2022&conyes=", c_only, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
-        dplyr::select(1, 65, 26, 28, 27, 2:4, 55, 64, 58:61, 36, 62, 63, 7, 6, 8, 9, 14:22, 43:45, 37, 38, 41, 39, 40,
-                      42, 5, 29, 49, 30, 47, 48, 50, 56, 57, 54, 10:13, 23:25, 31, 35, 32, 33)
+        dplyr::select(1, 65, 26, 28, 27, 2:5, 55, 64, 58:61, 36, 62, 63, 7, 6, 8, 9, 14:22, 43:45, 37, 38, 41, 39, 40,
+                      42, 29, 49, 6, 30, 47, 48, 50, 56, 57, 54, 10:13, 23:25, 31, 35, 46, 32, 33)
       colnames(x) <- names
       y <- x %>%
         dplyr::group_by(id) %>%

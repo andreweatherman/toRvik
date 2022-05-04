@@ -31,7 +31,23 @@ test_that("github issue #4; rbind works", {
                 'tibble' )
 })
 
-test_that("all splits return tibbles", {
+test_that("all normal season splits return tibbles", {
+  skip_on_cran()
+  expect_output(str(bart_player_season()), 'tibble')
+  expect_output(str(bart_player_season(stat='box')), 'tibble')
+  expect_output(str(bart_player_season(stat='shooting')), 'tibble')
+  expect_output(str(bart_player_season(stat='adv')), 'tibble')
+})
+
+test_that("all transfer splits return tibbles", {
+  skip_on_cran()
+  expect_output(str(bart_transfers()), 'tibble')
+  expect_output(str(bart_transfers(stat='box')), 'tibble')
+  expect_output(str(bart_transfers(stat='shooting')), 'tibble')
+  expect_output(str(bart_transfers(stat='adv')), 'tibble')
+})
+
+test_that("all pro splits return tibbles", {
   skip_on_cran()
   expect_output(str(bart_pro()), 'tibble')
   expect_output(str(bart_pro(stat='box')), 'tibble')

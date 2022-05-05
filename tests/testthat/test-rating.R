@@ -45,3 +45,10 @@ test_that("conf code must be exact", {
  expect_error(bart_conf_stats(), 'valid')
  expect_error(bart_conf_stats(conf='acc'), 'valid')
 })
+
+test_that("rbind works across seasons", {
+  skip_on_cran()
+  expect_output(str(bart_conf_stats(conf='ACC')), 'tibble')
+  expect_output(str(bart_conf_stats(year=2015, conf='ACC')), 'tibble')
+  expect_output(str(bart_conf_stats(year=2008, conf='ACC')), 'tibble')
+})

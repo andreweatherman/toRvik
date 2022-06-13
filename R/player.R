@@ -52,9 +52,10 @@ bart_player_season <- function(year = current_season(), stat = 'all', conf_only 
     if (stat == "box") {
       names <- c(
         "player", "pos", "exp", "hgt", "team", "conf", "g", "mpg", "ppg", "oreb",
-        "dreb", "rpg", "apg", "ast_to", "spg", "bpg", "num", "year", "id"
+        "dreb", "rpg", "apg", "tov", "ast_to", "spg", "bpg", "num", "year", "id"
       )
-      x <- readr::read_csv(paste0("https://barttorvik.com/getadvstats.php?year=", year, "&conyes=", c_only, "&csv=1"), col_names = FALSE, show_col_types = FALSE)
+      x <- readr::read_csv(paste0("https://barttorvik.com/getadvstats.php?year=", year, "&conyes=", c_only, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
+        dplyr:: mutate(tpg=X61/X36)
       y <- x %>% dplyr::mutate(across(c(17, 18, 20, 21, 43, 44), as.numeric))
       y <- y %>%
         dplyr::group_by(X33) %>%
@@ -65,7 +66,7 @@ bart_player_season <- function(year = current_season(), stat = 'all', conf_only 
         ) %>%
         dplyr::rename("id" = 1)
       x <- x %>%
-        dplyr::select(1, 65, 26, 27, 2:4, 55, 64, 58:61, 36, 62, 63, 28, 32, 33)
+        dplyr::select(1, 65, 26, 27, 2:4, 55, 64, 58:61, 67, 36, 62, 63, 28, 32, 33)
       colnames(x) <- names
       x <- dplyr::left_join(x, (y %>% dplyr::select(1, 4)), by = "id") %>%
         dplyr::mutate(exp=as.character(exp)) %>%
@@ -108,14 +109,15 @@ bart_player_season <- function(year = current_season(), stat = 'all', conf_only 
     }
     else {
       names <- c("player", "pos", "exp", "num", "hgt", "team", "conf", "g", "min", "mpg", "ppg", "oreb",
-                 "dreb", "rpg", "apg", "ast_to", "spg", "bpg", "usg", "ortg", "efg", "ts",
+                 "dreb", "rpg", "apg", "tov", "ast_to", "spg", "bpg", "usg", "ortg", "efg", "ts",
                  "ftm", "fta", "ft_pct", "two_m", "two_a", "two_pct", "three_m", "three_a",
                  "three_pct", "dunk_m", "dunk_a", "dunk_pct", "rim_m", "rim_a", "rim_pct",
                  "mid_m", "mid_a", "mid_pct", "porpag", "dporpag", "adj_oe", "drtg", "adj_de",
                  "stops", "obpm", "dbpm", "bpm", "oreb_rate", "dreb_rate", "ast", "to", "blk", "stl", "ftr", "pfr",
                  "rec", "pick", "year", "id")
       x <- readr::read_csv(paste0("https://barttorvik.com/getadvstats.php?year=", year, "&conyes=", c_only, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
-        dplyr::select(1, 65, 26, 28, 27, 2:5, 55, 64, 58:61, 36, 62, 63, 7, 6, 8, 9, 14:22, 43:45, 37, 38, 41, 39, 40,
+        dplyr:: mutate(tpg=X61/X36) %>%
+        dplyr::select(1, 65, 26, 28, 27, 2:5, 55, 64, 58:61, 67, 36, 62, 63, 7, 6, 8, 9, 14:22, 43:45, 37, 38, 41, 39, 40,
                       42, 29, 49, 6, 30, 47, 48, 50, 56, 57, 54, 10:13, 23:25, 31, 35, 46, 32, 33)
       colnames(x) <- names
       y <- x %>%

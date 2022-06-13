@@ -90,16 +90,23 @@ all eligible or declared players.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>stat</dt>
 <dd><p>Indicates statistical split (see details).</p></dd>
+
+
 <dt>conf_only</dt>
 <dd><p>Logical. Filters data by conference-only play; defaults to
 `FALSE`.</p></dd>
+
+
 <dt>early</dt>
 <dd><p>Logical. Filters by early entrance status; defaults to FALSE
 (all players).</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Returns a tibble with the number of columns dependent on the value
+    
+
+<p>Returns a tibble with the number of columns dependent on the value
   supplied to the `stat` argument.</p>
     </div>
     <div class="section level2">
@@ -118,7 +125,7 @@ possession-adjusted box score statistics.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">bart_pro</span><span class="op">(</span>stat<span class="op">=</span><span class="st">'box'</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,110 × 20</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,086 × 20</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    player     team  pos   exp   hgt   conf      g   mpg   ppg fg_pct  oreb  dreb</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> A.J. Cald… Chat… Wing… Jr    6-5   SC       33 28.5   4.86  0.371 0.571 2.57 </span>
@@ -126,12 +133,12 @@ possession-adjusted box score statistics.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> A.J. Reev… Prov… Wing… Sr    6-6   BE       28 25.3   9.89  0.375 0.643 2.18 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> A.J. Walk… Air … Comb… Sr    6-2   MWC      27 33.3  14.7   0.465 0.370 2.15 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> AJ Bramah  Neva… PF/C  Sr    6-7   MWC       4 21.2  10.8   0.514 2     4.5  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> AJ Griffin Duke  Wing… Fr    6-6   ACC      39 24.3  10.4   0.503 0.769 3.15 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> AJ Wilson  Sout… PF/C  Sr    6-7   SEC      21 13.5   3.14  0.5   1.59  1.45 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Aanen Moo… Sout… Wing… Sr    6-3   BSky     33 19.0   6.6   0.429 0.229 1.97 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> AJ Green   Nort… Comb… Jr    6-4   MVC      30 36.4  18.8   0.412 0.226 3.45 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> AJ Griffin Duke  Wing… Fr    6-6   ACC      39 24.3  10.4   0.503 0.769 3.15 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> AJ Wilson  Sout… PF/C  Sr    6-7   SEC      21 13.5   3.14  0.5   1.59  1.45 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Aaron Cook Geor… Pure… Sr    6-2   SEC      31 32.2  10.5   0.388 0.226 2.45 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Aaron Duh… Army  Scor… Sr    6-0   Pat      29 25.2   7     0.406 0.355 2.61 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,100 more rows, and 8 more variables: rpg &lt;dbl&gt;, apg &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,076 more rows, and 8 more variables: rpg &lt;dbl&gt;, apg &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ast_to &lt;dbl&gt;, spg &lt;dbl&gt;, bpg &lt;dbl&gt;, num &lt;chr&gt;, year &lt;dbl&gt;, id &lt;dbl&gt;</span></span>
 <span class="r-in"></span>
 </code></pre></div>
@@ -145,7 +152,7 @@ possession-adjusted box score statistics.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

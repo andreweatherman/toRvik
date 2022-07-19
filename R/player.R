@@ -69,7 +69,8 @@ bart_player_season <- function(year = current_season(), stat = 'all', conf_only 
         dplyr::select(1, 65, 26, 27, 2:4, 55, 64, 58:61, 67, 36, 62, 63, 28, 32, 33)
       colnames(x) <- names
       x <- dplyr::left_join(x, (y %>% dplyr::select(1, 4)), by = "id") %>%
-        dplyr::mutate(exp=as.character(exp)) %>%
+        dplyr::mutate(exp=as.character(exp),
+                      num=as.double(num)) %>%
         dplyr::relocate(fg_pct, .before = oreb) %>%
         dplyr::arrange(desc(ppg))
       return(x)
@@ -89,7 +90,8 @@ bart_player_season <- function(year = current_season(), stat = 'all', conf_only 
       colnames(x) <- names
       x <- x %>%
         dplyr::mutate(p_per = ((40 * ppg) / mpg), .after = ppg,
-                      exp=as.character(exp)) %>%
+                      exp=as.character(exp),
+                      num=as.double(num)) %>%
         dplyr::arrange(desc(ppg))
       return(x)
     }
@@ -103,7 +105,8 @@ bart_player_season <- function(year = current_season(), stat = 'all', conf_only 
         dplyr::select(1, 65, 26, 2:5, 29, 49, 6, 30, 47, 48, 50, 56, 57, 54, 10:13, 23:25, 31, 35, 46, 33)
       colnames(x) <- names
       x <- x %>%
-        dplyr::mutate(exp=as.character(exp)) %>%
+        dplyr::mutate(exp=as.character(exp),
+                      num=as.double(num)) %>%
         dplyr::arrange(desc(rec))
       return(x)
     }

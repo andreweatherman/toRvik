@@ -90,8 +90,7 @@ bart_player_season <- function(year = current_season(), stat = 'all', conf_only 
       colnames(x) <- names
       x <- x %>%
         dplyr::mutate(p_per = ((40 * ppg) / mpg), .after = ppg,
-                      exp=as.character(exp),
-                      num=as.double(num)) %>%
+                      exp=as.character(exp)) %>%
         dplyr::arrange(desc(ppg))
       return(x)
     }
@@ -105,8 +104,7 @@ bart_player_season <- function(year = current_season(), stat = 'all', conf_only 
         dplyr::select(1, 65, 26, 2:5, 29, 49, 6, 30, 47, 48, 50, 56, 57, 54, 10:13, 23:25, 31, 35, 46, 33)
       colnames(x) <- names
       x <- x %>%
-        dplyr::mutate(exp=as.character(exp),
-                      num=as.double(num)) %>%
+        dplyr::mutate(exp=as.character(exp)) %>%
         dplyr::arrange(desc(rec))
       return(x)
     }

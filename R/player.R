@@ -80,12 +80,12 @@ bart_player_season <- function(year = current_season(), stat = 'all', conf_only 
         "player", "pos", "exp", "team", "conf", "g", "mpg", "ppg", "usg", "ortg", "efg", "ts",
         "ftm", "fta", "ft_pct", "two_m", "two_a", "two_pct", "three_m", "three_a",
         "three_pct", "dunk_m", "dunk_a", "dunk_pct", "rim_m", "rim_a", "rim_pct",
-        "mid_m", "mid_a", "mid_pct", "id"
+        "mid_m", "mid_a", "mid_pct", "year", "id"
       )
       x <- readr::read_csv(paste0("https://barttorvik.com/getadvstats.php?year=", year, "&conyes=", c_only, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
         dplyr::select(
           1, 65, 26, 2:4, 55, 64, 7, 6, 8, 9, 14:22, 43:45, 37, 38, 41, 39, 40,
-          42, 33
+          42, 32, 33
         )
       colnames(x) <- names
       x <- x %>%
@@ -98,10 +98,10 @@ bart_player_season <- function(year = current_season(), stat = 'all', conf_only 
       names <- c(
         "player", "pos", "exp", "team", "conf", "g", "min", "porpag", "dporpag", "ortg", "adj_oe", "drtg", "adj_de",
         "stops", "obpm", "dbpm", "bpm", "oreb", "dreb", "ast", "to", "blk", "stl", "ftr", "pfr",
-        "rec", "pick", "id"
+        "rec", "pick", "year", "id"
       )
       x <- readr::read_csv(paste0("https://barttorvik.com/getadvstats.php?year=", year, "&conyes=", c_only, "&csv=1"), col_names = FALSE, show_col_types = FALSE) %>%
-        dplyr::select(1, 65, 26, 2:5, 29, 49, 6, 30, 47, 48, 50, 56, 57, 54, 10:13, 23:25, 31, 35, 46, 33)
+        dplyr::select(1, 65, 26, 2:5, 29, 49, 6, 30, 47, 48, 50, 56, 57, 54, 10:13, 23:25, 31, 35, 46, 32, 33)
       colnames(x) <- names
       x <- x %>%
         dplyr::mutate(exp=as.character(exp)) %>%

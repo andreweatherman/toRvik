@@ -604,29 +604,28 @@ bart_conf_stats <- function(year = current_season(), conf = NULL) {
 #'   \item{\code{team}}{character.}
 #'   \item{\code{conf}}{character.}
 #'   \item{\code{rec}}{character.}
+#'   \item{\code{barthag}}{double. The estimation of a team's win probability
+#'   against the average Division 1 team on a neutral court.}
 #'   \item{\code{adj_o}}{double.}
 #'   \item{\code{adj_o_rk}}{double.}
 #'   \item{\code{adj_d}}{double.}
 #'   \item{\code{adj_d_rk}}{double.}
-#'   \item{\code{barthag}}{double. The estimation of a team's win probability
-#'   against the average Division 1 team on a neutral court.}
+#'   \item{\code{adj_tempo}}{double.}
+#'   \item{\code{adj_tempo_rk}}{double.}
 #'   \item{\code{proj_rec}}{character.}
 #'   \item{\code{proj_conf_rec}}{character.}
 #'   \item{\code{wab}}{double. The number of wins above or below the expected
 #'   total from a bubble team against the same schedule.}
 #'   \item{\code{wab_rk}}{double.}
-#'   \item{\code{cur_rk}}{double.}
-#'   \item{\code{change}}{double.}
 #'   \item{\code{date}}{double.}
 #' }
 #' @param date Date to pull ratings (YYYYMMDD).
 #' @import dplyr
 #' @import lubridate
-#' @import httr
 #' @importFrom withr local_options
 #' @importFrom cli cli_abort
-#' @importFrom rvest read_html html_table
-#' @importFrom purrr pluck
+#' @importFrom tidyr separate
+#' @importFrom curl curl_download
 #' @importFrom magrittr %>%
 #' @examples
 #' bart_archive('20220113')
@@ -641,23 +640,21 @@ bart_archive <- function(date) {
     if (isTRUE(grepl("-", date))) {
       cli::cli_abort("Please enter a date in YYYYMMDD format with no hyphens")
     }
-    names <- c(
-      "rk", "team", "conf", "rec", "adj_o", "adj_o_rk", "adj_d", "adj_d_rk", "barthag", "proj_rec", "proj_conf_rec",
-      "wab", "wab_rk", "cur_rk", "change"
-    )
-    x <- httr::GET(paste0("https://barttorvik.com/trank-time-machine.php?date=", date)) %>%
-      httr::content(as = "text") %>%
-      rvest::read_html() %>%
-      rvest::html_table() %>%
-      purrr::pluck(1)
-    x <- x %>%
-      subset(select = -c(16:ncol(x)))
+    curl::curl_download(paste0('https://barttorvik.com/timemachine/team_results/', date, '_team_results.json.gz'), 'archive.json')
+    names <- c('rank', 'team', 'conf', 'record', 'barthag', 'adj_o', 'adj_o_rk', 'adj_d', 'adj_d_rk',
+               'adj_tempo', 'adj_tempo_rk', 'proj_record', 'proj_conf_record',
+               'wab', 'wab_rk', 'date')
+    x <-  jsonlite::fromJSON('archive.json') %>%
+      dplyr::as_tibble() %>%
+      dplyr::mutate(dplyr::across(c(1, 5:8, 45, 9:14, 42, 43), as.numeric),
+                    dplyr::across(11:14, round, 1),
+                    adj_tempo_rk = dplyr::dense_rank(desc(V45)), .after = V45,
+                    date = lubridate::ymd(date)) %>%
+      tidyr::unite('proj_record', 11:12, sep = '-', remove = TRUE) %>%
+      tidyr::unite('proj_conf_record', 12:13, sep = '-', remove = TRUE) %>%
+      dplyr::select(c(1:4, 9, 5:8, 43:44, 11:12, 40, 41, 45))
     colnames(x) <- names
-    x <- x %>%
-      dplyr::mutate(across(c(1, 5:9, 12:15), as.numeric),
-        date = lubridate::ymd(date), .after = last_col()
-      ) %>%
-      dplyr::filter(!is.na(adj_o))
-    return(x)
-  })
+    unlink('archive.json')
+    return(x) }
+  )
 }

@@ -166,7 +166,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   ²​adj_o_rk, ³​adj_d_rk, ⁴​adj_t_rk</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2.835 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; 3.307 sec elapsed</span></span></code></pre></div>
 <p>Here, the <code>bart_ratings</code> function returned the top ten teams in T-Rank in the current season. We are also presented with each team’s adjusted efficiencies, their adjusted tempo, and two forms of strength of schedule (documented in <code>bart_ratings</code>). But what if we want these same measures in home games only? We would use <code>bart_factors</code> and input ‘home’ as venue:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -190,31 +190,31 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   venue &lt;chr&gt;, type &lt;chr&gt;, top &lt;dbl&gt;, quad &lt;chr&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 3.297 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; 2.127 sec elapsed</span></span></code></pre></div>
 <p>And now, we have four factor data and metric ratings for <em>home games only</em>. The <code>bart_factors</code> function, and the analogous <code>bart_conf_factors</code>, takes venue, game type, date range, and opponent strength as additional splits. Great, but what if we want to explore rating trends over time? <code>toRvik</code> gives us that ability with <code>bart_archive</code>, a function that pulls adjusted ratings and projected records from the morning of a desired date:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">toRvik</span><span class="fu">::</span><span class="fu"><a href="../reference/bart_archive.html">bart_archive</a></span><span class="op">(</span><span class="st">'20220113'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 16</span></span></span>
-<span><span class="co">#&gt;       rk team    conf  rec   adj_o adj_o…¹ adj_d adj_d…² barthag proj_…³ proj_…⁴</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1 Gonzaga WCC   13-2   124.       2  93.3      20   0.964 26-3    15-1   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     2 Baylor  B12   15-1   121.       5  91.3      13   0.962 26-5    14-4   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     3 Houston Amer  14-2   120.       6  91        11   0.961 27-4    16-2   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     4 Auburn  SEC   15-1   115.      20  89.3       8   0.947 27-4    15-3   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     5 LSU     SEC   15-1   106.     117  82.4       1   0.946 27-4    14-4   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     6 Arizona P12   13-1   117.      15  91        12   0.946 27-4    17-3   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     7 Villan… BE    12-4   117.      13  91.6      16   0.942 24-6    17-3   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     8 Kansas  B12   13-2   122.       4  96.5      50   0.938 24-7    12-6   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     9 Purdue  B10   13-2   125        1  98.9      94   0.937 24-7    13-7   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    10 Duke    ACC   13-2   117.      11  93.8      23   0.926 26-5    16-4   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: wab &lt;dbl&gt;, wab_rk &lt;dbl&gt;, cur_rk &lt;dbl&gt;, change &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   date &lt;date&gt;, and abbreviated variable names ¹​adj_o_rk, ²​adj_d_rk,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ³​proj_rec, ⁴​proj_conf_rec</span></span></span>
+<span><span class="co">#&gt;     rank team   conf  record barthag adj_o adj_o…¹ adj_d adj_d…² adj_t…³ adj_t…⁴</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1 Gonza… WCC   13-2     0.964  124.       2  93.3      20    73.9       8</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     2 Baylor B12   15-1     0.963  121.       5  91.3      13    69.7     121</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     3 Houst… Amer  14-2     0.961  120.       6  91.0      11    66.2     306</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     4 Auburn SEC   15-1     0.947  115.      20  89.3       8    71.6      46</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     5 LSU    SEC   15-1     0.946  106.     117  82.4       1    70.9      72</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     6 Arizo… P12   13-1     0.945  117.      15  91.0      12    74.7       3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     7 Villa… BE    12-4     0.942  117.      13  91.6      16    62.3     354</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     8 Kansas B12   13-2     0.938  122.       4  96.5      50    70.6      79</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     9 Purdue B10   13-2     0.937  125.       1  98.9      94    68.1     203</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    10 Duke   ACC   13-2     0.926  117.      11  93.8      23    70.6      81</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: proj_record &lt;chr&gt;, proj_conf_record &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   wab &lt;dbl&gt;, wab_rk &lt;dbl&gt;, date &lt;date&gt;, and abbreviated variable names</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​adj_o_rk, ²​adj_d_rk, ³​adj_tempo, ⁴​adj_tempo_rk</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.882 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; 0.321 sec elapsed</span></span></code></pre></div>
 <p>At this time, <code>bart_archive</code> only takes a single date, but if you want to track longer periods, I suggest looking into mapping packages such as <a href="https://purrr.tidyverse.org/reference/index.html" class="external-link"><code>purrr</code></a>.</p>
 </div>
 <div class="section level2">
@@ -247,7 +247,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   dbpm &lt;dbl&gt;, net &lt;dbl&gt;, poss &lt;dbl&gt;, id &lt;dbl&gt;, game_id &lt;chr&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 15.879 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; 14.108 sec elapsed</span></span></code></pre></div>
 <p>Here, <code>bart_player_game</code> returned the 20 highest individual net BPMs by a Duke player this season. The function takes ‘box,’ ‘shooting,’ and ‘adv’ as stat inputs, and I welcome you to explore each one in your own session. But what if we want to investigate similar performance at a seaosn level? Well, <code>bart_player_season</code> gives us that option – also taking ‘box,’ ‘shooting,’ and ‘adv’ as stat inputs.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -270,7 +270,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   id &lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 4.529 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; 1.476 sec elapsed</span></span></code></pre></div>
 <p>And now, we have a tibble of season-long shooting data for Duke players, sorted by number of mid-range attempts. Advanced metric data can be pulled by team on a per-game basis using <code>bart_team_schedule</code>, and total team shooting splis can be accessed using <code>bart_team_shooting</code>. Game box data can be pulled with <code>bart_game_total</code>.</p>
 </div>
 <div class="section level2">
@@ -299,7 +299,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable name ¹​qual_avg</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.864 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; 0.588 sec elapsed</span></span></code></pre></div>
 <p>Returned are sheets of top teams sorted by their NCAA NET ranking. Because this function relies on NET data, it is only available back to the 2018-19 season. In-season performance is valuable, but what if you want to investigate <em>just</em> tournament data? Well, <code>toRvik</code> gives you two options to do so: <code>bart_tourney_odds</code> and <code>bart_tourney_results</code>. The former returns metric-adjusted round probabilities by split. Let’s explore round odds for the 2022 NCAA Tournament:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -320,7 +320,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     5 Midwest Iowa       B10     100  84.3  64.5  32.2  19.3   9.2   3.7</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     2 South   Villanova  BE      100  90.8  63.6  34.6  16.1   8.4   3.5</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.355 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; 0.229 sec elapsed</span></span></code></pre></div>
 <p>With the ‘odds’ argument set to ‘pre,’ we returned pre-tournament odds and sorted by likelihood to reach the second weekend (Sweet 16). <code>bart_tourney_odds</code> also takes current odds (‘current’), odds based on recent performance (‘recent’), and odds based on games against strong opponents (‘t100’). This data is similarly available starting with the 2019 tournament. Now, what if we want to explore tournament results?</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -338,7 +338,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   champ_percent &lt;dbl&gt;, from &lt;dbl&gt;, to &lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.854 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; 0.462 sec elapsed</span></span></code></pre></div>
 <p>With <code>bart_tourney_results</code>, we can return raw and adjusted outcomes by split. Here, we returned aggregate conference results from 2011 to 2021, sorted by PAKE – the number of wins attained above or below KenPom expectation. The function splits by team (‘team’), conference (‘conf’), coach (‘coach’), and seed (‘seed’) and includes data starting in 2000.</p>
 </div>
 <div class="section level2">

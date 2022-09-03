@@ -34,8 +34,9 @@ bart_season_schedule <- function(year = current_season()) {
     if (!(is.numeric(year) && nchar(year) == 4 && year >=
       2008)) {
       cli::cli_abort("Enter a valid year as a number (YYYY). Data only goes back to 2008!")
-    } else {
-      names <- c("date", "type", "neutral", "home", "away", "game_id")
+    }
+    if (year >= 2023) {
+      names <- c("date", "type", "neutral", "home", "home_conf", "away", "away_conf","game_id")
       x <- readr::read_csv(paste0("https://barttorvik.com/", year, "_master_sked.csv"), col_names = FALSE, show_col_types = FALSE) %>%
         dplyr::select(c(2, 3, 4, 6, 5, 3, 1))
       colnames(x) <- names
@@ -53,10 +54,13 @@ bart_season_schedule <- function(year = current_season()) {
           TRUE ~ FALSE
         )
       )
-      return(x)
     }
-  })
-}
+    else {
+      x <- readr::read_csv(paste0('https://github.com/andreweatherman/college-basketball-data/raw/main/schedules/schedule_',year,'.csv'), show_col_types = FALSE)
+    }
+    return(x)
+    }
+  ) }
 
 
 #' Get Team Schedule

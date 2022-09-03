@@ -8,5 +8,5 @@ test_that("throws error for season before 2008", {
 
 test_that("all years can combine", {
   skip_on_cran()
-  expect_output(str(map_dfr(c(2008:2022), .f=(function(year){bart_game_box(year)}))), 'tibble')
+  expect_output(str(purrr::map_dfr(c(2008:2022), .f=(function(year){bart_game_box(year)}))), 'tibble')
 })

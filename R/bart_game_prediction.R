@@ -18,12 +18,23 @@
 #' @importFrom dplyr as_tibble
 #' @importFrom httr modify_url
 #' @importFrom jsonlite fromJSON
+#' @importFrom cli cli_abort
+#' @importFrom lubridate as_date
 #' @examples
 #' bart_game_prediction(team='Duke', opp='North Carolina', date='20220402')
 #'
 #' @export
 
 bart_game_prediction <- function(team = NULL, opp = NULL, date = NULL, location='N') {
+
+  # test passed year
+  if (lubridate::as_date(date) <= lubridate::as_date('2014-11-13')) {
+    cli::cli_abort(c(
+      "{.var date} must be later than Nov. 13, 2014",
+      "x" = "You passed through {lubridate::as_date(date)}"
+    ))
+  }
+
   base_url <- 'https://api.cbbstat.com/games/predictions?'
   parsed <- httr::modify_url(
     base_url,
@@ -34,6 +45,20 @@ bart_game_prediction <- function(team = NULL, opp = NULL, date = NULL, location=
       location = location
     )
   )
-  data <- jsonlite::fromJSON(parsed) %>% dplyr::as_tibble()
+  data <- data.frame()
+
+  tryCatch(
+    expr = {
+      data  <- jsonlite::fromJSON(parsed) %>%
+        make_toRvik_data(sprintf('%s vs. %s Prediction', team, opp), Sys.time())
+    },
+    error = function(e) {
+      check_docs_error()
+    },
+    warning = function(w) {
+    },
+    finally = {
+    }
+  )
   return(data)
 }

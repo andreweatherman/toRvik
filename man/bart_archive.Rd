@@ -15,7 +15,7 @@ bart_archive(date = NULL, team = NULL, year = NULL)
 }
 \value{
 Returns a tibble with 16 columns:
-#' \describe{
+\describe{
   \item{\code{rk}}{double.}
   \item{\code{team}}{character.}
   \item{\code{conf}}{character.}

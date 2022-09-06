@@ -5,7 +5,7 @@
 \title{Get Player Game Stats}
 \usage{
 bart_player_game(
-  year = NULL,
+  year = current_season(),
   stat = NULL,
   game_id = NULL,
   player_id = NULL,

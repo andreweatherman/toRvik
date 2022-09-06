@@ -2,7 +2,7 @@
 % Please edit documentation in R/transfer_portal.R
 \name{transfer_portal}
 \alias{transfer_portal}
-\title{Transfer Portal}
+\title{Get Transfer Portal}
 \usage{
 transfer_portal(year = NULL, from = NULL, to = NULL)
 }

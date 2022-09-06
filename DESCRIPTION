@@ -15,6 +15,7 @@ Imports:
     cli,
     curl,
     dplyr,
+    glue,
     httr,
     janitor,
     jsonlite,

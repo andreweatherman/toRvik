@@ -34,12 +34,22 @@
 #' @importFrom dplyr as_tibble
 #' @importFrom httr modify_url
 #' @importFrom jsonlite fromJSON
+#' @importFrom cli cli_abort
 #' @examples
 #' player_recruiting_rankings(year=2019, stars=5)
 #'
 #' @export
 
 player_recruiting_rankings <- function(year = NULL, stars = NULL, state = NULL, conf = NULL, team = NULL, top = NULL, pos = NULL) {
+
+  # test passed year
+  if (!is.null(year) & !(is.numeric(year) && nchar(year) == 4 && year >= 2009)) {
+    cli::cli_abort(c(
+      "{.var year} must be 2009 or later",
+      "x" = "You passed through {year}"
+    ))
+  }
+
   base_url <- 'https://api.cbbstat.com/players/recruits?'
   parsed <- httr::modify_url(
     base_url,
@@ -53,6 +63,20 @@ player_recruiting_rankings <- function(year = NULL, stars = NULL, state = NULL, 
       position = pos
     )
   )
-  data <- jsonlite::fromJSON(parsed) %>% dplyr::as_tibble()
+  data <- data.frame()
+
+  tryCatch(
+    expr = {
+      data  <- jsonlite::fromJSON(parsed) %>%
+        make_toRvik_data('Recruiting Rankings', Sys.time())
+    },
+    error = function(e) {
+      check_docs_error()
+    },
+    warning = function(w) {
+    },
+    finally = {
+    }
+  )
   return(data)
 }

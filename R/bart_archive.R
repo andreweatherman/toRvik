@@ -4,7 +4,7 @@
 #' specified day. Data goes back to 2014-15.
 #'
 #' @returns Returns a tibble with 16 columns:
-#' #' \describe{
+#' \describe{
 #'   \item{\code{rk}}{double.}
 #'   \item{\code{team}}{character.}
 #'   \item{\code{conf}}{character.}
@@ -31,11 +31,21 @@
 #' @importFrom dplyr as_tibble
 #' @importFrom httr modify_url
 #' @importFrom jsonlite fromJSON
+#' @importFrom cli cli_abort
 #' @examples
 #' \donttest{bart_archive(date='20220113')}
 #'
 #' @export
 bart_archive <- function(date = NULL, team = NULL, year = NULL) {
+
+  # test passed year
+  if (!is.null(year) & !(is.numeric(year) && nchar(year) == 4 && year >= 2015)) {
+    cli::cli_abort(c(
+      "{.var year} must be 2015 or later",
+      "x" = "You passed through {year}"
+    ))
+  }
+
   base_url <- 'https://api.cbbstat.com/ratings/archive?'
   parsed <- httr::modify_url(
     base_url,
@@ -45,6 +55,21 @@ bart_archive <- function(date = NULL, team = NULL, year = NULL) {
       year = year
     )
   )
-  data <- jsonlite::fromJSON(parsed) %>% dplyr::as_tibble()
+
+  data <- data.frame()
+
+  tryCatch(
+    expr = {
+      data  <- jsonlite::fromJSON(parsed) %>%
+        make_toRvik_data('Archive Ratings', Sys.time())
+    },
+    error = function(e) {
+      check_docs_error()
+    },
+    warning = function(w) {
+    },
+    finally = {
+    }
+  )
   return(data)
 }

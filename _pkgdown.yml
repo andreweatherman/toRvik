@@ -67,31 +67,44 @@ reference:
     desc: Functions to scrape T-Rank
     contents:
       - '`bart_ratings`'
-      - '`bart_conf_factors`'
-      - '`bart_factors`'
       - '`bart_archive`'
+  - subtitle: Four Factors
+    desc: Functions to return four factor data
+    contents:
+      - '`bart_factors`'
+      - '`bart_conf_factors`'
+      - '`bart_game_factors`'
+      - '`bart_conf_stats`'
+  - subtitle: Players
+    desc: Functions to scrape player data
+    contents:
+    - '`bart_players`'
+    - '`bart_player_game`'
+    - '`bart_player_season`'
+    - '`bart_player_splits`'
+    - '`player_recruiting_rankings`'
+    - '`transfer_portal`'
+  - subtitle: Teams
+    desc: Functions to scrape team data
+    contents:
+      - '`teams_by_year`'
+      - '`bart_team_box`'
+      - '`bart_team_shooting`'
+      - '`bart_team_history`'
   - subtitle: Games
     desc: Functions to scrape games and results
     contents:
+      - '`bart_game_box`'
       - '`bart_season_schedule`'
       - '`bart_team_schedule`'
       - '`bart_pregame`'
-  - subtitle: Player and Game Stats
-    desc: Functions to scrape player and game stats
+  - subtitle: Predictions
+    desc: Functions to predict games
     contents:
-      - '`bart_player_game`'
-      - '`bart_player_season`'
-      - '`bart_transfers`'
-      - '`bart_pro`'
-      - '`bart_game_box`'
-      - '`bart_game_factors`'
-  - subtitle: Team and Conference Stats
-    desc: Functions to scrape team and conference stats
-    contents:
-      - '`bart_team_shooting`'
-      - '`bart_team_box`'
-      - '`bart_team_history`'
-      - '`bart_conf_stats`'
+      - '`bart_game_prediction`'
+      - '`bart_tournament_prediction`'
+      - '`bart_injuryimpact`'
+
   - subtitle: Tournament Stats
     desc: Functions to scrape tournament stats
     contents:
@@ -103,6 +116,5 @@ reference:
     contents:
       - '`bart_coach`'
       - '`bart_coach_change`'
-      - '`bart_injuryimpact`'
       - '`bart_poy`'
       - '`current_season`'

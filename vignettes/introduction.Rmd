@@ -56,11 +56,11 @@ toRvik::bart_ratings(year=2022) %>%
 tictoc::toc()
 ```
 
-Here, the `bart_ratings` function returned the top ten teams in T-Rank in the current season. We are also presented with each team's adjusted efficiencies, their adjusted tempo, and two forms of strength of schedule (documented in `bart_ratings`). But what if we want these same measures in home games only? We would use `bart_factors` and input 'home' as venue:
+Here, the `bart_ratings` function returned the top ten teams in T-Rank in the current season. We are also presented with each team's adjusted efficiencies, their adjusted tempo, and two forms of strength of schedule (documented in `bart_ratings`). But what if we want these same measures in home games only? We would use `bart_factors` and input 'H' as location:
 
 ```{r factors, warning=FALSE}
 tictoc::tic()
-toRvik::bart_factors(venue='home') %>%
+toRvik::bart_factors(location='H') %>%
   utils::head(10)
 tictoc::toc()
 ```
@@ -74,35 +74,29 @@ toRvik::bart_archive('20220113') %>%
 tictoc::toc()
 ```
 
-At this time, `bart_archive` only takes a single date, but if you want to track longer periods, I suggest looking into mapping packages such as [`purrr`](https://purrr.tidyverse.org/reference/index.html).
-
 ## **Exploring player and game data**
 
 Perhaps the most valuable functions in `toRvik` concern granular analysis. The package gives us the ability to explore advanced statistics at a game-by-game level for every Division 1 player since the 2007-08 season using `bart_player_game`. 
 
-Please note: This function returns a large tibble with >100,000 rows for each completed season. If you will be performing analyses on this data, it is recommended to store a fresh tibble as a saftey variable.
-
 ```{r player_game, warning=FALSE}
 tictoc::tic()
-toRvik::bart_player_game(year=2022, stat='adv') %>%
-  dplyr::filter(team=='Duke') %>%
+toRvik::bart_player_game(year=2022, stat='advanced', team='Duke') %>%
   dplyr::arrange(desc(net)) %>%
   utils::head(10)
 tictoc::toc()
 ```
 
-Here, `bart_player_game` returned the 20 highest individual net BPMs by a Duke player this season. The function takes 'box,' 'shooting,' and 'adv' as stat inputs, and I welcome you to explore each one in your own session. But what if we want to investigate similar performance at a seaosn level? Well, `bart_player_season` gives us that option -- also taking 'box,' 'shooting,' and 'adv' as stat inputs.
+Here, `bart_player_game` returned the 10 highest individual net BPMs by a Duke player this season. The function takes 'box,' 'shooting,' and 'advanced' as stat inputs, and I welcome you to explore each one in your own session. But what if we want to investigate similar performance at a season level? Well, `bart_player_season` gives us that option -- also taking 'box,' 'shooting,' and 'advanced' as stat inputs.
 
 ```{r player season, warning=FALSE}
 tictoc::tic()
-toRvik::bart_player_season(year=2022, stat='shooting') %>%
-  dplyr::filter(team=='Duke') %>%
+toRvik::bart_player_season(year=2022, stat='shooting', team='Duke') %>%
   dplyr::arrange(desc(mid_a)) %>%
   utils::head(5)
 tictoc::toc()
 ```
 
-And now, we have a tibble of season-long shooting data for Duke players, sorted by number of mid-range attempts. Advanced metric data can be pulled by team on a per-game basis using `bart_team_schedule`, and total team shooting splis can be accessed using `bart_team_shooting`. Game box data can be pulled with `bart_game_total`.
+And now, we have a tibble of season-long shooting data for Duke players, sorted by number of mid-range attempts. Advanced metric data can be pulled by team on a per-game basis using `bart_team_schedule`, and total team shooting splits can be accessed using `bart_team_shooting`. Game box data can be pulled with `bart_game_total`.
 
 ## **Investigating the NCAA tournament**
 

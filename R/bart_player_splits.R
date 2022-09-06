@@ -6,12 +6,7 @@
 #' \item{box}{Returns basic box score stats; sorts by ppg.}
 #' \item{shooting}{Returns play-by-play shooting splits; sorts by ppg.}
 #' \item{advanced}{Returns advanced metrics and possession-adjusted box score
-#' statistics; sorts by recruiting rank.}} and data can be split by any
-#' combination of three variables, explained below: \describe{
-#' \item{result} \item{month} \item{game}{Split by game type}}
-#'
-#' Function pulls detailed season-long player statistic by a variety
-#' of splits.
+#' statistics; sorts by recruiting rank.}}
 #'
 #' @returns Returns a tibble with the number of columns dependent on the value
 #'   supplied to the `stat` argument.
@@ -26,11 +21,21 @@
 #' @importFrom dplyr as_tibble
 #' @importFrom httr modify_url
 #' @importFrom jsonlite fromJSON
+#' @importFrom cli cli_abort
 #' @examples
 #' \donttest{bart_player_splits(year=2022, conf='ACC')}
 #'
 #' @export
-bart_player_splits <- function(year = NULL, split = NULL, team = NULL, conf = NULL, exp = NULL, player_id = NULL, type = NULL) {
+bart_player_splits <- function(year = current_season(), split = NULL, team = NULL, conf = NULL, exp = NULL, player_id = NULL, type = NULL) {
+
+  # test passed year
+  if (!is.null(year) & !(is.numeric(year) && nchar(year) == 4 && year >= 2008)) {
+    cli::cli_abort(c(
+      "{.var year} must be 2008 or later",
+      "x" = "You passed through {year}"
+    ))
+  }
+
   base_url <- 'https://api.cbbstat.com/players/season/stats/splits?'
   parsed <- httr::modify_url(
     base_url,
@@ -44,6 +49,21 @@ bart_player_splits <- function(year = NULL, split = NULL, team = NULL, conf = NU
       type = type
     )
   )
-  data <- jsonlite::fromJSON(parsed) %>% dplyr::as_tibble()
+  data <- data.frame()
+
+  tryCatch(
+    expr = {
+      data  <- jsonlite::fromJSON(parsed) %>%
+        make_toRvik_data('Player Splits', Sys.time())
+    },
+    error = function(e) {
+      check_docs_error()
+    },
+    warning = function(w) {
+    },
+    finally = {
+    }
+  )
   return(data)
 }
+

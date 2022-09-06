@@ -29,6 +29,6 @@ Data is split on three statistical types, explained below: \describe{
 statistics; sorts by recruiting rank.}}
 }
 \examples{
-\donttest{bart_player_season(year=2019, stat='adv')}
+\donttest{bart_player_season(year=2019, stat='advanced')}
 
 }

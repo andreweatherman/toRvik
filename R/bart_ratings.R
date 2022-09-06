@@ -36,11 +36,21 @@
 #' @importFrom dplyr as_tibble
 #' @importFrom httr modify_url
 #' @importFrom jsonlite fromJSON
+#' @importFrom cli cli_abort
 #' @examples
 #' \donttest{bart_ratings(year=2020)}
 #'
 #' @export
 bart_ratings <- function(year=current_season()) {
+
+  # test passed year
+  if (!is.null(year) & !(is.numeric(year) && nchar(year) == 4 && year >= 2008)) {
+    cli::cli_abort(c(
+      "{.var year} must be 2008 or later",
+      "x" = "You passed through {year}"
+    ))
+  }
+
   base_url <- 'https://api.cbbstat.com/ratings?'
   parsed <- httr::modify_url(
     base_url,
@@ -48,6 +58,22 @@ bart_ratings <- function(year=current_season()) {
       year = year
     )
   )
-  data <- jsonlite::fromJSON(parsed) %>% dplyr::as_tibble()
+
+  data <- data.frame()
+
+  tryCatch(
+    expr = {
+      data  <- jsonlite::fromJSON(parsed) %>%
+        make_toRvik_data(sprintf('Team Ratings: %i', year), Sys.time())
+    },
+    error = function(e) {
+      check_docs_error()
+    },
+    warning = function(w) {
+    },
+    finally = {
+    }
+  )
   return(data)
-  }
+}
+

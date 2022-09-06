@@ -4,7 +4,10 @@
 #' model
 #'
 #' Given a list of teams arranged in scheduled order, function returns
-#' tournament predictions for single-elimination tournaments
+#' tournament predictions for single-elimination tournaments. Teams must be
+#' supplied as a character vector and in bracket order. In other words, if team
+#' A plays team B and team C plays team D in round one, the function should be
+#' supplied `teams=c('A', 'B', 'C', 'D')`.
 #'
 #' @returns Returns a tibble with four columns: \describe{
 #'   \item{\code{team}}{character.} \item{\code{wins}}{integer.}
@@ -17,13 +20,23 @@
 #' @importFrom dplyr as_tibble
 #' @importFrom glue glue
 #' @importFrom jsonlite fromJSON
+#' @importFrom cli cli_abort
 #' @examples
-#' \donttest{bart_tournament_predicition(teams=c('Duke', 'North Carolina',
+#' \donttest{bart_tournament_prediction(teams=c('Duke', 'North Carolina',
 #' 'Kansas', 'Villanova'), date='20220402', sims=10, seed=1)}
 #'
 #' @export
 
-bart_tournament_predicition <- function(teams = NULL, date = NULL, sims = NULL, seed = NULL) {
+bart_tournament_prediction <- function(teams = NULL, date = NULL, sims = NULL, seed = NULL) {
+
+  # test passed year
+  if (!is.null(year) & !(is.numeric(year) && nchar(year) == 4 && year >= 2015)) {
+    cli::cli_abort(c(
+      "{.var year} must be 2015 or later",
+      "x" = "You passed through {year}"
+    ))
+  }
+
   base_url <- 'https://api.cbbstat.com/games/predictions/tournaments?'
   count <- 0
   for(team in teams) {
@@ -43,6 +56,20 @@ bart_tournament_predicition <- function(teams = NULL, date = NULL, sims = NULL, 
       seed = seed
     )
   )
-  data <- jsonlite::fromJSON(parsed) %>% dplyr::as_tibble()
+  data <- data.frame()
+
+  tryCatch(
+    expr = {
+      data  <- jsonlite::fromJSON(parsed) %>%
+        make_toRvik_data(sprintf('Tournament Prediction: %i Sims', sims), Sys.time())
+    },
+    error = function(e) {
+      check_docs_error()
+    },
+    warning = function(w) {
+    },
+    finally = {
+    }
+  )
   return(data)
 }

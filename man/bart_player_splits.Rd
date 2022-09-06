@@ -5,7 +5,7 @@
 \title{Get Player Season Splits}
 \usage{
 bart_player_splits(
-  year = NULL,
+  year = current_season(),
   split = NULL,
   team = NULL,
   conf = NULL,
@@ -41,12 +41,7 @@ Data is split on three statistical types, explained below: \describe{
 \item{box}{Returns basic box score stats; sorts by ppg.}
 \item{shooting}{Returns play-by-play shooting splits; sorts by ppg.}
 \item{advanced}{Returns advanced metrics and possession-adjusted box score
-statistics; sorts by recruiting rank.}} and data can be split by any
-combination of three variables, explained below: \describe{
-\item{result} \item{month} \item{game}{Split by game type}}
-
-Function pulls detailed season-long player statistic by a variety
-of splits.
+statistics; sorts by recruiting rank.}}
 }
 \examples{
 \donttest{bart_player_splits(year=2022, conf='ACC')}

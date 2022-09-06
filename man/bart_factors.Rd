@@ -30,7 +30,32 @@ bart_factors(
 \item{last}{Filters by last x games played}
 }
 \value{
-
+Returns a tibble with 22 columns:
+\describe{
+  \item{\code{team}}{character.}
+  \item{\code{conf}}{character.}
+  \item{\code{rating}}{double. Expected scoring margin against an average
+  team on a neutral court.}
+  \item{\code{rank}}{double.}
+  \item{\code{adj_o}}{double.}
+  \item{\code{adj_o_rank}}{double.}
+  \item{\code{adj_d}}{double.}
+  \item{\code{adj_d_rank}}{double.}
+  \item{\code{tempo}}{double.}
+  \item{\code{off_ppp}}{double. Raw points scored per possession.}
+  \item{\code{off_efg}}{double. Team effective FG\%.}
+  \item{\code{off_to}}{double. Offensive turnover rate.}
+  \item{\code{off_or}}{double. Offensive rebound rate.}
+  \item{\code{off_ftr}}{double. Offensive free throw rate.}
+  \item{\code{def_ppp}}{double. Raw points allowed per possesion.}
+  \item{\code{def_efg}}{double. Effective FG\% allowed.}
+  \item{\code{def_to}}{double. Turnover rate forced.}
+  \item{\code{def_or}}{double. Defensive rebound rate.}
+  \item{\code{def_ftr}}{double. Free throw rate allowed.}
+  \item{\code{wins}}{integer.}
+  \item{\code{losses}}{integer.}
+  \item{\code{games}}{integer.}
+}
 }
 \description{
 Returns four factor data and team records on a variety of splits, including
@@ -38,15 +63,9 @@ date range, quadrant level, opponent ranking, game location, and game type.
 }
 \details{
 For a brief explanation of each factor and its computation, please visit
-\href{https://kenpom.com/blog/four-factors/}{KenPom's blog}. Data can be
-split on three variables: \describe{ \item{result}{Splits on game result: 'W'
-or 'L'.} \item{type}{Splits on game type: 'nc' (non-conference), 'conf'
-(conference), or 'post' (post-season tournaments).} \item{quad}{Splits by
-quadrant level; 1-4 with 0 indicating 1-A games.} \item{top}{Splits by
-opponent T-Rank position, adjusted for game location.}
-\item{start/end}{Splits by date range (YYYYMMDD).}}
+\href{https://kenpom.com/blog/four-factors/}{KenPom's blog}.
 }
 \examples{
-\donttest{bart_factors(start='2022-01-13', type='conf')}
+bart_factors(year=2022, start='2022-01-13', type='conf')
 
 }

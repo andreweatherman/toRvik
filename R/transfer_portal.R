@@ -1,4 +1,4 @@
-#' Transfer Portal
+#' Get Transfer Portal
 #'
 #' Returns transfer portal decisions by year
 #'
@@ -19,12 +19,22 @@
 #' @importFrom dplyr as_tibble
 #' @importFrom httr modify_url
 #' @importFrom jsonlite fromJSON
+#' @importFrom cli cli_abort
 #' @examples
 #' transfer_portal(to='Duke')
 #'
 #' @export
 
 transfer_portal <- function(year = NULL, from = NULL, to = NULL) {
+
+  # test passed year
+  if (!is.null(year) & !(is.numeric(year) && nchar(year) == 4 && year >= 2013)) {
+    cli::cli_abort(c(
+      "{.var year} must be 2013 or later",
+      "x" = "You passed through {year}"
+    ))
+  }
+
   base_url <- 'https://api.cbbstat.com/players/transfers?'
   parsed <- httr::modify_url(
     base_url,
@@ -34,6 +44,20 @@ transfer_portal <- function(year = NULL, from = NULL, to = NULL) {
       to = to
     )
   )
-  data <- jsonlite::fromJSON(parsed) %>% dplyr::as_tibble()
+  data <- data.frame()
+
+  tryCatch(
+    expr = {
+      data  <- jsonlite::fromJSON(parsed) %>%
+        make_toRvik_data('Transfer Portal', Sys.time())
+    },
+    error = function(e) {
+      check_docs_error()
+    },
+    warning = function(w) {
+    },
+    finally = {
+    }
+  )
   return(data)
 }

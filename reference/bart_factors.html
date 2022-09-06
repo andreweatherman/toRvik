@@ -72,7 +72,7 @@ date range, quadrant level, opponent ranking, game location, and game type."><me
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get Four Factor Statistics</h1>
-      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/rating.R" class="external-link"><code>R/rating.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/bart_factors.R" class="external-link"><code>R/bart_factors.R</code></a></small>
       <div class="d-none name"><code>bart_factors.Rd</code></div>
     </div>
 
@@ -85,12 +85,12 @@ date range, quadrant level, opponent ranking, game location, and game type.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">bart_factors</span><span class="op">(</span></span>
 <span>  year <span class="op">=</span> <span class="fu"><a href="current_season.html">current_season</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  venue <span class="op">=</span> <span class="st">"all"</span>,</span>
-<span>  type <span class="op">=</span> <span class="st">"all"</span>,</span>
-<span>  quad <span class="op">=</span> <span class="st">"4"</span>,</span>
-<span>  top <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  result <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  start <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  end <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  end <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  location <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  last <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -100,28 +100,28 @@ date range, quadrant level, opponent ranking, game location, and game type.</p>
 <dd><p>Defaults to current season (YYYY).</p></dd>
 
 
-<dt>venue</dt>
-<dd><p>Filters by venue; defaults to `all`.</p></dd>
+<dt>result</dt>
+<dd><p>Filters by result ('W' or 'L')</p></dd>
 
 
 <dt>type</dt>
-<dd><p>Filters by game type; defaults to `all`.</p></dd>
-
-
-<dt>quad</dt>
-<dd><p>Filters by quadrant level; defaults to `4`.</p></dd>
-
-
-<dt>top</dt>
-<dd><p>Filters by opponent T-Rank position; defaults to NULL (all).</p></dd>
+<dd><p>Filter by game type ('nc', 'conf', or 'post')</p></dd>
 
 
 <dt>start</dt>
-<dd><p>Filters by start date; defaults to NULL (full season).</p></dd>
+<dd><p>Filters by starting date (YYYY-MM-DD)</p></dd>
 
 
 <dt>end</dt>
-<dd><p>Filters by end date; defaults to NULL (full season).</p></dd>
+<dd><p>Filters by ending date (YYYY-MM-DD)</p></dd>
+
+
+<dt>location</dt>
+<dd><p>Filters by game location ('H', 'A', or 'N')</p></dd>
+
+
+<dt>last</dt>
+<dd><p>Filters by last x games played</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -134,117 +134,97 @@ date range, quadrant level, opponent ranking, game location, and game type.</p>
   <dt><code>conf</code></dt>
 <dd><p>character.</p></dd>
 
-  <dt><code>barthag</code></dt>
-<dd><p>double. The estimation of a team's win probability
-  against the average Division 1 team on a neutral court.</p></dd>
+  <dt><code>rating</code></dt>
+<dd><p>double. Expected scoring margin against an average
+  team on a neutral court.</p></dd>
 
-  <dt><code>rec</code></dt>
-<dd><p>character.</p></dd>
-
-  <dt><code>wins</code></dt>
-<dd><p>double.</p></dd>
-
-  <dt><code>games</code></dt>
-<dd><p>double.</p></dd>
-
-  <dt><code>adj_t</code></dt>
+  <dt><code>rank</code></dt>
 <dd><p>double.</p></dd>
 
   <dt><code>adj_o</code></dt>
 <dd><p>double.</p></dd>
 
-  <dt><code>off_efg</code></dt>
-<dd><p>double.</p></dd>
-
-  <dt><code>off_to</code></dt>
-<dd><p>double.</p></dd>
-
-  <dt><code>off_or</code></dt>
-<dd><p>double.</p></dd>
-
-  <dt><code>off_ftr</code></dt>
+  <dt><code>adj_o_rank</code></dt>
 <dd><p>double.</p></dd>
 
   <dt><code>adj_d</code></dt>
 <dd><p>double.</p></dd>
 
-  <dt><code>def_efg</code></dt>
+  <dt><code>adj_d_rank</code></dt>
 <dd><p>double.</p></dd>
+
+  <dt><code>tempo</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>off_ppp</code></dt>
+<dd><p>double. Raw points scored per possession.</p></dd>
+
+  <dt><code>off_efg</code></dt>
+<dd><p>double. Team effective FG%.</p></dd>
+
+  <dt><code>off_to</code></dt>
+<dd><p>double. Offensive turnover rate.</p></dd>
+
+  <dt><code>off_or</code></dt>
+<dd><p>double. Offensive rebound rate.</p></dd>
+
+  <dt><code>off_ftr</code></dt>
+<dd><p>double. Offensive free throw rate.</p></dd>
+
+  <dt><code>def_ppp</code></dt>
+<dd><p>double. Raw points allowed per possesion.</p></dd>
+
+  <dt><code>def_efg</code></dt>
+<dd><p>double. Effective FG% allowed.</p></dd>
 
   <dt><code>def_to</code></dt>
-<dd><p>double.</p></dd>
+<dd><p>double. Turnover rate forced.</p></dd>
 
   <dt><code>def_or</code></dt>
-<dd><p>double.</p></dd>
+<dd><p>double. Defensive rebound rate.</p></dd>
 
   <dt><code>def_ftr</code></dt>
-<dd><p>double.</p></dd>
+<dd><p>double. Free throw rate allowed.</p></dd>
 
-  <dt><code>wab</code></dt>
-<dd><p>double. The number of wins above or below the expected
-  total from a bubble team against the same schedule.</p></dd>
+  <dt><code>wins</code></dt>
+<dd><p>integer.</p></dd>
 
-  <dt><code>year</code></dt>
-<dd><p>double.</p></dd>
+  <dt><code>losses</code></dt>
+<dd><p>integer.</p></dd>
 
-  <dt><code>venue</code></dt>
-<dd><p>character. Split supplied to the venue argument.</p></dd>
-
-  <dt><code>type</code></dt>
-<dd><p>character. Split supplied to the type argument.</p></dd>
-
-  <dt><code>top</code></dt>
-<dd><p>double. Split supplied to the top argument.</p></dd>
-
-  <dt><code>quad</code></dt>
-<dd><p>character. Split supplied to the quad argument.</p></dd>
+  <dt><code>games</code></dt>
+<dd><p>integer.</p></dd>
 
 
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>For a brief explanation of each factor and its computation, please visit
-<a href="https://kenpom.com/blog/four-factors/" class="external-link">KenPom's blog</a>. Data can be
-split on five variables:</p><dl><dt>venue</dt>
-<dd><p>Splits on game location;
-'all', 'home', 'away', 'neutral', and 'road' (away + neutral).</p></dd>
-
-<dt>type</dt>
-<dd><p>Splits on game type; 'all', 'nc' (non-conference), 'conf'
-(conference), 'reg' (regular season), 'post' (post-season tournaments),
-'ncaa' (NCAA tournament).</p></dd>
- <dt>quad</dt>
-<dd><p>Splits by quadrant level; 1-4 with 0
-indicating 1-A games.</p></dd>
- <dt>top</dt>
-<dd><p>Splits by opponent T-Rank position,
-adjusted for game location.</p></dd>
- <dt>start/end</dt>
-<dd><p>Splits by date range
-(YYYYMMDD).</p></dd>
-
-</dl></div>
+<a href="https://kenpom.com/blog/four-factors/" class="external-link">KenPom's blog</a>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">bart_factors</span><span class="op">(</span>quad<span class="op">=</span><span class="st">'3'</span>, venue<span class="op">=</span><span class="st">'away'</span>, start<span class="op">=</span><span class="st">'20220101'</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 357 × 24</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    team       conf  barthag rec    wins games adj_t adj_o off_efg off_to off_or</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Gonzaga    WCC     0.981 4–1       4     5  78.3  118.    58.5   16.5   20  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Duke       ACC     0.979 9–1       9    10  65.5  126.    56.6   14.5   32.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Arizona    P12     0.960 7–2       7     9  73.8  122.    55.9   18.5   33.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Kentucky   SEC     0.948 6–4       6    10  67.6  116.    49.4   18.2   32.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Murray St. OVC     0.943 2–0       2     2  64.1  112.    50.9   14.9   28.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Vermont    AE      0.938 3–0       3     3  66.1  116.    66.1   16.4   21.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Kansas     B12     0.930 5–4       5     9  68.1  120.    51.1   20.3   35.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Baylor     B12     0.929 7–3       7    10  68.4  116.    50.6   20.3   32.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Iowa       B10     0.918 5–4       5     9  69.1  121.    52.3   12.7   31.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Villanova  BE      0.913 7–2       7     9  66.2  120.    54.1   18.7   30.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 347 more rows, and 13 more variables: off_ftr &lt;dbl&gt;, adj_d &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   def_efg &lt;dbl&gt;, def_to &lt;dbl&gt;, def_or &lt;dbl&gt;, def_ftr &lt;dbl&gt;, wab &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   year &lt;dbl&gt;, venue &lt;chr&gt;, type &lt;chr&gt;, top &lt;dbl&gt;, quad &lt;chr&gt;, start &lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">bart_factors</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span>, start<span class="op">=</span><span class="st">'2022-01-13'</span>, type<span class="op">=</span><span class="st">'conf'</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Team Factors ──────────────────────────────────────────────── <span style="font-style: italic;">toRvik 1.0.2</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-06 05:38:53 UTC</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 358 × 22</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    team     conf  rating  rank adj_o adj_o…¹ adj_d adj_d…² tempo off_ppp off_efg</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Gonzaga  WCC     32.1     1  120.       5  87.7       3  74.9    118.    59.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Duke     ACC     28.6     2  123.       1  94.4      39  66.1    117.    56.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Kansas   B12     27.2     3  120.       4  92.8      21  68.6    109.    52.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Houston  Amer    26.1     4  114.      22  88.4       6  65.5    110.    52.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Kentucky SEC     25.6     5  122.       3  96.6      63  68.4    113.    53.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Baylor   B12     25.3     6  117.      13  91.3      12  67.0    106.    50.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Arizona  P12     24.8     7  118.       9  92.8      19  71.7    113.    55.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Iowa     B10     24.6     8  119.       7  94.2      36  69.2    114.    51.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Purdue   B10     24.2     9  122.       2  98.1      84  65.9    115.    56.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Villano… BE      23.8    10  120.       6  96.0      56  65.5    115.    55.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 348 more rows, 11 more variables: off_to &lt;dbl&gt;, off_or &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   off_ftr &lt;dbl&gt;, def_ppp &lt;dbl&gt;, def_efg &lt;dbl&gt;, def_to &lt;dbl&gt;, def_or &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   def_ftr &lt;dbl&gt;, wins &lt;int&gt;, losses &lt;int&gt;, games &lt;int&gt;, and abbreviated</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   variable names ¹​adj_o_rank, ²​adj_d_rank</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

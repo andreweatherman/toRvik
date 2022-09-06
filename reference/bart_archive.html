@@ -72,7 +72,7 @@ specified day. Data goes back to 2014-15."><meta property="og:image" content="ht
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get T-Rank Archive Ratings</h1>
-      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/rating.R" class="external-link"><code>R/rating.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/bart_archive.R" class="external-link"><code>R/bart_archive.R</code></a></small>
       <div class="d-none name"><code>bart_archive.Rd</code></div>
     </div>
 
@@ -83,21 +83,28 @@ specified day. Data goes back to 2014-15.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">bart_archive</span><span class="op">(</span><span class="va">date</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">bart_archive</span><span class="op">(</span>date <span class="op">=</span> <span class="cn">NULL</span>, team <span class="op">=</span> <span class="cn">NULL</span>, year <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>date</dt>
-<dd><p>Date to pull ratings (YYYYMMDD).</p></dd>
+<dd><p>Date to filter for (YYYYMMDD).</p></dd>
+
+
+<dt>team</dt>
+<dd><p>Team to filter for.</p></dd>
+
+
+<dt>year</dt>
+<dd><p>Year to filter for.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>Returns a tibble with 16 columns:
-#'</p><dl><dt><code>rk</code></dt>
+<p>Returns a tibble with 16 columns:</p><dl><dt><code>rk</code></dt>
 <dd><p>double.</p></dd>
 
   <dt><code>team</code></dt>
@@ -108,6 +115,10 @@ specified day. Data goes back to 2014-15.</p>
 
   <dt><code>rec</code></dt>
 <dd><p>character.</p></dd>
+
+  <dt><code>barthag</code></dt>
+<dd><p>double. The estimation of a team's win probability
+  against the average Division 1 team on a neutral court.</p></dd>
 
   <dt><code>adj_o</code></dt>
 <dd><p>double.</p></dd>
@@ -121,9 +132,11 @@ specified day. Data goes back to 2014-15.</p>
   <dt><code>adj_d_rk</code></dt>
 <dd><p>double.</p></dd>
 
-  <dt><code>barthag</code></dt>
-<dd><p>double. The estimation of a team's win probability
-  against the average Division 1 team on a neutral court.</p></dd>
+  <dt><code>adj_tempo</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>adj_tempo_rk</code></dt>
+<dd><p>double.</p></dd>
 
   <dt><code>proj_rec</code></dt>
 <dd><p>character.</p></dd>
@@ -138,12 +151,6 @@ specified day. Data goes back to 2014-15.</p>
   <dt><code>wab_rk</code></dt>
 <dd><p>double.</p></dd>
 
-  <dt><code>cur_rk</code></dt>
-<dd><p>double.</p></dd>
-
-  <dt><code>change</code></dt>
-<dd><p>double.</p></dd>
-
   <dt><code>date</code></dt>
 <dd><p>double.</p></dd>
 
@@ -152,24 +159,26 @@ specified day. Data goes back to 2014-15.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">bart_archive</span><span class="op">(</span><span class="st">'20220113'</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">bart_archive</span><span class="op">(</span>date<span class="op">=</span><span class="st">'20220113'</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Archive Ratings ───────────────────────────────────────────── <span style="font-style: italic;">toRvik 1.0.2</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-06 05:38:45 UTC</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 358 × 16</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     rank team   conf  record barthag adj_o adj_o…¹ adj_d adj_d…² adj_t…³ adj_t…⁴</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     1 Gonza… WCC   13-2     0.964  124.       2  93.3      20    73.9       8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     2 Baylor B12   15-1     0.963  121.       5  91.3      13    69.7     121</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     3 Houst… Amer  14-2     0.961  120.       6  91.0      11    66.2     306</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     4 Auburn SEC   15-1     0.947  115.      20  89.3       8    71.6      46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     5 LSU    SEC   15-1     0.946  106.     117  82.4       1    70.9      72</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     6 Arizo… P12   13-1     0.945  117.      15  91.0      12    74.7       3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     7 Villa… BE    12-4     0.942  117.      13  91.6      16    62.3     354</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     8 Kansas B12   13-2     0.938  122.       4  96.5      50    70.6      79</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     9 Purdue B10   13-2     0.937  125.       1  98.9      94    68.1     203</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>    10 Duke   ACC   13-2     0.926  117.      11  93.8      23    70.6      81</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>   125 Abile… WAC   11-5    0.612  100.      239  96.2      46    71.3      58</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>   260 Air F… MWC   8-5     0.321   93.7     331 100.      114    63.9     342</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>   151 Akron  MAC   9-4     0.535  105.      130 104.      188    64.9     327</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>    21 Alaba… SEC   11-5    0.880  117.       10  98.7      89    72.3      28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>   330 Alaba… SWAC  4-10    0.155   88.5     356 103.      156    67.6     234</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>   305 Alaba… SWAC  4-13    0.199   95.8     309 108.      285    72.0      37</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>   303 Albany AE    5-10    0.205   91.3     351 103.      158    66.2     305</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>   262 Alcor… SWAC  4-11    0.316   98.5     266 105.      224    68.0     207</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>   347 Ameri… Pat   4-10    0.091<span style="text-decoration: underline;">0</span>  93.9     329 115.      347    67.2     262</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>   188 Appal… SB    9-9     0.451  100.      235 102.      144    64.3     338</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 348 more rows, 5 more variables: proj_record &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   proj_conf_record &lt;chr&gt;, wab &lt;dbl&gt;, wab_rk &lt;dbl&gt;, date &lt;date&gt;, and</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   proj_conf_record &lt;chr&gt;, wab &lt;dbl&gt;, wab_rk &lt;int&gt;, date &lt;chr&gt;, and</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abbreviated variable names ¹​adj_o_rk, ²​adj_d_rk, ³​adj_tempo, ⁴​adj_tempo_rk</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

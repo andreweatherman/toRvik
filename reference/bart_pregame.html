@@ -72,7 +72,7 @@ all games."><meta property="og:image" content="https://andreweatherman.github.io
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get Pregame Probabilities</h1>
-      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/game.R" class="external-link"><code>R/game.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/bart_pregame.R" class="external-link"><code>R/bart_pregame.R</code></a></small>
       <div class="d-none name"><code>bart_pregame.Rd</code></div>
     </div>
 
@@ -83,13 +83,25 @@ all games.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">bart_pregame</span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="current_season.html">current_season</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">bart_pregame</span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="current_season.html">current_season</a></span><span class="op">(</span><span class="op">)</span>, team <span class="op">=</span> <span class="cn">NULL</span>, type <span class="op">=</span> <span class="cn">NULL</span>, game_id <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>year</dt>
 <dd><p>Defaults to current season (YYYY).</p></dd>
+
+
+<dt>team</dt>
+<dd><p>Team to filter for.</p></dd>
+
+
+<dt>type</dt>
+<dd><p>Game type to filter for ('nc', 'conf', 'conf_t', 'post', 'nond1')</p></dd>
+
+
+<dt>game_id</dt>
+<dd><p>Game ID to filter for.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -98,22 +110,19 @@ all games.</p>
 
 <p>Returns a tibble with 13 columns:</p><dl><dt><code>date</code></dt>
 <dd><p>double.</p></dd>
-
-  <dt><code>conf</code></dt>
+ <dt><code>conf</code></dt>
 <dd><p>character.</p></dd>
 
   <dt><code>line</code></dt>
 <dd><p>character.</p></dd>
-
-  <dt><code>ttq</code></dt>
-<dd><p>double. Torvik Thrill Quotient -- measures how good the
-  teams are, how close the game is projected to be, and how fast the tempo is
-  projected to be.</p></dd>
+ <dt><code>ttq</code></dt>
+<dd><p>double. Torvik Thrill
+  Quotient -- measures how good the teams are, how close the game is
+  projected to be, and how fast the tempo is projected to be.</p></dd>
 
   <dt><code>type</code></dt>
 <dd><p>character. See details.</p></dd>
-
-  <dt><code>team1</code></dt>
+ <dt><code>team1</code></dt>
 <dd><p>character.</p></dd>
 
   <dt><code>team1_wp</code></dt>
@@ -124,20 +133,17 @@ all games.</p>
 
   <dt><code>team2</code></dt>
 <dd><p>character.</p></dd>
-
-  <dt><code>team2_wp</code></dt>
-<dd><p>double. Estimated win percentage.</p></dd>
-
-  <dt><code>team2_pts</code></dt>
+ <dt><code>team2_wp</code></dt>
+<dd><p>double. Estimated
+  win percentage.</p></dd>
+ <dt><code>team2_pts</code></dt>
 <dd><p>double. Estimated total points.</p></dd>
 
   <dt><code>game_id</code></dt>
 <dd><p>character.</p></dd>
-
-  <dt><code>year</code></dt>
+ <dt><code>year</code></dt>
 <dd><p>double.</p></dd>
-
-
+ 
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -161,22 +167,23 @@ involving one non-D1 team.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">bart_pregame</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5,968 × 13</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    date       conf        line     ttq type  team1 team1…¹ team1…² team2 team2…³</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2021-11-09 ACC vs. SEC Duke …  91.5 nc    Duke   0.561     77.9 Kent…   0.439</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2021-11-09 B12 vs. B10 Kansa…  70.7 nc    Kans…  0.812     78.7 Mich…   0.188</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2021-11-09 OVC at MAC  Belmo…  66.9 nc    Belm…  0.531     71.0 Ohio    0.469</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2021-11-09 WAC at P12  Utah …  60.2 nc    Abil…  0.374     70.6 Utah    0.626</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2021-11-09 MVC at Sum  South…  59.5 nc    Brad…  0.279     70.7 Sout…   0.721</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2021-11-09 CUSA at SEC Alaba…  58.0 nc    Loui…  0.161     71.5 Alab…   0.839</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2021-11-09 CAA at MVC  Illin…  55.4 nc    UNC …  0.445     69.9 Illi…   0.555</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2021-11-09 MAC at MVC  Toled…  53.9 nc    Tole…  0.641     73.3 Valp…   0.359</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2021-11-09 MAAC at A10 VCU -…  53.6 nc    Sain…  0.214     56.4 VCU     0.786</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2021-11-09 CAA at Amer Houst…  51.0 nc    Hofs…  0.039<span style="text-decoration: underline;">5</span>    60.1 Hous…   0.960</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 5,958 more rows, 3 more variables: team2_pts &lt;dbl&gt;, game_id &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   year &lt;dbl&gt;, and abbreviated variable names ¹​team1_wp, ²​team1_pts, ³​team2_wp</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Pregame Probabilities ─────────────────────────────────────── <span style="font-style: italic;">toRvik 1.0.2</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-06 05:39:39 UTC</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5,967 × 13</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    date      conf  line    ttq type  team1 team1…¹ team1…² team2 team2…³ team2…⁴</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2021-11-… ACC … Duke…  91.5 nc    Duke   0.561     77.9 Kent…   0.439    76.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2021-11-… B12 … Kans…  70.7 nc    Kans…  0.812     78.7 Mich…   0.188    69.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2021-11-… OVC … Belm…  66.9 nc    Belm…  0.531     71.0 Ohio    0.469    70.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2021-11-… WAC … Utah…  60.2 nc    Abil…  0.374     70.6 Utah    0.626    73.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2021-11-… MVC … Sout…  59.5 nc    Brad…  0.279     70.7 Sout…   0.721    76.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2021-11-… CUSA… Alab…  58.0 nc    Loui…  0.161     71.5 Alab…   0.839    82.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2021-11-… CAA … Illi…  55.4 nc    UNC …  0.445     69.9 Illi…   0.555    71.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2021-11-… MAC … Tole…  53.9 nc    Tole…  0.641     73.3 Valp…   0.359    69.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2021-11-… MAAC… VCU …  53.6 nc    Sain…  0.214     56.4 VCU     0.786    63.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2021-11-… CAA … Hous…  51.0 nc    Hofs…  0.039<span style="text-decoration: underline;">5</span>    60.1 Hous…   0.960    79.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 5,957 more rows, 2 more variables: game_id &lt;chr&gt;, year &lt;int&gt;, and</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abbreviated variable names ¹​team1_wp, ²​team1_pts, ³​team2_wp, ⁴​team2_pts</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

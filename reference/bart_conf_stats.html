@@ -72,7 +72,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get Conference Team Statistics</h1>
-      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/rating.R" class="external-link"><code>R/rating.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/bart_conf_stats.R" class="external-link"><code>R/bart_conf_stats.R</code></a></small>
       <div class="d-none name"><code>bart_conf_stats.Rd</code></div>
     </div>
 
@@ -186,31 +186,30 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">bart_conf_stats</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span>, conf<span class="op">=</span><span class="st">'ACC'</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 15 × 24</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">bart_conf_stats</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2021</span>, conf<span class="op">=</span><span class="st">'ACC'</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 15 × 22</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       rk team   seed finish conf_…¹ adj_oe adj_de barthag eff_m…² con_oe con_o…³</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     6 Duke      2 Final… 16-4     123.    96.1   0.944      28   121.       1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>    16 Nort…     8 Finals 15-5     114.    93.5   0.911      18   115        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>    36 Notr…    11 R32    15-5     113.    96.8   0.854      18   114.       7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>    38 Miam…    10 Elite… 14-6     114.    98.0   0.847      17   117.       2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>    35 Wake…    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>     13-7     111.    95.0   0.854      20   115.       4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>    59 Virg…    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>     12-8     107.    95.1   0.801      14   112.       9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>    18 Virg…    11 R64    11-9     116.    95.2   0.903      16   115.       5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>   103 Flor…    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>     10-10    105.    98.4   0.683       7   106       11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>    45 Syra…    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>     9-11     116.   101.    0.827      13   115.       6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>    70 Clem…    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>     8-12     109.    98.4   0.775      10   109       10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>   111 Bost…    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>     6-14     104.    98.8   0.642       4   103       13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>   118 Loui…    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>     6-14     103.    98.3   0.631       1   104       12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span>   195 Pitt…    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>     6-14      98.9  101.    0.438       0   103.      14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span>   139 Geor…    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>     5-15     101.    97.9   0.579       4   101.      15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span>   120 Nort…    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>     4-16     109.   105.    0.625       7   112.       8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 13 more variables: con_de &lt;dbl&gt;, con_de_rk &lt;dbl&gt;, conf_barthag &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>    21 Virg…     4 R64    13-4      114.   94.5   0.894      22  115.        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>    10 Flor…     4 Sweet… 11-4      115.   93.1   0.921      27  121.        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>    50 Virg…    10 R64    9-4       110.   95.0   0.837      16  109.        9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>    33 Geor…     9 R64    11-6      114.   96.3   0.874      20  113.        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>    37 Nort…     8 R64    10-6      109.   93.0   0.862      17  109.        8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>    44 Clem…     7 R64    10-6      106.   91.5   0.842      10  104.       12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>    62 Loui…    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>     8-5       107.   95.1   0.786      12  107.       11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>    38 Syra…    11 Sweet… 9-7       113.   96.9   0.860      14  112.        6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>    51 Nort…    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>     9-8       111.   96.6   0.831      13  111.        7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>    32 Duke     <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>     9-9       115.   97.2   0.874      17  116.        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>    86 Notr…    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>     7-11      113.  104.    0.738      12  113.        5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>   101 Pitt…    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>     6-10      108.  100.    0.696       9  108.       10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span>   128 Miam…    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>     4-15      102.   99.5   0.580       0  100.       14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span>   157 Wake…    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>     3-15      102.  101.    0.521      -<span style="color: #BB0000;">2</span>   99.7      15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span>   161 Bost…    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>     2-11      104.  103.    0.516       0  103.       13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 11 more variables: con_de &lt;dbl&gt;, con_de_rk &lt;dbl&gt;, conf_barthag &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   proj_rec &lt;chr&gt;, conf_cur_sos &lt;dbl&gt;, conf_cur_sos_rk &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   conf_fut_sos &lt;dbl&gt;, conf_fut_sos_rk &lt;dbl&gt;, conf_sos &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   conf_sos_rk &lt;dbl&gt;, auto_prob &lt;dbl&gt;, bid_prob &lt;dbl&gt;, year &lt;dbl&gt;, and</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abbreviated variable names ¹​conf_rec, ²​eff_marg, ³​con_oe_rk</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   conf_sos_rk &lt;dbl&gt;, year &lt;dbl&gt;, and abbreviated variable names ¹​conf_rec,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​eff_marg, ³​con_oe_rk</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

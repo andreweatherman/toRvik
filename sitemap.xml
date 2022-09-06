@@ -49,6 +49,9 @@
     <loc>https://andreweatherman.github.io/toRvik/reference/bart_game_factors.html</loc>
   </url>
   <url>
+    <loc>https://andreweatherman.github.io/toRvik/reference/bart_game_prediction.html</loc>
+  </url>
+  <url>
     <loc>https://andreweatherman.github.io/toRvik/reference/bart_injuryimpact.html</loc>
   </url>
   <url>
@@ -58,13 +61,16 @@
     <loc>https://andreweatherman.github.io/toRvik/reference/bart_player_season.html</loc>
   </url>
   <url>
+    <loc>https://andreweatherman.github.io/toRvik/reference/bart_player_splits.html</loc>
+  </url>
+  <url>
+    <loc>https://andreweatherman.github.io/toRvik/reference/bart_players.html</loc>
+  </url>
+  <url>
     <loc>https://andreweatherman.github.io/toRvik/reference/bart_poy.html</loc>
   </url>
   <url>
     <loc>https://andreweatherman.github.io/toRvik/reference/bart_pregame.html</loc>
-  </url>
-  <url>
-    <loc>https://andreweatherman.github.io/toRvik/reference/bart_pro.html</loc>
   </url>
   <url>
     <loc>https://andreweatherman.github.io/toRvik/reference/bart_ratings.html</loc>
@@ -85,6 +91,9 @@
     <loc>https://andreweatherman.github.io/toRvik/reference/bart_team_shooting.html</loc>
   </url>
   <url>
+    <loc>https://andreweatherman.github.io/toRvik/reference/bart_tournament_prediction.html</loc>
+  </url>
+  <url>
     <loc>https://andreweatherman.github.io/toRvik/reference/bart_tourney_odds.html</loc>
   </url>
   <url>
@@ -94,12 +103,18 @@
     <loc>https://andreweatherman.github.io/toRvik/reference/bart_tourney_sheets.html</loc>
   </url>
   <url>
-    <loc>https://andreweatherman.github.io/toRvik/reference/bart_transfers.html</loc>
-  </url>
-  <url>
     <loc>https://andreweatherman.github.io/toRvik/reference/current_season.html</loc>
   </url>
   <url>
     <loc>https://andreweatherman.github.io/toRvik/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://andreweatherman.github.io/toRvik/reference/player_recruiting_rankings.html</loc>
+  </url>
+  <url>
+    <loc>https://andreweatherman.github.io/toRvik/reference/teams_by_year.html</loc>
+  </url>
+  <url>
+    <loc>https://andreweatherman.github.io/toRvik/reference/transfer_portal.html</loc>
   </url>
 </urlset>

@@ -70,7 +70,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get T-Rank Ratings</h1>
-      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/rating.R" class="external-link"><code>R/rating.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/bart_ratings.R" class="external-link"><code>R/bart_ratings.R</code></a></small>
       <div class="d-none name"><code>bart_ratings.Rd</code></div>
     </div>
 
@@ -163,25 +163,26 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">bart_ratings</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 358 × 19</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">bart_ratings</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2020</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Team Ratings: 2020 ────────────────────────────────────────── <span style="font-style: italic;">toRvik 1.0.2</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-06 05:39:41 UTC</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 353 × 19</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    team    conf  barthag barth…¹ adj_o adj_o…² adj_d adj_d…³ adj_t adj_t…⁴   wab</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Gonzaga WCC     0.966       1  120.       4  89.9       9  72.6       5  6.71</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Houston Amer    0.959       2  117.      10  88.5       6  63.7     336  6.15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Kansas  B12     0.958       3  120.       5  91.3      13  69.1      71 10.4 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Texas … B12     0.951       4  111.      41  85.4       1  66.3     223  6.57</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Baylor  B12     0.949       5  118.       8  91.3      14  67.6     149  8.91</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Duke    ACC     0.944       6  123.       1  96.0      53  67.4     161  7.19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Tennes… SEC     0.944       7  111.      34  87.1       3  67.4     164  7.96</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Villan… BE      0.935       8  117.       9  93.0      26  62.2     350  7.29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Arizona P12     0.934       9  118.       7  93.7      35  72.3       9  8.76</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> UCLA    P12     0.932      10  116.      12  92.2      20  65.4     274  5.06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 348 more rows, 8 more variables: nc_elite_sos &lt;dbl&gt;, nc_fut_sos &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   nc_cur_sos &lt;dbl&gt;, ov_elite_sos &lt;dbl&gt;, ov_fut_sos &lt;dbl&gt;, ov_cur_sos &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   seed &lt;int&gt;, year &lt;dbl&gt;, and abbreviated variable names ¹​barthag_rk,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Kansas  B12     0.962       1  116.       7  87.7       2  67.4     226 10.9 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Baylor  B12     0.951       2  114.      13  88.4       3  66.2     273  8.54</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Gonzaga WCC     0.947       3  121.       1  94.3      41  72.0      33  7.69</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Dayton  A10     0.945       4  120.       3  93.4      29  67.5     219  6.81</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Michig… B10     0.933       5  115.      11  91.3      11  69.3     117  5.23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Duke    ACC     0.931       6  115.       9  91.9      17  71.7      39  5.09</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Creigh… BE      0.929       7  121.       2  96.4      67  68.3     170  6.10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Ohio S… B10     0.920       8  115.      12  92.6      22  66.2     278  3.80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> San Di… MWC     0.912       9  114.      17  92.8      25  64.7     330  6.64</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Louisv… ACC     0.912      10  115.      10  94.0      37  66.9     244  4.34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 343 more rows, 8 more variables: nc_elite_sos &lt;int&gt;, nc_fut_sos &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   nc_cur_sos &lt;dbl&gt;, ov_elite_sos &lt;int&gt;, ov_fut_sos &lt;dbl&gt;, ov_cur_sos &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   seed &lt;lgl&gt;, year &lt;int&gt;, and abbreviated variable names ¹​barthag_rk,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​adj_o_rk, ³​adj_d_rk, ⁴​adj_t_rk</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

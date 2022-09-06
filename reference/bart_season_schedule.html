@@ -70,7 +70,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get Full Season Schedule</h1>
-      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/game.R" class="external-link"><code>R/game.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/R/bart_season_schedule.R" class="external-link"><code>R/bart_season_schedule.R</code></a></small>
       <div class="d-none name"><code>bart_season_schedule.Rd</code></div>
     </div>
 
@@ -80,13 +80,30 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">bart_season_schedule</span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="current_season.html">current_season</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">bart_season_schedule</span><span class="op">(</span></span>
+<span>  year <span class="op">=</span> <span class="fu"><a href="current_season.html">current_season</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  conf <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  team <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>year</dt>
 <dd><p>Defaults to current season (YYYY).</p></dd>
+
+
+<dt>type</dt>
+<dd><p>Filters for game type (see details).</p></dd>
+
+
+<dt>conf</dt>
+<dd><p>Filters for conference.</p></dd>
+
+
+<dt>team</dt>
+<dd><p>Filters for team.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -132,21 +149,22 @@ games.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">bart_season_schedule</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5,968 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    date       type  neutral home               away                game_id      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2021-11-09 nc    FALSE   Creighton          Arkansas Pine Bluff Arkansas Pin…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2021-11-09 nc    FALSE   Valparaiso         Toledo              ToledoValpar…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2021-11-09 nc    FALSE   Indiana            Eastern Michigan    Eastern Mich…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2021-11-09 nc    FALSE   North Carolina St. Bucknell            BucknellNort…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2021-11-09 nc    FALSE   Missouri           Central Michigan    Central Mich…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2021-11-09 nond1 FALSE   Brown              Salve Regina        Salve Regina…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2021-11-09 nond1 FALSE   Wright St.         Lake Erie           Lake ErieWri…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2021-11-09 nc    FALSE   New Mexico St.     UC Irvine           UC IrvineNew…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2021-11-09 nond1 FALSE   Furman             North Greenville    North Greenv…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2021-11-09 nc    FALSE   UAB                UNC Asheville       UNC Ashevill…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 5,958 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── 2022 Schedule ─────────────────────────────────────────────── <span style="font-style: italic;">toRvik 1.0.2</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-06 05:39:43 UTC</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5,968 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    date       type  neutral home             home_…¹ away  away_…² game_id  year</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2021-11-09 nc    FALSE   Creighton        BE      Arka… SWAC    Arkans…  <span style="text-decoration: underline;">2</span>022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2021-11-09 nc    FALSE   Valparaiso       MVC     Tole… MAC     Toledo…  <span style="text-decoration: underline;">2</span>022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2021-11-09 nc    FALSE   Indiana          B10     East… MAC     Easter…  <span style="text-decoration: underline;">2</span>022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2021-11-09 nc    FALSE   North Carolina … ACC     Buck… Pat     Buckne…  <span style="text-decoration: underline;">2</span>022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2021-11-09 nc    FALSE   Missouri         SEC     Cent… MAC     Centra…  <span style="text-decoration: underline;">2</span>022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2021-11-09 nond1 FALSE   Brown            Ivy     Salv… <span style="color: #BB0000;">NA</span>      Salve …  <span style="text-decoration: underline;">2</span>022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2021-11-09 nond1 FALSE   Wright St.       Horz    Lake… <span style="color: #BB0000;">NA</span>      Lake E…  <span style="text-decoration: underline;">2</span>022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2021-11-09 nc    FALSE   New Mexico St.   WAC     UC I… BW      UC Irv…  <span style="text-decoration: underline;">2</span>022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2021-11-09 nond1 FALSE   Furman           SC      Nort… <span style="color: #BB0000;">NA</span>      North …  <span style="text-decoration: underline;">2</span>022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2021-11-09 nc    FALSE   UAB              CUSA    UNC … BSth    UNC As…  <span style="text-decoration: underline;">2</span>022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 5,958 more rows, and abbreviated variable names ¹​home_conf, ²​away_conf</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

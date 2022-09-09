@@ -31,12 +31,12 @@ framework – delivering data at rapid speeds with dependable up-times.
 As of version 1.0.3, the package includes nearly 30 functions for
 pulling player and team data, game results, advanced metric splits,
 play-by-play shooting, and more. Leveraging the same data and models as
-[Barttorvik](www.barttorvik.com), the package now offers game and
-tournament predictor functions, allowing you to simulate games between
-any pair of teams on any date at any venue back to the 2014-15 season.
-`toRvik` also offers extensive transfer histories for over 5,000 players
-back to the 2011-12 season and detailed player recruiting rankings for
-over 6,000 players back to 2007-08.
+[Barttorvik](https://www.barttorvik.com), the package now offers game
+and tournament predictor functions, allowing you to simulate games
+between any pair of teams on any date at any venue back to the 2014-15
+season. `toRvik` also offers extensive transfer histories for over 5,000
+players back to the 2011-12 season and detailed player recruiting
+rankings for over 6,000 players back to 2007-08.
 
 ## Package Installation
 
@@ -88,7 +88,7 @@ head(bart_ratings())
 
     ## ── Team Ratings: 2022 ────────────────────────────────────────── toRvik 1.1.0 ──
 
-    ## ℹ Data updated: 2022-09-08 21:16:51 EDT
+    ## ℹ Data updated: 2022-09-09 08:20:52 EDT
 
     ## # A tibble: 6 × 19
     ##   team     conf  barthag barth…¹ adj_o adj_o…² adj_d adj_d…³ adj_t adj_t…⁴   wab
@@ -115,7 +115,7 @@ head(bart_factors(location='H'))
 
     ## ── Team Factors ──────────────────────────────────────────────── toRvik 1.1.0 ──
 
-    ## ℹ Data updated: 2022-09-08 21:16:52 EDT
+    ## ℹ Data updated: 2022-09-09 08:20:52 EDT
 
     ## # A tibble: 6 × 22
     ##   team      conf  rating  rank adj_o adj_o…¹ adj_d adj_d…² tempo off_ppp off_efg
@@ -142,7 +142,7 @@ bart_team_box(team='Duke', split='month') |>
 
     ## ── Team Stats ────────────────────────────────────────────────── toRvik 1.1.0 ──
 
-    ## ℹ Data updated: 2022-09-08 21:16:52 EDT
+    ## ℹ Data updated: 2022-09-09 08:20:53 EDT
 
     ## # A tibble: 1 × 39
     ##   team  month   min   pos   fgm   fga fg_pct   tpm   tpa fg3_pct   ftm   fta
@@ -167,7 +167,7 @@ head(bart_player_season(team='Duke', stat='box'))
 
     ## ── Player Season Stats ───────────────────────────────────────── toRvik 1.1.0 ──
 
-    ## ℹ Data updated: 2022-09-08 21:16:53 EDT
+    ## ℹ Data updated: 2022-09-09 08:20:53 EDT
 
     ## # A tibble: 6 × 21
     ##   player      pos   exp   hgt   team  conf      g   mpg   ppg fg_pct  oreb  dreb
@@ -190,7 +190,7 @@ head(bart_player_game(team='Duke', stat='advanced'))
 
     ## ── Player Game Stats ─────────────────────────────────────────── toRvik 1.1.0 ──
 
-    ## ℹ Data updated: 2022-09-08 21:16:53 EDT
+    ## ℹ Data updated: 2022-09-09 08:20:54 EDT
 
     ## # A tibble: 6 × 25
     ##   date        year player exp   team  conf  opp   result   min   pts   usg  ortg
@@ -217,7 +217,7 @@ head(transfer_portal(to='Duke'))
 
     ## ── Transfer Portal ───────────────────────────────────────────── toRvik 1.1.0 ──
 
-    ## ℹ Data updated: 2022-09-08 21:16:53 EDT
+    ## ℹ Data updated: 2022-09-09 08:20:54 EDT
 
     ## # A tibble: 6 × 11
     ##      id player        from  to    exp    year imm_e…¹ source from_d1 to_d1 sit  
@@ -242,7 +242,7 @@ head(player_recruiting_rankings(stars=5, state='NC'))
 
     ## ── Recruiting Rankings ───────────────────────────────────────── toRvik 1.1.0 ──
 
-    ## ℹ Data updated: 2022-09-08 21:16:54 EDT
+    ## ℹ Data updated: 2022-09-09 08:20:55 EDT
 
     ## # A tibble: 6 × 31
     ##   position player  height weight team  conf  high_…¹ town  state tfs_c…² tfs_c…³
@@ -273,7 +273,7 @@ bart_game_prediction('Duke', 'North Carolina', '20220113', location = 'H')
 
     ## ── Duke vs. North Carolina Prediction ────────────────────────── toRvik 1.1.0 ──
 
-    ## ℹ Data updated: 2022-09-08 21:16:54 EDT
+    ## ℹ Data updated: 2022-09-09 08:20:55 EDT
 
     ## # A tibble: 2 × 8
     ##   team           date          location tempo   ppp   pts win_per did_win
@@ -291,7 +291,7 @@ bart_tournament_prediction(teams = c('Duke', 'North Carolina', 'Kansas', 'Villan
 
     ## ── Tournament Prediction: 25 Sims ────────────────────────────── toRvik 1.1.0 ──
 
-    ## ℹ Data updated: 2022-09-08 21:16:55 EDT
+    ## ℹ Data updated: 2022-09-09 08:20:56 EDT
 
     ## # A tibble: 4 × 4
     ##   team            wins finals champ

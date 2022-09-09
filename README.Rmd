@@ -18,7 +18,7 @@ There are a lot of college basketball data out there, but most are difficult to 
 \
 Most of `toRvik`'s functions are powered by a dedicated Fast API framework -- delivering data at rapid speeds with dependable up-times.
 
-As of version 1.0.3, the package includes nearly 30 functions for pulling player and team data, game results, advanced metric splits, play-by-play shooting, and more. Leveraging the same data and models as [Barttorvik](www.barttorvik.com), the package now offers game and tournament predictor functions, allowing you to simulate games between any pair of teams on any date at any venue back to the 2014-15 season. `toRvik` also offers extensive transfer histories for over 5,000 players back to the 2011-12 season and detailed player recruiting rankings for over 6,000 players back to 2007-08.
+As of version 1.0.3, the package includes nearly 30 functions for pulling player and team data, game results, advanced metric splits, play-by-play shooting, and more. Leveraging the same data and models as [Barttorvik](https://www.barttorvik.com), the package now offers game and tournament predictor functions, allowing you to simulate games between any pair of teams on any date at any venue back to the 2014-15 season. `toRvik` also offers extensive transfer histories for over 5,000 players back to the 2011-12 season and detailed player recruiting rankings for over 6,000 players back to 2007-08.
 
 ## Package Installation
 

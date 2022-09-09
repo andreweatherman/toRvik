@@ -8,6 +8,10 @@ editor_options:
 
 [**This is an update submission for toRvik.**]{.underline}
 
+Re-submission:
+
+-   Added 'https://' to a url in the README.
+
 Updated many functions to be an API wrapper for a dedicated college
 basketball API that I run. The update also address two function errors
 that were recently brought to my attention by the CRAN team.

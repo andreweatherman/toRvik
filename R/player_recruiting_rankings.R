@@ -36,7 +36,7 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom cli cli_abort
 #' @examples
-#' player_recruiting_rankings(year=2019, stars=5)
+#' player_recruiting_rankings(year=2019, stars=5, state='domestic')
 #'
 #' @export
 

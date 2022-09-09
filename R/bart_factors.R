@@ -23,7 +23,7 @@
 #'   \item{\code{off_to}}{double. Offensive turnover rate.}
 #'   \item{\code{off_or}}{double. Offensive rebound rate.}
 #'   \item{\code{off_ftr}}{double. Offensive free throw rate.}
-#'   \item{\code{def_ppp}}{double. Raw points allowed per possesion.}
+#'   \item{\code{def_ppp}}{double. Raw points allowed per possession.}
 #'   \item{\code{def_efg}}{double. Effective FG\% allowed.}
 #'   \item{\code{def_to}}{double. Turnover rate forced.}
 #'   \item{\code{def_or}}{double. Defensive rebound rate.}
@@ -52,9 +52,9 @@
 bart_factors <- function(year = current_season(), result = NULL, type = NULL, start = NULL, end = NULL, location = NULL, last = NULL) {
 
   # test passed year
-  if (!is.null(year) & !(is.numeric(year) && nchar(year) == 4 && year >= 2009)) {
+  if (!is.null(year) & !(is.numeric(year) && nchar(year) == 4 && year >= 2008)) {
     cli::cli_abort(c(
-      "{.var year} must be 2009 or later",
+      "{.var year} must be 2008 or later",
       "x" = "You passed through {year}"
     ))
   }

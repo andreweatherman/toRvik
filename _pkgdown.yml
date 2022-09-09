@@ -87,7 +87,7 @@ reference:
   - subtitle: Teams
     desc: Functions to scrape team data
     contents:
-      - '`teams_by_year`'
+      - '`bart_teams`'
       - '`bart_team_box`'
       - '`bart_team_shooting`'
       - '`bart_team_history`'
@@ -96,7 +96,6 @@ reference:
     contents:
       - '`bart_game_box`'
       - '`bart_season_schedule`'
-      - '`bart_team_schedule`'
       - '`bart_pregame`'
   - subtitle: Predictions
     desc: Functions to predict games

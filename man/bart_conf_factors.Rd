@@ -6,56 +6,54 @@
 \usage{
 bart_conf_factors(
   year = current_season(),
-  venue = "all",
-  type = "all",
-  quad = "4",
-  top = 0,
+  conf = NULL,
+  opp_conf = NULL,
+  type = NULL,
+  location = NULL,
   start = NULL,
   end = NULL
 )
 }
 \arguments{
-\item{year}{Defaults to current season (YYYY).}
+\item{year}{Filters to year (YYYY)}
 
-\item{venue}{Filters by venue; defaults to `all`.}
+\item{conf}{Filters to conference}
 
-\item{type}{Filters by game type; defaults to `all`.}
+\item{opp_conf}{Filters to opponent conference}
 
-\item{quad}{Filters by quadrant level; defaults to `4`.}
+\item{type}{Filters to game type ('nc', 'conf', or 'post')}
 
-\item{top}{Filters by opponent T-Rank position; defaults to NULL (all).}
+\item{location}{Filters to game location ('H', 'A', or 'N')}
 
-\item{start}{Filters by start date; defaults to NULL (full season).}
+\item{start}{Filters by starting date (YYYY-MM-DD)}
 
-\item{end}{Filters by end date; defaults to NULL (full season).}
+\item{end}{Filters by ending date (YYYY-MM-DD)}
 }
 \value{
-Returns a tibble with 22 columns:
+Returns a tibble with 21 columns:
 \describe{
   \item{\code{conf}}{character.}
-  \item{\code{barthag}}{double. The estimation of a team's win probability
-  against the average Division 1 team on a neutral court.}
-  \item{\code{rec}}{character.}
-  \item{\code{wins}}{double.}
-  \item{\code{games}}{double.}
-  \item{\code{adj_t}}{double.}
+  \item{\code{rating}}{double. Expected scoring margin against an average
+  team on a neutral court.}
+  \item{\code{rank}}{double.}
   \item{\code{adj_o}}{double.}
-  \item{\code{off_efg}}{double.}
-  \item{\code{off_to}}{double.}
-  \item{\code{off_or}}{double.}
-  \item{\code{off_ftr}}{double.}
+  \item{\code{adj_o_rank}}{double.}
   \item{\code{adj_d}}{double.}
-  \item{\code{def_efg}}{double.}
-  \item{\code{def_to}}{double.}
-  \item{\code{def_or}}{double.}
-  \item{\code{def_ftr}}{double.}
-  \item{\code{wab}}{double. The number of wins above or below the expected
-  total from a bubble team against the same schedule.}
-  \item{\code{year}}{double.}
-  \item{\code{venue}}{character. Split supplied to the venue argument.}
-  \item{\code{type}}{character. Split supplied to the type argument.}
-  \item{\code{top}}{double. Split supplied to the top argument.}
-  \item{\code{quad}}{character. Split supplied to the quad argument.}
+  \item{\code{adj_d_rank}}{double.}
+  \item{\code{tempo}}{double.}
+  \item{\code{off_ppp}}{double. Raw points scored per possession.}
+  \item{\code{off_efg}}{double. Team effective FG\%.}
+  \item{\code{off_to}}{double. Offensive turnover rate.}
+  \item{\code{off_or}}{double. Offensive rebound rate.}
+  \item{\code{off_ftr}}{double. Offensive free throw rate.}
+  \item{\code{def_ppp}}{double. Raw points allowed per possession.}
+  \item{\code{def_efg}}{double. Effective FG\% allowed.}
+  \item{\code{def_to}}{double. Turnover rate forced.}
+  \item{\code{def_or}}{double. Defensive rebound rate.}
+  \item{\code{def_ftr}}{double. Free throw rate allowed.}
+  \item{\code{wins}}{integer.}
+  \item{\code{losses}}{integer.}
+  \item{\code{games}}{integer.}
 }
 }
 \description{

@@ -4,10 +4,14 @@
 \alias{bart_coach_change}
 \title{Get Head Coach Changes}
 \usage{
-bart_coach_change(year = current_season())
+bart_coach_change(year = NULL, conf = NULL, team = NULL)
 }
 \arguments{
-\item{year}{Defaults to current season (YYYY).}
+\item{year}{Year to filter}
+
+\item{conf}{Conference to filter}
+
+\item{team}{Team to filter}
 }
 \value{
 Returns a tibble with four columns:

@@ -29,14 +29,6 @@
 
 bart_tournament_prediction <- function(teams = NULL, date = NULL, sims = NULL, seed = NULL) {
 
-  # test passed year
-  if (!is.null(year) & !(is.numeric(year) && nchar(year) == 4 && year >= 2015)) {
-    cli::cli_abort(c(
-      "{.var year} must be 2015 or later",
-      "x" = "You passed through {year}"
-    ))
-  }
-
   base_url <- 'https://api.cbbstat.com/games/predictions/tournaments?'
   count <- 0
   for(team in teams) {
@@ -56,6 +48,7 @@ bart_tournament_prediction <- function(teams = NULL, date = NULL, sims = NULL, s
       seed = seed
     )
   )
+
   data <- data.frame()
 
   tryCatch(

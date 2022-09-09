@@ -8,6 +8,7 @@ bart_game_box(
   year = current_season(),
   date = NULL,
   team = NULL,
+  conf = NULL,
   game_id = NULL
 )
 }
@@ -17,6 +18,8 @@ bart_game_box(
 \item{date}{Filters to date (YYYY-MM-DD)}
 
 \item{team}{Filters to team}
+
+\item{conf}{Filters to conference}
 
 \item{game_id}{Filters to game}
 }
@@ -31,6 +34,6 @@ The home team is coded as `team2`. Neutral site games may contain errors as
 to whom is the home team.
 }
 \examples{
-bart_game_box(year=2022)
+\donttest{bart_game_box(year=2022)}
 
 }

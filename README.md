@@ -4,30 +4,51 @@
 # toRvik <a href="https://www.torvik.dev/"><img src="man/figures/logo.png" align="right" width="20%" min-width="100px"/></a>
 
 <!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/toRvik)](https://CRAN.R-project.org/package=toRvik)
-[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+
+[![CRAN
+status](https://www.r-pkg.org/badges/version/toRvik)](https://CRAN.R-project.org/package=toRvik)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/andreweatherman/toRvik/workflows/R-CMD-check/badge.svg)](https://github.com/andreweatherman/toRvik/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/andreweatherman/toRvik/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andreweatherman/toRvik?branch=main)
+
 <!-- badges: end -->
 
 [**`toRvik`**](https://github.com/andreweatherman/toRvik) is an R
-package for working with and scraping men’s college basketball data from
-[Barttorvik](https://barttorvik.com/).
+package for working with and scraping men’s college basketball.
 
-There are a lot of college basketball data out there, but most are difficult to pull and clean or they are behind a paywall. With `toRvik`, you have immediate access to some of the most detailed and extensive college basketball statistics publicly available -- all returned in tidy format with just a single line of code! Best of all, no subscription is required to access the data.
+There are a lot of college basketball data out there, but most are
+difficult to pull and clean or they are behind a paywall. With `toRvik`,
+you have immediate access to some of the most detailed and extensive
+college basketball statistics publicly available – all returned in tidy
+format with just a single line of code! Best of all, no subscription is
+required to access the data.  
+  
+Most of `toRvik`’s functions are powered by a dedicated Fast API
+framework – delivering data at rapid speeds with dependable up-times.
 
-As of version 1.0.2, the package includes over 20 functions for pulling player and team data, game results, advanced metric splits, play-by-play shooting, and more.
+As of version 1.0.3, the package includes nearly 30 functions for
+pulling player and team data, game results, advanced metric splits,
+play-by-play shooting, and more. Leveraging the same data and models as
+[Barttorvik](www.barttorvik.com), the package now offers game and
+tournament predictor functions, allowing you to simulate games between
+any pair of teams on any date at any venue back to the 2014-15 season.
+`toRvik` also offers extensive transfer histories for over 5,000 players
+back to the 2011-12 season and detailed player recruiting rankings for
+over 6,000 players back to 2007-08.
 
 ## Package Installation
 
 Install the released version of `toRvik` from CRAN:
-```{r}
+
+``` r
 install.packages("toRvik")
 ```
 
 Or install the development version from GitHub with:
-```{r}
+
+``` r
 if (!requireNamespace('devtools', quietly = TRUE)){
   install.packages('devtools')
 }
@@ -36,28 +57,26 @@ devtools::install_github("andreweatherman/toRvik")
 
 ## Package Highlights
 
--   Detailed game-by-game + season-long statistics by player
--   Shooting splits + shares by team
--   Game box scores for D-1 games
--   Team + conference four factors by split
--   Game-by-game four factors
--   NCAA committee-style team sheets
--   D-1 head coaching changes
+- Detailed game-by-game + season-long statistics by player and split
+- Extensive transfer + recruiting histories
+- Custom game and tournament predictions
+- Shooting splits + shares by team
+- Game box scores for all D-1 games
+- Team + conference four factors by split
+- Game-by-game four factors
+- NCAA committee-style team sheets
+- D-1 head coaching changes
 
 ## Basic Uses
 
-All `toRvik` functions fall into one of five categories:
+All `toRvik` functions fall into one of six categories:
 
--   **Rating**:
-	- Pulling and slicing T-Rank + four factor data 
--   **Game**: 
-	- Pulling team and season schedules + results
--   **Stat**: 
-	- Pulling and slicing player, team, and conference stats
--   **Tournament**: 
-	- Pulling raw and adjusted tournament performance
--   **Miscellaneous**
-	- Pulling coaching history, player of the year ratings, etc.
+- **Rating**, pulling and slicing T-Rank + four factor data
+- **Player**, pulling player data and histories
+- **Team**, pulling team statistics and histories
+- **Game**, pulling game-by-game data and schedules
+- **Tournament**, pulling raw and adjusted tournament performance
+- **Miscellaneous**
 
 ### Pull T-Rank ratings:
 
@@ -67,18 +86,23 @@ Calling `bart_ratings` will return the current T-Rank ranks and ratings.
 head(bart_ratings())
 ```
 
+    ## ── Team Ratings: 2022 ────────────────────────────────────────── toRvik 1.1.0 ──
+
+    ## ℹ Data updated: 2022-09-08 21:16:51 EDT
+
     ## # A tibble: 6 × 19
-    ##   team     conf  barthag barthag_rk adj_o adj_o_rk adj_d adj_d_rk adj_t adj_t_rk
-    ##   <chr>    <chr>   <dbl>      <int> <dbl>    <int> <dbl>    <int> <dbl>    <int>
-    ## 1 Gonzaga  WCC     0.966          1  120.        4  89.9        9  72.6        5
-    ## 2 Houston  Amer    0.959          2  117.       10  88.5        6  63.7      336
-    ## 3 Kansas   B12     0.958          3  120.        5  91.3       13  69.1       71
-    ## 4 Texas T… B12     0.951          4  111.       41  85.4        1  66.3      223
-    ## 5 Baylor   B12     0.949          5  118.        8  91.3       14  67.6      149
-    ## 6 Duke     ACC     0.944          6  123.        1  96.0       53  67.4      161
-    ## # … with 9 more variables: wab <dbl>, nc_elite_sos <dbl>, nc_fut_sos <dbl>,
-    ## #   nc_cur_sos <dbl>, ov_elite_sos <dbl>, ov_fut_sos <dbl>, ov_cur_sos <dbl>,
-    ## #   seed <int>, year <dbl>
+    ##   team     conf  barthag barth…¹ adj_o adj_o…² adj_d adj_d…³ adj_t adj_t…⁴   wab
+    ##   <chr>    <chr>   <dbl>   <int> <dbl>   <int> <dbl>   <int> <dbl>   <int> <dbl>
+    ## 1 Gonzaga  WCC     0.966       1  120.       4  89.9       9  72.6       5  6.71
+    ## 2 Houston  Amer    0.959       2  117.      10  88.5       6  63.7     336  6.15
+    ## 3 Kansas   B12     0.958       3  120.       5  91.3      13  69.1      71 10.4 
+    ## 4 Texas T… B12     0.951       4  111.      41  85.4       1  66.3     223  6.57
+    ## 5 Baylor   B12     0.949       5  118.       8  91.3      14  67.6     149  8.91
+    ## 6 Duke     ACC     0.944       6  123.       1  96.0      53  67.4     161  7.19
+    ## # … with 8 more variables: nc_elite_sos <int>, nc_fut_sos <dbl>,
+    ## #   nc_cur_sos <dbl>, ov_elite_sos <int>, ov_fut_sos <dbl>, ov_cur_sos <dbl>,
+    ## #   seed <dbl>, year <int>, and abbreviated variable names ¹​barthag_rk,
+    ## #   ²​adj_o_rk, ³​adj_d_rk, ⁴​adj_t_rk
 
 ### Pull team statistics
 
@@ -86,83 +110,196 @@ Calling `bart_factors` will return four factor stats on a number of
 splits. To filter by home games, set venue to ‘home.’
 
 ``` r
-head(bart_factors(venue='home'))
+head(bart_factors(location='H'))
 ```
 
-    ## # A tibble: 6 × 21
-    ##   team       conf  barthag rec    wins games adj_t adj_o off_efg off_to off_or
-    ##   <chr>      <chr>   <dbl> <chr> <dbl> <dbl> <dbl> <dbl>   <dbl>  <dbl>  <dbl>
-    ## 1 Houston    Amer    0.978 16–1     16    17  65.8  116.    54.3   16.5   39.1
-    ## 2 Baylor     B12     0.968 15–2     15    17  69.3  118.    55.1   17.6   38.1
-    ## 3 Gonzaga    WCC     0.966 16–0     16    16  73.1  121.    60     15.3   31.8
-    ## 4 Texas Tech B12     0.965 18–0     18    18  68.2  117.    57     19.4   38.3
-    ## 5 Auburn     SEC     0.961 16–0     16    16  72.5  116.    52.6   16.3   32.5
-    ## 6 Tennessee  SEC     0.959 16–0     16    16  68.9  113.    53     18.3   37.5
-    ## # … with 10 more variables: off_ftr <dbl>, adj_d <dbl>, def_efg <dbl>,
-    ## #   def_to <dbl>, def_or <dbl>, def_ftr <dbl>, year <dbl>, venue <chr>,
-    ## #   type <chr>, quad <chr>
+    ## ── Team Factors ──────────────────────────────────────────────── toRvik 1.1.0 ──
+
+    ## ℹ Data updated: 2022-09-08 21:16:52 EDT
+
+    ## # A tibble: 6 × 22
+    ##   team      conf  rating  rank adj_o adj_o…¹ adj_d adj_d…² tempo off_ppp off_efg
+    ##   <chr>     <chr>  <dbl> <dbl> <dbl>   <dbl> <dbl>   <dbl> <dbl>   <dbl>   <dbl>
+    ## 1 Houston   Amer    32.7     1  116.      15  83.0       1  66.1    117.    54.2
+    ## 2 Gonzaga   WCC     29.7     2  120.       5  89.9      18  72.7    123.    60.1
+    ## 3 Baylor    B12     28.8     3  116.       9  87.6       9  69.3    116.    55.0
+    ## 4 Villanova BE      28.8     4  123.       2  94.0      50  63.2    122.    57.6
+    ## 5 Purdue    B10     28.4     5  124.       1  96.0      81  67.9    125.    58.2
+    ## 6 Auburn    SEC     27.6     6  115.      17  87.5       8  72.9    113.    53.1
+    ## # … with 11 more variables: off_to <dbl>, off_or <dbl>, off_ftr <dbl>,
+    ## #   def_ppp <dbl>, def_efg <dbl>, def_to <dbl>, def_or <dbl>, def_ftr <dbl>,
+    ## #   wins <int>, losses <int>, games <int>, and abbreviated variable names
+    ## #   ¹​adj_o_rank, ²​adj_d_rank
 
 Calling `bart_team_box` will return team box totals and per-game
-averages by game type. To filter by in-conference games, set type to
-‘conf.’
+averages by game type. To find how Duke performed during the month of
+March:
 
 ``` r
-head(bart_team_box(type='conf'))
+bart_team_box(team='Duke', split='month') |>
+  dplyr::filter(month=='March')
 ```
 
-    ## # A tibble: 6 × 27
-    ##   team     ast   blk  dreb   fga   fgm   fta   ftm  oreb    pf   pts   reb   stl
-    ##   <chr>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-    ## 1 Gonza…   266    83   471   912   480   238   182   121   218  1271   592   101
-    ## 2 South…   267    49   518  1024   562   361   286   106   271  1568   624   101
-    ## 3 Oral …   214    77   570  1258   594   302   224   191   314  1619   761    85
-    ## 4 Toledo   325    65   600  1256   626   349   270   202   300  1669   802   108
-    ## 5 South…   200    49   336   795   383   360   279   115   242  1163   451   111
-    ## 6 Bryant   249    68   507  1076   483   397   298   213   295  1411   720   105
-    ## # … with 14 more variables: to <dbl>, tpa <dbl>, tpm <dbl>, fg_pct <dbl>,
-    ## #   tp_pct <dbl>, ft_pct <dbl>, rpg <dbl>, apg <dbl>, spg <dbl>, bpg <dbl>,
-    ## #   tpg <dbl>, fpg <dbl>, ppg <dbl>, games <int>
+    ## ── Team Stats ────────────────────────────────────────────────── toRvik 1.1.0 ──
+
+    ## ℹ Data updated: 2022-09-08 21:16:52 EDT
+
+    ## # A tibble: 1 × 39
+    ##   team  month   min   pos   fgm   fga fg_pct   tpm   tpa fg3_pct   ftm   fta
+    ##   <chr> <chr> <int> <int> <int> <int>  <dbl> <int> <int>   <dbl> <int> <int>
+    ## 1 Duke  March  1800   599   270   518  0.521    63   176   0.358   118   149
+    ## # … with 27 more variables: ft_pct <dbl>, oreb <int>, dreb <int>, reb <int>,
+    ## #   ast <int>, stl <int>, blk <int>, to <int>, pf <int>, pts <int>,
+    ## #   second_chance_pts <dbl>, second_chance_fgm <dbl>, second_chance_fga <dbl>,
+    ## #   second_change_fg_pct <dbl>, pts_in_paint <dbl>, pts_in_paint_fgm <dbl>,
+    ## #   pts_in_paint_fga <dbl>, pts_in_paint_fg_pct <dbl>, fast_brk_pts <dbl>,
+    ## #   fast_brk_fgm <dbl>, fast_brk_fga <dbl>, fast_brk_fg_pct <dbl>,
+    ## #   bench_pts <dbl>, pts_tov <dbl>, games <int>, wins <int>, losses <int>
 
 ### Pull player statistics
 
 Calling `bart_player_season` will return detailed season-long player
-stats. To pull per-game averages, set stat to ‘box.’
+stats. To pull per-game averages for Duke players:
 
 ``` r
-head(bart_player_season(stat='box'))
+head(bart_player_season(team='Duke', stat='box'))
 ```
 
-    ## # A tibble: 6 × 20
+    ## ── Player Season Stats ───────────────────────────────────────── toRvik 1.1.0 ──
+
+    ## ℹ Data updated: 2022-09-08 21:16:53 EDT
+
+    ## # A tibble: 6 × 21
     ##   player      pos   exp   hgt   team  conf      g   mpg   ppg fg_pct  oreb  dreb
-    ##   <chr>       <chr> <chr> <chr> <chr> <chr> <dbl> <dbl> <dbl>  <dbl> <dbl> <dbl>
-    ## 1 Peter Kiss  Comb… Sr    6-5   Brya… NEC      27  35.7  25.2  0.484 1.44   4.33
-    ## 2 Darius McG… Comb… Sr    5-9   Libe… ASun     30  33.7  24.6  0.445 0.454  4.03
-    ## 3 Antoine Da… Scor… Sr    6-1   Detr… Horz     29  37.0  23.9  0.429 0.483  3.07
-    ## 4 Keegan Mur… Stre… So    6-8   Iowa  B10      35  31.9  23.5  0.596 2.86   5.8 
-    ## 5 Max Abmas   Comb… Jr    6-0   Oral… Sum      28  36.8  22.8  0.412 0.3    3.13
-    ## 6 Bryce Hami… Wing… Sr    6-4   UNLV  MWC      31  32.3  21.9  0.439 0.688  4.31
-    ## # … with 8 more variables: rpg <dbl>, apg <dbl>, ast_to <dbl>, spg <dbl>,
-    ## #   bpg <dbl>, num <chr>, year <dbl>, id <dbl>
+    ##   <chr>       <chr> <chr> <chr> <chr> <chr> <int> <dbl> <dbl>  <dbl> <dbl> <dbl>
+    ## 1 Paolo Banc… Wing… Fr    6-10  Duke  ACC      39  33.0 17.2   0.513 1.77   6.05
+    ## 2 Wendell Mo… Comb… Jr    6-5   Duke  ACC      39  33.9 13.4   0.513 1.21   4.05
+    ## 3 Trevor Kee… Comb… Fr    6-4   Duke  ACC      36  30.2 11.5   0.422 0.833  2.61
+    ## 4 Mark Willi… C     So    7-0   Duke  ACC      39  23.6 11.2   0.782 2.59   4.87
+    ## 5 AJ Griffin  Wing… Fr    6-6   Duke  ACC      39  24.3 10.4   0.503 0.769  3.15
+    ## 6 Jeremy Roa… Comb… So    6-1   Duke  ACC      39  29    8.62  0.412 0.359  2.05
+    ## # … with 9 more variables: rpg <dbl>, apg <dbl>, tov <dbl>, ast_to <dbl>,
+    ## #   spg <dbl>, bpg <dbl>, num <dbl>, year <int>, id <int>
 
 Calling `bart_player_game` will return detailed game-by-game player
-stats. To pull advance splits by game, set stat to ‘adv.’
+stats. To pull advance splits by game for Duke players:
 
 ``` r
-head(bart_player_game(stat='adv'))
+head(bart_player_game(team='Duke', stat='advanced'))
 ```
 
-    ## # A tibble: 6 × 24
-    ##   date        year player       exp   team  opp   result   min   pts   usg  ortg
-    ##   <date>     <dbl> <chr>        <chr> <chr> <chr> <chr>  <dbl> <dbl> <dbl> <dbl>
-    ## 1 2021-11-09  2022 Jalen Colem… Sr    Kans… Mich… W         10     5  34.2  76.9
-    ## 2 2021-11-12  2022 Jalen Colem… Sr    Kans… Tarl… W         12    10  11.7 144. 
-    ## 3 2021-11-18  2022 Jalen Colem… Sr    Kans… Ston… W         15     7  12.4 186. 
-    ## 4 2021-11-25  2022 Jalen Colem… Sr    Kans… Nort… W         10     0  10.3   0  
-    ## 5 2021-11-26  2022 Jalen Colem… Sr    Kans… Dayt… L          8     0  16.3  25.5
-    ## 6 2021-11-28  2022 Jalen Colem… Sr    Kans… Iona  W          5     0   3   215. 
+    ## ── Player Game Stats ─────────────────────────────────────────── toRvik 1.1.0 ──
+
+    ## ℹ Data updated: 2022-09-08 21:16:53 EDT
+
+    ## # A tibble: 6 × 25
+    ##   date        year player exp   team  conf  opp   result   min   pts   usg  ortg
+    ##   <chr>      <dbl> <chr>  <chr> <chr> <chr> <chr> <chr>  <dbl> <dbl> <dbl> <dbl>
+    ## 1 2021-11-09  2022 Theo … Sr    Duke  ACC   Kent… W         22     5  14.3  98.7
+    ## 2 2021-11-12  2022 Theo … Sr    Duke  ACC   Army  W         15     0  11.9  18.1
+    ## 3 2021-11-13  2022 Theo … Sr    Duke  ACC   Camp… W         10     0   1.9 236  
+    ## 4 2021-11-16  2022 Theo … Sr    Duke  ACC   Gard… W         15     4  19.1 100. 
+    ## 5 2021-11-19  2022 Theo … Sr    Duke  ACC   Lafa… W         17     4  12.2 122. 
+    ## 6 2021-11-22  2022 Theo … Sr    Duke  ACC   The … W         16     8  11.6 207. 
     ## # … with 13 more variables: or_pct <dbl>, dr_pct <dbl>, ast_pct <dbl>,
     ## #   to_pct <dbl>, stl_pct <dbl>, blk_pct <dbl>, bpm <dbl>, obpm <dbl>,
     ## #   dbpm <dbl>, net <dbl>, poss <dbl>, id <dbl>, game_id <chr>
+
+### Pull transfer histories
+
+Calling `transfer_portal` will return transfer histories with matching
+player IDs to join with other statistics. To find all players who
+transferred to Duke:
+
+``` r
+head(transfer_portal(to='Duke'))
+```
+
+    ## ── Transfer Portal ───────────────────────────────────────────── toRvik 1.1.0 ──
+
+    ## ℹ Data updated: 2022-09-08 21:16:53 EDT
+
+    ## # A tibble: 6 × 11
+    ##      id player        from  to    exp    year imm_e…¹ source from_d1 to_d1 sit  
+    ##   <int> <chr>         <chr> <chr> <chr> <int> <chr>   <chr>  <lgl>   <lgl> <lgl>
+    ## 1 65776 Kale Catchin… Harv… Duke  Sr     2023 Yes     Josep… TRUE    FALSE NA   
+    ## 2 66209 Ryan Young    Nort… Duke  Jr     2023 Yes     Jeff … TRUE    FALSE NA   
+    ## 3 65826 Max Johns     Prin… Duke  Sr     2023 Yes     <NA>   TRUE    FALSE NA   
+    ## 4 50593 Theo John     Marq… Duke  Sr     2022 Yes     <NA>   TRUE    TRUE  FALSE
+    ## 5 51179 Bates Jones   Davi… Duke  Sr     2022 Yes     <NA>   TRUE    TRUE  FALSE
+    ## 6 45926 Patrick Tape  Colu… Duke  Sr     2021 Yes     Evan … TRUE    TRUE  TRUE 
+    ## # … with abbreviated variable name ¹​imm_elig
+
+### Pull recruiting rankings
+
+Calling `player_recruiting_rankings` will return extensive recruit
+histories with matching player IDs. To find all 5-star players who
+played high school basketball in North Carolina:
+
+``` r
+head(player_recruiting_rankings(stars=5, state='NC'))
+```
+
+    ## ── Recruiting Rankings ───────────────────────────────────────── toRvik 1.1.0 ──
+
+    ## ℹ Data updated: 2022-09-08 21:16:54 EDT
+
+    ## # A tibble: 6 × 31
+    ##   position player  height weight team  conf  high_…¹ town  state tfs_c…² tfs_c…³
+    ##   <chr>    <chr>   <chr>   <dbl> <chr> <chr> <chr>   <chr> <chr>   <dbl>   <int>
+    ## 1 SF       Patric… 6-6       215 Flor… ACC   West C… Char… Nort…    99.1       5
+    ## 2 PG       Devon … 6-2       185 Kans… B12   Provid… Char… Nort…    99.3       5
+    ## 3 SF       Jaylen… 6-8       215 Wake… ACC   Wesley… High… Nort…    99.3       5
+    ## 4 SG       Coby W… 6-5       185 Nort… ACC   Greenf… Wils… Nort…    99.1       5
+    ## 5 PF       Harry … 6-10      240 Duke  ACC   Oak Hi… Wins… Nort…   100.        5
+    ## 6 PG       Dennis… 6-3       190 Nort… ACC   Trinit… Faye… Nort…    99.7       5
+    ## # … with 20 more variables: tfs_comp_national <dbl>, tfs_comp_position <dbl>,
+    ## #   tfs_comp_state <dbl>, tfs_rating <dbl>, tfs_star <int>, espn_rating <dbl>,
+    ## #   espn_grade <dbl>, espn_rank <dbl>, rivals_rating <dbl>, rivals_rank <dbl>,
+    ## #   avg_rank <dbl>, num_offers <int>, announce_date <chr>, tfs_cb <chr>,
+    ## #   tfs_cb_odds <dbl>, tfs_cb_alt <chr>, tfs_cb_alt_odds <dbl>, tfs_pid <int>,
+    ## #   year <int>, id <int>, and abbreviated variable names ¹​high_school,
+    ## #   ²​tfs_comp_rating, ³​tfs_comp_star
+
+### Predict games and tournaments
+
+Calling `bart_game_predictions` will returns expected points,
+possessions, and win percentage for a given game on a given date. To
+simulate North Carolina at Duke in mid-January:
+
+``` r
+bart_game_prediction('Duke', 'North Carolina', '20220113', location = 'H')
+```
+
+    ## ── Duke vs. North Carolina Prediction ────────────────────────── toRvik 1.1.0 ──
+
+    ## ℹ Data updated: 2022-09-08 21:16:54 EDT
+
+    ## # A tibble: 2 × 8
+    ##   team           date          location tempo   ppp   pts win_per did_win
+    ##   <chr>          <chr>         <chr>    <dbl> <dbl> <dbl>   <dbl> <lgl>  
+    ## 1 Duke           Jan. 13, 2022 Home      73.4  1.15  84.2    73.1 TRUE   
+    ## 2 North Carolina Jan. 13, 2022 Away      73.4  1.02  75.1    26.9 FALSE
+
+Calling `bart_tournament_prediction` will simulate a single-elimination
+tournament between a group of teams on a given date. To simulate the
+2022 Final Four 25 times:
+
+``` r
+bart_tournament_prediction(teams = c('Duke', 'North Carolina', 'Kansas', 'Villanova'), '20220402', sims = 25, seed = 10)
+```
+
+    ## ── Tournament Prediction: 25 Sims ────────────────────────────── toRvik 1.1.0 ──
+
+    ## ℹ Data updated: 2022-09-08 21:16:55 EDT
+
+    ## # A tibble: 4 × 4
+    ##   team            wins finals champ
+    ##   <chr>          <int>  <int> <int>
+    ## 1 Duke              31     21    10
+    ## 2 Kansas            17     10     7
+    ## 3 Villanova         21     15     6
+    ## 4 North Carolina     6      4     2
 
 ## Documentation
 
@@ -173,4 +310,4 @@ For more information on the package and its functions, please see the
 
 [Andrew Weatherman](https://www.linkedin.com/in/andrewweatherman/)
 
-<a href="https://twitter.com/andreweatherman" target="blank"><img src="https://img.shields.io/twitter/follow/andreweatherman?color=blue&label=%40andreweatherman&logo=twitter&style=for-the-badge" alt="@andreweatherman" /></a>
+<a href="https://twitter.com/andreweatherman" target="blank"><img src="https://img.shields.io/twitter/follow/andreweatherman?color=blue&amp;label=%40andreweatherman&amp;logo=twitter&amp;style=for-the-badge" alt="@andreweatherman"/></a>

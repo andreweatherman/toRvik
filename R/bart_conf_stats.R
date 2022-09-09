@@ -67,43 +67,6 @@ bart_conf_stats <- function(year = current_season(), conf = NULL) {
       2008)) {
       cli::cli_abort("Enter a valid year as a number. Data only goes back to 2008!")
     }
-    if(year==current_season()) {
-      x <- httr::GET(paste0("https://barttorvik.com/conf.php?conf=", conf, "&year=", year)) %>%
-        httr::content(as = "text") %>%
-        rvest::read_html() %>%
-        rvest::html_table() %>%
-        purrr::pluck(1) %>%
-        janitor::row_to_names(row_number = 1) %>%
-        janitor::clean_names() %>%
-        tidyr::separate(team, into = c("team", "more"), sep = "(?<=[a-zA-QS-Z.])\\s*(?=[0-9])") %>%
-        tidyr::separate(more, into = c("seed", "finish"), sep = ",") %>%
-        dplyr::mutate_at(4, funs(trimws(.))) %>%
-        dplyr::select(-9) %>%
-        dplyr::rename(
-          "conf_rec" = 5,
-          "eff_marg"=9,
-          "con_oe_rk" = 11,
-          "con_de_rk" = 13,
-          "conf_barthag" = 14,
-          "conf_cur_sos" = 16,
-          "conf_cur_sos_rk" = 17,
-          "conf_fut_sos" = 18,
-          "conf_fut_sos_rk" = 19,
-          "conf_sos" = 20,
-          "conf_sos_rk" = 21,
-          "auto_prob"=22,
-          "bid_prob"=23
-        ) %>%
-        dplyr::mutate(
-          year=year,
-          seed = readr::parse_number(seed),
-          auto_prob=readr::parse_number(auto_prob),
-          bid_prob=readr::parse_number(bid_prob),
-          across(c(1, 6:14, 16:23), as.numeric)
-        )
-      return(x)
-    }
-  else {
     x <- httr::GET(paste0("https://barttorvik.com/conf.php?conf=", conf, "&year=", year)) %>%
       httr::content(as = "text") %>%
       rvest::read_html() %>%
@@ -134,6 +97,5 @@ bart_conf_stats <- function(year = current_season(), conf = NULL) {
         across(c(1, 6:14, 16:21), as.numeric)
       )
     return(x)
-  }
   })
 }

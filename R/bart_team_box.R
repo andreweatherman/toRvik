@@ -1,104 +1,61 @@
 #' Get Team Box Stats
 #'
-#' Returns team box totals and per-game averages by game type back to 2008.
+#' Returns aggregate team stats back to 2008
 #'
-#' Columns ending in 'pg' indicate a per-game average. Unless specified by
-#' `type=d1`, results include games against non-Division 1 opponents.
+#' The `split` argument filters the results by split, explained below:
+#' \describe{ \item{result}{Wins and losses} \item{location}{Game location}
+#' \item{month}{Game month} \item{type}{Game type}}
 #'
-#' The `type` argument splits the results by game type, explained below:
-#' \describe{ \item{all}{All games played.} \item{nc}{Non-conference games.}
-#' \item{conf}{In-conference games.} \item{post}{Post-conference tournament
-#' games.} \item{d1}{Games against D-1 teams only.} \item{nond1}{Games involving
-#' one non-D1 team.} }
-#'
-#' @returns Returns a tibble of team box totals and per-game averages
-#' @param year Defaults to current season (YYYY).
-#' @param type Filters by game type; defaults to `all`.
-#' @import dplyr
-#' @importFrom tidyr gather spread
+#' @returns Returns a tibble with the number of columns dependent on the year.
+#' @param year Filters to year.
+#' @param team Filters to team.
+#' @param conf Filters to conf.
+#' @param split Split to filter (see details).
+#' @param stat Filters for agg. stats (total) or avg. stats (avg)
 #' @importFrom magrittr %>%
+#' @importFrom dplyr as_tibble arrange
+#' @importFrom httr modify_url
+#' @importFrom jsonlite fromJSON
 #' @importFrom cli cli_abort
 #' @examples
-#' \donttest{bart_team_box(type='conf')}
+#' \donttest{bart_team_box(split='month', team='Duke')}
 #' @export
-bart_team_box <- function(year=current_season(), type='all') {
-  suppressMessages({
-    if (!(is.numeric(year) && nchar(year) == 4 && year >=
-          2008)) {
-      cli::cli_abort("Enter a valid year as a number (YYYY). Data only goes back to 2008!")
-    }
-    if (!(type %in% c('all', 'nc', 'conf', 'conf_t', 'post', 'd1', 'nond1'))) {
-      cli::cli_abort("Please input a valid type value (see details)")
-    }
-  teams <- toRvik::bart_season_schedule(year=year) %>%
-            dplyr::filter(type != 'nond1') %>%
-            dplyr::select(home) %>%
-            dplyr::distinct()
-  if (type=='all') {
-    x <- toRvik::bart_game_box(year=current_season()) %>%
-      dplyr::select(3:34, 38)
-    x <- tidyr::gather(x, key='key', value='value', -team1, -team2, -game_id) %>%
-      dplyr::mutate(team = dplyr::case_when(grepl("team1", key)~team1,
-                                            grepl("team2", key)~team2),
-                    key=gsub(".*_", "", key)) %>%
-      dplyr::select(3:6) %>%
-      tidyr::spread(key, value) %>%
-      dplyr::group_by(team) %>%
-      dplyr::summarize(dplyr::across(where(is.double), sum, na.rm=TRUE))
-    x <- dplyr::inner_join(x, teams, by=c('team'='home'))
-    y <- toRvik::bart_season_schedule(year=year) %>%
-      dplyr::select(home, away) %>%
-      tidyr::gather("loc", "team", home, away) %>%
-      dplyr::count(team, name='games')
-  }
-  else if (type=='d1') {
-    x <- dplyr::inner_join(toRvik::bart_game_box(year=year), (toRvik::bart_season_schedule(year=year) %>% dplyr::filter(type != 'nond1')), by='game_id') %>%
-      dplyr::select(3:34, 38)
-    x <- tidyr::gather(x, key='key', value='value', -team1, -team2, -game_id) %>%
-      dplyr::mutate(team = dplyr::case_when(grepl("team1", key)~team1,
-                                            grepl("team2", key)~team2),
-                    key=gsub(".*_", "", key)) %>%
-      dplyr::select(3:6) %>%
-      tidyr::spread(key, value) %>%
-      dplyr::group_by(team) %>%
-      dplyr::summarize(dplyr::across(where(is.double), sum, na.rm=TRUE))
-    x <- dplyr::inner_join(x, teams, by=c('team'='home'))
-    y <- toRvik::bart_season_schedule(year=year) %>%
-      dplyr::filter(type != 'nond1') %>%
-      dplyr::select(home, away) %>%
-      tidyr::gather("loc", "team", home, away) %>%
-      dplyr::count(team, name='games')
-  }
-  else {
-    x <- dplyr::inner_join(toRvik::bart_game_box(year=year), (toRvik::bart_season_schedule(year=year) %>% dplyr::filter(type== !!type)), by='game_id') %>%
-          dplyr::select(3:34, 38)
-    x <- tidyr::gather(x, key='key', value='value', -team1, -team2, -game_id) %>%
-      dplyr::mutate(team = dplyr::case_when(grepl("team1", key)~team1,
-                                            grepl("team2", key)~team2),
-                    key=gsub(".*_", "", key)) %>%
-      dplyr::select(3:6) %>%
-      tidyr::spread(key, value) %>%
-      dplyr::group_by(team) %>%
-      dplyr::summarize(dplyr::across(where(is.double), sum, na.rm=TRUE))
-    x <- dplyr::inner_join(x, teams, by=c('team'='home'))
-    y <- toRvik::bart_season_schedule(year=year) %>%
-      dplyr::filter(type== !!type) %>%
-      dplyr::select(home, away) %>%
-      tidyr::gather("loc", "team", home, away) %>%
-      dplyr::count(team, name='games')
-  }
-  x <- dplyr::inner_join(x, y, by='team')
-  x <- x %>% dplyr::mutate(fg_pct=fgm/fga,
-                           tp_pct=tpm/tpa,
-                           ft_pct=ftm/fta,
-                           rpg=(oreb+dreb)/games,
-                           apg=ast/games,
-                           spg=stl/games,
-                           bpg=blk/games,
-                           tpg=to/games,
-                           fpg=pf/games,
-                           ppg=pts/games, .before=games) %>%
-            dplyr::arrange(desc(ppg))
+bart_team_box <- function(year = current_season(), team = NULL, conf = NULL, split = NULL, stat = 'total') {
 
-  return(x)
-  })}
+  # test passed year
+  if (!is.null(year) & !(is.numeric(year) && nchar(year) == 4 && year >= 2008)) {
+    cli::cli_abort(c(
+      "{.var year} must be 2008 or later",
+      "x" = "You passed through {year}"
+    ))
+  }
+
+  base_url <- 'https://api.cbbstat.com/teams/stats?'
+  parsed <- httr::modify_url(
+    base_url,
+    query = list(
+      year = year,
+      team = team,
+      conf = conf,
+      split = split,
+      stat = stat
+    )
+  )
+
+  data <- data.frame()
+
+  tryCatch(
+    expr = {
+      data  <- jsonlite::fromJSON(parsed) %>%
+        make_toRvik_data('Team Stats', Sys.time())
+    },
+    error = function(e) {
+      check_docs_error()
+    },
+    warning = function(w) {
+    },
+    finally = {
+    }
+  )
+  return(data)
+}

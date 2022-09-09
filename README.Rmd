@@ -5,28 +5,38 @@ output: github_document
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # toRvik <a href="https://www.torvik.dev/"><img src="man/figures/logo.png" align="right" width="20%" min-width="100px"/></a>
- 
+
 <!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/toRvik)](https://CRAN.R-project.org/package=toRvik)
-[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-[![R-CMD-check](https://github.com/andreweatherman/toRvik/workflows/R-CMD-check/badge.svg)](https://github.com/andreweatherman/toRvik/actions)
- [![Codecov test coverage](https://codecov.io/gh/andreweatherman/toRvik/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andreweatherman/toRvik?branch=main)
+
+[![CRAN status](https://www.r-pkg.org/badges/version/toRvik)](https://CRAN.R-project.org/package=toRvik) [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) [![R-CMD-check](https://github.com/andreweatherman/toRvik/workflows/R-CMD-check/badge.svg)](https://github.com/andreweatherman/toRvik/actions) [![Codecov test coverage](https://codecov.io/gh/andreweatherman/toRvik/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andreweatherman/toRvik?branch=main)
+
 <!-- badges: end -->
 
-[**`toRvik`**](https://github.com/andreweatherman/toRvik) is an R package for working with and scraping men's college basketball data from [Barttorvik](https://barttorvik.com/). 
- 
-There are a lot of college basketball data out there, but most are difficult to pull and clean or they are behind a paywall. With `toRvik`, you have immediate access to some of the most detailed and extensive college basketball statistics publicly available -- all returned in tidy format with just a single line of code! Best of all, no subscription is required to access the data.
+[**`toRvik`**](https://github.com/andreweatherman/toRvik) is an R package for working with and scraping men's college basketball.
 
-As of version 1.0.2, the package includes over 20 functions for pulling player and team data, game results, advanced metric splits, play-by-play shooting, and more.As of version 1.0.2, `toRvik` ships with more than 20 functions.
-   
+There are a lot of college basketball data out there, but most are difficult to pull and clean or they are behind a paywall. With `toRvik`, you have immediate access to some of the most detailed and extensive college basketball statistics publicly available -- all returned in tidy format with just a single line of code! Best of all, no subscription is required to access the data.\
+\
+Most of `toRvik`'s functions are powered by a dedicated Fast API framework -- delivering data at rapid speeds with dependable up-times.
+
+As of version 1.0.3, the package includes nearly 30 functions for pulling player and team data, game results, advanced metric splits, play-by-play shooting, and more. Leveraging the same data and models as [Barttorvik](www.barttorvik.com), the package now offers game and tournament predictor functions, allowing you to simulate games between any pair of teams on any date at any venue back to the 2014-15 season. `toRvik` also offers extensive transfer histories for over 5,000 players back to the 2011-12 season and detailed player recruiting rankings for over 6,000 players back to 2007-08.
+
 ## Package Installation
+
+```{r, include=FALSE}
+library(dplyr)
+library(toRvik)
+```
+
+
 Install the released version of `toRvik` from CRAN:
-```{r}
+
+```{r, eval=FALSE}
 install.packages("toRvik")
 ```
 
 Or install the development version from GitHub with:
-```{r, echo=FALSE}
+
+```{r, eval=FALSE}
 if (!requireNamespace('devtools', quietly = TRUE)){
   install.packages('devtools')
 }
@@ -35,9 +45,11 @@ devtools::install_github("andreweatherman/toRvik")
 
 ## Package Highlights
 
--   Detailed game-by-game + season-long statistics by player
+-   Detailed game-by-game + season-long statistics by player and split
+-   Extensive transfer + recruiting histories
+-   Custom game and tournament predictions
 -   Shooting splits + shares by team
--   Game box scores for D-1 games
+-   Game box scores for all D-1 games
 -   Team + conference four factors by split
 -   Game-by-game four factors
 -   NCAA committee-style team sheets
@@ -45,18 +57,19 @@ devtools::install_github("andreweatherman/toRvik")
 
 ## Basic Uses
 
-All `toRvik` functions fall into one of five categories:
+All `toRvik` functions fall into one of six categories:
 
--   **Rating**, pulling and slicing T-Rank + four factor data 
--   **Game**, pulling team and season schedules + results
--   **Stat**, pulling and slicing player, team, and conference stats
--   **Tournament**, pulling raw and adjusted tournament
-    performance
+-   **Rating**, pulling and slicing T-Rank + four factor data
+-   **Player**, pulling player data and histories
+-   **Team**, pulling team statistics and histories
+-   **Game**, pulling game-by-game data and schedules
+-   **Tournament**, pulling raw and adjusted tournament performance
 -   **Miscellaneous**
 
 ### Pull T-Rank ratings:
 
 Calling `bart_ratings` will return the current T-Rank ranks and ratings.
+
 ```{r}
 head(bart_ratings())
 ```
@@ -64,34 +77,68 @@ head(bart_ratings())
 ### Pull team statistics
 
 Calling `bart_factors` will return four factor stats on a number of splits. To filter by home games, set venue to 'home.'
+
 ```{r}
-head(bart_factors(venue='home'))
+head(bart_factors(location='H'))
 ```
 
-Calling `bart_team_box` will return team box totals and per-game averages by game type. To filter by in-conference games, set type to 'conf.'
+Calling `bart_team_box` will return team box totals and per-game averages by game type. To find how Duke performed during the month of March:
+
 ```{r}
-head(bart_team_box(type='conf'))
+bart_team_box(team='Duke', split='month') |>
+  dplyr::filter(month=='March')
 ```
 
 ### Pull player statistics
 
-Calling `bart_player_season` will return detailed season-long player stats. To pull per-game averages, set stat to 'box.'
-``` {r}
-head(bart_player_season(stat='box'))
+Calling `bart_player_season` will return detailed season-long player stats. To pull per-game averages for Duke players:
+
+```{r}
+head(bart_player_season(team='Duke', stat='box'))
 ```
 
-Calling `bart_player_game` will return detailed game-by-game player stats. To pull advance splits by game, set stat to 'adv.'
+Calling `bart_player_game` will return detailed game-by-game player stats. To pull advance splits by game for Duke players:
+
 ```{r}
-head(bart_player_game(stat='adv'))
+head(bart_player_game(team='Duke', stat='advanced'))
 ```
- 
+
+### Pull transfer histories
+
+Calling `transfer_portal` will return transfer histories with matching player IDs to join with other statistics. To find all players who transferred to Duke:
+
+```{r}
+head(transfer_portal(to='Duke'))
+```
+
+### Pull recruiting rankings
+
+Calling `player_recruiting_rankings` will return extensive recruit histories with matching player IDs. To find all 5-star players who played high school basketball in North Carolina:
+
+```{r}
+head(player_recruiting_rankings(stars=5, state='NC'))
+```
+
+### Predict games and tournaments
+
+Calling `bart_game_predictions` will returns expected points, possessions, and win percentage for a given game on a given date. To simulate North Carolina at Duke in mid-January:
+
+```{r}
+bart_game_prediction('Duke', 'North Carolina', '20220113', location = 'H')
+```
+
+Calling `bart_tournament_prediction` will simulate a single-elimination tournament between a group of teams on a given date. To simulate the 2022 Final Four 25 times:
+
+```{r}
+bart_tournament_prediction(teams = c('Duke', 'North Carolina', 'Kansas', 'Villanova'), '20220402', sims = 25, seed = 10)
+```
+
 ## Documentation
 
-For more information on the package and its functions, please see
-the [**`toRvik`** reference](https://www.torvik.dev/).
+For more information on the package and its functions, please see the [**`toRvik`** reference](https://www.torvik.dev/).
 
 ## The Author
 
 [Andrew Weatherman](https://www.linkedin.com/in/andrewweatherman/)
 
-<a href="https://twitter.com/andreweatherman" target="blank"><img src="https://img.shields.io/twitter/follow/andreweatherman?color=blue&label=%40andreweatherman&logo=twitter&style=for-the-badge" alt="@andreweatherman" /></a>
+<a href="https://twitter.com/andreweatherman" target="blank"><img src="https://img.shields.io/twitter/follow/andreweatherman?color=blue&amp;label=%40andreweatherman&amp;logo=twitter&amp;style=for-the-badge" alt="@andreweatherman"/></a>

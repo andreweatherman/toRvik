@@ -1,19 +1,20 @@
 Package: toRvik
 Type: Package
-Title: Scrape Tidy Men's College Basketball Data from Barttorvik
-Version: 1.0.2
+Title: Extensive and Tidy NCAA Men's College Basketball Data
+Version: 1.1.0
 Authors@R: person("Andrew", "Weatherman", email = "taw38@duke.edu", 
   role = c("aut", "cre"))
-Description: A suite of functions to quickly scrape and tidy advanced metrics,
-    detailed player and game statistics, team and coach histories, and more from
-    Barttorvik<https://barttorvik.com/>.
+Description: An API wrapper for cbbstat and a suite of functions to pull
+  and clean detailed, extensive college basketball statistics from 
+  Barttorvik<https://barttorvik.com/>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.1
 Imports: 
     cli,
-    curl,
+    crayon,
+    data.table,
     dplyr,
     glue,
     httr,
@@ -23,6 +24,7 @@ Imports:
     magrittr,
     purrr,
     readr,
+    rlang,
     rvest,
     stringr,
     tidyr,

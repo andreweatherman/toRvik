@@ -4,10 +4,14 @@
 \alias{bart_team_shooting}
 \title{Get Team Shooting Splits}
 \usage{
-bart_team_shooting(year = current_season())
+bart_team_shooting(year = current_season(), conf = NULL, team = NULL)
 }
 \arguments{
-\item{year}{Defaults to current season (YYYY).}
+\item{year}{Filters to year}
+
+\item{conf}{Filters to conference}
+
+\item{team}{Filters to team}
 }
 \value{
 Returns a tibble with 20 columns:

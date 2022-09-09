@@ -4,15 +4,21 @@
 \alias{bart_player_season}
 \title{Get Player Season Stats}
 \usage{
-bart_player_season(year = NULL, id = NULL, team = NULL, stat = NULL)
+bart_player_season(
+  year = current_season(),
+  id = NULL,
+  team = NULL,
+  stat = NULL
+)
 }
 \arguments{
 \item{year}{Defaults to current season (YYYY).}
 
-\item{stat}{Indicates statistical split (see details).}
+\item{id}{Filters to player ID}
 
-\item{conf_only}{Logical. Filters data by conference-only play; defaults to
-`FALSE`.}
+\item{team}{Filters to team}
+
+\item{stat}{Stat to return ('advanced', 'box', 'shooting')}
 }
 \value{
 Returns a tibble with the number of columns dependent on the value

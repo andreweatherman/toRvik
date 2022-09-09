@@ -13,15 +13,15 @@
 #'   \item{\code{from_d1}}{logical.} \item{\code{to_d1}}{logical}
 #'   \item{\code{sit}}{logical.}}
 #' @param year Year to filter
-#' @param from Team player is transfering from
-#' @param to Team player is transfering to
+#' @param from Team player is transferring from
+#' @param to Team player is transferring to
 #' @importFrom magrittr %>%
 #' @importFrom dplyr as_tibble
 #' @importFrom httr modify_url
 #' @importFrom jsonlite fromJSON
 #' @importFrom cli cli_abort
 #' @examples
-#' transfer_portal(to='Duke')
+#' transfer_portal(to='Charlotte')
 #'
 #' @export
 

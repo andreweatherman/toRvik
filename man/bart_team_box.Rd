@@ -4,29 +4,36 @@
 \alias{bart_team_box}
 \title{Get Team Box Stats}
 \usage{
-bart_team_box(year = current_season(), type = "all")
+bart_team_box(
+  year = current_season(),
+  team = NULL,
+  conf = NULL,
+  split = NULL,
+  stat = "total"
+)
 }
 \arguments{
-\item{year}{Defaults to current season (YYYY).}
+\item{year}{Filters to year.}
 
-\item{type}{Filters by game type; defaults to `all`.}
+\item{team}{Filters to team.}
+
+\item{conf}{Filters to conf.}
+
+\item{split}{Split to filter (see details).}
+
+\item{stat}{Filters for agg. stats (total) or avg. stats (avg)}
 }
 \value{
-Returns a tibble of team box totals and per-game averages
+Returns a tibble with the number of columns dependent on the year.
 }
 \description{
-Returns team box totals and per-game averages by game type back to 2008.
+Returns aggregate team stats back to 2008
 }
 \details{
-Columns ending in 'pg' indicate a per-game average. Unless specified by
-`type=d1`, results include games against non-Division 1 opponents.
-
-The `type` argument splits the results by game type, explained below:
-\describe{ \item{all}{All games played.} \item{nc}{Non-conference games.}
-\item{conf}{In-conference games.} \item{post}{Post-conference tournament
-games.} \item{d1}{Games against D-1 teams only.} \item{nond1}{Games involving
-one non-D1 team.} }
+The `split` argument filters the results by split, explained below:
+\describe{ \item{result}{Wins and losses} \item{location}{Game location}
+\item{month}{Game month} \item{type}{Game type}}
 }
 \examples{
-\donttest{bart_team_box(type='conf')}
+\donttest{bart_team_box(split='month', team='Duke')}
 }

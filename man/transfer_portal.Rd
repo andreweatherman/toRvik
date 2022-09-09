@@ -9,9 +9,9 @@ transfer_portal(year = NULL, from = NULL, to = NULL)
 \arguments{
 \item{year}{Year to filter}
 
-\item{from}{Team player is transfering from}
+\item{from}{Team player is transferring from}
 
-\item{to}{Team player is transfering to}
+\item{to}{Team player is transferring to}
 }
 \value{
 Returns a tibble with 31 columns: \describe{
@@ -30,6 +30,6 @@ Function pulls destination decisions by players in the transfer portal back
 to 2012
 }
 \examples{
-transfer_portal(to='Duke')
+transfer_portal(to='Charlotte')
 
 }

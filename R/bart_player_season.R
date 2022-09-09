@@ -11,9 +11,9 @@
 #' @returns Returns a tibble with the number of columns dependent on the value
 #'   supplied to the `stat` argument.
 #' @param year Defaults to current season (YYYY).
-#' @param stat Indicates statistical split (see details).
-#' @param conf_only Logical. Filters data by conference-only play; defaults to
-#'   `FALSE`.
+#' @param id Filters to player ID
+#' @param team Filters to team
+#' @param stat Stat to return ('advanced', 'box', 'shooting')
 #' @importFrom magrittr %>%
 #' @importFrom dplyr as_tibble
 #' @importFrom httr modify_url
@@ -23,7 +23,7 @@
 #' \donttest{bart_player_season(year=2019, stat='advanced')}
 #'
 #' @export
-bart_player_season <- function(year = NULL, id = NULL, team = NULL, stat = NULL) {
+bart_player_season <- function(year = current_season(), id = NULL, team = NULL, stat = NULL) {
 
   # test passed year
   if (!is.null(year) & !(is.numeric(year) && nchar(year) == 4 && year >= 2008)) {

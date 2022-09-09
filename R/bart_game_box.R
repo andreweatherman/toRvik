@@ -9,6 +9,7 @@
 #' @param year Filters to year (YYYY)
 #' @param date Filters to date (YYYY-MM-DD)
 #' @param team Filters to team
+#' @param conf Filters to conference
 #' @param game_id Filters to game
 #' @importFrom magrittr %>%
 #' @importFrom dplyr as_tibble
@@ -16,10 +17,10 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom cli cli_abort
 #' @examples
-#' bart_game_box(year=2022)
+#' \donttest{bart_game_box(year=2022)}
 #'
 #' @export
-bart_game_box <- function(year = current_season(), date = NULL, team = NULL, game_id = NULL) {
+bart_game_box <- function(year = current_season(), date = NULL, team = NULL, conf = NULL, game_id = NULL) {
 
   # test passed year
   if (!is.null(year) & !(is.numeric(year) && nchar(year) == 4 && year >= 2008)) {
@@ -34,17 +35,17 @@ bart_game_box <- function(year = current_season(), date = NULL, team = NULL, gam
     base_url,
     query = list(
       year = year,
-      date = date,
       team = team,
-      game_id = game_id
+      conf = conf
     )
   )
+
   data <- data.frame()
 
   tryCatch(
     expr = {
       data  <- jsonlite::fromJSON(parsed) %>%
-        make_toRvik_data('Game Box Score', Sys.time())
+        make_toRvik_data('Game Box', Sys.time())
     },
     error = function(e) {
       check_docs_error()

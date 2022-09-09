@@ -4,4 +4,4 @@ utils::globalVariables(c('team', 'more', 'rec', 'seed', 'barthag','auto_prob','b
                          'pake', 'coach','result','score','points','opp_points','opp_conf','loc','lead_diff',
                          'V3', '.', 'ast', 'away', 'blk', 'fta', 'ftm', 'games', 'home', 'key', 'pf', 'pts',
                          'stl', 'team1', 'team2', 'to', 'tpa', 'tpm', 'value', 'where', 'ts', 'num', 'abrev',
-                         'player'))
+                         'player', 'is_installed'))

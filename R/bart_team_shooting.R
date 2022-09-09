@@ -29,38 +29,51 @@
 #'   \item{\code{three_share_d}}{double.}
 #'   \item{\code{year}}{double.}
 #'}
-#' @param year Defaults to current season (YYYY).
-#' @import dplyr
-#' @import httr
-#' @importFrom withr local_options
-#' @importFrom cli cli_abort
-#' @importFrom rvest read_html html_table
-#' @importFrom purrr pluck
-#' @importFrom tidyr separate
+#' @param year Filters to year
+#' @param conf Filters to conference
+#' @param team Filters to team
 #' @importFrom magrittr %>%
+#' @importFrom dplyr as_tibble
+#' @importFrom glue glue
+#' @importFrom jsonlite fromJSON
+#' @importFrom cli cli_abort
 #' @examples
 #' bart_team_shooting(year=2019)
 #' @export
-bart_team_shooting <- function(year = current_season()) {
-  suppressWarnings({
-    withr::local_options(HTTPUserAgent='toRvik Package')
-    names <- c("team", "conf", "dunk_fg", "dunk_share", "dunk_fg_d", "dunk_share_d", "close_fg", "close_share", "close_fg_d", "close_share_d", "far_fg", "far_share", "far_fg_d", "far_share_d", "three_fg", "three_share", "three_fg_d", "three_share_d")
-    if (!(is.numeric(year) && nchar(year) == 4 && year >=
-          2010)) {
-      cli::cli_abort("Enter a valid year as a number (YYYY). Data only goes back to 2010!")
-    } else {
-      x <- httr::GET(paste0("https://barttorvik.com/teampbptot.php?year=", year)) %>%
-        httr::content(as = "text") %>%
-        rvest::read_html() %>%
-        rvest::html_table() %>%
-        purrr::pluck(1) %>%
-        subset(select = -c(1, seq(7, 22, 5)))
-      colnames(x) <- names
-      x <- x[!(x$team == ""), ]
-      x <- x %>%
-        tidyr::separate(team, into = c("team", "seed"), sep = "(?<=\\D) (?=[0-9])") %>%
-        dplyr::mutate(across(c(2, seq(5, 19, 2)), as.numeric), year = year)
-      return(x)
+bart_team_shooting <- function(year = current_season(), conf = NULL, team = NULL) {
+
+  # test passed year
+  if (!is.null(year) & !(is.numeric(year) && nchar(year) == 4 && year >= 2010)) {
+    cli::cli_abort(c(
+      "{.var year} must be 2010 or later",
+      "x" = "You passed through {year}"
+    ))
+  }
+
+  base_url <- 'https://api.cbbstat.com/teams/shooting?'
+  parsed <- httr::modify_url(
+    base_url,
+    query = list(
+      year = year,
+      team = team,
+      conf = conf
+    )
+  )
+
+  data <- data.frame()
+
+  tryCatch(
+    expr = {
+      data  <- jsonlite::fromJSON(parsed) %>%
+        make_toRvik_data('Team Shooting', Sys.time())
+    },
+    error = function(e) {
+      check_docs_error()
+    },
+    warning = function(w) {
+    },
+    finally = {
     }
-  })
+  )
+  return(data)
 }

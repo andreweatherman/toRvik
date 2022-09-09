@@ -17,11 +17,11 @@
 #' @importFrom glue glue
 #' @importFrom jsonlite fromJSON
 #' @examples
-#' teams_by_year()
+#' bart_teams(conf='ACC')
 #'
 #' @export
 
-teams_by_year <- function(year = NULL, conf = NULL) {
+bart_teams <- function(year = NULL, conf = NULL) {
   base_url <- 'https://api.cbbstat.com/teams'
   parsed <- httr::modify_url(
     base_url,
@@ -30,6 +30,20 @@ teams_by_year <- function(year = NULL, conf = NULL) {
       conf = conf
     )
   )
-  data <- jsonlite::fromJSON(parsed) %>% dplyr::as_tibble()
+  data <- data.frame()
+
+  tryCatch(
+    expr = {
+      data  <- jsonlite::fromJSON(parsed) %>%
+        make_toRvik_data('Team Database', Sys.time())
+    },
+    error = function(e) {
+      check_docs_error()
+    },
+    warning = function(w) {
+    },
+    finally = {
+    }
+  )
   return(data)
 }

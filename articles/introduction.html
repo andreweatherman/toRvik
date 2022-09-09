@@ -148,7 +148,7 @@
 <span><span class="fu">toRvik</span><span class="fu">::</span><span class="fu"><a href="../reference/bart_ratings.html">bart_ratings</a></span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ── Team Ratings: 2022 ────────────────────────────────────────── <span style="font-style: italic;">toRvik 1.1.0</span> ──</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-09 12:24:46 UTC</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-09 23:43:41 UTC</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 19</span></span></span>
 <span><span class="co">#&gt;    team    conf  barthag barth…¹ adj_o adj_o…² adj_d adj_d…³ adj_t adj_t…⁴   wab</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -167,14 +167,14 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   seed &lt;dbl&gt;, year &lt;int&gt;, and abbreviated variable names ¹​barthag_rk,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ²​adj_o_rk, ³​adj_d_rk, ⁴​adj_t_rk</span></span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 5.904 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; 0.521 sec elapsed</span></span></code></pre></div>
 <p>Here, the <code>bart_ratings</code> function returned the top ten teams in T-Rank in the current season. We are also presented with each team’s adjusted efficiencies, their adjusted tempo, and two forms of strength of schedule (documented in <code>bart_ratings</code>). But what if we want these same measures in home games only? We would use <code>bart_factors</code> and input ‘H’ as location:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">toRvik</span><span class="fu">::</span><span class="fu"><a href="../reference/bart_factors.html">bart_factors</a></span><span class="op">(</span>location<span class="op">=</span><span class="st">'H'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ── Team Factors ──────────────────────────────────────────────── <span style="font-style: italic;">toRvik 1.1.0</span> ──</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-09 12:24:46 UTC</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-09 23:43:42 UTC</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 22</span></span></span>
 <span><span class="co">#&gt;    team     conf  rating  rank adj_o adj_o…¹ adj_d adj_d…² tempo off_ppp off_efg</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -193,14 +193,14 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   wins &lt;int&gt;, losses &lt;int&gt;, games &lt;int&gt;, and abbreviated variable names</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ¹​adj_o_rank, ²​adj_d_rank</span></span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.365 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; 0.606 sec elapsed</span></span></code></pre></div>
 <p>And now, we have four factor data and metric ratings for <em>home games only</em>. The <code>bart_factors</code> function, and the analogous <code>bart_conf_factors</code>, takes venue, game type, date range, and opponent strength as additional splits. Great, but what if we want to explore rating trends over time? <code>toRvik</code> gives us that ability with <code>bart_archive</code>, a function that pulls adjusted ratings and projected records from the morning of a desired date:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">toRvik</span><span class="fu">::</span><span class="fu"><a href="../reference/bart_archive.html">bart_archive</a></span><span class="op">(</span><span class="st">'20220113'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ── Archive Ratings ───────────────────────────────────────────── <span style="font-style: italic;">toRvik 1.1.0</span> ──</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-09 12:24:46 UTC</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-09 23:43:43 UTC</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 16</span></span></span>
 <span><span class="co">#&gt;     rank team   conf  record barthag adj_o adj_o…¹ adj_d adj_d…² adj_t…³ adj_t…⁴</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
@@ -218,7 +218,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   wab &lt;dbl&gt;, wab_rk &lt;int&gt;, date &lt;chr&gt;, and abbreviated variable names</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ¹​adj_o_rk, ²​adj_d_rk, ³​adj_tempo, ⁴​adj_tempo_rk</span></span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.187 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; 0.398 sec elapsed</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="exploring-player-and-game-data">
@@ -231,7 +231,7 @@
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">net</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ── Player Game Stats ─────────────────────────────────────────── <span style="font-style: italic;">toRvik 1.1.0</span> ──</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-09 12:24:47 UTC</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-09 23:43:43 UTC</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 25</span></span></span>
 <span><span class="co">#&gt;    date       year player exp   team  conf  opp   result   min   pts   usg  ortg</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -249,7 +249,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   to_pct &lt;dbl&gt;, stl_pct &lt;dbl&gt;, blk_pct &lt;dbl&gt;, bpm &lt;dbl&gt;, obpm &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   dbpm &lt;dbl&gt;, net &lt;dbl&gt;, poss &lt;dbl&gt;, id &lt;dbl&gt;, game_id &lt;chr&gt;</span></span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.459 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; 0.69 sec elapsed</span></span></code></pre></div>
 <p>Here, <code>bart_player_game</code> returned the 10 highest individual net BPMs by a Duke player this season. The function takes ‘box,’ ‘shooting,’ and ‘advanced’ as stat inputs, and I welcome you to explore each one in your own session. But what if we want to investigate similar performance at a season level? Well, <code>bart_player_season</code> gives us that option – also taking ‘box,’ ‘shooting,’ and ‘advanced’ as stat inputs.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -257,7 +257,7 @@
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">mid_a</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ── Player Season Stats ───────────────────────────────────────── <span style="font-style: italic;">toRvik 1.1.0</span> ──</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-09 12:24:47 UTC</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-09 23:43:44 UTC</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 33</span></span></span>
 <span><span class="co">#&gt;   player pos   exp   team  conf      g   mpg   ppg p_per   usg  ortg   efg    ts</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -272,7 +272,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   rim_pct &lt;dbl&gt;, mid_m &lt;dbl&gt;, mid_a &lt;dbl&gt;, mid_pct &lt;dbl&gt;, year &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   id &lt;int&gt;</span></span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.291 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; 0.47 sec elapsed</span></span></code></pre></div>
 <p>And now, we have a tibble of season-long shooting data for Duke players, sorted by number of mid-range attempts. Advanced metric data can be pulled by team on a per-game basis using <code>bart_team_schedule</code>, and total team shooting splits can be accessed using <code>bart_team_shooting</code>. Game box data can be pulled with <code>bart_game_total</code>.</p>
 </div>
 <div class="section level2">
@@ -300,7 +300,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 4 more variables: q2 &lt;chr&gt;, q1_2 &lt;chr&gt;, q3 &lt;chr&gt;, q4 &lt;chr&gt;, and</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable name ¹​qual_avg</span></span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 1.084 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; 0.871 sec elapsed</span></span></code></pre></div>
 <p>Returned are sheets of top teams sorted by their NCAA NET ranking. Because this function relies on NET data, it is only available back to the 2018-19 season. In-season performance is valuable, but what if you want to investigate <em>just</em> tournament data? Well, <code>toRvik</code> gives you two options to do so: <code>bart_tourney_odds</code> and <code>bart_tourney_results</code>. The former returns metric-adjusted round probabilities by split. Let’s explore round odds for the 2022 NCAA Tournament:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -321,7 +321,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     5 Midwest Iowa       B10     100  84.3  64.5  32.2  19.3   9.2   3.7</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     2 South   Villanova  BE      100  90.8  63.6  34.6  16.1   8.4   3.5</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.373 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; 0.269 sec elapsed</span></span></code></pre></div>
 <p>With the ‘odds’ argument set to ‘pre,’ we returned pre-tournament odds and sorted by likelihood to reach the second weekend (Sweet 16). <code>bart_tourney_odds</code> also takes current odds (‘current’), odds based on recent performance (‘recent’), and odds based on games against strong opponents (‘t100’). This data is similarly available starting with the 2019 tournament. Now, what if we want to explore tournament results?</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -338,7 +338,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 6 more variables: champ &lt;dbl&gt;, top2 &lt;dbl&gt;, f4_percent &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   champ_percent &lt;dbl&gt;, from &lt;dbl&gt;, to &lt;dbl&gt;</span></span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.762 sec elapsed</span></span></code></pre></div>
+<span><span class="co">#&gt; 0.414 sec elapsed</span></span></code></pre></div>
 <p>With <code>bart_tourney_results</code>, we can return raw and adjusted outcomes by split. Here, we returned aggregate conference results from 2011 to 2021, sorted by PAKE – the number of wins attained above or below KenPom expectation. The function splits by team (‘team’), conference (‘conf’), coach (‘coach’), and seed (‘seed’) and includes data starting in 2000.</p>
 </div>
 <div class="section level2">

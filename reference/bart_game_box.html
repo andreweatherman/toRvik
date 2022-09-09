@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">toRvik</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,6 +84,7 @@
 <span>  year <span class="op">=</span> <span class="fu"><a href="current_season.html">current_season</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  date <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  team <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  conf <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  game_id <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -100,6 +101,10 @@
 
 <dt>team</dt>
 <dd><p>Filters to team</p></dd>
+
+
+<dt>conf</dt>
+<dd><p>Filters to conference</p></dd>
 
 
 <dt>game_id</dt>
@@ -121,28 +126,28 @@ to whom is the home team.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">bart_game_box</span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Game Box Score ────────────────────────────────────────────── <span style="font-style: italic;">toRvik 1.0.2</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-06 05:38:55 UTC</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5,967 × 40</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    date         min team1  team2 team1…¹ team1…² team1…³ team1…⁴ team1…⁵ team1…⁶</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2022-04-04   200 North… Kans…      23      73       5      23      18      22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2022-04-02   200 Villa… Kans…      22      57      13      31       8      10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2022-04-02   200 North… Duke       27      64      10      26      17      24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2022-04-01   200 Fresn… Coas…      31      59      12      20      11      18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2022-03-31   200 Xavier Texa…      29      60       7      18       8      15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2022-03-29   200 St. B… Xavi…      29      62       9      22      10      13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2022-03-29   200 Washi… Texa…      19      55       7      29      11      20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2022-03-28   225 Coast… Sout…      28      59       9      24       4       6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2022-03-28   200 South… Fres…      19      61       4      20       6       8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2022-03-27   200 Miami… Kans…      19      55       3      21       9      13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 5,957 more rows, 30 more variables: team1_oreb &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   team1_dreb &lt;int&gt;, team1_reb &lt;int&gt;, team1_ast &lt;int&gt;, team1_stl &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   team1_blk &lt;int&gt;, team1_to &lt;int&gt;, team1_pf &lt;int&gt;, team1_pts &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   team2_fgm &lt;int&gt;, team2_fga &lt;int&gt;, team2_tpm &lt;int&gt;, team2_tpa &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   team2_ftm &lt;int&gt;, team2_fta &lt;int&gt;, team2_oreb &lt;int&gt;, team2_dreb &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   team2_reb &lt;int&gt;, team2_ast &lt;int&gt;, team2_stl &lt;int&gt;, team2_blk &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   team2_to &lt;int&gt;, team2_pf &lt;int&gt;, team2_pts &lt;int&gt;, pos &lt;dbl&gt;, win &lt;chr&gt;, …</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Game Box ──────────────────────────────────────────────────── <span style="font-style: italic;">toRvik 1.1.0</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-09 01:44:57 UTC</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 11,934 × 48</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    date  type  locat…¹ did_win team  conf  opp   opp_c…²   min   pos   fgm   fga</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2022… post  N       FALSE   Nort… ACC   Kans… B12       200    73    23    73</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2022… post  N       TRUE    Kans… B12   Nort… ACC       200    73    29    66</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2022… post  N       FALSE   Vill… BE    Kans… B12       200    57    22    57</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2022… post  N       TRUE    Kans… B12   Vill… BE        200    57    29    54</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2022… post  N       TRUE    Nort… ACC   Duke  ACC       200    69    27    64</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2022… post  N       FALSE   Duke  ACC   Nort… ACC       200    69    30    72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2022… post  A       TRUE    Fres… MWC   Coas… SB        200    66    31    59</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2022… post  H       FALSE   Coas… SB    Fres… MWC       200    66    25    63</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2022… post  N       TRUE    Xavi… BE    Texa… SEC       200    67    29    60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2022… post  N       FALSE   Texa… SEC   Xavi… BE        200    67    23    51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 11,924 more rows, 36 more variables: tpm &lt;int&gt;, tpa &lt;int&gt;, ftm &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   fta &lt;int&gt;, oreb &lt;int&gt;, dreb &lt;int&gt;, reb &lt;int&gt;, ast &lt;int&gt;, stl &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   blk &lt;int&gt;, to &lt;int&gt;, pf &lt;int&gt;, pts &lt;int&gt;, second_chance_pts &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   second_chance_fgm &lt;dbl&gt;, second_chance_fga &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   second_change_fg_pct &lt;dbl&gt;, pts_in_paint &lt;dbl&gt;, pts_in_paint_fgm &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   pts_in_paint_fga &lt;dbl&gt;, pts_in_paint_fg_pct &lt;dbl&gt;, fast_brk_pts &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   fast_brk_fgm &lt;dbl&gt;, fast_brk_fga &lt;dbl&gt;, fast_brk_fg_pct &lt;dbl&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

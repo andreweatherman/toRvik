@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">toRvik</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,13 +74,28 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.1.0" id="torvik-110">torvik 1.1.0<a class="anchor" aria-label="anchor" href="#torvik-110"></a></h2>
+<div class="section level4">
+<h4 id="cran-update-1-1-0">CRAN 1.1.0 Update<a class="anchor" aria-label="anchor" href="#cran-update-1-1-0"></a></h4>
+<p><strong>Code Updates:</strong></p>
+<ul><li>Improved data retrieval speeds by shifting many functions to wrapping a dedicated Fast API</li>
+<li>Added <code>transfer_portal</code>, <code>player_recruiting_rankings</code>, <code>bart_game_prediction</code>, and <code>bart_tournament_prediction</code>
+</li>
+<li>Removed <code>bart_transfers</code>, <code>bart_pro</code>, and <code>bart_team_schedule</code>
+</li>
+</ul><p><strong>Other:</strong></p>
+<ul><li>Added headers to data pulled by the API to note time retrieved</li></ul></div>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.3" id="torvik-103">toRvik 1.0.3<a class="anchor" aria-label="anchor" href="#torvik-103"></a></h2>
 <p><strong>Patches:</strong></p>
-<ul><li>Fixed <a href="https://github.com/andreweatherman/toRvik/issues/4" class="external-link">data issue</a> that casued <code>bart_player_season</code> to fail on row binds across certain seasons</li></ul><p><strong>Code Updates:</strong></p>
+<ul><li>Fixed <a href="https://github.com/andreweatherman/toRvik/issues/4" class="external-link">data issue</a> that caused <code>bart_player_season</code> to fail on row binds across certain seasons</li></ul><p><strong>Code Updates:</strong></p>
 <ul><li>Added <a href="https://www.torvik.dev/reference/bart_pro.php" class="external-link"><code>bart_pro</code></a> to to pull statistics for draft-eligible players</li></ul><p><strong>Other:</strong></p>
 <ul><li>Moved package site to self-host on AWS</li></ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.2" id="torvik-102">toRvik 1.0.2<a class="anchor" aria-label="anchor" href="#torvik-102"></a></h2><p class="text-muted">CRAN release: 2022-04-22</p>
+<div class="section level4">
+<h4 id="cran-update-1-0-2">CRAN 1.0.2 Update<a class="anchor" aria-label="anchor" href="#cran-update-1-0-2"></a></h4>
 <p><strong>Addressed CRAN submission comments:</strong></p>
 <ul><li>Omitted ‘Functions’ from package title</li>
 <li>Provided links to utilized web services in DESCRIPTION</li>
@@ -95,6 +110,7 @@
 <li>Switched neutral variable in <code>bart_season_schedule</code> to logical type</li>
 </ul><p><strong>Other:</strong></p>
 <ul><li>Site refresh for CRAN release</li></ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.1" id="torvik-101">toRvik 1.0.1<a class="anchor" aria-label="anchor" href="#torvik-101"></a></h2>
 <p><strong>Initial CRAN submission rejected; fixed with 1.0.2</strong></p>

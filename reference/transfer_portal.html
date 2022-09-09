@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">toRvik</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,11 +90,11 @@
 
 
 <dt>from</dt>
-<dd><p>Team player is transfering from</p></dd>
+<dd><p>Team player is transferring from</p></dd>
 
 
 <dt>to</dt>
-<dd><p>Team player is transfering to</p></dd>
+<dd><p>Team player is transferring to</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -138,22 +138,23 @@ to 2012</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">transfer_portal</span><span class="op">(</span>to<span class="op">=</span><span class="st">'Duke'</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Transfer Portal ───────────────────────────────────────────── <span style="font-style: italic;">toRvik 1.0.2</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-06 05:40:06 UTC</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      id player        from  to    exp    year imm_e…¹ source from_d1 to_d1 sit  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> <span style="text-decoration: underline;">65</span>776 Kale Catchin… Harv… Duke  Sr     <span style="text-decoration: underline;">2</span>023 Yes     Josep… TRUE    FALSE <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> <span style="text-decoration: underline;">66</span>209 Ryan Young    Nort… Duke  Jr     <span style="text-decoration: underline;">2</span>023 Yes     Jeff … TRUE    FALSE <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> <span style="text-decoration: underline;">65</span>826 Max Johns     Prin… Duke  Sr     <span style="text-decoration: underline;">2</span>023 Yes     <span style="color: #BB0000;">NA</span>     TRUE    FALSE <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> <span style="text-decoration: underline;">50</span>593 Theo John     Marq… Duke  Sr     <span style="text-decoration: underline;">2</span>022 Yes     <span style="color: #BB0000;">NA</span>     TRUE    TRUE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> <span style="text-decoration: underline;">51</span>179 Bates Jones   Davi… Duke  Sr     <span style="text-decoration: underline;">2</span>022 Yes     <span style="color: #BB0000;">NA</span>     TRUE    TRUE  FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> <span style="text-decoration: underline;">45</span>926 Patrick Tape  Colu… Duke  Sr     <span style="text-decoration: underline;">2</span>021 Yes     Evan … TRUE    TRUE  TRUE </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> <span style="text-decoration: underline;">45</span>926 Patrick Tape  Colu… Duke  Sr     <span style="text-decoration: underline;">2</span>021 Yes     Evan … TRUE    TRUE  TRUE </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> <span style="text-decoration: underline;">31</span>029 Sean Obi      Rice  Duke  So     <span style="text-decoration: underline;">2</span>015 <span style="color: #BB0000;">NA</span>      Jeff … TRUE    TRUE  TRUE </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> <span style="text-decoration: underline;">19</span>693 Rodney Hood   Miss… Duke  So     <span style="text-decoration: underline;">2</span>014 <span style="color: #BB0000;">NA</span>      Andy … TRUE    TRUE  TRUE </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​imm_elig</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">transfer_portal</span><span class="op">(</span>to<span class="op">=</span><span class="st">'Charlotte'</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Transfer Portal ───────────────────────────────────────────── <span style="font-style: italic;">toRvik 1.1.0</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-09 01:45:54 UTC</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 22 × 11</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       id player       from  to    exp    year imm_e…¹ source from_d1 to_d1 sit  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> <span style="text-decoration: underline;">72</span>897 Lu'Cye Patt… Miss… Char… So     <span style="text-decoration: underline;">2</span>023 <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     TRUE    FALSE <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> <span style="text-decoration: underline;">45</span>359 Perry Franc… Texa… Char… Sr     <span style="text-decoration: underline;">2</span>022 Yes     <span style="color: #BB0000;">NA</span>     TRUE    TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> <span style="text-decoration: underline;">50</span>945 Austin Butl… Holy… Char… Sr     <span style="text-decoration: underline;">2</span>022 Yes     <span style="color: #BB0000;">NA</span>     TRUE    TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> <span style="text-decoration: underline;">51</span>383 Musa Jallow  Ohio… Char… Jr     <span style="text-decoration: underline;">2</span>022 Yes     <span style="color: #BB0000;">NA</span>     TRUE    TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> <span style="text-decoration: underline;">65</span>717 Robert Bras… Syra… Char… Jr     <span style="text-decoration: underline;">2</span>022 <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     TRUE    TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> <span style="text-decoration: underline;">74</span>703 Igor Milici… Virg… Char… Fr     <span style="text-decoration: underline;">2</span>022 <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     TRUE    FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> <span style="text-decoration: underline;">66</span>511 Jhery Matos  Dayt… Char… Sr     <span style="text-decoration: underline;">2</span>021 Yes     <span style="color: #BB0000;">NA</span>     TRUE    TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="text-decoration: underline;">67</span>757 Marvin Cann… Wash… Char… Sr     <span style="text-decoration: underline;">2</span>021 Yes     <span style="color: #BB0000;">NA</span>     TRUE    TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="text-decoration: underline;">50</span>906 Clyde Trapp  Clem… Char… Sr     <span style="text-decoration: underline;">2</span>021 Yes     <span style="color: #BB0000;">NA</span>     TRUE    TRUE  FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">73</span>688 Montre' Gip… Tarl… Char… Sr     <span style="text-decoration: underline;">2</span>021 Yes     <span style="color: #BB0000;">NA</span>     TRUE    FALSE FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 12 more rows, and abbreviated variable name ¹​imm_elig</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

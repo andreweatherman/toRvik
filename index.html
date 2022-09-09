@@ -36,7 +36,7 @@
     
     <a class="navbar-brand me-2" href="index.html">toRvik</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,27 +105,32 @@
 </h1>
 </div>
 <!-- badges: start -->
-<p><a href="https://github.com/andreweatherman/toRvik" class="external-link"><strong><code>toRvik</code></strong></a> is an R package for working with and scraping men’s college basketball data from <a href="https://barttorvik.com/" class="external-link">Barttorvik</a>.</p>
+<p><a href="https://github.com/andreweatherman/toRvik" class="external-link"><strong><code>toRvik</code></strong></a> is an R package for working with and scraping men’s college basketball.</p>
 <p>There are a lot of college basketball data out there, but most are difficult to pull and clean or they are behind a paywall. With <code>toRvik</code>, you have immediate access to some of the most detailed and extensive college basketball statistics publicly available – all returned in tidy format with just a single line of code! Best of all, no subscription is required to access the data.</p>
-<p>As of version 1.0.2, the package includes over 20 functions for pulling player and team data, game results, advanced metric splits, play-by-play shooting, and more.</p>
+<p>Most of <code>toRvik</code>’s functions are powered by a dedicated Fast API framework – delivering data at rapid speeds with dependable up-times.</p>
+<p>As of version 1.0.3, the package includes nearly 30 functions for pulling player and team data, game results, advanced metric splits, play-by-play shooting, and more. Leveraging the same data and models as <a href="www.barttorvik.com">Barttorvik</a>, the package now offers game and tournament predictor functions, allowing you to simulate games between any pair of teams on any date at any venue back to the 2014-15 season. <code>toRvik</code> also offers extensive transfer histories for over 5,000 players back to the 2011-12 season and detailed player recruiting rankings for over 6,000 players back to 2007-08.</p>
 <div class="section level2">
 <h2 id="package-installation">Package Installation<a class="anchor" aria-label="anchor" href="#package-installation"></a>
 </h2>
 <p>Install the released version of <code>toRvik</code> from CRAN:</p>
-<pre class="{r}"><code><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"toRvik"</span><span class="op">)</span></span></code></pre>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"toRvik"</span><span class="op">)</span></span></code></pre></div>
 <p>Or install the development version from GitHub with:</p>
-<pre class="{r}"><code><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'devtools'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'devtools'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'devtools'</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"andreweatherman/toRvik"</span><span class="op">)</span> </span></code></pre>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"andreweatherman/toRvik"</span><span class="op">)</span> </span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="package-highlights">Package Highlights<a class="anchor" aria-label="anchor" href="#package-highlights"></a>
 </h2>
 <ul>
-<li>Detailed game-by-game + season-long statistics by player</li>
+<li>Detailed game-by-game + season-long statistics by player and split</li>
+<li>Extensive transfer + recruiting histories</li>
+<li>Custom game and tournament predictions</li>
 <li>Shooting splits + shares by team</li>
-<li>Game box scores for D-1 games</li>
+<li>Game box scores for all D-1 games</li>
 <li>Team + conference four factors by split</li>
 <li>Game-by-game four factors</li>
 <li>NCAA committee-style team sheets</li>
@@ -135,23 +140,19 @@
 <div class="section level2">
 <h2 id="basic-uses">Basic Uses<a class="anchor" aria-label="anchor" href="#basic-uses"></a>
 </h2>
-<p>All <code>toRvik</code> functions fall into one of five categories:</p>
+<p>All <code>toRvik</code> functions fall into one of six categories:</p>
 <ul>
 <li>
-<strong>Rating</strong>:<ul><li>Pulling and slicing T-Rank + four factor data</li></ul>
-</li>
+<strong>Rating</strong>, pulling and slicing T-Rank + four factor data</li>
 <li>
-<strong>Game</strong>:<ul><li>Pulling team and season schedules + results</li></ul>
-</li>
+<strong>Player</strong>, pulling player data and histories</li>
 <li>
-<strong>Stat</strong>:<ul><li>Pulling and slicing player, team, and conference stats</li></ul>
-</li>
+<strong>Team</strong>, pulling team statistics and histories</li>
 <li>
-<strong>Tournament</strong>:<ul><li>Pulling raw and adjusted tournament performance</li></ul>
-</li>
+<strong>Game</strong>, pulling game-by-game data and schedules</li>
 <li>
-<strong>Miscellaneous</strong><ul><li>Pulling coaching history, player of the year ratings, etc.</li></ul>
-</li>
+<strong>Tournament</strong>, pulling raw and adjusted tournament performance</li>
+<li><strong>Miscellaneous</strong></li>
 </ul>
 <div class="section level3">
 <h3 id="pull-t-rank-ratings">Pull T-Rank ratings:<a class="anchor" aria-label="anchor" href="#pull-t-rank-ratings"></a>
@@ -159,91 +160,191 @@
 <p>Calling <code>bart_ratings</code> will return the current T-Rank ranks and ratings.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/bart_ratings.html">bart_ratings</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">## # A tibble: 6 × 19</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">##   team     conf  barthag barthag_rk adj_o adj_o_rk adj_d adj_d_rk adj_t adj_t_rk</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">##   &lt;chr&gt;    &lt;chr&gt;   &lt;dbl&gt;      &lt;int&gt; &lt;dbl&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt;</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co">## 1 Gonzaga  WCC     0.966          1  120.        4  89.9        9  72.6        5</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co">## 2 Houston  Amer    0.959          2  117.       10  88.5        6  63.7      336</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co">## 3 Kansas   B12     0.958          3  120.        5  91.3       13  69.1       71</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="co">## 4 Texas T… B12     0.951          4  111.       41  85.4        1  66.3      223</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="co">## 5 Baylor   B12     0.949          5  118.        8  91.3       14  67.6      149</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="co">## 6 Duke     ACC     0.944          6  123.        1  96.0       53  67.4      161</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co">## # … with 9 more variables: wab &lt;dbl&gt;, nc_elite_sos &lt;dbl&gt;, nc_fut_sos &lt;dbl&gt;,</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="co">## #   nc_cur_sos &lt;dbl&gt;, ov_elite_sos &lt;dbl&gt;, ov_fut_sos &lt;dbl&gt;, ov_cur_sos &lt;dbl&gt;,</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="co">## #   seed &lt;int&gt;, year &lt;dbl&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">## ── Team Ratings: 2022 ────────────────────────────────────────── toRvik 1.1.0 ──</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">## ℹ Data updated: 2022-09-08 21:16:51 EDT</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">## # A tibble: 6 × 19</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">##   team     conf  barthag barth…¹ adj_o adj_o…² adj_d adj_d…³ adj_t adj_t…⁴   wab</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">##   &lt;chr&gt;    &lt;chr&gt;   &lt;dbl&gt;   &lt;int&gt; &lt;dbl&gt;   &lt;int&gt; &lt;dbl&gt;   &lt;int&gt; &lt;dbl&gt;   &lt;int&gt; &lt;dbl&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">## 1 Gonzaga  WCC     0.966       1  120.       4  89.9       9  72.6       5  6.71</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">## 2 Houston  Amer    0.959       2  117.      10  88.5       6  63.7     336  6.15</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">## 3 Kansas   B12     0.958       3  120.       5  91.3      13  69.1      71 10.4 </span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="co">## 4 Texas T… B12     0.951       4  111.      41  85.4       1  66.3     223  6.57</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co">## 5 Baylor   B12     0.949       5  118.       8  91.3      14  67.6     149  8.91</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="co">## 6 Duke     ACC     0.944       6  123.       1  96.0      53  67.4     161  7.19</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="co">## # … with 8 more variables: nc_elite_sos &lt;int&gt;, nc_fut_sos &lt;dbl&gt;,</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="co">## #   nc_cur_sos &lt;dbl&gt;, ov_elite_sos &lt;int&gt;, ov_fut_sos &lt;dbl&gt;, ov_cur_sos &lt;dbl&gt;,</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="co">## #   seed &lt;dbl&gt;, year &lt;int&gt;, and abbreviated variable names ¹​barthag_rk,</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="co">## #   ²​adj_o_rk, ³​adj_d_rk, ⁴​adj_t_rk</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="pull-team-statistics">Pull team statistics<a class="anchor" aria-label="anchor" href="#pull-team-statistics"></a>
 </h3>
 <p>Calling <code>bart_factors</code> will return four factor stats on a number of splits. To filter by home games, set venue to ‘home.’</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/bart_factors.html">bart_factors</a></span><span class="op">(</span>venue<span class="op">=</span><span class="st">'home'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">## # A tibble: 6 × 21</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co">##   team       conf  barthag rec    wins games adj_t adj_o off_efg off_to off_or</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co">##   &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">## 1 Houston    Amer    0.978 16–1     16    17  65.8  116.    54.3   16.5   39.1</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co">## 2 Baylor     B12     0.968 15–2     15    17  69.3  118.    55.1   17.6   38.1</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co">## 3 Gonzaga    WCC     0.966 16–0     16    16  73.1  121.    60     15.3   31.8</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">## 4 Texas Tech B12     0.965 18–0     18    18  68.2  117.    57     19.4   38.3</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="co">## 5 Auburn     SEC     0.961 16–0     16    16  72.5  116.    52.6   16.3   32.5</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co">## 6 Tennessee  SEC     0.959 16–0     16    16  68.9  113.    53     18.3   37.5</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="co">## # … with 10 more variables: off_ftr &lt;dbl&gt;, adj_d &lt;dbl&gt;, def_efg &lt;dbl&gt;,</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="co">## #   def_to &lt;dbl&gt;, def_or &lt;dbl&gt;, def_ftr &lt;dbl&gt;, year &lt;dbl&gt;, venue &lt;chr&gt;,</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="co">## #   type &lt;chr&gt;, quad &lt;chr&gt;</span></span></code></pre></div>
-<p>Calling <code>bart_team_box</code> will return team box totals and per-game averages by game type. To filter by in-conference games, set type to ‘conf.’</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/bart_factors.html">bart_factors</a></span><span class="op">(</span>location<span class="op">=</span><span class="st">'H'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">## ── Team Factors ──────────────────────────────────────────────── toRvik 1.1.0 ──</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">## ℹ Data updated: 2022-09-08 21:16:52 EDT</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">## # A tibble: 6 × 22</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">##   team      conf  rating  rank adj_o adj_o…¹ adj_d adj_d…² tempo off_ppp off_efg</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">##   &lt;chr&gt;     &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">## 1 Houston   Amer    32.7     1  116.      15  83.0       1  66.1    117.    54.2</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">## 2 Gonzaga   WCC     29.7     2  120.       5  89.9      18  72.7    123.    60.1</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">## 3 Baylor    B12     28.8     3  116.       9  87.6       9  69.3    116.    55.0</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">## 4 Villanova BE      28.8     4  123.       2  94.0      50  63.2    122.    57.6</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">## 5 Purdue    B10     28.4     5  124.       1  96.0      81  67.9    125.    58.2</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">## 6 Auburn    SEC     27.6     6  115.      17  87.5       8  72.9    113.    53.1</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">## # … with 11 more variables: off_to &lt;dbl&gt;, off_or &lt;dbl&gt;, off_ftr &lt;dbl&gt;,</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co">## #   def_ppp &lt;dbl&gt;, def_efg &lt;dbl&gt;, def_to &lt;dbl&gt;, def_or &lt;dbl&gt;, def_ftr &lt;dbl&gt;,</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co">## #   wins &lt;int&gt;, losses &lt;int&gt;, games &lt;int&gt;, and abbreviated variable names</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">## #   ¹​adj_o_rank, ²​adj_d_rank</span></span></code></pre></div>
+<p>Calling <code>bart_team_box</code> will return team box totals and per-game averages by game type. To find how Duke performed during the month of March:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/bart_team_box.html">bart_team_box</a></span><span class="op">(</span>type<span class="op">=</span><span class="st">'conf'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">## # A tibble: 6 × 27</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="co">##   team     ast   blk  dreb   fga   fgm   fta   ftm  oreb    pf   pts   reb   stl</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="co">##   &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="co">## 1 Gonza…   266    83   471   912   480   238   182   121   218  1271   592   101</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="co">## 2 South…   267    49   518  1024   562   361   286   106   271  1568   624   101</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co">## 3 Oral …   214    77   570  1258   594   302   224   191   314  1619   761    85</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co">## 4 Toledo   325    65   600  1256   626   349   270   202   300  1669   802   108</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="co">## 5 South…   200    49   336   795   383   360   279   115   242  1163   451   111</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="co">## 6 Bryant   249    68   507  1076   483   397   298   213   295  1411   720   105</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="co">## # … with 14 more variables: to &lt;dbl&gt;, tpa &lt;dbl&gt;, tpm &lt;dbl&gt;, fg_pct &lt;dbl&gt;,</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="co">## #   tp_pct &lt;dbl&gt;, ft_pct &lt;dbl&gt;, rpg &lt;dbl&gt;, apg &lt;dbl&gt;, spg &lt;dbl&gt;, bpg &lt;dbl&gt;,</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a><span class="co">## #   tpg &lt;dbl&gt;, fpg &lt;dbl&gt;, ppg &lt;dbl&gt;, games &lt;int&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/bart_team_box.html">bart_team_box</a></span><span class="op">(</span>team<span class="op">=</span><span class="st">'Duke'</span>, split<span class="op">=</span><span class="st">'month'</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">month</span><span class="op">==</span><span class="st">'March'</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">## ── Team Stats ────────────────────────────────────────────────── toRvik 1.1.0 ──</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co">## ℹ Data updated: 2022-09-08 21:16:52 EDT</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">## # A tibble: 1 × 39</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">##   team  month   min   pos   fgm   fga fg_pct   tpm   tpa fg3_pct   ftm   fta</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">##   &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;dbl&gt; &lt;int&gt; &lt;int&gt;   &lt;dbl&gt; &lt;int&gt; &lt;int&gt;</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">## 1 Duke  March  1800   599   270   518  0.521    63   176   0.358   118   149</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">## # … with 27 more variables: ft_pct &lt;dbl&gt;, oreb &lt;int&gt;, dreb &lt;int&gt;, reb &lt;int&gt;,</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co">## #   ast &lt;int&gt;, stl &lt;int&gt;, blk &lt;int&gt;, to &lt;int&gt;, pf &lt;int&gt;, pts &lt;int&gt;,</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co">## #   second_chance_pts &lt;dbl&gt;, second_chance_fgm &lt;dbl&gt;, second_chance_fga &lt;dbl&gt;,</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="co">## #   second_change_fg_pct &lt;dbl&gt;, pts_in_paint &lt;dbl&gt;, pts_in_paint_fgm &lt;dbl&gt;,</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="co">## #   pts_in_paint_fga &lt;dbl&gt;, pts_in_paint_fg_pct &lt;dbl&gt;, fast_brk_pts &lt;dbl&gt;,</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="co">## #   fast_brk_fgm &lt;dbl&gt;, fast_brk_fga &lt;dbl&gt;, fast_brk_fg_pct &lt;dbl&gt;,</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="co">## #   bench_pts &lt;dbl&gt;, pts_tov &lt;dbl&gt;, games &lt;int&gt;, wins &lt;int&gt;, losses &lt;int&gt;</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="pull-player-statistics">Pull player statistics<a class="anchor" aria-label="anchor" href="#pull-player-statistics"></a>
 </h3>
-<p>Calling <code>bart_player_season</code> will return detailed season-long player stats. To pull per-game averages, set stat to ‘box.’</p>
+<p>Calling <code>bart_player_season</code> will return detailed season-long player stats. To pull per-game averages for Duke players:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/bart_player_season.html">bart_player_season</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">'box'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">## # A tibble: 6 × 20</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="co">##   player      pos   exp   hgt   team  conf      g   mpg   ppg fg_pct  oreb  dreb</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="co">##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="co">## 1 Peter Kiss  Comb… Sr    6-5   Brya… NEC      27  35.7  25.2  0.484 1.44   4.33</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="co">## 2 Darius McG… Comb… Sr    5-9   Libe… ASun     30  33.7  24.6  0.445 0.454  4.03</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="co">## 3 Antoine Da… Scor… Sr    6-1   Detr… Horz     29  37.0  23.9  0.429 0.483  3.07</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="co">## 4 Keegan Mur… Stre… So    6-8   Iowa  B10      35  31.9  23.5  0.596 2.86   5.8 </span></span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="co">## 5 Max Abmas   Comb… Jr    6-0   Oral… Sum      28  36.8  22.8  0.412 0.3    3.13</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="co">## 6 Bryce Hami… Wing… Sr    6-4   UNLV  MWC      31  32.3  21.9  0.439 0.688  4.31</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a><span class="co">## # … with 8 more variables: rpg &lt;dbl&gt;, apg &lt;dbl&gt;, ast_to &lt;dbl&gt;, spg &lt;dbl&gt;,</span></span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="co">## #   bpg &lt;dbl&gt;, num &lt;chr&gt;, year &lt;dbl&gt;, id &lt;dbl&gt;</span></span></code></pre></div>
-<p>Calling <code>bart_player_game</code> will return detailed game-by-game player stats. To pull advanced splits by game, set stat to ‘adv.’</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/bart_player_season.html">bart_player_season</a></span><span class="op">(</span>team<span class="op">=</span><span class="st">'Duke'</span>, stat<span class="op">=</span><span class="st">'box'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">## ── Player Season Stats ───────────────────────────────────────── toRvik 1.1.0 ──</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">## ℹ Data updated: 2022-09-08 21:16:53 EDT</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">## # A tibble: 6 × 21</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">##   player      pos   exp   hgt   team  conf      g   mpg   ppg fg_pct  oreb  dreb</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">##   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co">## 1 Paolo Banc… Wing… Fr    6-10  Duke  ACC      39  33.0 17.2   0.513 1.77   6.05</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co">## 2 Wendell Mo… Comb… Jr    6-5   Duke  ACC      39  33.9 13.4   0.513 1.21   4.05</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co">## 3 Trevor Kee… Comb… Fr    6-4   Duke  ACC      36  30.2 11.5   0.422 0.833  2.61</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="co">## 4 Mark Willi… C     So    7-0   Duke  ACC      39  23.6 11.2   0.782 2.59   4.87</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="co">## 5 AJ Griffin  Wing… Fr    6-6   Duke  ACC      39  24.3 10.4   0.503 0.769  3.15</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="co">## 6 Jeremy Roa… Comb… So    6-1   Duke  ACC      39  29    8.62  0.412 0.359  2.05</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="co">## # … with 9 more variables: rpg &lt;dbl&gt;, apg &lt;dbl&gt;, tov &lt;dbl&gt;, ast_to &lt;dbl&gt;,</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="co">## #   spg &lt;dbl&gt;, bpg &lt;dbl&gt;, num &lt;dbl&gt;, year &lt;int&gt;, id &lt;int&gt;</span></span></code></pre></div>
+<p>Calling <code>bart_player_game</code> will return detailed game-by-game player stats. To pull advance splits by game for Duke players:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/bart_player_game.html">bart_player_game</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">'adv'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">## # A tibble: 6 × 24</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="co">##   date        year player       exp   team  opp   result   min   pts   usg  ortg</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="co">##   &lt;date&gt;     &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co">## 1 2021-11-09  2022 Jalen Colem… Sr    Kans… Mich… W         10     5  34.2  76.9</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="co">## 2 2021-11-12  2022 Jalen Colem… Sr    Kans… Tarl… W         12    10  11.7 144. </span></span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="co">## 3 2021-11-18  2022 Jalen Colem… Sr    Kans… Ston… W         15     7  12.4 186. </span></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="co">## 4 2021-11-25  2022 Jalen Colem… Sr    Kans… Nort… W         10     0  10.3   0  </span></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="co">## 5 2021-11-26  2022 Jalen Colem… Sr    Kans… Dayt… L          8     0  16.3  25.5</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="co">## 6 2021-11-28  2022 Jalen Colem… Sr    Kans… Iona  W          5     0   3   215. </span></span>
-<span id="cb12-10"><a href="#cb12-10"></a><span class="co">## # … with 13 more variables: or_pct &lt;dbl&gt;, dr_pct &lt;dbl&gt;, ast_pct &lt;dbl&gt;,</span></span>
-<span id="cb12-11"><a href="#cb12-11"></a><span class="co">## #   to_pct &lt;dbl&gt;, stl_pct &lt;dbl&gt;, blk_pct &lt;dbl&gt;, bpm &lt;dbl&gt;, obpm &lt;dbl&gt;,</span></span>
-<span id="cb12-12"><a href="#cb12-12"></a><span class="co">## #   dbpm &lt;dbl&gt;, net &lt;dbl&gt;, poss &lt;dbl&gt;, id &lt;dbl&gt;, game_id &lt;chr&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/bart_player_game.html">bart_player_game</a></span><span class="op">(</span>team<span class="op">=</span><span class="st">'Duke'</span>, stat<span class="op">=</span><span class="st">'advanced'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">## ── Player Game Stats ─────────────────────────────────────────── toRvik 1.1.0 ──</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">## ℹ Data updated: 2022-09-08 21:16:53 EDT</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co">## # A tibble: 6 × 25</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="co">##   date        year player exp   team  conf  opp   result   min   pts   usg  ortg</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co">##   &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="co">## 1 2021-11-09  2022 Theo … Sr    Duke  ACC   Kent… W         22     5  14.3  98.7</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="co">## 2 2021-11-12  2022 Theo … Sr    Duke  ACC   Army  W         15     0  11.9  18.1</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="co">## 3 2021-11-13  2022 Theo … Sr    Duke  ACC   Camp… W         10     0   1.9 236  </span></span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="co">## 4 2021-11-16  2022 Theo … Sr    Duke  ACC   Gard… W         15     4  19.1 100. </span></span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="co">## 5 2021-11-19  2022 Theo … Sr    Duke  ACC   Lafa… W         17     4  12.2 122. </span></span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="co">## 6 2021-11-22  2022 Theo … Sr    Duke  ACC   The … W         16     8  11.6 207. </span></span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="co">## # … with 13 more variables: or_pct &lt;dbl&gt;, dr_pct &lt;dbl&gt;, ast_pct &lt;dbl&gt;,</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a><span class="co">## #   to_pct &lt;dbl&gt;, stl_pct &lt;dbl&gt;, blk_pct &lt;dbl&gt;, bpm &lt;dbl&gt;, obpm &lt;dbl&gt;,</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a><span class="co">## #   dbpm &lt;dbl&gt;, net &lt;dbl&gt;, poss &lt;dbl&gt;, id &lt;dbl&gt;, game_id &lt;chr&gt;</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="pull-transfer-histories">Pull transfer histories<a class="anchor" aria-label="anchor" href="#pull-transfer-histories"></a>
+</h3>
+<p>Calling <code>transfer_portal</code> will return transfer histories with matching player IDs to join with other statistics. To find all players who transferred to Duke:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/transfer_portal.html">transfer_portal</a></span><span class="op">(</span>to<span class="op">=</span><span class="st">'Duke'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co">## ── Transfer Portal ───────────────────────────────────────────── toRvik 1.1.0 ──</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="co">## ℹ Data updated: 2022-09-08 21:16:53 EDT</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="co">## # A tibble: 6 × 11</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="co">##      id player        from  to    exp    year imm_e…¹ source from_d1 to_d1 sit  </span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co">##   &lt;int&gt; &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;lgl&gt;   &lt;lgl&gt; &lt;lgl&gt;</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="co">## 1 65776 Kale Catchin… Harv… Duke  Sr     2023 Yes     Josep… TRUE    FALSE NA   </span></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="co">## 2 66209 Ryan Young    Nort… Duke  Jr     2023 Yes     Jeff … TRUE    FALSE NA   </span></span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="co">## 3 65826 Max Johns     Prin… Duke  Sr     2023 Yes     &lt;NA&gt;   TRUE    FALSE NA   </span></span>
+<span id="cb14-11"><a href="#cb14-11"></a><span class="co">## 4 50593 Theo John     Marq… Duke  Sr     2022 Yes     &lt;NA&gt;   TRUE    TRUE  FALSE</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a><span class="co">## 5 51179 Bates Jones   Davi… Duke  Sr     2022 Yes     &lt;NA&gt;   TRUE    TRUE  FALSE</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a><span class="co">## 6 45926 Patrick Tape  Colu… Duke  Sr     2021 Yes     Evan … TRUE    TRUE  TRUE </span></span>
+<span id="cb14-14"><a href="#cb14-14"></a><span class="co">## # … with abbreviated variable name ¹​imm_elig</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="pull-recruiting-rankings">Pull recruiting rankings<a class="anchor" aria-label="anchor" href="#pull-recruiting-rankings"></a>
+</h3>
+<p>Calling <code>player_recruiting_rankings</code> will return extensive recruit histories with matching player IDs. To find all 5-star players who played high school basketball in North Carolina:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="reference/player_recruiting_rankings.html">player_recruiting_rankings</a></span><span class="op">(</span>stars<span class="op">=</span><span class="fl">5</span>, state<span class="op">=</span><span class="st">'NC'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co">## ── Recruiting Rankings ───────────────────────────────────────── toRvik 1.1.0 ──</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="co">## ℹ Data updated: 2022-09-08 21:16:54 EDT</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="co">## # A tibble: 6 × 31</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="co">##   position player  height weight team  conf  high_…¹ town  state tfs_c…² tfs_c…³</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="co">##   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;int&gt;</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="co">## 1 SF       Patric… 6-6       215 Flor… ACC   West C… Char… Nort…    99.1       5</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="co">## 2 PG       Devon … 6-2       185 Kans… B12   Provid… Char… Nort…    99.3       5</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a><span class="co">## 3 SF       Jaylen… 6-8       215 Wake… ACC   Wesley… High… Nort…    99.3       5</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a><span class="co">## 4 SG       Coby W… 6-5       185 Nort… ACC   Greenf… Wils… Nort…    99.1       5</span></span>
+<span id="cb16-12"><a href="#cb16-12"></a><span class="co">## 5 PF       Harry … 6-10      240 Duke  ACC   Oak Hi… Wins… Nort…   100.        5</span></span>
+<span id="cb16-13"><a href="#cb16-13"></a><span class="co">## 6 PG       Dennis… 6-3       190 Nort… ACC   Trinit… Faye… Nort…    99.7       5</span></span>
+<span id="cb16-14"><a href="#cb16-14"></a><span class="co">## # … with 20 more variables: tfs_comp_national &lt;dbl&gt;, tfs_comp_position &lt;dbl&gt;,</span></span>
+<span id="cb16-15"><a href="#cb16-15"></a><span class="co">## #   tfs_comp_state &lt;dbl&gt;, tfs_rating &lt;dbl&gt;, tfs_star &lt;int&gt;, espn_rating &lt;dbl&gt;,</span></span>
+<span id="cb16-16"><a href="#cb16-16"></a><span class="co">## #   espn_grade &lt;dbl&gt;, espn_rank &lt;dbl&gt;, rivals_rating &lt;dbl&gt;, rivals_rank &lt;dbl&gt;,</span></span>
+<span id="cb16-17"><a href="#cb16-17"></a><span class="co">## #   avg_rank &lt;dbl&gt;, num_offers &lt;int&gt;, announce_date &lt;chr&gt;, tfs_cb &lt;chr&gt;,</span></span>
+<span id="cb16-18"><a href="#cb16-18"></a><span class="co">## #   tfs_cb_odds &lt;dbl&gt;, tfs_cb_alt &lt;chr&gt;, tfs_cb_alt_odds &lt;dbl&gt;, tfs_pid &lt;int&gt;,</span></span>
+<span id="cb16-19"><a href="#cb16-19"></a><span class="co">## #   year &lt;int&gt;, id &lt;int&gt;, and abbreviated variable names ¹​high_school,</span></span>
+<span id="cb16-20"><a href="#cb16-20"></a><span class="co">## #   ²​tfs_comp_rating, ³​tfs_comp_star</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="predict-games-and-tournaments">Predict games and tournaments<a class="anchor" aria-label="anchor" href="#predict-games-and-tournaments"></a>
+</h3>
+<p>Calling <code>bart_game_predictions</code> will returns expected points, possessions, and win percentage for a given game on a given date. To simulate North Carolina at Duke in mid-January:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/bart_game_prediction.html">bart_game_prediction</a></span><span class="op">(</span><span class="st">'Duke'</span>, <span class="st">'North Carolina'</span>, <span class="st">'20220113'</span>, location <span class="op">=</span> <span class="st">'H'</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co">## ── Duke vs. North Carolina Prediction ────────────────────────── toRvik 1.1.0 ──</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="co">## ℹ Data updated: 2022-09-08 21:16:54 EDT</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="co">## # A tibble: 2 × 8</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="co">##   team           date          location tempo   ppp   pts win_per did_win</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="co">##   &lt;chr&gt;          &lt;chr&gt;         &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;lgl&gt;  </span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="co">## 1 Duke           Jan. 13, 2022 Home      73.4  1.15  84.2    73.1 TRUE   </span></span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="co">## 2 North Carolina Jan. 13, 2022 Away      73.4  1.02  75.1    26.9 FALSE</span></span></code></pre></div>
+<p>Calling <code>bart_tournament_prediction</code> will simulate a single-elimination tournament between a group of teams on a given date. To simulate the 2022 Final Four 25 times:</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/bart_tournament_prediction.html">bart_tournament_prediction</a></span><span class="op">(</span>teams <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Duke'</span>, <span class="st">'North Carolina'</span>, <span class="st">'Kansas'</span>, <span class="st">'Villanova'</span><span class="op">)</span>, <span class="st">'20220402'</span>, sims <span class="op">=</span> <span class="fl">25</span>, seed <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co">## ── Tournament Prediction: 25 Sims ────────────────────────────── toRvik 1.1.0 ──</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="co">## ℹ Data updated: 2022-09-08 21:16:55 EDT</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="co">## # A tibble: 4 × 4</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="co">##   team            wins finals champ</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="co">##   &lt;chr&gt;          &lt;int&gt;  &lt;int&gt; &lt;int&gt;</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a><span class="co">## 1 Duke              31     21    10</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="co">## 2 Kansas            17     10     7</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a><span class="co">## 3 Villanova         21     15     6</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a><span class="co">## 4 North Carolina     6      4     2</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
 </h2>
-<p>For more information on the package and its functions, please see the <a href="https://www.torvik.dev/reference/" class="external-link"><strong><code>toRvik</code></strong> reference</a>.</p>
+<p>For more information on the package and its functions, please see the <a href="https://www.torvik.dev/" class="external-link"><strong><code>toRvik</code></strong> reference</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="the-author">The Author<a class="anchor" aria-label="anchor" href="#the-author"></a>

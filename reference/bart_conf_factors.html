@@ -12,7 +12,7 @@ date range, quadrant level, opponent ranking, game location, and game type."><me
     
     <a class="navbar-brand me-2" href="../index.html">toRvik</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,10 +85,10 @@ date range, quadrant level, opponent ranking, game location, and game type.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">bart_conf_factors</span><span class="op">(</span></span>
 <span>  year <span class="op">=</span> <span class="fu"><a href="current_season.html">current_season</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  venue <span class="op">=</span> <span class="st">"all"</span>,</span>
-<span>  type <span class="op">=</span> <span class="st">"all"</span>,</span>
-<span>  quad <span class="op">=</span> <span class="st">"4"</span>,</span>
-<span>  top <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  conf <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  opp_conf <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  location <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  start <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  end <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -97,104 +97,100 @@ date range, quadrant level, opponent ranking, game location, and game type.</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>year</dt>
-<dd><p>Defaults to current season (YYYY).</p></dd>
+<dd><p>Filters to year (YYYY)</p></dd>
 
 
-<dt>venue</dt>
-<dd><p>Filters by venue; defaults to `all`.</p></dd>
+<dt>conf</dt>
+<dd><p>Filters to conference</p></dd>
+
+
+<dt>opp_conf</dt>
+<dd><p>Filters to opponent conference</p></dd>
 
 
 <dt>type</dt>
-<dd><p>Filters by game type; defaults to `all`.</p></dd>
+<dd><p>Filters to game type ('nc', 'conf', or 'post')</p></dd>
 
 
-<dt>quad</dt>
-<dd><p>Filters by quadrant level; defaults to `4`.</p></dd>
-
-
-<dt>top</dt>
-<dd><p>Filters by opponent T-Rank position; defaults to NULL (all).</p></dd>
+<dt>location</dt>
+<dd><p>Filters to game location ('H', 'A', or 'N')</p></dd>
 
 
 <dt>start</dt>
-<dd><p>Filters by start date; defaults to NULL (full season).</p></dd>
+<dd><p>Filters by starting date (YYYY-MM-DD)</p></dd>
 
 
 <dt>end</dt>
-<dd><p>Filters by end date; defaults to NULL (full season).</p></dd>
+<dd><p>Filters by ending date (YYYY-MM-DD)</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>Returns a tibble with 22 columns:</p><dl><dt><code>conf</code></dt>
+<p>Returns a tibble with 21 columns:</p><dl><dt><code>conf</code></dt>
 <dd><p>character.</p></dd>
 
-  <dt><code>barthag</code></dt>
-<dd><p>double. The estimation of a team's win probability
-  against the average Division 1 team on a neutral court.</p></dd>
+  <dt><code>rating</code></dt>
+<dd><p>double. Expected scoring margin against an average
+  team on a neutral court.</p></dd>
 
-  <dt><code>rec</code></dt>
-<dd><p>character.</p></dd>
-
-  <dt><code>wins</code></dt>
-<dd><p>double.</p></dd>
-
-  <dt><code>games</code></dt>
-<dd><p>double.</p></dd>
-
-  <dt><code>adj_t</code></dt>
+  <dt><code>rank</code></dt>
 <dd><p>double.</p></dd>
 
   <dt><code>adj_o</code></dt>
 <dd><p>double.</p></dd>
 
-  <dt><code>off_efg</code></dt>
-<dd><p>double.</p></dd>
-
-  <dt><code>off_to</code></dt>
-<dd><p>double.</p></dd>
-
-  <dt><code>off_or</code></dt>
-<dd><p>double.</p></dd>
-
-  <dt><code>off_ftr</code></dt>
+  <dt><code>adj_o_rank</code></dt>
 <dd><p>double.</p></dd>
 
   <dt><code>adj_d</code></dt>
 <dd><p>double.</p></dd>
 
-  <dt><code>def_efg</code></dt>
+  <dt><code>adj_d_rank</code></dt>
 <dd><p>double.</p></dd>
+
+  <dt><code>tempo</code></dt>
+<dd><p>double.</p></dd>
+
+  <dt><code>off_ppp</code></dt>
+<dd><p>double. Raw points scored per possession.</p></dd>
+
+  <dt><code>off_efg</code></dt>
+<dd><p>double. Team effective FG%.</p></dd>
+
+  <dt><code>off_to</code></dt>
+<dd><p>double. Offensive turnover rate.</p></dd>
+
+  <dt><code>off_or</code></dt>
+<dd><p>double. Offensive rebound rate.</p></dd>
+
+  <dt><code>off_ftr</code></dt>
+<dd><p>double. Offensive free throw rate.</p></dd>
+
+  <dt><code>def_ppp</code></dt>
+<dd><p>double. Raw points allowed per possession.</p></dd>
+
+  <dt><code>def_efg</code></dt>
+<dd><p>double. Effective FG% allowed.</p></dd>
 
   <dt><code>def_to</code></dt>
-<dd><p>double.</p></dd>
+<dd><p>double. Turnover rate forced.</p></dd>
 
   <dt><code>def_or</code></dt>
-<dd><p>double.</p></dd>
+<dd><p>double. Defensive rebound rate.</p></dd>
 
   <dt><code>def_ftr</code></dt>
-<dd><p>double.</p></dd>
+<dd><p>double. Free throw rate allowed.</p></dd>
 
-  <dt><code>wab</code></dt>
-<dd><p>double. The number of wins above or below the expected
-  total from a bubble team against the same schedule.</p></dd>
+  <dt><code>wins</code></dt>
+<dd><p>integer.</p></dd>
 
-  <dt><code>year</code></dt>
-<dd><p>double.</p></dd>
+  <dt><code>losses</code></dt>
+<dd><p>integer.</p></dd>
 
-  <dt><code>venue</code></dt>
-<dd><p>character. Split supplied to the venue argument.</p></dd>
-
-  <dt><code>type</code></dt>
-<dd><p>character. Split supplied to the type argument.</p></dd>
-
-  <dt><code>top</code></dt>
-<dd><p>double. Split supplied to the top argument.</p></dd>
-
-  <dt><code>quad</code></dt>
-<dd><p>character. Split supplied to the quad argument.</p></dd>
+  <dt><code>games</code></dt>
+<dd><p>integer.</p></dd>
 
 
 </dl></div>
@@ -225,22 +221,25 @@ adjusted for game location.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">bart_conf_factors</span><span class="op">(</span>type<span class="op">=</span><span class="st">'nc'</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 32 × 22</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    conf  barthag rec     wins games adj_t adj_o off_efg off_to off_or off_ftr</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> B12     0.881 105–22   105   127  68.1  107.    53.1   18.8   33.9    31.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> B10     0.834 108–31   108   139  69    109.    53.5   17.6   30.9    33.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> SEC     0.820 129–47   129   176  69.8  106.    50.8   18.1   33.8    31.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> BE      0.791 88–27     88   115  70.2  107.    51.7   18.5   32.2    33.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> P12     0.748 82–41     82   123  69.2  105.    50.6   17.6   31.7    32.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> ACC     0.746 106–53   106   159  68.5  106.    51.8   17.4   29.5    32.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Amer    0.718 82–42     82   124  68.3  104.    50.2   18.1   31.7    32  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> MWC     0.698 83–41     83   124  68    104.    51.6   17.9   26.5    31  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> WCC     0.675 81–51     81   132  69.4  103.    51.9   19.4   28.8    29.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> A10     0.609 98–66     98   164  68.4  103.    51.4   18.4   28.5    30.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 22 more rows, and 11 more variables: adj_d &lt;dbl&gt;, def_efg &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   def_to &lt;dbl&gt;, def_or &lt;dbl&gt;, def_ftr &lt;dbl&gt;, wab &lt;dbl&gt;, year &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   venue &lt;chr&gt;, type &lt;chr&gt;, top &lt;dbl&gt;, quad &lt;chr&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Conference Factors ────────────────────────────────────────── <span style="font-style: italic;">toRvik 1.1.0</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-09 01:44:49 UTC</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 32 × 21</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    conf  rating  rank adj_o adj_o_r…¹ adj_d adj_d…² tempo off_ppp off_efg off_to</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> B12    17.7      1  107.         3  89.0       1  68.7    109.    53.3   18.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> B10    15.2      2  109.         1  94.1       3  69.0    110.    53.7   17.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> SEC    13.8      3  106.         4  92.6       2  69.8    107.    50.8   18.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> BE     12.2      4  107.         2  94.8       4  69.8    107.    51.8   18.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> ACC    10.3      5  106.         5  96.0       7  68.4    107.    51.8   17.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> P12    10.3      5  105.         6  95.2       6  69.2    106.    50.6   17.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Amer    8.88     6  104.         8  95.0       5  68.4    104.    50.3   18  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> MWC     7.6      7  104.         9  96.3       8  68.2    104.    51.7   17.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> WCC     7.1      8  104.        10  96.7       9  68.8    103.    52.0   19.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> A10     4.27     9  103.        11  98.8      10  68.4    104.    51.6   18.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 22 more rows, 10 more variables: off_or &lt;dbl&gt;, off_ftr &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   def_ppp &lt;dbl&gt;, def_efg &lt;dbl&gt;, def_to &lt;dbl&gt;, def_or &lt;dbl&gt;, def_ftr &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   wins &lt;int&gt;, losses &lt;int&gt;, games &lt;int&gt;, and abbreviated variable names</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​adj_o_rank, ²​adj_d_rank</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

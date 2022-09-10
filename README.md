@@ -7,6 +7,7 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/toRvik)](https://CRAN.R-project.org/package=toRvik)
+[![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/toRvik?color=blue)](https://cran.r-project.org/package=toRvik)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/andreweatherman/toRvik/workflows/R-CMD-check/badge.svg)](https://github.com/andreweatherman/toRvik/actions)

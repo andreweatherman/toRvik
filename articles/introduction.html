@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="toRvik">
-<title>Intro to toRvik • toRvik</title>
+<title>Introduction to toRvik • toRvik</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -20,7 +20,7 @@
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Intro to toRvik">
+<meta property="og:title" content="Introduction to toRvik">
 <meta property="og:description" content="toRvik">
 <meta property="og:image" content="https://andreweatherman.github.io/toRvik/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -103,7 +103,7 @@
 
 <script src="introduction_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Intro to toRvik</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Introduction to toRvik</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/andreweatherman/toRvik/blob/HEAD/vignettes/introduction.Rmd" class="external-link"><code>vignettes/introduction.Rmd</code></a></small>
@@ -112,240 +112,133 @@
 
     
     
-<p>Hey, everyone, I’m Andrew Weatherman, creator of <a href="https://github.com/andreweatherman/toRvik" class="external-link"><code>toRvik</code></a> and lover of college basketball analytics. The goal of <code>toRvik</code> is to expand access to reliable, high-quality CBB statistics. While analogous packages exist to pull data, like Saiem Gilani’s brilliant <a href="http://hoopr.sportsdataverse.org/" class="external-link"><code>hoopR</code></a>, <code>toRvik</code> requires no paid subscription or set-up and can be immediately utilized by anyone with just a few lines of code.</p>
+<p>Hey everyone, I’m <a href="https://twitter.com/andreweatherman" class="external-link">Andrew Weatherman</a>, the developer and maintainer of <a href="https://github.com/andreweatherman/toRvik" class="external-link"><code>toRvik</code></a>. I created <code>toRvik</code> to solve one distinct problem facing men’s college basketball: A lack of accessible open-source data. <a href="https://synergysports.com" class="external-link">Synergy</a>, <a href="https://cbbanalytics.com" class="external-link">CBB Analytics</a>, and <a href="https://kenpom.com" class="external-link">KenPom</a> are great analytics solutions, but they are neither open source nor free. <code>toRvik</code> offers speedy access to some of the most extensive and detailed college basketball data on the planet – for free and with just a few lines of code!</p>
+<div class="section level3">
+<h3 id="what-to-expect">What to expect<a class="anchor" aria-label="anchor" href="#what-to-expect"></a>
+</h3>
+<p><code>toRvik</code> offers in-depth access to player, team, and coaching data, with most statistics back-logged to the 2007-2008 season. Granular data is available for game-by-game player statistics, offering over 40 variables per player, unprecedented access to transfer and recruiting histories, and an industry-leading game predictor model created by <a href="https://twitter.com/totally_t_bomb" class="external-link">Bart Torvik</a>.</p>
+</div>
+<div class="section level3">
+<h3 id="install-r-and-rstudio">Install R and RStudio<a class="anchor" aria-label="anchor" href="#install-r-and-rstudio"></a>
+</h3>
+<p>To get started, you’ll need to have R and, preferably, RStudio installed on your machine.</p>
+<ol style="list-style-type: decimal">
+<li><p>Head to <a href="https://cran.r-project.org/" class="external-link">https://cran.r-project.org</a></p></li>
+<li><p>Select the appropriate link for your operating system (Windows, Mac OS X, or Linux)</p></li>
+</ol>
+<ul>
+<li><p><strong>Windows</strong> - Select base and download the most recent version</p></li>
+<li><p><strong>Mac OS X</strong> - Select <em>Latest Release</em>, but check to make sure your OS is the correct version. Look through Binaries for Legacy OS X Systems if you are on an older release</p></li>
+<li><p><strong>Linux</strong> - Select the appropriate distro and follow the installation instructions</p></li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Head to <a href="https://www.rstudio.com/products/rstudio/download/#download" title="Download the appropriate version of RStudio (Free) for your operating system to use with R" class="external-link">RStudio.com</a>
+</li>
+<li>Follow the associated download and installation instructions for RStudio.</li>
+<li>For <span class="underline"><strong>Windows</strong></span> users: I recommend installing <a href="https://cran.r-project.org/bin/windows/Rtools/" class="external-link"><em>RTools</em></a>. Many R packages will require it to successfully compile. Assuming you have downloaded the latest version of R, similarly download the latest version of RTools.</li>
+</ol>
+</div>
 <div class="section level2">
 <h2 id="install-torvik">
 <strong>Install</strong> <a href="https://github.com/andreweatherman/toRvik" class="external-link"><strong><code>toRvik</code></strong></a><a class="anchor" aria-label="anchor" href="#install-torvik"></a>
 </h2>
+<p>The released CRAN version can be downloaded using the following:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># You can install using {pacman} with the following code:</span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'pacman'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'pacman'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'toRvik'</span><span class="op">)</span></span></code></pre></div>
+<p>Whereas the latest development version can be downloaded using:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'devtools'</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'devtools'</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="fu">pacman</span><span class="fu">::</span><span class="fu">p_load_current_gh</span><span class="op">(</span><span class="st">"andreweatherman/toRvik"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span>, update <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"andreweatherman/toRvik"</span><span class="op">)</span> </span></code></pre></div>
+<p>Once you have R, RStudio, and <code>toRvik</code> installed, you are ready to start digging through the data!</p>
 </div>
 <div class="section level2">
-<h2 id="overview-of-barttorvik-and-torvik">
-<strong>Overview of Barttorvik and</strong> <a href="https://github.com/andreweatherman/toRvik" class="external-link"><strong><code>toRvik</code></strong></a><a class="anchor" aria-label="anchor" href="#overview-of-barttorvik-and-torvik"></a>
+<h2 id="function-structures">Function structures<a class="anchor" aria-label="anchor" href="#function-structures"></a>
 </h2>
-<p><code>toRvik</code> is a package of scrapers that pull data from <a href="https://barttorvik.com/" class="external-link">Barttorvik</a>, a popular college basketball analytics website, and return it in tidy format. Barttorvik splits its data on a number of variables and hosts detailed player and game statistics, while serving as a reputable, industry-recognized metric rating system. Generally speaking, all data is avaliable back to the 2007-08 season. More information about Barttorvik, its data, and its metric rating system can be found <a href="http://adamcwisports.blogspot.com/p/every-possession-counts.html" class="external-link">here</a>.</p>
-<p>Package functions are syntactically structured to point to their data source (e.g. by ‘player,’ ‘game,’ etc.) and should be considered <code>get</code> functions by nature. As of <code>toRvik</code> version 1.0.3, the package exports nearly 30 functions covering the website and its data. Some highlights include:</p>
+<p><code>toRvik</code> offers functions that cover five major categories: Rating, player, team, game, and tournament.</p>
+<div class="section level3">
+<h3 id="ratings">Ratings<a class="anchor" aria-label="anchor" href="#ratings"></a>
+</h3>
+<p><code>toRvik</code> pulls current and archived ratings from <a href="https://www.barttorvik.com" class="external-link">T-Rank</a>, a well-respected leader in college basketball analytics. Historical ratings are available back to the 2014-15 season and can be aggregated by date, team, or year. Both rating functions return current and projected team records, <em>barthag</em> – the projected win percentage against an average team on a neutral court – and adjusted offensive and defensive efficiencies + tempo.</p>
+<p><strong>Rating functions:</strong></p>
 <ul>
-<li>Retrieving detailed game-by-game player statistics</li>
-<li>Splitting advanced metrics by game location, type, date range, or opponent strength</li>
-<li>Pulling play-by-play shooting bins for players and teams</li>
-<li>Grabbing composite recruit rankings for top players by coach</li>
-<li>Generating injury-adjusted efficiency measures by team</li>
+<li><p><a href="https://www.torvik.dev/reference/bart_ratings.php" class="external-link"><code>bart_ratings</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/bart_archive.php" class="external-link"><code>bart_archive</code></a></p></li>
 </ul>
 </div>
-<div class="section level2">
-<h2 id="quick-start-with-ratings">
-<strong>Quick start with ratings</strong><a class="anchor" aria-label="anchor" href="#quick-start-with-ratings"></a>
-</h2>
-<p><code>toRvik</code> requires no set-up and can be instantly executed in any session. To understand the package, the T-Rank functions, pulling and splitting Barttorvik’s metric rating system, are an excellent place to start. Let’s take a glance at the top teams in T-Rank using <code>toRvik</code>:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">toRvik</span><span class="fu">::</span><span class="fu"><a href="../reference/bart_ratings.html">bart_ratings</a></span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── Team Ratings: 2022 ────────────────────────────────────────── <span style="font-style: italic;">toRvik 1.1.0</span> ──</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-10 23:39:46 UTC</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 19</span></span></span>
-<span><span class="co">#&gt;    team    conf  barthag barth…¹ adj_o adj_o…² adj_d adj_d…³ adj_t adj_t…⁴   wab</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Gonzaga WCC     0.966       1  120.       4  89.9       9  72.6       5  6.71</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Houston Amer    0.959       2  117.      10  88.5       6  63.7     336  6.15</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Kansas  B12     0.958       3  120.       5  91.3      13  69.1      71 10.4 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Texas … B12     0.951       4  111.      41  85.4       1  66.3     223  6.57</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Baylor  B12     0.949       5  118.       8  91.3      14  67.6     149  8.91</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Duke    ACC     0.944       6  123.       1  96.0      53  67.4     161  7.19</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Tennes… SEC     0.944       7  111.      34  87.1       3  67.4     164  7.96</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Villan… BE      0.935       8  117.       9  93.0      26  62.2     350  7.29</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Arizona P12     0.934       9  118.       7  93.7      35  72.3       9  8.76</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> UCLA    P12     0.932      10  116.      12  92.2      20  65.4     274  5.06</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 8 more variables: nc_elite_sos &lt;int&gt;, nc_fut_sos &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   nc_cur_sos &lt;dbl&gt;, ov_elite_sos &lt;int&gt;, ov_fut_sos &lt;dbl&gt;, ov_cur_sos &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   seed &lt;dbl&gt;, year &lt;int&gt;, and abbreviated variable names ¹​barthag_rk,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ²​adj_o_rk, ³​adj_d_rk, ⁴​adj_t_rk</span></span></span>
-<span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.919 sec elapsed</span></span></code></pre></div>
-<p>Here, the <code>bart_ratings</code> function returned the top ten teams in T-Rank in the current season. We are also presented with each team’s adjusted efficiencies, their adjusted tempo, and two forms of strength of schedule (documented in <code>bart_ratings</code>). But what if we want these same measures in home games only? We would use <code>bart_factors</code> and input ‘H’ as location:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">toRvik</span><span class="fu">::</span><span class="fu"><a href="../reference/bart_factors.html">bart_factors</a></span><span class="op">(</span>location<span class="op">=</span><span class="st">'H'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── Team Factors ──────────────────────────────────────────────── <span style="font-style: italic;">toRvik 1.1.0</span> ──</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-10 23:39:47 UTC</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 22</span></span></span>
-<span><span class="co">#&gt;    team     conf  rating  rank adj_o adj_o…¹ adj_d adj_d…² tempo off_ppp off_efg</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Houston  Amer    32.7     1  116.      15  83.0       1  66.1    117.    54.2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Gonzaga  WCC     29.7     2  120.       5  89.9      18  72.7    123.    60.1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Baylor   B12     28.8     3  116.       9  87.6       9  69.3    116.    55.0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Villano… BE      28.8     4  123.       2  94.0      50  63.2    122.    57.6</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Purdue   B10     28.4     5  124.       1  96.0      81  67.9    125.    58.2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Auburn   SEC     27.6     6  115.      17  87.5       8  72.9    113.    53.1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Texas T… B12     27.5     7  116.      14  88.2      11  68.6    116.    57.3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Tenness… SEC     27.5     8  113.      28  86.0       6  69.5    112.    53.1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> UCLA     P12     26.5     9  116.      11  89.7      16  69.6    115.    54.3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Texas    B12     25.3    10  109.      65  83.4       2  63.8    109.    51.6</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 11 more variables: off_to &lt;dbl&gt;, off_or &lt;dbl&gt;, off_ftr &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   def_ppp &lt;dbl&gt;, def_efg &lt;dbl&gt;, def_to &lt;dbl&gt;, def_or &lt;dbl&gt;, def_ftr &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   wins &lt;int&gt;, losses &lt;int&gt;, games &lt;int&gt;, and abbreviated variable names</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​adj_o_rank, ²​adj_d_rank</span></span></span>
-<span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.337 sec elapsed</span></span></code></pre></div>
-<p>And now, we have four factor data and metric ratings for <em>home games only</em>. The <code>bart_factors</code> function, and the analogous <code>bart_conf_factors</code>, takes venue, game type, date range, and opponent strength as additional splits. Great, but what if we want to explore rating trends over time? <code>toRvik</code> gives us that ability with <code>bart_archive</code>, a function that pulls adjusted ratings and projected records from the morning of a desired date:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">toRvik</span><span class="fu">::</span><span class="fu"><a href="../reference/bart_archive.html">bart_archive</a></span><span class="op">(</span><span class="st">'20220113'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── Archive Ratings ───────────────────────────────────────────── <span style="font-style: italic;">toRvik 1.1.0</span> ──</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-10 23:39:47 UTC</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 16</span></span></span>
-<span><span class="co">#&gt;     rank team   conf  record barthag adj_o adj_o…¹ adj_d adj_d…² adj_t…³ adj_t…⁴</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>   125 Abile… WAC   11-5    0.612  100.      239  96.2      46    71.3      58</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>   260 Air F… MWC   8-5     0.321   93.7     331 100.      114    63.9     342</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>   151 Akron  MAC   9-4     0.535  105.      130 104.      188    64.9     327</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>    21 Alaba… SEC   11-5    0.880  117.       10  98.7      89    72.3      28</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>   330 Alaba… SWAC  4-10    0.155   88.5     356 103.      156    67.6     234</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>   305 Alaba… SWAC  4-13    0.199   95.8     309 108.      285    72.0      37</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>   303 Albany AE    5-10    0.205   91.3     351 103.      158    66.2     305</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>   262 Alcor… SWAC  4-11    0.316   98.5     266 105.      224    68.0     207</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>   347 Ameri… Pat   4-10    0.091<span style="text-decoration: underline;">0</span>  93.9     329 115.      347    67.2     262</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>   188 Appal… SB    9-9     0.451  100.      235 102.      144    64.3     338</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: proj_record &lt;chr&gt;, proj_conf_record &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   wab &lt;dbl&gt;, wab_rk &lt;int&gt;, date &lt;chr&gt;, and abbreviated variable names</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​adj_o_rk, ²​adj_d_rk, ³​adj_tempo, ⁴​adj_tempo_rk</span></span></span>
-<span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.653 sec elapsed</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="players">Players<a class="anchor" aria-label="anchor" href="#players"></a>
+</h3>
+<p><code>toRvik</code> ships with a number of functions that explore detailed player statistics. Notably, <code>bart_player_game</code> provides box and advanced statistics by player for nearly 70,000 Division I games back to the 2008 season. Season-long statistics are available with <code>bart_player_season</code> and <code>bart_player_splits</code>. The latter will split granular player statistics by game result, type, location, or month.</p>
+<p>Unprecedented access to transfer and recruiting histories are available with <code>transfer_portal</code> and <code>player_recruiting_rankings</code>. Powered by Verbal Commits, <code>toRvik</code> provides the transfer histories of over 5,000 players back to the 2012 season, while individual recruiting rankings from 247Sports, ESPN, and Rivals are provided for over 6,000 players back to 2008.</p>
+<p><strong>Player functions:</strong></p>
+<ul>
+<li><p><a href="https://www.torvik.dev/reference/bart_player_game.php" class="external-link"><code>bart_player_game</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/bart_player_season.php" class="external-link"><code>bart_player_season</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/bart_player_splits.php" class="external-link"><code>bart_player_splits</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/transfer_portal.php" class="external-link"><code>transfer_portal</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/player_recruiting_rankings.php" class="external-link"><code>player_recruiting_rankings</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/bart_players.php" class="external-link"><code>bart_players</code></a></p></li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="teams">Teams<a class="anchor" aria-label="anchor" href="#teams"></a>
+</h3>
+<p>The package exports several functions that focus on team statistics and histories. <code>bart_team_box</code> returns aggregate and per-game box totals on four splits: Game result, type, location, and month. <code>bart_team_shooting</code> will return team shooting performance on a number of on-court location ‘bins,’ including dunks, close two, far two, and three-point field goals. As for history, <code>bart_team_history</code> returns a tidy look at per-season results and four factors.</p>
+<p><strong>Team functions:</strong></p>
+<ul>
+<li><p><a href="https://www.torvik.dev/reference/bart_team_box.php" class="external-link"><code>bart_team_box</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/bart_team_shooting.php" class="external-link"><code>bart_team_shooting</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/bart_team_history.php" class="external-link"><code>bart_team_history</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/bart_teams.php" class="external-link"><code>bart_teams</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/bart_conf_stats.php" class="external-link"><code>bart_conf_stats</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/bart_conf_factors.php" class="external-link"><code>bart_conf_factors</code></a></p></li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="games">Games<a class="anchor" aria-label="anchor" href="#games"></a>
+</h3>
+<p><code>toRvik</code> pulls detailed game data with several functions. <code>bart_game_box</code> returns box statistics and game information; back to the 2019 season, it will also return second chance points, points off turnovers and from the becnh, points in the paint, fast break points, and basic score data (biggest lead, biggest run, time leading, and NET quadrant).</p>
+<p><code>bart_game_prediction</code> leverages Barttorvik’s industry-leading game predictor model to return expected possessions, points, and win percentage for any game on any date at any location back to 2015. <code>bart_tournament_prediction</code> will randomly simulate single-elimination tournaments on any date.</p>
+<p><strong>Game functions:</strong></p>
+<ul>
+<li><p><a href="https://www.torvik.dev/reference/bart_game_box.php" class="external-link"><code>bart_game_box</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/bart_game_factors.php" class="external-link"><code>bart_game_factors</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/bart_season_schedule.php" class="external-link"><code>bart_season_schedule</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/bart_pregame.php" class="external-link"><code>bart_pregame</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/bart_game_prediction.php" class="external-link"><code>bart_game_prediction</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/bart_tournament_prediction.php" class="external-link"><code>bart_tournament_prediction</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/bart_injuryimpact.php" class="external-link"><code>bart_injuryimpact</code></a></p></li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="tournaments">Tournaments<a class="anchor" aria-label="anchor" href="#tournaments"></a>
+</h3>
+<p><code>toRvik</code> offers three functions that explore historical and expected tournament performance. <code>bart_tournament_results</code> returns both traditional raw results and seed- and strength-adjusted performance by team, conference, NCAA seed, and coach back to 2000. <code>bart_tourney_sheets</code> returns the same quality and predictive metrics that are taken into consideration by the NCAA selection committee.</p>
+<p><strong>Tournament functions:</strong></p>
+<ul>
+<li><p><a href="https://www.torvik.dev/reference/bart_tourney_results.php" class="external-link"><code>bart_tournament_results</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/bart_tourney_sheets.php" class="external-link"><code>bart_tourney_sheets</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/bart_tourney_odds.php" class="external-link"><code>bart_tourney_odds</code></a></p></li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="others">Others<a class="anchor" aria-label="anchor" href="#others"></a>
+</h3>
+<p>Other functions exported by <code>toRvik</code> include:</p>
+<ul>
+<li><p><a href="https://www.torvik.dev/reference/bart_coach.php" class="external-link"><code>bart_coach</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/bart_coach_change.php" class="external-link"><code>bart_coach_change</code></a></p></li>
+<li><p><a href="https://www.torvik.dev/reference/bart_poy.php" class="external-link"><code>bart_poy</code></a></p></li>
+</ul>
+</div>
 </div>
 <div class="section level2">
-<h2 id="exploring-player-and-game-data">
-<strong>Exploring player and game data</strong><a class="anchor" aria-label="anchor" href="#exploring-player-and-game-data"></a>
+<h2 id="contact">Contact<a class="anchor" aria-label="anchor" href="#contact"></a>
 </h2>
-<p>Perhaps the most valuable functions in <code>toRvik</code> concern granular analysis. The package gives us the ability to explore advanced statistics at a game-by-game level for every Division 1 player since the 2007-08 season using <code>bart_player_game</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">toRvik</span><span class="fu">::</span><span class="fu"><a href="../reference/bart_player_game.html">bart_player_game</a></span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span>, stat<span class="op">=</span><span class="st">'advanced'</span>, team<span class="op">=</span><span class="st">'Duke'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">net</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── Player Game Stats ─────────────────────────────────────────── <span style="font-style: italic;">toRvik 1.1.0</span> ──</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-10 23:39:48 UTC</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 25</span></span></span>
-<span><span class="co">#&gt;    date       year player exp   team  conf  opp   result   min   pts   usg  ortg</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2021-12-…  <span style="text-decoration: underline;">2</span>022 AJ Gr… Fr    Duke  ACC   Sout… W         22    19  16.7  214.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2021-11-…  <span style="text-decoration: underline;">2</span>022 Wende… Jr    Duke  ACC   Army  W         35    19  22.9  142.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2021-11-…  <span style="text-decoration: underline;">2</span>022 Wende… Jr    Duke  ACC   Lafa… W         29    23  25.2  159.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2022-01-…  <span style="text-decoration: underline;">2</span>022 Mark … So    Duke  ACC   Nort… W         27    19  25    144.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2022-03-…  <span style="text-decoration: underline;">2</span>022 Mark … So    Duke  ACC   Cal … W         32    15  19.5  156.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2021-11-…  <span style="text-decoration: underline;">2</span>022 Paolo… Fr    Duke  ACC   The … W         31    28  29.3  157.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2022-03-…  <span style="text-decoration: underline;">2</span>022 Paolo… Fr    Duke  ACC   Texa… W         37    22  23.6  146.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2022-01-…  <span style="text-decoration: underline;">2</span>022 AJ Gr… Fr    Duke  ACC   Loui… W         34    22  17.2  163.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2022-03-…  <span style="text-decoration: underline;">2</span>022 Trevo… Fr    Duke  ACC   Pitt… W         34    27  25.9  175.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2021-11-…  <span style="text-decoration: underline;">2</span>022 AJ Gr… Fr    Duke  ACC   Lafa… W         21    18  16.4  188.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 13 more variables: or_pct &lt;dbl&gt;, dr_pct &lt;dbl&gt;, ast_pct &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   to_pct &lt;dbl&gt;, stl_pct &lt;dbl&gt;, blk_pct &lt;dbl&gt;, bpm &lt;dbl&gt;, obpm &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   dbpm &lt;dbl&gt;, net &lt;dbl&gt;, poss &lt;dbl&gt;, id &lt;dbl&gt;, game_id &lt;chr&gt;</span></span></span>
-<span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.431 sec elapsed</span></span></code></pre></div>
-<p>Here, <code>bart_player_game</code> returned the 10 highest individual net BPMs by a Duke player this season. The function takes ‘box,’ ‘shooting,’ and ‘advanced’ as stat inputs, and I welcome you to explore each one in your own session. But what if we want to investigate similar performance at a season level? Well, <code>bart_player_season</code> gives us that option – also taking ‘box,’ ‘shooting,’ and ‘advanced’ as stat inputs.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">toRvik</span><span class="fu">::</span><span class="fu"><a href="../reference/bart_player_season.html">bart_player_season</a></span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span>, stat<span class="op">=</span><span class="st">'shooting'</span>, team<span class="op">=</span><span class="st">'Duke'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">mid_a</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── Player Season Stats ───────────────────────────────────────── <span style="font-style: italic;">toRvik 1.1.0</span> ──</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-10 23:39:48 UTC</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 33</span></span></span>
-<span><span class="co">#&gt;   player pos   exp   team  conf      g   mpg   ppg p_per   usg  ortg   efg    ts</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Paolo… Wing… Fr    Duke  ACC      39  33.0 17.2   20.9  27.2  111.  52    55.7</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Wende… Comb… Jr    Duke  ACC      39  33.9 13.4   15.8  20.3  121.  56.9  60.5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> AJ Gr… Wing… Fr    Duke  ACC      39  24.3 10.4   17.1  16.9  127.  61.3  63.0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Jerem… Comb… So    Duke  ACC      39  29    8.62  11.9  17.7  105.  47.7  51.5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Trevo… Comb… Fr    Duke  ACC      36  30.2 11.5   15.2  20.1  110.  49.6  52.0</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 20 more variables: ftm &lt;int&gt;, fta &lt;int&gt;, ft_pct &lt;dbl&gt;, two_m &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   two_a &lt;int&gt;, two_pct &lt;dbl&gt;, three_m &lt;int&gt;, three_a &lt;int&gt;, three_pct &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   dunk_m &lt;dbl&gt;, dunk_a &lt;dbl&gt;, dunk_pct &lt;dbl&gt;, rim_m &lt;dbl&gt;, rim_a &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   rim_pct &lt;dbl&gt;, mid_m &lt;dbl&gt;, mid_a &lt;dbl&gt;, mid_pct &lt;dbl&gt;, year &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   id &lt;int&gt;</span></span></span>
-<span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.301 sec elapsed</span></span></code></pre></div>
-<p>And now, we have a tibble of season-long shooting data for Duke players, sorted by number of mid-range attempts. Advanced metric data can be pulled by team on a per-game basis using <code>bart_team_schedule</code>, and total team shooting splits can be accessed using <code>bart_team_shooting</code>. Game box data can be pulled with <code>bart_game_total</code>.</p>
-</div>
-<div class="section level2">
-<h2 id="investigating-the-ncaa-tournament">
-<strong>Investigating the NCAA tournament</strong><a class="anchor" aria-label="anchor" href="#investigating-the-ncaa-tournament"></a>
-</h2>
-<p>Lastly for this introductory vignette, we will explore <code>toRvik</code> functions for scraping tournament data. Frequent any time on social media in college basketball circles in March, and you will undoubtedly hear about ‘team sheets,’ detailed repositories of strength and quality metrics used by the seeding and selection committee. With <code>bart_tourney_sheets</code>, you can pull ‘quick-hit’ team sheets in tidy format with just a single line of code:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">toRvik</span><span class="fu">::</span><span class="fu"><a href="../reference/bart_tourney_sheets.html">bart_tourney_sheets</a></span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 16</span></span></span>
-<span><span class="co">#&gt;    team     seed   net   kpi   sor res_avg   bpi    kp   sag qual_…¹ q1a   q1   </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Gonzaga     1     1     5     7     6       1     1     1     1   5-2   10-3 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Arizona     1     2     3     2     2.5     3     2     2     2.3 4-2   6-3  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Houston     5     3    13    14    13.5     2     4     5     3.7 0-3   1-4  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Baylor      1     4     2     4     3       6     5     4     5   4-4   10-5 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Kentuc…     2     5     9     5     7       4     3     6     4.3 3-6   9-7  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Kansas      1     6     1     1     1       8     6     3     5.7 4-4   12-5 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Tennes…     3     7     4     3     3.5     5     7     7     6.3 4-7   11-7 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Villan…     2     8     7     8     7.5     7    11     9     9   5-4   7-6  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Texas …     3     9    17    12    14.5    13     9    14    12   5-5   8-9  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> UCLA        4    10    11    15    13       9     8    10     9   2-4   5-4  </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 4 more variables: q2 &lt;chr&gt;, q1_2 &lt;chr&gt;, q3 &lt;chr&gt;, q4 &lt;chr&gt;, and</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable name ¹​qual_avg</span></span></span>
-<span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.936 sec elapsed</span></span></code></pre></div>
-<p>Returned are sheets of top teams sorted by their NCAA NET ranking. Because this function relies on NET data, it is only available back to the 2018-19 season. In-season performance is valuable, but what if you want to investigate <em>just</em> tournament data? Well, <code>toRvik</code> gives you two options to do so: <code>bart_tourney_odds</code> and <code>bart_tourney_results</code>. The former returns metric-adjusted round probabilities by split. Let’s explore round odds for the 2022 NCAA Tournament:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">toRvik</span><span class="fu">::</span><span class="fu"><a href="../reference/bart_tourney_odds.html">bart_tourney_odds</a></span><span class="op">(</span>year<span class="op">=</span><span class="fl">2022</span>, odds<span class="op">=</span><span class="st">'pre'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">s16</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 11</span></span></span>
-<span><span class="co">#&gt;     seed region  team       conf    r64   r32   s16    e8    f4    f2 champ</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     1 West    Gonzaga    WCC     100  96.6  81.9  69.6  52    38.5  27.5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     1 Midwest Kansas     B12     100  96.3  73.7  48.7  32.5  17.7   8.5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     1 South   Arizona    P12     100  94.8  72.7  37.3  21.2  12     5.4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     1 East    Baylor     B12     100  94.9  72.5  42.9  25.2  11.1   5.8</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     2 Midwest Auburn     SEC     100  91.5  70    48.4  24.8  11.7   4.8</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     2 West    Duke       ACC     100  94.1  69.8  38.9  15.5   8.2   4  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     3 West    Texas Tech B12     100  92.6  68.4  40.9  17.1   9.5   5  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     3 South   Tennessee  SEC     100  92.3  67.5  41    20.8  11.6   5.2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     5 Midwest Iowa       B10     100  84.3  64.5  32.2  19.3   9.2   3.7</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     2 South   Villanova  BE      100  90.8  63.6  34.6  16.1   8.4   3.5</span></span>
-<span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.266 sec elapsed</span></span></code></pre></div>
-<p>With the ‘odds’ argument set to ‘pre,’ we returned pre-tournament odds and sorted by likelihood to reach the second weekend (Sweet 16). <code>bart_tourney_odds</code> also takes current odds (‘current’), odds based on recent performance (‘recent’), and odds based on games against strong opponents (‘t100’). This data is similarly available starting with the 2019 tournament. Now, what if we want to explore tournament results?</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">tic</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">toRvik</span><span class="fu">::</span><span class="fu"><a href="../reference/bart_tourney_results.html">bart_tourney_results</a></span><span class="op">(</span>min_year<span class="op">=</span><span class="fl">2011</span>, max_year<span class="op">=</span><span class="fl">2021</span>, type<span class="op">=</span><span class="st">'conf'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 18</span></span></span>
-<span><span class="co">#&gt;   conf   pake  pase  wins  loss w_percent   r64   r32   s16    e8    f4    f2</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> P12    11.2  11.4    55    38     0.591    38    27    18     8     2     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> SEC    10.9  15.5    78    48     0.619    49    33    21    14     7     2</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> MVC     4.1   6.1    19    15     0.559    15    11     4     2     2     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> ACC     3.6  -<span style="color: #BB0000;">0.3</span>   102    61     0.626    64    44    31    15     5     4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Horz    2.6   3       5    10     0.333    10     1     1     1     1     1</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 6 more variables: champ &lt;dbl&gt;, top2 &lt;dbl&gt;, f4_percent &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   champ_percent &lt;dbl&gt;, from &lt;dbl&gt;, to &lt;dbl&gt;</span></span></span>
-<span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tictoc/man/tic.html" class="external-link">toc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 0.457 sec elapsed</span></span></code></pre></div>
-<p>With <code>bart_tourney_results</code>, we can return raw and adjusted outcomes by split. Here, we returned aggregate conference results from 2011 to 2021, sorted by PAKE – the number of wins attained above or below KenPom expectation. The function splits by team (‘team’), conference (‘conf’), coach (‘coach’), and seed (‘seed’) and includes data starting in 2000.</p>
-</div>
-<div class="section level2">
-<h2 id="and-youre-off">
-<strong>And you’re off!</strong><a class="anchor" aria-label="anchor" href="#and-youre-off"></a>
-</h2>
-<p><code>toRvik</code> includes several additional functions and capabilities that I did not describe here; take time to explore them and those detailed in this introduction. If you have any questions, feel free to message me on <a href="https://twitter.com/andreweatherman" class="external-link">Twitter</a>. If you run into any bugs, please open an issue on the <a href="https://github.com/andreweatherman/toRvik/issues" class="external-link">GitHub</a>. Happy exploring!</p>
+<p>If you have any suggestions or concerns, <a href="https://twitter.com/andreweatherman" class="external-link">please direct message me on Twitter</a>. My inbox is always open. If you encounter any bugs, <a href="https://github.com/andreweatherman/toRvik/issues" class="external-link">please open a GitHub issue</a>.</p>
+<p>Thank you for trying out <code>toRvik</code>! I hope you enjoy it.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

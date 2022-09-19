@@ -5,7 +5,9 @@
 \title{Get Team Box Stats}
 \usage{
 bart_team_box(
-  year = current_season(),
+  year = NULL,
+  start = NULL,
+  end = NULL,
   team = NULL,
   conf = NULL,
   split = NULL,
@@ -14,6 +16,10 @@ bart_team_box(
 }
 \arguments{
 \item{year}{Filters to year.}
+
+\item{start}{Filters to starting year.}
+
+\item{end}{Filters to ending year.}
 
 \item{team}{Filters to team.}
 

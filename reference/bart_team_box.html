@@ -81,7 +81,9 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">bart_team_box</span><span class="op">(</span></span>
-<span>  year <span class="op">=</span> <span class="fu"><a href="current_season.html">current_season</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  year <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  start <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  end <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  team <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  conf <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  split <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -93,6 +95,14 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>year</dt>
 <dd><p>Filters to year.</p></dd>
+
+
+<dt>start</dt>
+<dd><p>Filters to starting year.</p></dd>
+
+
+<dt>end</dt>
+<dd><p>Filters to ending year.</p></dd>
 
 
 <dt>team</dt>
@@ -134,24 +144,8 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">bart_team_box</span><span class="op">(</span>split<span class="op">=</span><span class="st">'month'</span>, team<span class="op">=</span><span class="st">'Duke'</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Team Stats ────────────────────────────────────────────────── <span style="font-style: italic;">toRvik 1.1.0</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-13 04:53:48 UTC</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 39</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   team  month      min   pos   fgm   fga fg_pct   tpm   tpa fg3_pct   ftm   fta</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Duke  April      200    69    30    72  0.417     5    22   0.227    12    20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Duke  December   800   279   127   236  0.538    43    97   0.443    61    78</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Duke  February  <span style="text-decoration: underline;">1</span>600   519   230   468  0.491    72   179   0.402   103   137</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Duke  January   <span style="text-decoration: underline;">1</span>825   607   250   535  0.467    65   184   0.353   101   153</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Duke  March     <span style="text-decoration: underline;">1</span>800   599   270   518  0.521    63   176   0.358   118   149</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Duke  November  <span style="text-decoration: underline;">1</span>600   574   251   530  0.474    60   184   0.326   103   138</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 27 more variables: ft_pct &lt;dbl&gt;, oreb &lt;int&gt;, dreb &lt;int&gt;, reb &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ast &lt;int&gt;, stl &lt;int&gt;, blk &lt;int&gt;, to &lt;int&gt;, pf &lt;int&gt;, pts &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   second_chance_pts &lt;dbl&gt;, second_chance_fgm &lt;dbl&gt;, second_chance_fga &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   second_change_fg_pct &lt;dbl&gt;, pts_in_paint &lt;dbl&gt;, pts_in_paint_fgm &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   pts_in_paint_fga &lt;dbl&gt;, pts_in_paint_fg_pct &lt;dbl&gt;, fast_brk_pts &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   fast_brk_fgm &lt;dbl&gt;, fast_brk_fga &lt;dbl&gt;, fast_brk_fg_pct &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bench_pts &lt;dbl&gt;, pts_tov &lt;dbl&gt;, games &lt;int&gt;, wins &lt;int&gt;, losses &lt;int&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Something went wrong. Check documentation.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> data frame with 0 columns and 0 rows</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

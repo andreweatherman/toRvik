@@ -87,7 +87,9 @@
 <span>  team <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  conf <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  split <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  stat <span class="op">=</span> <span class="st">"total"</span></span>
+<span>  stat <span class="op">=</span> <span class="st">"total"</span>,</span>
+<span>  aggregate <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -98,11 +100,11 @@
 
 
 <dt>start</dt>
-<dd><p>Filters to starting year.</p></dd>
+<dd><p>Filters to starting year</p></dd>
 
 
 <dt>end</dt>
-<dd><p>Filters to ending year.</p></dd>
+<dd><p>Filters to ending year</p></dd>
 
 
 <dt>team</dt>
@@ -119,6 +121,15 @@
 
 <dt>stat</dt>
 <dd><p>Filters for agg. stats (total) or avg. stats (avg)</p></dd>
+
+
+<dt>aggregate</dt>
+<dd><p>Aggregate all years (TRUE) or return per-year stats when
+passing a range of years (FALSE; default)</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Any other parameter accepted by the API endpoint</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -144,8 +155,28 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">bart_team_box</span><span class="op">(</span>split<span class="op">=</span><span class="st">'month'</span>, team<span class="op">=</span><span class="st">'Duke'</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Something went wrong. Check documentation.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> data frame with 0 columns and 0 rows</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Team Stats ────────────────────────────────────────────────── <span style="font-style: italic;">toRvik 1.1.0</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Data updated: <span style="color: #00BB00;">2022-09-20 01:39:18 UTC</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 78 × 40</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    team  month     year   min   pos   fgm   fga fg_pct   tpm   tpa fg3_pct   ftm</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Duke  April     <span style="text-decoration: underline;">2</span>010   400   114    52   107  0.486    18    42   0.429    17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Duke  April     <span style="text-decoration: underline;">2</span>015   400   127    50   101  0.495     6    21   0.286    43</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Duke  April     <span style="text-decoration: underline;">2</span>022   200    69    30    72  0.417     5    22   0.227    12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Duke  December  <span style="text-decoration: underline;">2</span>008   825   306   125   256  0.488    41    97   0.423    58</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Duke  December  <span style="text-decoration: underline;">2</span>009  <span style="text-decoration: underline;">1</span>000   359   158   316  0.5      36   113   0.319    70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Duke  December  <span style="text-decoration: underline;">2</span>010  <span style="text-decoration: underline;">1</span>200   423   190   372  0.511    53   115   0.461   103</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Duke  December  <span style="text-decoration: underline;">2</span>011  <span style="text-decoration: underline;">1</span>200   428   181   351  0.516    58   132   0.439   119</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Duke  December  <span style="text-decoration: underline;">2</span>012   800   296   121   229  0.528    36    86   0.419    95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Duke  December  <span style="text-decoration: underline;">2</span>013  <span style="text-decoration: underline;">1</span>000   361   157   316  0.497    44    94   0.468    74</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Duke  December  <span style="text-decoration: underline;">2</span>014  <span style="text-decoration: underline;">1</span>000   342   143   302  0.474    48   125   0.384    78</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 68 more rows, and 28 more variables: fta &lt;dbl&gt;, ft_pct &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   oreb &lt;dbl&gt;, dreb &lt;dbl&gt;, reb &lt;dbl&gt;, ast &lt;dbl&gt;, stl &lt;dbl&gt;, blk &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   to &lt;dbl&gt;, pf &lt;dbl&gt;, pts &lt;int&gt;, second_chance_pts &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   second_chance_fgm &lt;dbl&gt;, second_chance_fga &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   second_change_fg_pct &lt;dbl&gt;, pts_in_paint &lt;dbl&gt;, pts_in_paint_fgm &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   pts_in_paint_fga &lt;dbl&gt;, pts_in_paint_fg_pct &lt;dbl&gt;, fast_brk_pts &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   fast_brk_fgm &lt;dbl&gt;, fast_brk_fga &lt;dbl&gt;, fast_brk_fg_pct &lt;dbl&gt;, …</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

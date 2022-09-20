@@ -14,6 +14,9 @@
 #' @param conf Filters to conf.
 #' @param split Split to filter (see details).
 #' @param stat Filters for agg. stats (total) or avg. stats (avg)
+#' @param aggregate Aggregate all years (TRUE) or return per-year stats when
+#'   passing a range of years (FALSE; default)
+#' @param ... Any other parameter accepted by the API endpoint
 #' @importFrom magrittr %>%
 #' @importFrom dplyr as_tibble arrange
 #' @importFrom httr modify_url
@@ -22,7 +25,7 @@
 #' @examples
 #' \donttest{bart_team_box(split='month', team='Duke')}
 #' @export
-bart_team_box <- function(year = NULL, start = NULL, end = NULL, team = NULL, conf = NULL, split = NULL, stat = 'total') {
+bart_team_box <- function(year = NULL, start = NULL, end = NULL, team = NULL, conf = NULL, split = NULL, stat = 'total', aggregate = FALSE, ...) {
 
   # test passed year
   if (!is.null(year) & !(is.numeric(year) && nchar(year) == 4 && year >= 2008)) {
@@ -58,7 +61,9 @@ bart_team_box <- function(year = NULL, start = NULL, end = NULL, team = NULL, co
       team = team,
       conf = conf,
       split = split,
-      stat = stat
+      stat = stat,
+      aggregate = aggregate,
+      ...
     )
   )
 

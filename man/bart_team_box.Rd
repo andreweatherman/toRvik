@@ -11,7 +11,9 @@ bart_team_box(
   team = NULL,
   conf = NULL,
   split = NULL,
-  stat = "total"
+  stat = "total",
+  aggregate = FALSE,
+  ...
 )
 }
 \arguments{
@@ -28,6 +30,11 @@ bart_team_box(
 \item{split}{Split to filter (see details).}
 
 \item{stat}{Filters for agg. stats (total) or avg. stats (avg)}
+
+\item{aggregate}{Aggregate all years (TRUE) or return per-year stats when
+passing a range of years (FALSE; default)}
+
+\item{...}{Any other parameter accepted by the API endpoint}
 }
 \value{
 Returns a tibble with the number of columns dependent on the year.

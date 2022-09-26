@@ -17,9 +17,9 @@ bart_team_box(
 \arguments{
 \item{year}{Filters to year.}
 
-\item{start}{Filters to starting year.}
+\item{start}{Filters to starting year}
 
-\item{end}{Filters to ending year.}
+\item{end}{Filters to ending year}
 
 \item{team}{Filters to team.}
 

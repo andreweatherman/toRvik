@@ -68,6 +68,13 @@
 #' @export
 bart_player_leaderboard <- function(stat = NULL, year = NULL, agg = 'mean', span = 'career', num_players = 25, min_games = NULL, min_minutes = NULL, exp = NULL, team = NULL, conf = NULL, id = NULL, ...) {
 
+  # test that stat was passed through
+  if (is.null(stat)) {
+    cli::cli_abort(c(
+      "x" = "{.var stat} must be declared. See documentation for a full list."
+    ))
+  }
+
   # test that year wasn't used with career
   if (span == 'career' & !is.null(year)) {
     cli::cli_abort(c(

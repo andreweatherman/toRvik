@@ -26,7 +26,56 @@
 #' \donttest{bart_player_game(year=2022, stat='box')}
 #'
 #' @export
-bart_player_game <- function(year = current_season(), stat = NULL, game_id = NULL, player_id = NULL, exp = NULL, team = NULL, conf = NULL) {
+bart_player_game <- function(year = current_season(), stat = NULL, game_id = NULL, player_id = NULL, exp = NULL, team = NULL, conf = NULL, load_all = FALSE, ...) {
+
+
+  # load all data if requested
+  if (load_all) {
+
+    switch(stat,
+           'box' = 'pg_box',
+           'shooting' = 'pg_shooting',
+           'advanced' = 'pg_adv',
+           'all' = 'pg_all')
+
+    data <- load_gh_data(stat)
+
+    # filter with parameters
+    if (any(!is.null(c(game_id, player_id, exp, team, conf)))) {
+
+      data <- data %>%
+        dplyr::filter(
+          year %==% !!year &
+          game_id %==% !!game_id &
+          player_id %==% id &
+          exp %==% !!exp &
+          team %==% !!team &
+          conf %==% !!conf
+        )
+
+    }
+
+    else {
+
+    }
+
+    tryCatch(
+      expr = {
+        data  <- data %>%
+          make_toRvik_data('Player Game Stats', Sys.time())
+      },
+      error = function(e) {
+        check_docs_error()
+      },
+      warning = function(w) {
+      },
+      finally = {
+      }
+    )
+
+  }
+
+  else {
 
   # test passed year
   if (!is.null(year) & !(is.numeric(year) && nchar(year) == 4 && year >= 2008)) {
@@ -64,5 +113,7 @@ bart_player_game <- function(year = current_season(), stat = NULL, game_id = NUL
     finally = {
     }
   )
+
+  }
   return(data)
 }

@@ -11,7 +11,9 @@ bart_player_game(
   player_id = NULL,
   exp = NULL,
   team = NULL,
-  conf = NULL
+  conf = NULL,
+  load_all = FALSE,
+  ...
 )
 }
 \arguments{
@@ -28,6 +30,8 @@ bart_player_game(
 \item{team}{Team to filter.}
 
 \item{conf}{Conference to filter.}
+
+\item{load_all}{Load all available data (boolean); defaults to FALSE.}
 }
 \value{
 Returns a tibble with the number of columns dependent on the value
@@ -41,7 +45,8 @@ Data is split on three statistical types, explained below: \describe{
 \item{box}{Returns basic box score stats; sorts by ppg.}
 \item{shooting}{Returns play-by-play shooting splits; sorts by ppg.}
 \item{advanced}{Returns advanced metrics and possession-adjusted box score
-statistics; sorts by recruiting rank.}}
+statistics; sorts by recruiting rank.}
+\item{all}{Used when `load_all` is TRUE to return all data}}
 }
 \examples{
 \donttest{bart_player_game(year=2022, stat='box')}

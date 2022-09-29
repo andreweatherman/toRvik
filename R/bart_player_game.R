@@ -6,7 +6,8 @@
 #' \item{box}{Returns basic box score stats; sorts by ppg.}
 #' \item{shooting}{Returns play-by-play shooting splits; sorts by ppg.}
 #' \item{advanced}{Returns advanced metrics and possession-adjusted box score
-#' statistics; sorts by recruiting rank.}}
+#' statistics; sorts by recruiting rank.}
+#' \item{all}{Used when `load_all` is TRUE to return all data}}
 #'
 #' @returns Returns a tibble with the number of columns dependent on the value
 #'   supplied to the `stat` argument.
@@ -17,6 +18,7 @@
 #' @param exp Player experience to filter.
 #' @param team Team to filter.
 #' @param conf Conference to filter.
+#' @param load_all Load all available data (boolean); defaults to FALSE.
 #' @importFrom magrittr %>%
 #' @importFrom dplyr as_tibble
 #' @importFrom httr modify_url

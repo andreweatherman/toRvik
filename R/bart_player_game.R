@@ -28,11 +28,16 @@
 #' @export
 bart_player_game <- function(year = current_season(), stat = NULL, game_id = NULL, player_id = NULL, exp = NULL, team = NULL, conf = NULL, load_all = FALSE, ...) {
 
+  if (is.null(stat)) {
+    cli::cli_abort(c(
+      "x" = "You forgot to include {.var stat}!"
+    ))
+  }
 
   # load all data if requested
   if (load_all) {
 
-    switch(stat,
+    stat <- switch(stat,
            'box' = 'pg_box',
            'shooting' = 'pg_shooting',
            'advanced' = 'pg_adv',
@@ -45,9 +50,8 @@ bart_player_game <- function(year = current_season(), stat = NULL, game_id = NUL
 
       data <- data %>%
         dplyr::filter(
-          year %==% !!year &
           game_id %==% !!game_id &
-          player_id %==% id &
+          id %==% player_id &
           exp %==% !!exp &
           team %==% !!team &
           conf %==% !!conf

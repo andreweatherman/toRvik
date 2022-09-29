@@ -42,7 +42,7 @@ load_gh_data <- function(stat = NULL, dbConnection = NULL, tablename = NULL, ...
     in_db <- TRUE
   else in_db <- FALSE
   url <- paste0('https://github.com/andreweatherman/toRvik-data/raw/main/', gh_data_path(stat))
-  out <- rbindlist_with_attrs(rds_from_url(url))
+  out <- rds_from_url(url) %>% make_toRvik_data('Player Game Stats', Sys.time())
   if (in_db) {
     DBI::dbWriteTable(dbConnection, tablename, out, append = TRUE)
     out <- NULL

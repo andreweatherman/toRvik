@@ -19,6 +19,7 @@
 #' @param team Team to filter.
 #' @param conf Conference to filter.
 #' @param load_all Load all available data (boolean); defaults to FALSE.
+#' @param ... Acceptable parameters for API. Used for function development
 #' @importFrom magrittr %>%
 #' @importFrom dplyr as_tibble
 #' @importFrom httr modify_url

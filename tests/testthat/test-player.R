@@ -1,8 +1,12 @@
 test_that("throws error for season before 2008", {
   expect_error(bart_player_season(2007), 'or later')
-  expect_error(bart_player_game(2007), 'or later')
+  expect_error(bart_player_game(stat='box', 2007), 'or later')
   expect_error(bart_poy(2007), 'valid year')
   expect_error(bart_injuryimpact(year=2007, team='Duke', player='Paolo Banchero'), 'valid year')
+})
+
+test_that('throws no stat provided error', {
+  expect_error(bart_player_game(load_all=TRUE), 'stat')
 })
 
 test_that("throws error for more than one space in name", {

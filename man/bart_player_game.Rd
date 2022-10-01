@@ -32,6 +32,8 @@ bart_player_game(
 \item{conf}{Conference to filter.}
 
 \item{load_all}{Load all available data (boolean); defaults to FALSE.}
+
+\item{...}{Acceptable parameters for API. Used for function development}
 }
 \value{
 Returns a tibble with the number of columns dependent on the value

@@ -5,12 +5,7 @@
 #'
 #' @export
 current_season <- function() {
-  dplyr::if_else(as.double(substr(Sys.Date(), 6, 7)) >= 10,
-                 as.double(substr(Sys.Date(), 1, 4)) + 1, as.double(substr(
-                   Sys.Date(),
-                   1, 4
-                 ))
-  )
+  2022
 }
 
 my_time <- function() strftime(Sys.time(), format = "%H:%M:%S")

@@ -26,12 +26,17 @@ gh_data_path <- function(stat = ...) {
          'pg_box' = 'player_game/box.rds',
          'pg_shooting' = 'player_game/shooting.rds',
          'pg_adv' = 'player_game/advanced.rds',
-         'pg_all' = 'player_game/all.rds')
+         'pg_all' = 'player_game/all.rds',
+         'ps_box' = 'player_season/box.rds',
+         'ps_shooting' = 'player_season/shooting.rds',
+         'ps_adv' = 'player_season/advanced.rds',
+         'ps_all' = 'player_season/all.rds')
 
 }
 
 # Function to load full data from GitHub
 # This function is adapted from hoopR
+
 load_gh_data <- function(stat = NULL, dbConnection = NULL, tablename = NULL, ...) {
   if (!is.null(dbConnection) && !is.null(tablename))
     in_db <- TRUE

@@ -8,7 +8,9 @@ bart_player_season(
   year = current_season(),
   id = NULL,
   team = NULL,
-  stat = NULL
+  stat = NULL,
+  load_all = FALSE,
+  ...
 )
 }
 \arguments{
@@ -19,6 +21,10 @@ bart_player_season(
 \item{team}{Filters to team}
 
 \item{stat}{Stat to return ('advanced', 'box', 'shooting')}
+
+\item{load_all}{Load all available data (boolean); defaults to FALSE.}
+
+\item{...}{Acceptable parameters for API. Used for function development}
 }
 \value{
 Returns a tibble with the number of columns dependent on the value
@@ -32,7 +38,8 @@ Data is split on three statistical types, explained below: \describe{
 \item{box}{Returns basic box score stats; sorts by ppg.}
 \item{shooting}{Returns play-by-play shooting splits; sorts by ppg.}
 \item{advanced}{Returns advanced metrics and possession-adjusted box score
-statistics; sorts by recruiting rank.}}
+statistics; sorts by recruiting rank.} \item{all}{Used when `load_all` is
+TRUE to return all data}}
 }
 \examples{
 \donttest{bart_player_season(year=2019, stat='advanced')}

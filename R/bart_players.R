@@ -15,7 +15,7 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom cli cli_abort
 #' @examples
-#' bart_players(year=2022)
+#' \donttest{try(bart_players(year=2022))}
 #'
 #' @export
 bart_players <- function(year = current_season()) {

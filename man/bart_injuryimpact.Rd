@@ -32,6 +32,6 @@ Estimations are experimental and based on
 dubious analysis.'}
 }
 \examples{
-bart_injuryimpact(year=2019, team='Duke', player='Zion Williamson')
+\donttest{try(bart_injuryimpact(year=2019, team='Duke', player='Zion Williamson'))}
 
 }

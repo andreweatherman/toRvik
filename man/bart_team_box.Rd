@@ -48,5 +48,5 @@ The `split` argument filters the results by split, explained below:
 \item{month}{Game month} \item{type}{Game type}}
 }
 \examples{
-\donttest{bart_team_box(split='month', team='Duke')}
+\donttest{try(bart_team_box(split='month', team='Duke'))}
 }

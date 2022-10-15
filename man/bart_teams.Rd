@@ -25,6 +25,6 @@ Function pulls teams and their men's basketball conference affiliation
 by year back to 2008
 }
 \examples{
-bart_teams(conf='ACC')
+\donttest{try(bart_teams(conf='ACC'))}
 
 }

@@ -26,7 +26,7 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom cli cli_abort
 #' @examples
-#' \donttest{bart_player_game(year=2022, stat='box')}
+#' \donttest{try(bart_player_game(year=2022, stat='box'))}
 #'
 #' @export
 bart_player_game <- function(year = current_season(), stat = NULL, game_id = NULL, player_id = NULL, exp = NULL, team = NULL, conf = NULL, load_all = FALSE, ...) {

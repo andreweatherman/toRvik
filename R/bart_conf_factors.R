@@ -52,7 +52,7 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom cli cli_abort
 #' @examples
-#' \donttest{bart_conf_factors(type='nc')}
+#' \donttest{try(bart_conf_factors(type='nc'))}
 #'
 #' @export
 

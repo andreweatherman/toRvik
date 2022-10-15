@@ -30,6 +30,6 @@ Function pulls destination decisions by players in the transfer portal back
 to 2012
 }
 \examples{
-transfer_portal(to='Charlotte')
+\donttest{try(transfer_portal(to='Charlotte'))}
 
 }

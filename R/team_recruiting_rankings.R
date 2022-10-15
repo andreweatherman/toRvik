@@ -34,7 +34,7 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom cli cli_abort
 #' @examples
-#' team_recruiting_rankings(year=2022)
+#' \donttest{try(team_recruiting_rankings(year=2022))}
 #'
 #' @export
 

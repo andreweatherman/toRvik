@@ -29,7 +29,7 @@
 #' @importFrom purrr pluck
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_poy(year=2019, class='fr')
+#' \donttest{try(bart_poy(year=2019, class='fr'))}
 #'
 #' @export
 bart_poy <- function(year = current_season(), conf = "All", class = NULL, conf_only = FALSE) {

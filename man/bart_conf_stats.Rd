@@ -55,6 +55,6 @@ Accepted conference abbreviations for the `conf` argument are: \itemize{\item �
 ‘P12’, ‘Pat’, ‘SB’, ‘SC’, ‘SEC’, ‘SWAC’, ‘Slnd’, ‘Sum’, ‘WAC’, ‘WCC’}
 }
 \examples{
-bart_conf_stats(year=2021, conf='ACC')
+\donttest{try(bart_conf_stats(year=2021, conf='ACC'))}
 
 }

@@ -40,6 +40,6 @@ games.} \item{post}{Post-conference tournament games.} \item{nond1}{Games
 involving one non-D1 team.} }
 }
 \examples{
-bart_pregame(year=2022)
+\donttest{try(bart_pregame(year=2022))}
 
 }

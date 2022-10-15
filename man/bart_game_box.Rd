@@ -34,6 +34,6 @@ The home team is coded as `team2`. Neutral site games may contain errors as
 to whom is the home team.
 }
 \examples{
-\donttest{bart_game_box(year=2022)}
+\donttest{try(bart_game_box(year=2022))}
 
 }

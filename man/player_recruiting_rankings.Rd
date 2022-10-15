@@ -57,6 +57,6 @@ Function pulls high school meta data and recruiting rankings for individual
 players from 247Sports, ESPN, and Rivals back to 2008
 }
 \examples{
-player_recruiting_rankings(year=2019, stars=5, state='domestic')
+\donttest{try(player_recruiting_rankings(year=2019, stars=5, state='domestic'))}
 
 }

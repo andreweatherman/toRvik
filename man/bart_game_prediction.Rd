@@ -30,6 +30,6 @@ Function returns projected score, points per possession, tempo, and win
 percentage for a given match-up on a given day
 }
 \examples{
-bart_game_prediction(team='Duke', opp='North Carolina', date='20220402')
+\donttest{try(bart_game_prediction(team='Duke', opp='North Carolina', date='20220402'))}
 
 }

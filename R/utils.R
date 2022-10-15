@@ -5,7 +5,11 @@
 #'
 #' @export
 current_season <- function() {
-  2022
+  dplyr::if_else(
+    Sys.Date() >= as.Date('2022-11-15'),
+    2023,
+    2022
+  )
 }
 
 my_time <- function() strftime(Sys.time(), format = "%H:%M:%S")
@@ -152,4 +156,17 @@ rbindlist_with_attrs <- function(dflist){
   attr(out,"toRvik_type") <- toRvik_type
   out
 
+}
+
+# define list unchop from vctrs
+list_unchop <- function(x,
+                        ...,
+                        indices = NULL,
+                        ptype = NULL,
+                        name_spec = NULL,
+                        name_repair = c("minimal", "unique", "check_unique", "universal", "unique_quiet", "universal_quiet"),
+                        error_arg = "x",
+                        error_call = current_env()) {
+  check_dots_empty0(...)
+  .Call(ffi_list_unchop, x, indices, ptype, name_spec, name_repair, environment())
 }

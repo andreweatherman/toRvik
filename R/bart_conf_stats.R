@@ -52,7 +52,7 @@
 #' @importFrom tidyr separate
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_conf_stats(year=2021, conf='ACC')
+#' \donttest{try(bart_conf_stats(year=2021, conf='ACC'))}
 #'
 #' @export
 bart_conf_stats <- function(year = current_season(), conf = NULL) {

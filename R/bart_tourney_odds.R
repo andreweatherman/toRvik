@@ -34,7 +34,7 @@
 #' @importFrom stringr str_replace
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_tourney_odds(year=2022, odds='pre')
+#' \donttest{try(bart_tourney_odds(year=2022, odds='pre'))}
 #'
 #' @export
 bart_tourney_odds <- function(year = current_season(), odds = "current") {

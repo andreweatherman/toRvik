@@ -63,7 +63,7 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom cli cli_abort
 #' @examples
-#' \donttest{bart_player_leaderboard('pts')}
+#' \donttest{try(bart_player_leaderboard('pts'))}
 #' @md
 #' @export
 bart_player_leaderboard <- function(stat = NULL, year = NULL, agg = 'mean', span = 'career', num_players = 25, min_games = NULL, min_minutes = NULL, exp = NULL, team = NULL, conf = NULL, id = NULL, ...) {

@@ -20,7 +20,7 @@
 #' @importFrom tidyr separate
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_coach('Mike Krzyzewski')
+#' \donttest{try(bart_coach('Mike Krzyzewski'))}
 #'
 #' @export
 bart_coach <- function(coach) {

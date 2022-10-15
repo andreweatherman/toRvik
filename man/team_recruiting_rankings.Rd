@@ -44,6 +44,6 @@ Function pulls national and conference ranking for 247Sports recruiting back
 to 2011
 }
 \examples{
-team_recruiting_rankings(year=2022)
+\donttest{try(team_recruiting_rankings(year=2022))}
 
 }

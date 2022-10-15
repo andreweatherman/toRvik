@@ -34,7 +34,7 @@
 #' @importFrom tidyr separate
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_tourney_sheets(year=2019)
+#' \donttest{try(bart_tourney_sheets(year=2019))}
 #'
 #' @export
 bart_tourney_sheets <- function(year = current_season()) {

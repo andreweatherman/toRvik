@@ -47,5 +47,5 @@ names are used where applicable (e.g. 'North Carolina'). For complete list,
 see `team` column of \code{\link{bart_ratings}}.
 }
 \examples{
-bart_team_history(team='Charlotte')
+\donttest{try(bart_team_history(team='Charlotte'))}
 }

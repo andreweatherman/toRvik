@@ -5,10 +5,6 @@ test_that("throws error for season before 2008", {
   expect_error(bart_conf_stats(2007, conf='ACC'), 'valid year')
 })
 
-test_that("archive cuts off before 2014-15", {
-  expect_message(bart_archive('2014-01-01'), 'went wrong')
-})
-
 test_that("date range works with one end", {
   expect_output(str(bart_factors(start='2022-01-01')), 'toRvik_data')
   expect_output(str(bart_factors(end='2022-01-01')), 'toRvik_data')
@@ -34,11 +30,4 @@ test_that("location values must be exact", {
 test_that("conf code must be exact", {
  expect_error(bart_conf_stats(), 'valid')
  expect_error(bart_conf_stats(conf='acc'), 'valid')
-})
-
-test_that("rbind works across seasons", {
-  skip_on_cran()
-  expect_output(str(bart_conf_stats(conf='ACC')), 'tibble')
-  expect_output(str(bart_conf_stats(year=2015, conf='ACC')), 'tibble')
-  expect_output(str(bart_conf_stats(year=2008, conf='ACC')), 'tibble')
 })

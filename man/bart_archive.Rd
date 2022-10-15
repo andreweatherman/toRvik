@@ -41,6 +41,6 @@ Returns T-Rank ratings and efficiency metrics from the morning of the
 specified day. Data goes back to 2014-15.
 }
 \examples{
-\donttest{bart_archive(date='20220113')}
+\donttest{try(bart_archive(date='20220113'))}
 
 }

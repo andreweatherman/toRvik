@@ -44,7 +44,7 @@
 #' @importFrom tidyr separate
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_team_history(team='Charlotte')
+#' \donttest{try(bart_team_history(team='Charlotte'))}
 #' @export
 bart_team_history <- function(team) {
   suppressWarnings({

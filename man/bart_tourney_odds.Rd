@@ -38,6 +38,6 @@ adjusted odds over the last ten games} \item{t100}{Returns odds against top
 100 opponents.}}
 }
 \examples{
-bart_tourney_odds(year=2022, odds='pre')
+\donttest{try(bart_tourney_odds(year=2022, odds='pre'))}
 
 }

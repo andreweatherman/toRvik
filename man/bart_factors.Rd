@@ -66,6 +66,6 @@ For a brief explanation of each factor and its computation, please visit
 \href{https://kenpom.com/blog/four-factors/}{KenPom's blog}.
 }
 \examples{
-bart_factors(year=2022, start='2022-01-13', type='conf')
+\donttest{try(bart_factors(year=2022, start='2022-01-13', type='conf'))}
 
 }

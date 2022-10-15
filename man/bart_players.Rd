@@ -20,6 +20,6 @@ Returns a tibble with three columns:
 Returns players and player IDs for a given season
 }
 \examples{
-bart_players(year=2022)
+\donttest{try(bart_players(year=2022))}
 
 }

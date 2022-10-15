@@ -22,8 +22,8 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom cli cli_abort
 #' @examples
-#' \donttest{bart_tournament_prediction(teams=c('Duke', 'North Carolina',
-#' 'Kansas', 'Villanova'), date='20220402', sims=10, seed=1)}
+#' \donttest{try(bart_tournament_prediction(teams=c('Duke', 'North Carolina',
+#' 'Kansas', 'Villanova'), date='20220402', sims=10, seed=1))}
 #'
 #' @export
 

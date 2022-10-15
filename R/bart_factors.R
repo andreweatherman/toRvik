@@ -46,7 +46,7 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom cli cli_abort
 #' @examples
-#' bart_factors(year=2022, start='2022-01-13', type='conf')
+#' \donttest{try(bart_factors(year=2022, start='2022-01-13', type='conf'))}
 #'
 #' @export
 bart_factors <- function(year = current_season(), result = NULL, type = NULL, start = NULL, end = NULL, location = NULL, last = NULL) {

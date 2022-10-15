@@ -41,6 +41,6 @@ Accepted conference abbreviations for the `conf` argument are: \itemize{\item
 ‘OVC’, ‘P12’, ‘Pat’, ‘SB’, ‘SC’, ‘SEC’, ‘SWAC’, ‘Slnd’, ‘Sum’, ‘WAC’, ‘WCC’ }
 }
 \examples{
-bart_poy(year=2019, class='fr')
+\donttest{try(bart_poy(year=2019, class='fr'))}
 
 }

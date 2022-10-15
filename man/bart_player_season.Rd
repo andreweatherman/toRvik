@@ -42,6 +42,6 @@ statistics; sorts by recruiting rank.} \item{all}{Used when `load_all` is
 TRUE to return all data}}
 }
 \examples{
-\donttest{bart_player_season(year=2019, stat='advanced')}
+\donttest{try(bart_player_season(year=2019, stat='advanced'))}
 
 }

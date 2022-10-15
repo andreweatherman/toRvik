@@ -31,6 +31,6 @@ given a seed. \item PAKE is the number of wins above or below the expected
 value given a KenPom rating.}
 }
 \examples{
-bart_tourney_results(min_year=2010, max_year=2015, type='conf')
+\donttest{try(bart_tourney_results(min_year=2010, max_year=2015, type='conf'))}
 
 }

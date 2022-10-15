@@ -21,7 +21,7 @@
 #' @importFrom cli cli_abort
 #' @importFrom lubridate as_date
 #' @examples
-#' bart_game_prediction(team='Duke', opp='North Carolina', date='20220402')
+#' \donttest{try(bart_game_prediction(team='Duke', opp='North Carolina', date='20220402'))}
 #'
 #' @export
 

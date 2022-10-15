@@ -9,7 +9,3 @@ test_that("throws error for season before 2008", {
 test_that('throws error for more than one space in team name', {
   expect_error(bart_team_history(team='North  Carolia'), 'spacing')
 })
-
-test_that("split input must match", {
-  expect_message(bart_team_box(split='Month'), 'went wrong')
-})

@@ -45,6 +45,6 @@ would project to lose against this team's non-conference or overall schedule.
 `x_fut_sos` is the projected average Barthag rating of opponents.}
 }
 \examples{
-\donttest{bart_ratings(year=2020)}
+\donttest{try(bart_ratings(year=2020))}
 
 }

@@ -17,7 +17,7 @@
 #' @importFrom glue glue
 #' @importFrom jsonlite fromJSON
 #' @examples
-#' bart_teams(conf='ACC')
+#' \donttest{try(bart_teams(conf='ACC'))}
 #'
 #' @export
 

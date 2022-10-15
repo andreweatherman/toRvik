@@ -4,13 +4,63 @@ editor_options:
     wrap: 72
 ---
 
+# v1.1.1
+
+[**This is an update submission for toRvik.**]{.underline}
+
+Fixed critical error that persisted with a mistake to the
+`current_season` function. Wrapped all examples inside `try`.
+
+## Test environments
+
+-   local: Apple Silicon macOS 12.3.0; Darwin 21.4.0; R 4.2.1
+-   local: windows-x86_64; R 4.2.1
+-   rhub: Debian Linux (R 4.2.1); Oracle Solaris 10, x86, 32 bit (R
+    4.2.1)
+
+## R CMD check results
+
+### macOS:
+
+0 errors \| 0 warnings \| 1 notes
+
+Warning: <anonymous>: ... may be used in an incorrect context
+
+gh_data_path: ... may be used in an incorrect context
+
+Warning: <anonymous>: ... may be used in an incorrect context
+
+**`...` is not used in an incorrect context and works as intended and
+expected.**
+
+### Windows:
+
+0 errors \| 0 warnings \| 1 notes
+
+Warning: <anonymous>: ... may be used in an incorrect context
+
+gh_data_path: ... may be used in an incorrect context
+
+Warning: <anonymous>: ... may be used in an incorrect context
+
+**`...` is not used in an incorrect context and works as intended and
+expected.**
+
+### Linux (Debian)
+
+0 errors \| 0 warnings \| 0 notes
+
+### Solaris:
+
+0 errors \| 0 warnings \| 0 notes
+
 # v1.1.0
 
 [**This is an update submission for toRvik.**]{.underline}
 
 Re-submission:
 
--   Added 'https://' to a url in the README.
+-   Added '<https://>' to a url in the README.
 
 Updated many functions to be an API wrapper for a dedicated college
 basketball API that I run. The update also address two function errors
@@ -28,8 +78,6 @@ that were recently brought to my attention by the CRAN team.
 ### macOS:
 
 0 errors \| 0 warnings \| 0 notes
-
-**This is a new submission.**
 
 ### Windows:
 

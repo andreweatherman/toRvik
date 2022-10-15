@@ -23,7 +23,7 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom cli cli_abort
 #' @examples
-#' \donttest{bart_team_box(split='month', team='Duke')}
+#' \donttest{try(bart_team_box(split='month', team='Duke'))}
 #' @export
 bart_team_box <- function(year = NULL, start = NULL, end = NULL, team = NULL, conf = NULL, split = NULL, stat = 'total', aggregate = FALSE, ...) {
 

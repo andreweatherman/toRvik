@@ -33,7 +33,7 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom cli cli_abort
 #' @examples
-#' \donttest{bart_archive(date='20220113')}
+#' \donttest{try(bart_archive(date='20220113'))}
 #'
 #' @export
 bart_archive <- function(date = NULL, team = NULL, year = NULL) {

@@ -1,7 +1,7 @@
 Package: toRvik
 Type: Package
 Title: Extensive and Tidy NCAA Men's College Basketball Data
-Version: 1.1.0
+Version: 1.1.1
 Authors@R: person("Andrew", "Weatherman", email = "taw38@duke.edu", 
   role = c("aut", "cre"))
 Description: An API wrapper for cbbstat and a suite of functions to pull

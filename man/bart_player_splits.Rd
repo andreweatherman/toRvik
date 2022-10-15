@@ -44,6 +44,6 @@ Data is split on three statistical types, explained below: \describe{
 statistics; sorts by recruiting rank.}}
 }
 \examples{
-\donttest{bart_player_splits(year=2022, conf='ACC')}
+\donttest{try(bart_player_splits(year=2022, conf='ACC'))}
 
 }

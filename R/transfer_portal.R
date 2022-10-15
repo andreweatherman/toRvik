@@ -21,7 +21,7 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom cli cli_abort
 #' @examples
-#' transfer_portal(to='Charlotte')
+#' \donttest{try(transfer_portal(to='Charlotte'))}
 #'
 #' @export
 

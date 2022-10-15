@@ -32,7 +32,7 @@ A plays team B and team C plays team D in round one, the function should be
 supplied `teams=c('A', 'B', 'C', 'D')`.
 }
 \examples{
-\donttest{bart_tournament_prediction(teams=c('Duke', 'North Carolina',
-'Kansas', 'Villanova'), date='20220402', sims=10, seed=1)}
+\donttest{try(bart_tournament_prediction(teams=c('Duke', 'North Carolina',
+'Kansas', 'Villanova'), date='20220402', sims=10, seed=1))}
 
 }

@@ -26,7 +26,7 @@
 #' @importFrom purrr pluck
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_injuryimpact(year=2019, team='Duke', player='Zion Williamson')
+#' \donttest{try(bart_injuryimpact(year=2019, team='Duke', player='Zion Williamson'))}
 #'
 #' @export
 bart_injuryimpact <- function(year = current_season(), team = NULL, player = NULL) {

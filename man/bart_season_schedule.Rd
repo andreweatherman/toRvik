@@ -42,6 +42,6 @@ column, games are classified by one of four indicators, explained below:
 games.} \item{nond1}{Games involving one non-D1 team.} }
 }
 \examples{
-bart_season_schedule(year=2022)
+\donttest{try(bart_season_schedule(year=2022))}
 
 }

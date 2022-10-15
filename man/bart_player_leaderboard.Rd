@@ -94,5 +94,5 @@ Available statistics to pass through to \code{stat}:\tabular{ll}{
 }
 }
 \examples{
-\donttest{bart_player_leaderboard('pts')}
+\donttest{try(bart_player_leaderboard('pts'))}
 }

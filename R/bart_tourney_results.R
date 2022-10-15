@@ -22,7 +22,7 @@
 #' @importFrom purrr pluck
 #' @importFrom magrittr %>%
 #' @examples
-#' bart_tourney_results(min_year=2010, max_year=2015, type='conf')
+#' \donttest{try(bart_tourney_results(min_year=2010, max_year=2015, type='conf'))}
 #'
 #' @export
 bart_tourney_results <- function(min_year = 2000, max_year = current_season(), type = "team") {

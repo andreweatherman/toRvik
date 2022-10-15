@@ -23,7 +23,7 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom cli cli_abort
 #' @examples
-#' \donttest{bart_player_splits(year=2022, conf='ACC')}
+#' \donttest{try(bart_player_splits(year=2022, conf='ACC'))}
 #'
 #' @export
 bart_player_splits <- function(year = current_season(), split = NULL, team = NULL, conf = NULL, exp = NULL, player_id = NULL, type = NULL) {

@@ -41,6 +41,6 @@ For a brief explanation of each factor and its computation, please visit
 `opp_avg_marg` is the the average lead or deficit during a game.
 }
 \examples{
-bart_game_factors(year=2022)
+\donttest{try(bart_game_factors(year=2022))}
 
 }

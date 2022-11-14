@@ -38,9 +38,27 @@ form.
 
 0 errors \| 0 warnings \| 0 notes
 
+Warning: <anonymous>: ... may be used in an incorrect context
+
+gh_data_path: ... may be used in an incorrect context
+
+Warning: <anonymous>: ... may be used in an incorrect context
+
+**`...` is not used in an incorrect context and works as intended and
+expected.**
+
 ### Solaris:
 
 0 errors \| 0 warnings \| 0 notes
+
+Warning: <anonymous>: ... may be used in an incorrect context
+
+gh_data_path: ... may be used in an incorrect context
+
+Warning: <anonymous>: ... may be used in an incorrect context
+
+**`...` is not used in an incorrect context and works as intended and
+expected.**
 
 # v1.1.0
 

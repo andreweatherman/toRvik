@@ -27,6 +27,12 @@
 
 bart_game_prediction <- function(team = NULL, opp = NULL, date = NULL, location='N') {
 
+  # pass current date if none selected
+  if (is.null(date)) {
+    date <- as.Date(with_tz(Sys.time(), "EST"))
+    date <- gsub('-', '', date)
+  }
+
   # test passed year
   if (lubridate::as_date(date) <= lubridate::as_date('2014-11-13')) {
     cli::cli_abort(c(

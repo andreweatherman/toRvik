@@ -18,33 +18,21 @@ Fixed critical error that persisted with a mistake to the
 -   rhub: Debian Linux (R 4.2.1); Oracle Solaris 10, x86, 32 bit (R
     4.2.1)
 
-## R CMD check results
+## R CMD check results:
+
+<https://barttorvik.com/> and <https://linkedin.com/andreweatherman>
+**are** valid links. Windows checks will fail them because of how the
+sites are designed. This was not a problem in 1.0.0 or 1.1.0 -- but is
+the reason why 1.1.1 was continuously rejected by the auto-submission
+form.
 
 ### macOS:
 
-0 errors \| 0 warnings \| 1 notes
-
-Warning: <anonymous>: ... may be used in an incorrect context
-
-gh_data_path: ... may be used in an incorrect context
-
-Warning: <anonymous>: ... may be used in an incorrect context
-
-**`...` is not used in an incorrect context and works as intended and
-expected.**
+0 errors \| 0 warnings \| 0 notes
 
 ### Windows:
 
-0 errors \| 0 warnings \| 1 notes
-
-Warning: <anonymous>: ... may be used in an incorrect context
-
-gh_data_path: ... may be used in an incorrect context
-
-Warning: <anonymous>: ... may be used in an incorrect context
-
-**`...` is not used in an incorrect context and works as intended and
-expected.**
+0 errors \| 0 warnings \| 0 notes
 
 ### Linux (Debian)
 

@@ -19,14 +19,12 @@
 #' @param team Team to filter.
 #' @param conf Conference to filter.
 #' @param load_all Load all available data (boolean); defaults to FALSE.
-#' @param ... Acceptable parameters for API. Used for function development
+#' @param ... Acceptable parameters for API. Used for future development
 #' @importFrom magrittr %>%
 #' @importFrom dplyr as_tibble
-#' @importFrom httr modify_url
-#' @importFrom jsonlite fromJSON
 #' @importFrom cli cli_abort
 #' @examples
-#' \donttest{try(bart_player_game(year=2022, stat='box'))}
+#' \donttest{try(bart_player_game(year=2023, stat='box'))}
 #'
 #' @export
 bart_player_game <- function(year = current_season(), stat = NULL, game_id = NULL, player_id = NULL, exp = NULL, team = NULL, conf = NULL, load_all = FALSE, ...) {
@@ -37,16 +35,16 @@ bart_player_game <- function(year = current_season(), stat = NULL, game_id = NUL
     ))
   }
 
+  stat <- switch(stat,
+                 'box' = 'pg_box',
+                 'shooting' = 'pg_shooting',
+                 'advanced' = 'pg_adv',
+                 'all' = 'pg_all')
+
   # load all data if requested
   if (load_all) {
 
-    stat <- switch(stat,
-           'box' = 'pg_box',
-           'shooting' = 'pg_shooting',
-           'advanced' = 'pg_adv',
-           'all' = 'pg_all')
-
-    data <- load_gh_data(stat)
+    data <- load_gh_data(stat, load_all = TRUE)
 
     # filter with parameters
     if (any(!is.null(c(game_id, player_id, exp, team, conf)))) {
@@ -84,43 +82,41 @@ bart_player_game <- function(year = current_season(), stat = NULL, game_id = NUL
 
   else {
 
-  # test passed year
-  if (!is.null(year) & !(is.numeric(year) && nchar(year) == 4 && year >= 2008)) {
-    cli::cli_abort(c(
-      "{.var year} must be 2008 or later",
-      "x" = "You passed through {year}"
-    ))
-  }
+    data <- load_gh_data(stat, year = year)
 
-  base_url <- 'https://api.cbbstat.com/players/game/stats?'
-  parsed <- httr::modify_url(
-    base_url,
-    query = list(
-      year = year,
-      type = stat,
-      game_id = game_id,
-      player_id = player_id,
-      exp = exp,
-      team = team,
-      conf = conf
-    )
-  )
-  data <- data.frame()
+    # filter with parameters
+    if (any(!is.null(c(game_id, player_id, exp, team, conf)))) {
 
-  tryCatch(
-    expr = {
-      data  <- jsonlite::fromJSON(parsed) %>%
-        make_toRvik_data('Player Game Stats', Sys.time())
-    },
-    error = function(e) {
-      check_docs_error()
-    },
-    warning = function(w) {
-    },
-    finally = {
+      data <- data %>%
+        dplyr::filter(
+          game_id %==% !!game_id &
+            id %==% player_id &
+            exp %==% !!exp &
+            team %==% !!team &
+            conf %==% !!conf
+        )
+
     }
-  )
+
+    else {
+
+    }
+
+    tryCatch(
+      expr = {
+        data  <- data %>%
+          make_toRvik_data('Player Game Stats', Sys.time())
+      },
+      error = function(e) {
+        check_docs_error()
+      },
+      warning = function(w) {
+      },
+      finally = {
+      }
+    )
 
   }
+
   return(data)
 }

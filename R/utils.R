@@ -24,17 +24,32 @@ my_time <- function() strftime(Sys.time(), format = "%H:%M:%S")
 }
 
 # Helper function to match GitHub url path
-gh_data_path <- function(stat = ...) {
+gh_data_path <- function(stat, load_all = FALSE, year = NULL, ...) {
 
-  switch(stat,
-         'pg_box' = 'player_game/box.rds',
-         'pg_shooting' = 'player_game/shooting.rds',
-         'pg_adv' = 'player_game/advanced.rds',
-         'pg_all' = 'player_game/all.rds',
-         'ps_box' = 'player_season/box.rds',
-         'ps_shooting' = 'player_season/shooting.rds',
-         'ps_adv' = 'player_season/advanced.rds',
-         'ps_all' = 'player_season/all.rds')
+  if (load_all) {
+    params <- c('pg_box', 'pg_shooting', 'pg_adv', 'pg_all', 'ps_box', 'ps_shooting',
+                'ps_adv', 'ps_all')
+
+    endpoint <- c('player_game/box.parquet', 'player_game/shooting.parquet',
+                  'player_game/advanced.parquet', 'player_game/all.parquet',
+                  'player_season/box.parquet','player_season/shooting.parquet',
+                  'player_season/advanced.parquet', 'player_season/all.parquet')
+  }
+
+  else {
+  params <- c('pg_box', 'pg_shooting', 'pg_adv', 'pg_all', 'ps_box', 'ps_shooting',
+              'ps_adv', 'ps_all', 'current_ratings')
+
+  endpoint <- c(glue('player_game/{year}/box_{year}.parquet'), glue('player_game/{year}/shooting_{year}.parquet'),
+                glue('player_game/{year}/advanced_{year}.parquet'), glue('player_game/{year}/all_{year}.parquet'),
+                glue('player_season/{year}/box_{year}.parquet'), glue('player_season/{year}/shooting_{year}.parquet'),
+                glue('player_season/{year}/advanced_{year}.parquet'), glue('player_season/{year}/all_{year}.parquet'),
+                'ratings/ratings_2023.csv')
+  }
+
+  check <- setNames(endpoint, params)
+
+  link <- check[stat]
 
 }
 
@@ -45,8 +60,16 @@ load_gh_data <- function(stat = NULL, dbConnection = NULL, tablename = NULL, ...
   if (!is.null(dbConnection) && !is.null(tablename))
     in_db <- TRUE
   else in_db <- FALSE
-  url <- paste0('https://github.com/andreweatherman/toRvik-data/raw/main/', gh_data_path(stat))
-  out <- rds_from_url(url) %>% make_toRvik_data('Player Game Stats', Sys.time())
+  url <- paste0('https://github.com/andreweatherman/toRvik-data/raw/main/', gh_data_path(stat, ...))
+  if (endsWith(url, '.rds')) {
+    out <- rds_from_url(url)
+  }
+  if (endsWith(url, '.parquet')) {
+    out <- parquet_from_url(url)
+  }
+  else {
+    out <- read.csv(url)
+  }
   if (in_db) {
     DBI::dbWriteTable(dbConnection, tablename, out, append = TRUE)
     out <- NULL
@@ -72,6 +95,30 @@ rds_from_url <- function(url) {
   data.table::setDT(load)
   return(load)
 }
+
+# helper function to download .parquet from url
+# h/t to Tan and {nflreadr}
+parquet_from_url <- function(url) {
+  rlang::check_installed("arrow")
+  # cache_message()
+  load <- try(curl::curl_fetch_memory(url), silent = TRUE)
+
+  if (inherits(load, "try-error")) {
+    cli::cli_warn("Failed to retrieve data from {.url {url}}")
+    return(data.table::data.table())
+  }
+
+  content <- try(arrow::read_parquet(load$content), silent = TRUE)
+
+  if (inherits(content, "try-error")) {
+    cli::cli_warn("Failed to parse file with {.fun arrow::read_parquet()} from {.url {url}}")
+    return(data.table::data.table())
+  }
+
+  data.table::setDT(content)
+  return(content)
+}
+
 
 
 # Functions for custom class
@@ -133,7 +180,7 @@ rule_footer <- function(x) {
 
 #' @export
 #' @noRd
-print.toRvik_data <- function(x,...) {
+print.toRvik_data <- function(x, ...) {
   cli::cli_rule(left = "{attr(x,'toRvik_type')}",right = "{.emph toRvik {utils::packageVersion('toRvik')}}")
 
   if(!is.null(attr(x,'toRvik_timestamp'))) {

@@ -20,7 +20,7 @@
 
 **Code Updates:**
 
--   Added [`bart_pro`](https://www.torvik.dev/reference/bart_pro.php) to to pull statistics for draft-eligible players
+-   Added `bart_pro` to to pull statistics for draft-eligible players
 
 **Other:**
 

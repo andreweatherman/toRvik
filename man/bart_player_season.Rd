@@ -24,7 +24,7 @@ bart_player_season(
 
 \item{load_all}{Load all available data (boolean); defaults to FALSE.}
 
-\item{...}{Acceptable parameters for API. Used for function development}
+\item{...}{Acceptable parameters for API. Used for future development}
 }
 \value{
 Returns a tibble with the number of columns dependent on the value
@@ -42,6 +42,6 @@ statistics; sorts by recruiting rank.} \item{all}{Used when `load_all` is
 TRUE to return all data}}
 }
 \examples{
-\donttest{try(bart_player_season(year=2019, stat='advanced'))}
+\donttest{try(bart_player_season(year=2023, stat='advanced'))}
 
 }

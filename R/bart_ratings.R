@@ -51,19 +51,18 @@ bart_ratings <- function(year=current_season()) {
     ))
   }
 
-  base_url <- 'https://api.cbbstat.com/ratings?'
-  parsed <- httr::modify_url(
-    base_url,
-    query = list(
-      year = year
-    )
-  )
+  if (year != current_season()) {
+    # pass
+    data <- load_gh_data('current_ratings')
+  }
 
-  data <- data.frame()
+  else {
+    data <- load_gh_data('current_ratings')
+  }
 
   tryCatch(
     expr = {
-      data  <- jsonlite::fromJSON(parsed) %>%
+      data  <- data %>%
         make_toRvik_data(sprintf('Team Ratings: %i', year), Sys.time())
     },
     error = function(e) {

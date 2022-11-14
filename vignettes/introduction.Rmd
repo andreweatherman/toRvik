@@ -34,7 +34,7 @@ To get started, you'll need to have R and, preferably, RStudio installed on your
 
 -   **Linux** - Select the appropriate distro and follow the installation instructions
 
-3.  Head to [RStudio.com](https://www.rstudio.com/products/rstudio/download/#download "Download the appropriate version of RStudio (Free) for your operating system to use with R")
+3.  Head to [posit.co](https://posit.co/download/rstudio-desktop/#download "Download the appropriate version of RStudio (Free) for your operating system to use with R")
 4.  Follow the associated download and installation instructions for RStudio.
 5.  For [**Windows**]{.underline} users: I recommend installing [*RTools*](https://cran.r-project.org/bin/windows/Rtools/). Many R packages will require it to successfully compile. Assuming you have downloaded the latest version of R, similarly download the latest version of RTools.
 

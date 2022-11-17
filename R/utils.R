@@ -46,7 +46,7 @@ gh_data_path <- function(stat, load_all = FALSE, year = NULL, ...) {
                 glue('player_game/{year}/advanced_{year}.parquet'), glue('player_game/{year}/all_{year}.parquet'),
                 glue('player_season/{year}/box_{year}.parquet'), glue('player_season/{year}/shooting_{year}.parquet'),
                 glue('player_season/{year}/advanced_{year}.parquet'), glue('player_season/{year}/all_{year}.parquet'),
-                'ratings/ratings_2023.csv')
+                glue('ratings/ratings_{year}.csv'))
   }
 
   check <- setNames(endpoint, params)

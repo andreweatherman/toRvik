@@ -24,7 +24,7 @@
 #' \donttest{try(bart_player_season(year=2023, stat='advanced'))}
 #'
 #' @export
-bart_player_season <- function(year = current_season(), id = NULL, team = NULL, stat = NULL, load_all = FALSE, ...) {
+bart_player_season <- function(year = current_season(), player_id = NULL, team = NULL, stat = NULL, load_all = FALSE, ...) {
 
   if (is.null(stat)) {
     cli::cli_abort(c(

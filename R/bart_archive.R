@@ -29,8 +29,6 @@
 #' @param year Year to filter for.
 #' @importFrom magrittr %>%
 #' @importFrom dplyr as_tibble
-#' @importFrom httr modify_url
-#' @importFrom jsonlite fromJSON
 #' @importFrom cli cli_abort
 #' @examples
 #' \donttest{try(bart_archive(date='20220113'))}
@@ -46,21 +44,16 @@ bart_archive <- function(date = NULL, team = NULL, year = NULL) {
     ))
   }
 
-  base_url <- 'https://api.cbbstat.com/ratings/archive?'
-  parsed <- httr::modify_url(
-    base_url,
-    query = list(
-      date = date,
-      team = team,
-      year = year
-    )
-  )
+  # remove hyphens if present in date
+  date <- gsub('-', '', date)
 
-  data <- data.frame()
+  data <- read.csv(paste0('https://github.com/andreweatherman/toRvik-data/raw/main/ratings/archive/by_date/ratings_archive_', date, '.csv')) %>%
+    arrange(rank)
 
   tryCatch(
     expr = {
-      data  <- jsonlite::fromJSON(parsed) %>%
+      data  <- data %>%
+        drop_index() %>%
         make_toRvik_data('Archive Ratings', Sys.time())
     },
     error = function(e) {

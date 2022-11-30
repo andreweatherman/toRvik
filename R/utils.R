@@ -27,6 +27,7 @@ my_time <- function() strftime(Sys.time(), format = "%H:%M:%S")
 gh_data_path <- function(stat, load_all = FALSE, year = NULL, ...) {
 
   if (load_all) {
+
     params <- c('pg_box', 'pg_shooting', 'pg_adv', 'pg_all', 'ps_box', 'ps_shooting',
                 'ps_adv', 'ps_all')
 
@@ -37,6 +38,7 @@ gh_data_path <- function(stat, load_all = FALSE, year = NULL, ...) {
   }
 
   else {
+
   params <- c('pg_box', 'pg_shooting', 'pg_adv', 'pg_all', 'ps_box', 'ps_shooting',
               'ps_adv', 'ps_all', 'current_ratings')
 
@@ -44,7 +46,7 @@ gh_data_path <- function(stat, load_all = FALSE, year = NULL, ...) {
                 glue('player_game/{year}/advanced_{year}.parquet'), glue('player_game/{year}/all_{year}.parquet'),
                 glue('player_season/{year}/box_{year}.parquet'), glue('player_season/{year}/shooting_{year}.parquet'),
                 glue('player_season/{year}/advanced_{year}.parquet'), glue('player_season/{year}/all_{year}.parquet'),
-                'ratings/ratings_2023.csv')
+                glue('ratings/ratings_{year}.csv'))
   }
 
   check <- setNames(endpoint, params)
@@ -203,6 +205,17 @@ rbindlist_with_attrs <- function(dflist){
   attr(out,"toRvik_type") <- toRvik_type
   out
 
+}
+
+# define function to drop index if one is detected
+drop_index <- function(data) {
+  if (colnames(data)[1] == 'X') {
+    data %>%
+      dplyr::select(-1)
+  }
+  else {
+    data
+  }
 }
 
 # define list unchop from vctrs

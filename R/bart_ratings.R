@@ -34,8 +34,6 @@
 #' @param year Defaults to current season (YYYY).
 #' @importFrom magrittr %>%
 #' @importFrom dplyr as_tibble
-#' @importFrom httr modify_url
-#' @importFrom jsonlite fromJSON
 #' @importFrom cli cli_abort
 #' @examples
 #' \donttest{try(bart_ratings(year=2020))}
@@ -53,16 +51,17 @@ bart_ratings <- function(year=current_season()) {
 
   if (year != current_season()) {
     # pass
-    data <- load_gh_data('current_ratings')
+    data <- load_gh_data('current_ratings', year = year)
   }
 
   else {
-    data <- load_gh_data('current_ratings')
+    data <- load_gh_data('current_ratings', year = year)
   }
 
   tryCatch(
     expr = {
       data  <- data %>%
+        drop_index() %>%
         make_toRvik_data(sprintf('Team Ratings: %i', year), Sys.time())
     },
     error = function(e) {

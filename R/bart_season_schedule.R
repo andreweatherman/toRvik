@@ -55,7 +55,8 @@ bart_season_schedule <- function(year = current_season(), type = NULL, conf = NU
   tryCatch(
     expr = {
       data  <- jsonlite::fromJSON(parsed) %>%
-        make_toRvik_data(sprintf('%i Schedule', year), Sys.time())
+        make_toRvik_data(sprintf('%i Schedule', year), Sys.time()) %>%
+        dplyr::select(-1)
     },
     error = function(e) {
       check_docs_error()

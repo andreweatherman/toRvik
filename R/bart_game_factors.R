@@ -51,6 +51,8 @@ bart_game_factors <- function(year = current_season(), team = NULL, conf = NULL,
   tryCatch(
     expr = {
       data  <- jsonlite::fromJSON(parsed) %>%
+        drop_index() %>%
+        mutate(date = as.Date(date)) %>%
         make_toRvik_data('Game Factors', Sys.time())
     },
     error = function(e) {

@@ -45,6 +45,7 @@ bart_game_box <- function(year = current_season(), date = NULL, team = NULL, con
   tryCatch(
     expr = {
       data  <- jsonlite::fromJSON(parsed) %>%
+        drop_index() %>%
         make_toRvik_data('Game Box', Sys.time())
     },
     error = function(e) {

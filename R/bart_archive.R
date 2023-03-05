@@ -44,11 +44,20 @@ bart_archive <- function(date = NULL, team = NULL, year = NULL) {
     ))
   }
 
+  if (is.null(date) & is.null(team)) {
+    data <- read.csv(paste0('https://github.com/andreweatherman/toRvik-data/raw/main/ratings/archive/by_year/full_', year, '.csv')) %>%
+      dplyr::mutate(date = as.Date(date)) %>%
+      dplyr::group_by(date) %>%
+      dplyr::arrange(rank, .by_group = TRUE)
+  }
+
+  else {
   # remove hyphens if present in date
   date <- gsub('-', '', date)
 
   data <- read.csv(paste0('https://github.com/andreweatherman/toRvik-data/raw/main/ratings/archive/by_date/ratings_archive_', date, '.csv')) %>%
-    arrange(rank)
+    dplyr::arrange(rank)
+  }
 
   tryCatch(
     expr = {

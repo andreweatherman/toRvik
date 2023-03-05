@@ -209,7 +209,7 @@ rbindlist_with_attrs <- function(dflist){
 
 # define function to drop index if one is detected
 drop_index <- function(data) {
-  if (colnames(data)[1] == 'X') {
+  if (colnames(data)[1] %in% c('X', 'Unnamed: 0')) {
     data %>%
       dplyr::select(-1)
   }

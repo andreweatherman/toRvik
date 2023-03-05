@@ -34,12 +34,12 @@
 #' }
 #'
 #' @param year Defaults to current season (YYYY).
-#' @param result Filters by result ('W' or 'L')
-#' @param type Filter by game type ('nc', 'conf', or 'post')
+#' @param venue Filters by game location ('all', home', 'away', 'neutral', 'road')
+#' @param type Filter by game type ('all', 'nc', 'conf', 'reg', 'post', 'ncaa')
+#' @param quad Filters by quadrant game ('0': 1, '1': 2, '2', 3, '3': 4, '5': all)
+#' @param top Filters by games by teams in top `n` in rankings
 #' @param start Filters by starting date (YYYY-MM-DD)
 #' @param end Filters by ending date (YYYY-MM-DD)
-#' @param location Filters by game location ('H', 'A', or 'N')
-#' @param last Filters by last x games played
 #' @importFrom magrittr %>%
 #' @importFrom dplyr as_tibble arrange
 #' @importFrom httr modify_url
@@ -49,7 +49,7 @@
 #' \donttest{try(bart_factors(year=2022, start='2022-01-13', type='conf'))}
 #'
 #' @export
-bart_factors <- function(year = current_season(), result = NULL, type = NULL, start = NULL, end = NULL, location = NULL, last = NULL) {
+bart_factors <- function(year = current_season(), venue = NULL, type = NULL, quad = NULL, top = NULL, start = NULL, end = NULL) {
 
   # test passed year
   if (!is.null(year) & !(is.numeric(year) && nchar(year) == 4 && year >= 2008)) {
@@ -59,17 +59,17 @@ bart_factors <- function(year = current_season(), result = NULL, type = NULL, st
     ))
   }
 
-  base_url <- 'https://api.cbbstat.com/games/factors/splits?'
+  base_url <- 'https://api.cbbstat.com/ratings/factors/splits?'
   parsed <- httr::modify_url(
     base_url,
     query = list(
       year = year,
-      result = result,
+      venue = venue,
       type = type,
+      quad = quad,
+      top = top,
       start = start,
-      end = end,
-      location = location,
-      last = last
+      end = end
     )
   )
   data <- data.frame()
@@ -77,8 +77,7 @@ bart_factors <- function(year = current_season(), result = NULL, type = NULL, st
   tryCatch(
     expr = {
       data  <- jsonlite::fromJSON(parsed) %>%
-        make_toRvik_data('Team Factors', Sys.time()) %>%
-        dplyr::arrange(rank)
+        make_toRvik_data('Team Factors', Sys.time())
     },
     error = function(e) {
       check_docs_error()

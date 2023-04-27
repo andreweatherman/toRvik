@@ -16,6 +16,8 @@ coverage](https://codecov.io/gh/andreweatherman/toRvik/branch/main/graph/badge.s
 
 <!-- badges: end -->
 
+**IMPORTANT**: The package will no longer be maintained. I am in the process of developing a new API and accompanying package. Will bring faster speeds and a more defined structure. Expected roll-out to coincide with the 2023-24 college basketball season. toRvik will remain operational in its current state until the new API and package are released.
+
 [**`toRvik`**](https://github.com/andreweatherman/toRvik) is an R
 package for working with and scraping men’s college basketball.
 

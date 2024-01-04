@@ -9,14 +9,14 @@
 status](https://www.r-pkg.org/badges/version/toRvik)](https://CRAN.R-project.org/package=toRvik)
 [![Downloads](http://cranlogs.r-pkg.org/badges/grand-total/toRvik?color=blue)](https://cran.r-project.org/package=toRvik)
 [![Lifecycle:
-stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+superseded](https://img.shields.io/badge/lifecycle-superseded-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#superseded)
 [![R-CMD-check](https://github.com/andreweatherman/toRvik/workflows/R-CMD-check/badge.svg)](https://github.com/andreweatherman/toRvik/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/andreweatherman/toRvik/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andreweatherman/toRvik?branch=main)
 
 <!-- badges: end -->
 
-**IMPORTANT**: The package will no longer be maintained. I am in the process of developing a new API and accompanying package. Will bring faster speeds and a more defined structure. Expected roll-out to coincide with the 2023-24 college basketball season. toRvik will remain operational in its current state until the new API and package are released.
+**IMPORTANT**: The package will no longer be maintained. I am in the process of developing a new API in [cbbdata](https://cbbdata.aweatherman.com/) and accompanying package [cbbplotR](https://cbbplotr.aweatherman.com). Will bring faster speeds and a more defined structure. Expected roll-out to coincide with the 2023-24 college basketball season. toRvik will remain operational in its current state until the new API and package are released.
 
 [**`toRvik`**](https://github.com/andreweatherman/toRvik) is an R
 package for working with and scraping men’s college basketball.
